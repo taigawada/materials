@@ -4,7 +4,12 @@
     "private": false,
     "description": "",
     "type": "module",
+    "types": "./types/build.d.ts",
     "main": "dist/icons2.js",
+    "files": [
+        "/dist",
+        "/types"
+    ],
     "exports": {
         ".": {
             "import": "./dist/icons2.js",
@@ -17,7 +22,7 @@
     },
     "scripts": {
         "serve": "vite",
-        "build": "vite build"
+        "build": "vite build & vue-tsc"
     },
     "dependencies": {
         "@simple-education/tokens": "^0.1.0",
