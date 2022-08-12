@@ -1,9 +1,7 @@
 <template>
     <div class="temp-base">
         <div class="select-date-container">
-            <SimpleIcon class="paginate-icon" @click="handleSubMonth">
-                <ArrowLeft />
-            </SimpleIcon>
+            <ArrowLeft class="paginate-icon" @click="handleSubMonth" />
             <span>{{ showDateString() }}</span>
             <ArrowRight class="paginate-icon" @click="handleAddMonth" />
         </div>
@@ -49,6 +47,7 @@ import {
     addMonths,
     subMonths,
     isSameMonth,
+    isSameDay,
     differenceInWeeks,
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education/icons2';
@@ -75,7 +74,7 @@ export default defineComponent({
         },
         selected: {
             type: Date,
-            default: () => new Date(),
+            default: undefined,
             required: false,
         },
         showRelatedDays: {
@@ -90,7 +89,6 @@ export default defineComponent({
         },
     },
     setup(props, context) {
-        console.log(props.selected);
         const nowEntered = reactive<Entered>({
             weekIndex: null,
             weekDayIndex: null,
@@ -110,7 +108,7 @@ export default defineComponent({
             if (props.start === 'monday') return 1;
             else return 0;
         };
-        const currentShowDate = ref(props.selected);
+        const currentShowDate = ref<Date>(props.selected ? props.selected : new Date());
         const highLightsPositions = ref<[number, number][]>([]);
         watchEffect(() => {
             let parseResult: [number, number][] = [];
@@ -133,11 +131,17 @@ export default defineComponent({
             }
             highLightsPositions.value = parseResult;
         });
-        const showHighLights = (date: Date) =>
-            highLightsPositions.value.find(
-                (elememt) => elememt[0] === differenceInWeeks(date, startOfMonth(date)) && elememt[1] === getDay(date) - weekStartsOn() && isSameMonth(date, currentShowDate.value)
-            );
-        const currentSelectedDate = ref(props.selected);
+        const currentSelectedDate = ref<Date | undefined>(props.selected);
+        const showHighLights = (date: Date) => {
+            if (highLightsPositions.value.length > 0) {
+                return highLightsPositions.value.find(
+                    (elememt) =>
+                        elememt[0] === differenceInWeeks(date, startOfMonth(date)) && elememt[1] === getDay(date) - weekStartsOn() && isSameMonth(date, currentShowDate.value)
+                );
+            } else {
+                return currentSelectedDate.value ? isSameDay(date, currentSelectedDate.value) : false;
+            }
+        };
         const handleDateSelect = (date: Date, weekIndex: number, weekDayIndex: number) => {
             if (weekDayIndex === 6) weekDayIndex = -weekStartsOn();
             currentSelectedDate.value = date;
@@ -195,7 +199,6 @@ export default defineComponent({
             isEntered,
             format,
             showHighLights,
-            currentSelectedDate,
             handleDateSelect,
             getDate,
             showDate,
