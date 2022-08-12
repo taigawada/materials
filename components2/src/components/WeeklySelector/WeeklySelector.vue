@@ -66,7 +66,6 @@ export default defineComponent({
         },
         sunday: {
             type: Boolean,
-            default: true,
             required: false,
         },
     },

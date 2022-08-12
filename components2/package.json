@@ -4,6 +4,7 @@
     "private": false,
     "description": "",
     "type": "module",
+    "types": "types/build.d.ts",
     "main": "dist/components2.js",
     "exports": {
         ".": {
@@ -17,7 +18,7 @@
     },
     "scripts": {
         "serve": "vite",
-        "build": "vite build",
+        "build": "vue-tsc & vite build",
         "format": "prettier -w src/**/*.{ts,vue}"
     },
     "eslintIgnore": [
@@ -45,6 +46,7 @@
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.2.1",
         "prettier": "^2.7.1",
-        "typescript": "^4.7.4"
+        "typescript": "^4.7.4",
+        "vue-tsc": "^0.40.1"
     }
 }

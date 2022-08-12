@@ -90,6 +90,7 @@ export default defineComponent({
         },
     },
     setup(props, context) {
+        console.log(props.selected);
         const nowEntered = reactive<Entered>({
             weekIndex: null,
             weekDayIndex: null,

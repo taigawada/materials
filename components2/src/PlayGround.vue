@@ -39,6 +39,7 @@
             remove
             multiple
             @fieldChange="comboFieldChange"
+            @remove="comboFieldRemove"
             @add:item="handleAddItems"
             @change:selected="comboSelectedChange"
         >
@@ -212,8 +213,11 @@ export default defineComponent({
         const comboFieldChange = (newValue: string) => {
             comboField.value = newValue;
         };
+        const comboFieldRemove = () => {
+            comboField.value = '';
+        };
         const comboItems = ref(['1年A組', '1年B組', '1年C組', '1年D組', '1年E組']);
-        const comboSelected = ref<string[]>([]);
+        const comboSelected = ref<string[]>(['1年A組']);
         const handleAddItems = (item: string) => {
             comboSelected.value.push(item);
             comboItems.value.push(item);
@@ -241,6 +245,7 @@ export default defineComponent({
             handleChecked,
             fieldvalue,
             handleFieldChange,
+            comboFieldRemove,
             handleTextFieldRemove,
             selectRef,
             handleSelectChange,
