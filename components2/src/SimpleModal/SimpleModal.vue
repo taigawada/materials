@@ -5,7 +5,7 @@
                 <div class="title">{{ title }}</div>
                 <div class="close" @click="handleDestroy">
                     <SimpleIcon size="24px">
-                        <CloseButton />
+                        <CloseCross />
                     </SimpleIcon>
                 </div>
             </div>
@@ -28,7 +28,7 @@
 <script lang="ts">
 import { defineComponent, watchEffect, PropType } from '@vue/composition-api';
 import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
-import { CloseButton } from '@simple-education/icons2';
+import { CloseCross } from '@simple-education/icons2';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 interface MainAction {
     text: string;
@@ -44,7 +44,7 @@ export default defineComponent({
     components: {
         SimpleButton,
         SimpleIcon,
-        CloseButton,
+        CloseCross,
     },
     props: {
         open: {

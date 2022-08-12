@@ -1,29 +1,11 @@
 <template>
     <div id="app">
-        <SimpleTabs
-            :tabs="tabs"
-            :selected="tabSelected"
-            @change="handleTabSelect"
-        />
+        <SimpleTabs :tabs="tabs" :selected="tabSelected" @change="handleTabSelect" />
         <h1>Playground</h1>
         <p>buttons</p>
-        <SimpleButton
-            primary
-            :disabled="disabled"
-            :loading="loading"
-            @click="handleButtonClick"
-        >
-            ボタン
-        </SimpleButton>
+        <SimpleButton primary :disabled="disabled" :loading="loading" @click="handleButtonClick"> ボタン </SimpleButton>
         <p>Actions</p>
-        <SimpleActions
-            :open="actionsOpen"
-            :actions="actions"
-            @click="actionsOpenToggle"
-            @close="onClose"
-        >
-            その他の操作
-        </SimpleActions>
+        <SimpleActions :open="actionsOpen" :actions="actions" @click="actionsOpenToggle" @close="onClose"> その他の操作 </SimpleActions>
         <p>Input, Checkbox & Card</p>
         <SimpleCard
             width="50%"
@@ -34,41 +16,17 @@
                 text: 'キャンセル',
             }"
         >
-            <SimpleInput
-                :value="fieldvalue"
-                caption="生徒氏名"
-                placeholder="名前を入力してください"
-                remove
-                @change:value="handleFieldChange"
-                @remove="handleTextFieldRemove"
-            />
-            <SimpleCheckbox
-                label="生徒の端末に即反映する"
-                :value="checked"
-                @change="handleChecked"
-            />
-            <SimpleSelector
-                :value="selectRef"
-                :items="selectItems"
-                @change="handleSelectChange"
-            />
+            <SimpleInput :value="fieldvalue" caption="生徒氏名" placeholder="名前を入力してください" remove @change:value="handleFieldChange" @remove="handleTextFieldRemove" />
+            <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
+            <SimpleSelector :value="selectRef" :items="selectItems" @change="handleSelectChange" />
         </SimpleCard>
         <p>Banner</p>
-        <SimpleBanner
-            style="width: 40%; margin: 0 auto"
-            title="今日までの提出物"
-            buttonLabel="確認"
-            @action="action"
-        >
+        <SimpleBanner style="width: 40%; margin: 0 auto" title="今日までの提出物" buttonLabel="確認" @action="action">
             <b>百マス計算</b>
         </SimpleBanner>
         <p>Tags, Combobox</p>
         <SimpleStack>
-            <SimpleTag
-                v-for="(item, index) in comboSelected"
-                :key="item + index"
-                @remove="handleRemoveItem(item)"
-            >
+            <SimpleTag v-for="(item, index) in comboSelected" :key="item + index" @remove="handleRemoveItem(item)">
                 {{ item }}
             </SimpleTag>
         </SimpleStack>
@@ -99,30 +57,17 @@
             @subAction="handleModalOpen"
             @destroy="handleModalOpen"
         >
-            <SimpleInput
-                :value="fieldvalue"
-                caption="生徒氏名"
-                placeholder="名前を入力してください"
-                remove
-                @change:value="handleFieldChange"
-                @remove="handleTextFieldRemove"
-            />
+            <SimpleInput :value="fieldvalue" caption="生徒氏名" placeholder="名前を入力してください" remove @change:value="handleFieldChange" @remove="handleTextFieldRemove" />
         </SimpleModal>
         <p>WeeklySelector</p>
         <div>
-            <WeeklySelector
-                :weekValue="weekState.week"
-                @change="changeWeek"
-                @addWeek="changeWeek"
-                @delWeek="changeWeek"
-            />
+            <WeeklySelector :weekValue="weekState.week" @change="changeWeek" @addWeek="changeWeek" @delWeek="changeWeek" />
         </div>
         <div>
             <SimpleCalender :highLights="weekState.week"></SimpleCalender>
         </div>
         <p>date picker</p>
-        <SimpleDatePicker style="width: 20%; margin: 0 auto">
-        </SimpleDatePicker>
+        <SimpleDatePicker style="width: 20%; margin: 0 auto"> </SimpleDatePicker>
         <div style="height: 800px"></div>
     </div>
 </template>
@@ -144,8 +89,7 @@ import SimpleStack from './SimpleStack/SimpleStack.vue';
 import SimpleDatePicker from './SImpleDatePicker/SimpleDatePicker.vue';
 import SimpleCalender from './SimpleCalender/SimpleCalender.vue';
 
-const sleep = (waitTime: number) =>
-    new Promise((resolve) => setTimeout(resolve, waitTime));
+const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
 export default defineComponent({
     name: 'App',
@@ -268,13 +212,7 @@ export default defineComponent({
         const comboFieldChange = (newValue: string) => {
             comboField.value = newValue;
         };
-        const comboItems = ref([
-            '1年A組',
-            '1年B組',
-            '1年C組',
-            '1年D組',
-            '1年E組',
-        ]);
+        const comboItems = ref(['1年A組', '1年B組', '1年C組', '1年D組', '1年E組']);
         const comboSelected = ref<string[]>([]);
         const handleAddItems = (item: string) => {
             comboSelected.value.push(item);

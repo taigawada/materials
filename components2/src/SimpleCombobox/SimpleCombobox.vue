@@ -28,7 +28,7 @@
             </div>
             <div v-show="allowAdd && fieldValue.length > 0 && !includeItem(fieldValue)" class="enteredItem add" @click="addItem(fieldValue)">
                 <SimpleIcon class="add-icon" size="16px">
-                    <DeleteButton />
+                    <DeleteCross />
                 </SimpleIcon>
                 <div class="items non-multi-selectable">"{{ fieldValue }}"を追加</div>
             </div>
@@ -37,13 +37,13 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, PropType } from '@vue/composition-api';
-import { DeleteButton } from '@simple-education/icons2';
+import { DeleteCross } from '@simple-education/icons2';
 import SimpleInput from '../SimpleInput/SimpleInput.vue';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
 import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 export default defineComponent({
     components: {
-        DeleteButton,
+        DeleteCross,
         SimpleInput,
         SimpleCheckbox,
         SimpleIcon,

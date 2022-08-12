@@ -15,10 +15,7 @@
             <a class="activator-text">
                 <slot></slot>
             </a>
-            <!-- <DownArrow/> -->
-            <SimpleIcon>
-                <ArrowDown />
-            </SimpleIcon>
+            <ArrowDown style="width: 16px" />
         </a>
         <div v-if="open" class="popover" :style="parentWidth">
             <div v-for="(action, index) in actions" :key="action.label + index" class="item" @click="action.onAction">
@@ -30,7 +27,6 @@
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted, watchEffect, PropType } from '@vue/composition-api';
 import { ArrowDown } from '@simple-education/icons2';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 interface Actions {
     label: string;
     onAction: () => unknown;
@@ -38,7 +34,6 @@ interface Actions {
 export default defineComponent({
     components: {
         ArrowDown,
-        SimpleIcon,
     },
     props: {
         open: Boolean,
@@ -98,6 +93,7 @@ export default defineComponent({
             activator,
             activatorWidth,
             parentWidth,
+            ArrowDown,
         };
     },
 });

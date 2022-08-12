@@ -3,7 +3,7 @@
         <span class="text"><slot></slot></span>
         <div class="remove" @click="hundleClickRemove">
             <SimpleIcon color="rgba(255, 255, 255, 1)">
-                <RemoveButton />
+                <CloseCross />
             </SimpleIcon>
         </div>
     </div>
@@ -11,10 +11,10 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
-import { RemoveButton } from '@simple-education/icons2';
+import { CloseCross } from '@simple-education/icons2';
 export default defineComponent({
     components: {
-        RemoveButton,
+        CloseCross,
         SimpleIcon,
     },
     setup(_, context) {

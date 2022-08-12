@@ -12,7 +12,7 @@
             <input v-model="text" :placeholder="placeholder" class="input" @focus="handleFocusIn" @focusout="handleFocusOut" />
             <div v-show="appearRemoveButton" class="remove" @click="hundleRemove">
                 <SimpleIcon size="18px">
-                    <DeleteButton />
+                    <DeleteCross />
                 </SimpleIcon>
             </div>
         </div>
@@ -20,11 +20,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
-import { DeleteButton } from '@simple-education/icons2';
+import { DeleteCross } from '@simple-education/icons2';
 import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 export default defineComponent({
     components: {
-        DeleteButton,
+        DeleteCross,
         SimpleIcon,
     },
     props: {

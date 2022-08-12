@@ -1,16 +1,18 @@
 <template>
-    <div class="svg-icon_base" :style="svgSize" @click="handleClick">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" :width="size" :height="size">
-            <g :fill="color">
-                <slot></slot>
-            </g>
-        </svg>
-    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon_base" :style="svgSize" @click="handleClick">
+        <use :xlink:href="source + '#simple-education_svg_icons_base'"></use>
+    </svg>
+    <!-- <img :src="`data:image/svg+xml;utf8,${source}`" alt="" aria-hidden="true" class="svg-icon_base" :style="svgSize" /> -->
 </template>
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
 export default defineComponent({
     props: {
+        // eslint-disable-next-line vue/require-prop-types
+        source: {
+            default: undefined,
+            required: true,
+        },
         color: {
             type: String,
             default: 'rgba(44, 62, 80, 1)',
@@ -23,6 +25,7 @@ export default defineComponent({
         },
     },
     setup(props, context) {
+        console.log(props.source);
         const handleClick = () => {
             context.emit('click');
         };
@@ -37,6 +40,7 @@ export default defineComponent({
 .svg-icon_base {
     width: var(--svg--icon_size);
     height: var(--svg--icon_size);
+    color: aqua;
 }
 .close-button {
     fill: none;

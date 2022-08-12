@@ -1,9 +1,7 @@
 <template>
     <div class="base">
         <div class="header">
-            <SimpleIcon color="rgba(196, 113, 67, 1)">
-                <ExclamationMark />
-            </SimpleIcon>
+            <ExclamationMark class="excla_mark" />
             <div v-show="title !== undefined" class="heading">{{ title }}</div>
         </div>
         <div class="content">
@@ -14,13 +12,11 @@
 </template>
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 import { ExclamationMark } from '@simple-education/icons2';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 export default defineComponent({
     components: {
         SimpleButton,
-        SimpleIcon,
         ExclamationMark,
     },
     props: {
@@ -74,5 +70,10 @@ export default defineComponent({
 }
 .button {
     margin: 0 0 0 auto;
+}
+.excla_mark {
+    width: 18px;
+    height: 18px;
+    fill: $warning-deep;
 }
 </style>
