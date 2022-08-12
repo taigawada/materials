@@ -12,31 +12,18 @@
 
         <table>
             <tr>
-                <th
-                    v-for="dayOfWeekIndex in dayWeekArray"
-                    :key="'dayOfWeek' + dayOfWeekIndex"
-                    class="calender-header"
-                >
+                <th v-for="dayOfWeekIndex in dayWeekArray" :key="'dayOfWeek' + dayOfWeekIndex" class="calender-header">
                     {{ dayOfWeekStr(start, dayOfWeekIndex) }}
                 </th>
             </tr>
-            <tr
-                v-for="(week, weekIndex) in getCalendarArray"
-                :key="'week' + weekIndex"
-            >
+            <tr v-for="(week, weekIndex) in getCalendarArray" :key="'week' + weekIndex">
                 <td
                     v-for="(day, weekDayIndex) in week"
                     :key="'day' + weekDayIndex"
                     class="calender-data"
                     :class="{
-                        calender_show_related_days: !isSameMonth(
-                            day,
-                            currentShowDate
-                        ),
-                        calender_data_entered:
-                            select &&
-                            isEntered(weekIndex, weekDayIndex) &&
-                            isSameMonth(day, currentShowDate),
+                        calender_show_related_days: !isSameMonth(day, currentShowDate),
+                        calender_data_entered: select && isEntered(weekIndex, weekDayIndex) && isSameMonth(day, currentShowDate),
                         calender_data_selected: showHighLights(day),
                     }"
                     :style="pointer"
@@ -51,14 +38,7 @@
     </div>
 </template>
 <script lang="ts">
-import {
-    computed,
-    defineComponent,
-    ref,
-    PropType,
-    reactive,
-    watchEffect,
-} from '@vue/composition-api';
+import { computed, defineComponent, ref, PropType, reactive, watchEffect } from '@vue/composition-api';
 import {
     format,
     startOfMonth,
@@ -126,10 +106,7 @@ export default defineComponent({
             nowEntered.weekDayIndex = null;
         };
         const isEntered = (weekIndex: number, weekDayIndex: number) => {
-            return (
-                nowEntered.weekIndex == weekIndex &&
-                nowEntered.weekDayIndex == weekDayIndex
-            );
+            return nowEntered.weekIndex == weekIndex && nowEntered.weekDayIndex == weekDayIndex;
         };
         const weekStartsOn = () => {
             if (props.start === 'monday') return 1;
@@ -143,16 +120,13 @@ export default defineComponent({
                 props.highLights[0].map((weekOfDay, weekOfDayIndex) => {
                     if (weekOfDayIndex === 6) weekOfDayIndex = -weekStartsOn();
                     if (weekOfDay) {
-                        [...new Array(5).keys()].map((index) =>
-                            parseResult.push([index, weekOfDayIndex])
-                        );
+                        [...new Array(5).keys()].map((index) => parseResult.push([index, weekOfDayIndex]));
                     }
                 });
             } else {
                 props.highLights.map((week, weekIndex) => {
                     week.map((weekOfDay, weekOfDayIndex) => {
-                        if (weekOfDayIndex === 6)
-                            weekOfDayIndex = -weekStartsOn();
+                        if (weekOfDayIndex === 6) weekOfDayIndex = -weekStartsOn();
                         if (weekOfDay) {
                             parseResult.push([weekIndex, weekOfDayIndex]);
                         }
@@ -163,25 +137,16 @@ export default defineComponent({
         });
         const showHighLights = (date: Date) =>
             highLightsPositions.value.find(
-                (elememt) =>
-                    elememt[0] ===
-                        differenceInWeeks(date, startOfMonth(date)) &&
-                    elememt[1] === getDay(date) - weekStartsOn() &&
-                    isSameMonth(date, currentShowDate.value)
+                (elememt) => elememt[0] === differenceInWeeks(date, startOfMonth(date)) && elememt[1] === getDay(date) - weekStartsOn() && isSameMonth(date, currentShowDate.value)
             );
         const currentSelectedDate = ref(props.selected);
-        const handleDateSelect = (
-            date: Date,
-            weekIndex: number,
-            weekDayIndex: number
-        ) => {
+        const handleDateSelect = (date: Date, weekIndex: number, weekDayIndex: number) => {
             if (weekDayIndex === 6) weekDayIndex = -weekStartsOn();
             currentSelectedDate.value = date;
             highLightsPositions.value = [[weekIndex, weekDayIndex]];
             context.emit('change', date);
         };
-        const showDateString = () =>
-            format(currentShowDate.value, 'yyyy年MM月');
+        const showDateString = () => format(currentShowDate.value, 'yyyy年MM月');
         const handleAddMonth = () => {
             currentShowDate.value = addMonths(currentShowDate.value, 1);
         };

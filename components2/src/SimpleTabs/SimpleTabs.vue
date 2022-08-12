@@ -1,25 +1,14 @@
 <template>
     <div class="base">
-        <div
-            v-for="(tab, index) in tabs"
-            :key="tab.id"
-            class="tab"
-            @mouseenter="mouseenter(index)"
-            @mouseleave="mouseleave"
-            @click="hundleSelect(index)"
-        >
+        <div v-for="(tab, index) in tabs" :key="tab.id" class="tab" @mouseenter="mouseenter(index)" @mouseleave="mouseleave" @click="hundleSelect(index)">
             <span
                 :class="{
                     enteredText: isEntered === index && isEntered !== selected,
                 }"
             >
                 {{ tab.label }}
-            </span
-            >
-            <div
-                v-show="isEntered === index && isEntered !== selected"
-                class="entered"
-            ></div>
+            </span>
+            <div v-show="isEntered === index && isEntered !== selected" class="entered"></div>
             <div v-show="selected === index" class="selected"></div>
         </div>
     </div>

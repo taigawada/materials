@@ -1,12 +1,8 @@
 <template>
     <div class="tag-base">
         <span class="text"><slot></slot></span>
-        <div
-            class="remove"
-            @click="hundleClickRemove">
-            <SimpleIcon
-                color="rgba(255, 255, 255, 1)"
-            >
+        <div class="remove" @click="hundleClickRemove">
+            <SimpleIcon color="rgba(255, 255, 255, 1)">
                 <RemoveButton />
             </SimpleIcon>
         </div>

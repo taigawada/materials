@@ -19,9 +19,7 @@ export default defineComponent({
             required: false,
         },
         distribution: {
-            type: String as PropType<
-                'left' | 'center' | 'right' | 'spaceBetween' | 'spaceAround'
-            >,
+            type: String as PropType<'left' | 'center' | 'right' | 'spaceBetween' | 'spaceAround'>,
             default: 'center',
             required: false,
         },

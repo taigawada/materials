@@ -21,26 +21,14 @@
             </SimpleIcon>
         </a>
         <div v-if="open" class="popover" :style="parentWidth">
-            <div
-                v-for="(action, index) in actions"
-                :key="action.label + index"
-                class="item"
-                @click="action.onAction"
-            >
+            <div v-for="(action, index) in actions" :key="action.label + index" class="item" @click="action.onAction">
                 {{ action.label }}
             </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-import {
-    defineComponent,
-    ref,
-    computed,
-    onMounted,
-    watchEffect,
-    PropType,
-} from '@vue/composition-api';
+import { defineComponent, ref, computed, onMounted, watchEffect, PropType } from '@vue/composition-api';
 import { ArrowDown } from '@simple-education/icons2';
 import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 interface Actions {

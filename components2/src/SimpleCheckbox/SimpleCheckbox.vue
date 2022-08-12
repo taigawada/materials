@@ -11,11 +11,7 @@
                 <CheckMark />
             </SimpleIcon>
         </div>
-        <span
-            v-show="label !== undefined"
-            class="label-text"
-            @click="hundleChange"
-        >
+        <span v-show="label !== undefined" class="label-text" @click="hundleChange">
             {{ label }}
         </span>
     </div>
@@ -50,6 +46,7 @@ export default defineComponent({
     },
 });
 </script>
+
 <style scoped lang="scss">
 @use '~/@simple-education/tokens/stylesheet.scss' as *;
 .base {

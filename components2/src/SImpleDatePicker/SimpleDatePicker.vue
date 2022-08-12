@@ -1,19 +1,8 @@
 <template>
     <div @mousedown="mousedown" @mouseleave="mouseleave">
-        <SimpleInput
-            placeholder="日付を選択"
-            :value="inputValue"
-            @change:value="inputChange"
-            @focusIn="inFocus"
-            @focusOut="outFocus"
-        >
-        </SimpleInput>
+        <SimpleInput placeholder="日付を選択" :value="inputValue" @change:value="inputChange" @focusIn="inFocus" @focusOut="outFocus"> </SimpleInput>
         <div v-if="isEntered || isFocus" class="float-box">
-            <SimpleCalender
-                select
-                :selected="currentSelectDate"
-                @change="handleSelectDateChange"
-            ></SimpleCalender>
+            <SimpleCalender select :selected="currentSelectDate" @change="handleSelectDateChange"></SimpleCalender>
         </div>
     </div>
 </template>

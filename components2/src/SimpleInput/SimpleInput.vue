@@ -9,18 +9,8 @@
             {{ caption }}
         </div>
         <div class="wrapper">
-            <input
-                v-model="text"
-                :placeholder="placeholder"
-                class="input"
-                @focus="handleFocusIn"
-                @focusout="handleFocusOut"
-            />
-            <div
-                v-show="appearRemoveButton"
-                class="remove"
-                @click="hundleRemove"
-            >
+            <input v-model="text" :placeholder="placeholder" class="input" @focus="handleFocusIn" @focusout="handleFocusOut" />
+            <div v-show="appearRemoveButton" class="remove" @click="hundleRemove">
                 <SimpleIcon size="18px">
                     <DeleteButton />
                 </SimpleIcon>

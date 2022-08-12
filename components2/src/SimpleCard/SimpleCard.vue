@@ -1,29 +1,14 @@
 <template>
     <div class="card" :style="cardWidth">
         <slot></slot>
-        <div
-            v-if="mainAction !== undefined || subAction !== undefined"
-            class="actions"
-        >
+        <div v-if="mainAction !== undefined || subAction !== undefined" class="actions">
             <div>
-                <SimpleButton
-                    v-if="subAction"
-                    normal
-                    :disabled="subAction.disabled"
-                    :loading="subAction.loading"
-                    @click="hundleSubActionClick"
-                    >{{ subAction.text }}</SimpleButton
-                >
+                <SimpleButton v-if="subAction" normal :disabled="subAction.disabled" :loading="subAction.loading" @click="hundleSubActionClick">{{ subAction.text }}</SimpleButton>
             </div>
             <div>
-                <SimpleButton
-                    v-if="mainAction"
-                    primary
-                    :disabled="mainAction.disabled"
-                    :loading="mainAction.loading"
-                    @click="hundleMainActionClick"
-                    >{{ mainAction.text }}</SimpleButton
-                >
+                <SimpleButton v-if="mainAction" primary :disabled="mainAction.disabled" :loading="mainAction.loading" @click="hundleMainActionClick">{{
+                    mainAction.text
+                }}</SimpleButton>
             </div>
         </div>
     </div>

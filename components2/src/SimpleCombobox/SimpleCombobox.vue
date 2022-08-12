@@ -21,22 +21,12 @@
                     currentSelect: currentSelectItem(item),
                 }"
             >
-                <SimpleCheckbox
-                    v-if="multiple"
-                    class="items"
-                    :value="includeItem(item)"
-                    :label="item"
-                    @change="(bool) => onChangeSelect(item, bool)"
-                />
+                <SimpleCheckbox v-if="multiple" class="items" :value="includeItem(item)" :label="item" @change="(bool) => onChangeSelect(item, bool)" />
                 <div v-if="!multiple" class="items non-multi-selectable" @click="onChangeSelect(item, undefined)">
                     {{ item }}
                 </div>
             </div>
-            <div
-                v-show="allowAdd && fieldValue.length > 0 && !includeItem(fieldValue)"
-                class="enteredItem add"
-                @click="addItem(fieldValue)"
-            >
+            <div v-show="allowAdd && fieldValue.length > 0 && !includeItem(fieldValue)" class="enteredItem add" @click="addItem(fieldValue)">
                 <SimpleIcon class="add-icon" size="16px">
                     <DeleteButton />
                 </SimpleIcon>

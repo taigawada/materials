@@ -9,13 +9,7 @@
         <div class="content">
             <slot></slot>
         </div>
-        <SimpleButton
-            v-show="buttonLabel !== undefined"
-            plain
-            class="button"
-            @click="hundleClick"
-            >{{ buttonLabel }}</SimpleButton
-        >
+        <SimpleButton v-show="buttonLabel !== undefined" plain class="button" @click="hundleClick">{{ buttonLabel }}</SimpleButton>
     </div>
 </template>
 <script lang="ts">

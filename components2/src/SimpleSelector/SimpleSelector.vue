@@ -18,11 +18,7 @@
                 }"
             >
                 <option hidden value="">{{ initialValue }}</option>
-                <option
-                    v-for="(item, index) in items"
-                    :key="item.value + index"
-                    :value="item.value"
-                >
+                <option v-for="(item, index) in items" :key="item.value + index" :value="item.value">
                     {{ item.label }}
                 </option>
             </select>

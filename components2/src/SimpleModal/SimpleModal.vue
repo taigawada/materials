@@ -14,20 +14,10 @@
             </div>
             <div class="footer">
                 <div class="actions">
-                    <SimpleButton
-                        normal
-                        :disabled="subAction?.disabled"
-                        :loading="subAction?.loading"
-                        @click="onSubAction"
-                    >
+                    <SimpleButton normal :disabled="subAction?.disabled" :loading="subAction?.loading" @click="onSubAction">
                         {{ subAction?.text }}
                     </SimpleButton>
-                    <SimpleButton
-                        primary
-                        :disabled="mainAction?.disabled"
-                        :loading="mainAction?.loading"
-                        @click="onMainAction"
-                    >
+                    <SimpleButton primary :disabled="mainAction?.disabled" :loading="mainAction?.loading" @click="onMainAction">
                         {{ mainAction?.text }}
                     </SimpleButton>
                 </div>

@@ -1,14 +1,9 @@
 <template>
     <div class="base">
         <div v-for="weekIndex in weekArray" :key="'week' + weekIndex">
-            <div v-show="weekLength > 1" class="caption">
-                第{{ weekIndex + 1 }}週
-            </div>
+            <div v-show="weekLength > 1" class="caption">第{{ weekIndex + 1 }}週</div>
             <div class="weekdays">
-                <div
-                    v-for="index in weekdaysArray"
-                    :key="'weekdays' + weekIndex + index"
-                >
+                <div v-for="index in weekdaysArray" :key="'weekdays' + weekIndex + index">
                     <div
                         class="box"
                         :class="{
@@ -29,35 +24,17 @@
                 </div>
             </div>
         </div>
-        <SimpleButton
-            v-show="weekValue.length === 1"
-            plain
-            class="addWeek"
-            @click="handleAddWeek"
-        >
+        <SimpleButton v-show="weekValue.length === 1" plain class="addWeek" @click="handleAddWeek">
             <SimpleStack alignment="center" distribution="center">
-                <SimpleIcon
-                    size="18px"
-                    color="rgba(53, 146, 185, 1)"
-                    class="week-add-icon"
-                >
+                <SimpleIcon size="18px" color="rgba(53, 146, 185, 1)" class="week-add-icon">
                     <ArrowDown />
                 </SimpleIcon>
                 月ごと
             </SimpleStack>
         </SimpleButton>
-        <SimpleButton
-            v-show="weekValue.length !== 1"
-            plain
-            class="addWeek"
-            @click="handleDelWeek"
-        >
+        <SimpleButton v-show="weekValue.length !== 1" plain class="addWeek" @click="handleDelWeek">
             <SimpleStack alignment="center" distribution="center">
-                <SimpleIcon
-                    size="18px"
-                    color="rgba(53, 146, 185, 1)"
-                    class="week-add-icon"
-                >
+                <SimpleIcon size="18px" color="rgba(53, 146, 185, 1)" class="week-add-icon">
                     <ArrowUp />
                 </SimpleIcon>
                 週ごと
@@ -108,9 +85,7 @@ export default defineComponent({
                 return 6;
             }
         });
-        const weekdaysArray = computed(() => [
-            ...Array(weekdaysLength.value).keys(),
-        ]);
+        const weekdaysArray = computed(() => [...Array(weekdaysLength.value).keys()]);
         const handleClick = (week: number, weekDay: number) => {
             const changed = [...props.weekValue];
             changed[week] = [...changed[week]];
@@ -119,9 +94,7 @@ export default defineComponent({
         };
         const handleAddWeek = () => {
             const newWeek = [...props.weekValue];
-            [...new Array(3).keys()].map(() =>
-                newWeek.push(new Array(7).fill(false))
-            );
+            [...new Array(3).keys()].map(() => newWeek.push(new Array(7).fill(false)));
             weekLength.value = 4;
             context.emit('addWeek', newWeek);
         };
