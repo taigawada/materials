@@ -5,9 +5,7 @@
                 <ArrowLeft />
             </SimpleIcon>
             <span>{{ showDateString() }}</span>
-            <SimpleIcon class="paginate-icon" @click="handleAddMonth">
-                <ArrowRight />
-            </SimpleIcon>
+            <ArrowRight class="paginate-icon" @click="handleAddMonth" />
         </div>
 
         <table>
@@ -53,7 +51,6 @@ import {
     isSameMonth,
     differenceInWeeks,
 } from 'date-fns';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 import { ArrowLeft, ArrowRight } from '@simple-education/icons2';
 import { monthBoolean } from '../../types/week';
 import { dayOfWeekStr } from '../../utils/utils';
@@ -64,7 +61,7 @@ interface Entered {
 }
 
 export default defineComponent({
-    components: { SimpleIcon, ArrowLeft, ArrowRight },
+    components: { ArrowLeft, ArrowRight },
     props: {
         start: {
             type: String as PropType<'monday' | 'sunday'>,
@@ -226,6 +223,9 @@ export default defineComponent({
     justify-content: space-around;
 }
 .paginate-icon {
+    width: 16px;
+    height: 16px;
+    fill: $surface-black;
     cursor: pointer;
 }
 .calender-header {

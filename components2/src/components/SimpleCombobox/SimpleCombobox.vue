@@ -27,9 +27,7 @@
                 </div>
             </div>
             <div v-show="allowAdd && fieldValue.length > 0 && !includeItem(fieldValue)" class="enteredItem add" @click="addItem(fieldValue)">
-                <SimpleIcon class="add-icon" size="16px">
-                    <DeleteCross />
-                </SimpleIcon>
+                <DeleteCross class="add-icon" />
                 <div class="items non-multi-selectable">"{{ fieldValue }}"を追加</div>
             </div>
         </div>
@@ -40,13 +38,11 @@ import { defineComponent, ref, computed, PropType } from '@vue/composition-api';
 import { DeleteCross } from '@simple-education/icons2';
 import SimpleInput from '../SimpleInput/SimpleInput.vue';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 export default defineComponent({
     components: {
         DeleteCross,
         SimpleInput,
         SimpleCheckbox,
-        SimpleIcon,
     },
     props: {
         caption: {
@@ -214,6 +210,9 @@ export default defineComponent({
     align-items: center;
 }
 .add-icon {
+    width: 16px;
+    height: 16px;
+    fill: $surface-black;
     transform: rotate(45deg);
 }
 </style>

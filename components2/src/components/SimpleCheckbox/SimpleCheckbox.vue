@@ -7,9 +7,7 @@
             }"
             @click="hundleChange"
         >
-            <SimpleIcon size="17px" color="rgba(255, 255, 255, 1)">
-                <CheckMark />
-            </SimpleIcon>
+            <CheckMark class="checkmark" />
         </div>
         <span v-show="label !== undefined" class="label-text" @click="hundleChange">
             {{ label }}
@@ -19,11 +17,9 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import { CheckMark } from '@simple-education/icons2';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 export default defineComponent({
     components: {
         CheckMark,
-        SimpleIcon,
     },
     props: {
         label: {
@@ -70,5 +66,10 @@ export default defineComponent({
 .checkedBackground {
     border: 1px solid $checked;
     background: $checked;
+}
+.checkmark {
+    width: 17px;
+    height: 17px;
+    fill: $surface;
 }
 </style>

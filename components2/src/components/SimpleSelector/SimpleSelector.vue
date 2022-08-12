@@ -22,14 +22,10 @@
                     {{ item.label }}
                 </option>
             </select>
-            <SimpleIcon class="select-icon" size="15px">
-                <SelectArrow />
-            </SimpleIcon>
+            <SelectArrow class="select-icon" />
         </div>
         <div v-show="isError" class="error">
-            <SimpleIcon class="exclamation">
-                <ExclamationMark size="16px" color="rgba(255, 121, 121, 1)" />
-            </SimpleIcon>
+            <ExclamationMark class="exclamation" />
             <span class="error-text">{{ error }}</span>
         </div>
     </div>
@@ -37,7 +33,6 @@
 <script lang="ts">
 import { defineComponent, computed, PropType } from '@vue/composition-api';
 import { ExclamationMark, SelectArrow } from '@simple-education/icons2';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 interface Item {
     value: string;
     label: string;
@@ -46,7 +41,6 @@ export default defineComponent({
     components: {
         ExclamationMark,
         SelectArrow,
-        SimpleIcon,
     },
     props: {
         initialValue: {
@@ -134,7 +128,9 @@ export default defineComponent({
     outline: 0;
 }
 .select-icon {
-    enable-background: new 0 0 512 512;
+    width: 15px;
+    height: 15px;
+    fill: $surface-black;
     position: relative;
     right: $space-6;
     z-index: 11;
@@ -143,7 +139,9 @@ export default defineComponent({
     display: flex;
 }
 .exclamation {
-    enable-background: new 0 0 512 512;
+    width: 15px;
+    height: 15px;
+    fill: $error;
     margin-left: 3px;
     margin-right: 5px;
 }

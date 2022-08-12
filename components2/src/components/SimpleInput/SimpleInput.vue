@@ -10,10 +10,8 @@
         </div>
         <div class="wrapper">
             <input v-model="text" :placeholder="placeholder" class="input" @focus="handleFocusIn" @focusout="handleFocusOut" />
-            <div v-show="appearRemoveButton" class="remove" @click="hundleRemove">
-                <SimpleIcon size="18px">
-                    <DeleteCross />
-                </SimpleIcon>
+            <div v-show="appearRemoveButton" class="remove">
+                <DeleteCross class="delete-icon" @click="hundleRemove" />
             </div>
         </div>
     </div>
@@ -21,11 +19,9 @@
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
 import { DeleteCross } from '@simple-education/icons2';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 export default defineComponent({
     components: {
         DeleteCross,
-        SimpleIcon,
     },
     props: {
         value: {
@@ -112,10 +108,15 @@ export default defineComponent({
     outline: 0;
 }
 .remove {
+    height: 18px;
     position: relative;
-    height: 18px; // アイコンの高さに合わせて調整
     right: $space-8;
     cursor: pointer;
     z-index: 110;
+}
+.delete-icon {
+    width: 18px;
+    height: 18px;
+    fill: $surface-black;
 }
 </style>

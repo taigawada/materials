@@ -3,11 +3,7 @@
         <div class="card">
             <div class="header">
                 <div class="title">{{ title }}</div>
-                <div class="close" @click="handleDestroy">
-                    <SimpleIcon size="24px">
-                        <CloseCross />
-                    </SimpleIcon>
-                </div>
+                <CloseCross class="close-icon" @click="handleDestroy" />
             </div>
             <div class="content">
                 <slot></slot>
@@ -27,7 +23,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, watchEffect, PropType } from '@vue/composition-api';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 import { CloseCross } from '@simple-education/icons2';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 interface MainAction {
@@ -43,7 +38,6 @@ interface SubAction {
 export default defineComponent({
     components: {
         SimpleButton,
-        SimpleIcon,
         CloseCross,
     },
     props: {
@@ -143,8 +137,10 @@ export default defineComponent({
     right: 20px;
     transform: translateY(-50%);
 }
-.close {
+.close-icon {
+    width: 24px;
     height: 24px;
+    fill: $surface-black;
     margin-right: $space-4;
     cursor: pointer;
 }
