@@ -27,41 +27,59 @@
                         </span>
                     </div>
                 </div>
-                <div
-                    class="gabagebox"
-                    :class="{
-                        hidden: weekIndex === 0,
-                    }"
-                    @click="handleDelWeek(weekIndex)"
-                >
-                    <SimpleIcon size="22px">
-                        <DeleteButton />
-                    </SimpleIcon>
-                </div>
             </div>
         </div>
         <SimpleButton
-            v-show="weekValue.length !== maximum"
+            v-show="weekValue.length === 1"
             plain
             class="addWeek"
             @click="handleAddWeek"
         >
-            + 週を追加
+            <SimpleStack alignment="center" distribution="center">
+                <SimpleIcon
+                    size="18px"
+                    color="rgba(53, 146, 185, 1)"
+                    class="week-add-icon"
+                >
+                    <ArrowDown />
+                </SimpleIcon>
+                月ごと
+            </SimpleStack>
+        </SimpleButton>
+        <SimpleButton
+            v-show="weekValue.length !== 1"
+            plain
+            class="addWeek"
+            @click="handleDelWeek"
+        >
+            <SimpleStack alignment="center" distribution="center">
+                <SimpleIcon
+                    size="18px"
+                    color="rgba(53, 146, 185, 1)"
+                    class="week-add-icon"
+                >
+                    <ArrowUp />
+                </SimpleIcon>
+                週ごと
+            </SimpleStack>
         </SimpleButton>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, PropType } from '@vue/composition-api';
-import { DeleteButton } from '@simple-education/icons2';
+import { ArrowDown, ArrowUp } from '@simple-education/icons2';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
+import SimpleStack from '@/SimpleStack/SimpleStack.vue';
 type Week = boolean[];
 type Start = 'monday' | 'sunday';
 export default defineComponent({
     components: {
-        DeleteButton,
+        ArrowUp,
+        ArrowDown,
         SimpleButton,
         SimpleIcon,
+        SimpleStack,
     },
     props: {
         weekValue: {
@@ -71,17 +89,12 @@ export default defineComponent({
         },
         start: {
             type: String as PropType<Start>,
-            default: 'sunday',
+            default: 'monday',
             required: false,
         },
         sunday: {
             type: Boolean,
             default: true,
-            required: false,
-        },
-        maximum: {
-            type: Number,
-            default: 4,
             required: false,
         },
     },
@@ -106,14 +119,16 @@ export default defineComponent({
         };
         const handleAddWeek = () => {
             const newWeek = [...props.weekValue];
-            newWeek.push(newWeek[weekLength.value - 1]);
-            weekLength.value++;
+            [...new Array(3).keys()].map(() =>
+                newWeek.push(new Array(7).fill(false))
+            );
+            weekLength.value = 4;
             context.emit('addWeek', newWeek);
         };
-        const handleDelWeek = (weekIndex: number) => {
+        const handleDelWeek = () => {
             const deletedWeek = [...props.weekValue];
-            deletedWeek.splice(weekIndex, 1);
-            weekLength.value--;
+            deletedWeek.splice(1, 3);
+            weekLength.value = 1;
             context.emit('delWeek', deletedWeek);
         };
         const enabled = computed(() => (week: number, weekDay: number) => {
