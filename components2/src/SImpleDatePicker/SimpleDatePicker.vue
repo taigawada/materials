@@ -45,7 +45,6 @@ export default defineComponent({
         };
         const currentSelectDate = ref<Date>();
         const handleSelectDateChange = (date: Date) => {
-            console.log(date);
             currentSelectDate.value = date;
             inputValue.value = format(date, 'yyyy年MM月dd日');
         };

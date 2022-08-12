@@ -2,12 +2,19 @@
     "name": "simple-education",
     "license": "UNLICENSED",
     "private": true,
+    "scripts": {
+        "build": "npm run build --workspaces --if-present"
+    },
     "workspaces": [
         "components2",
         "icons2",
         "tokens"
     ],
     "devDependencies": {
-        "eslint": "^8.21.0"
+        "vite": "^3.0.6",
+        "vite-plugin-vue2": "^2.0.2"
+    },
+    "dependencies": {
+        "vue-template-compiler": "~2.6.14"
     }
 }
