@@ -18,7 +18,7 @@
                                 selectedText: enabled(weekIndex, index),
                             }"
                         >
-                            {{ WeekStr(index) }}
+                            {{ dayOfWeekStr(start, index) }}
                         </span>
                     </div>
                 </div>
@@ -26,17 +26,13 @@
         </div>
         <SimpleButton v-show="weekValue.length === 1" plain class="addWeek" @click="handleAddWeek">
             <SimpleStack alignment="center" distribution="center">
-                <SimpleIcon size="18px" color="rgba(53, 146, 185, 1)" class="week-add-icon">
-                    <ArrowDown />
-                </SimpleIcon>
+                <ArrowDown class="week-add-icon" />
                 月ごと
             </SimpleStack>
         </SimpleButton>
         <SimpleButton v-show="weekValue.length !== 1" plain class="addWeek" @click="handleDelWeek">
             <SimpleStack alignment="center" distribution="center">
-                <SimpleIcon size="18px" color="rgba(53, 146, 185, 1)" class="week-add-icon">
-                    <ArrowUp />
-                </SimpleIcon>
+                <ArrowUp class="week-add-icon" />
                 週ごと
             </SimpleStack>
         </SimpleButton>
@@ -44,10 +40,10 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, PropType } from '@vue/composition-api';
+import { dayOfWeekStr } from '../../utils/utils';
 import { ArrowDown, ArrowUp } from '@simple-education/icons2';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
-import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
-import SimpleStack from '@/SimpleStack/SimpleStack.vue';
+import SimpleStack from '../SimpleStack/SimpleStack.vue';
 type Week = boolean[];
 type Start = 'monday' | 'sunday';
 export default defineComponent({
@@ -55,7 +51,6 @@ export default defineComponent({
         ArrowUp,
         ArrowDown,
         SimpleButton,
-        SimpleIcon,
         SimpleStack,
     },
     props: {
@@ -107,30 +102,6 @@ export default defineComponent({
         const enabled = computed(() => (week: number, weekDay: number) => {
             return props.weekValue[week][weekDay];
         });
-        const WeekStr = (index: number) => {
-            let shifter = 0;
-            if (props.start === 'monday') {
-                shifter = 1;
-            }
-            switch (index + shifter) {
-                case 0:
-                    return '日';
-                case 1:
-                    return '月';
-                case 2:
-                    return '火';
-                case 3:
-                    return '水';
-                case 4:
-                    return '木';
-                case 5:
-                    return '金';
-                case 6:
-                    return '土';
-                case 7:
-                    return '日';
-            }
-        };
         return {
             weekLength,
             weekArray,
@@ -140,12 +111,13 @@ export default defineComponent({
             handleAddWeek,
             handleDelWeek,
             enabled,
-            WeekStr,
+            dayOfWeekStr,
         };
     },
 });
 </script>
-<style scoped>
+<style scoped lang="scss">
+@use '~/@simple-education/tokens/stylesheet.scss' as *;
 .base {
     display: inline-block;
 }
@@ -190,9 +162,10 @@ export default defineComponent({
     text-align: left;
     font-size: 12px;
 }
-.gabagebox {
-    margin-left: 10px;
-    height: 22px;
+.week-add-icon {
+    width: 14px;
+    height: 14px;
+    fill: $selected;
     cursor: pointer;
 }
 .hidden {

@@ -73,21 +73,21 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, reactive } from '@vue/composition-api';
-import SimpleButton from './SimpleButton/SimpleButton.vue';
-import SimpleTabs from './SimpleTabs/SimpleTabs.vue';
-import SimpleActions from './SimpleActions/SimpleActions.vue';
-import SimpleCheckbox from './SimpleCheckbox/SimpleCheckbox.vue';
-import SimpleBanner from './SimpleBanner/SimpleBanner.vue';
-import SimpleInput from './SimpleInput/SimpleInput.vue';
-import SimpleCard from './SimpleCard/SimpleCard.vue';
-import SimpleTag from './SimpleTag/SimpleTag.vue';
-import SimpleModal from './SimpleModal/SimpleModal.vue';
-import SimpleSelector from './SimpleSelector/SimpleSelector.vue';
-import WeeklySelector from './WeeklySelector/WeeklySelector.vue';
-import SimpleCombobox from './SimpleCombobox/SimpleCombobox.vue';
-import SimpleStack from './SimpleStack/SimpleStack.vue';
-import SimpleDatePicker from './SImpleDatePicker/SimpleDatePicker.vue';
-import SimpleCalender from './SimpleCalender/SimpleCalender.vue';
+import SimpleButton from '@/SimpleButton/SimpleButton.vue';
+import SimpleTabs from './components/SimpleTabs/SimpleTabs.vue';
+import SimpleActions from './components/SimpleActions/SimpleActions.vue';
+import SimpleCheckbox from './components/SimpleCheckbox/SimpleCheckbox.vue';
+import SimpleBanner from './components/SimpleBanner/SimpleBanner.vue';
+import SimpleInput from './components/SimpleInput/SimpleInput.vue';
+import SimpleCard from './components/SimpleCard/SimpleCard.vue';
+import SimpleTag from './components/SimpleTag/SimpleTag.vue';
+import SimpleModal from './components/SimpleModal/SimpleModal.vue';
+import SimpleSelector from './components/SimpleSelector/SimpleSelector.vue';
+import WeeklySelector from './components/WeeklySelector/WeeklySelector.vue';
+import SimpleCombobox from './components/SimpleCombobox/SimpleCombobox.vue';
+import SimpleStack from './components/SimpleStack/SimpleStack.vue';
+import SimpleDatePicker from './components/SImpleDatePicker/SimpleDatePicker.vue';
+import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
 
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 

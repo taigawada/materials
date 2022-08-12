@@ -55,8 +55,8 @@ import {
 } from 'date-fns';
 import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
 import { ArrowLeft, ArrowRight } from '@simple-education/icons2';
-import { monthBoolean } from '../types/week';
-import { dayOfWeekStr } from '../Utils/Utils';
+import { monthBoolean } from '../../types/week';
+import { dayOfWeekStr } from '../../utils/utils';
 
 interface Entered {
     weekIndex: null | number;
