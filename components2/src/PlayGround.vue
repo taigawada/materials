@@ -109,18 +109,19 @@
             />
         </SimpleModal>
         <p>WeeklySelector</p>
-        <p>{{ weekState.week }}</p>
-        <WeeklySelector
-            :weekValue="weekState.week"
-            @change="changeWeek"
-            @addWeek="changeWeek"
-            @delWeek="changeWeek"
-        />
+        <div>
+            <WeeklySelector
+                :weekValue="weekState.week"
+                @change="changeWeek"
+                @addWeek="changeWeek"
+                @delWeek="changeWeek"
+            />
+        </div>
+        <div>
+            <SimpleCalender :highLights="weekState.week"></SimpleCalender>
+        </div>
         <p>date picker</p>
-        <SimpleDatePicker
-            style="width: 20%; margin: 0 auto"
-            :highLights="weekState.week"
-        >
+        <SimpleDatePicker style="width: 20%; margin: 0 auto">
         </SimpleDatePicker>
         <div style="height: 800px"></div>
     </div>
@@ -141,6 +142,7 @@ import WeeklySelector from './WeeklySelector/WeeklySelector.vue';
 import SimpleCombobox from './SimpleCombobox/SimpleCombobox.vue';
 import SimpleStack from './SimpleStack/SimpleStack.vue';
 import SimpleDatePicker from './SImpleDatePicker/SimpleDatePicker.vue';
+import SimpleCalender from './SimpleCalender/SimpleCalender.vue';
 
 const sleep = (waitTime: number) =>
     new Promise((resolve) => setTimeout(resolve, waitTime));
@@ -162,6 +164,7 @@ export default defineComponent({
         SimpleCombobox,
         SimpleStack,
         SimpleDatePicker,
+        SimpleCalender,
     },
     setup() {
         // SimpleButton
@@ -255,7 +258,7 @@ export default defineComponent({
         };
         // WeeklySelector
         const weekState = reactive({
-            week: [[false, true, false, false, false, false, false]],
+            week: [[false, false, false, false, false, false, false]],
         });
         const changeWeek = (newValue: boolean[][]) => {
             weekState.week = newValue;
@@ -272,11 +275,11 @@ export default defineComponent({
             '1年D組',
             '1年E組',
         ]);
+        const comboSelected = ref<string[]>([]);
         const handleAddItems = (item: string) => {
-            console.log(item);
+            comboSelected.value.push(item);
             comboItems.value.push(item);
         };
-        const comboSelected = ref<string[]>([]);
         const handleRemoveItem = (item: string) => {
             let currentSelect = comboSelected.value;
             currentSelect.splice(currentSelect.indexOf(item), 1);

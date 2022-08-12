@@ -14,7 +14,7 @@
         <div v-if="isEntered || isFocus" class="float-box">
             <div
                 v-for="(item, index) in filtered"
-                :key="item+index"
+                :key="item + index"
                 class="enteredItem"
                 :class="{
                     checkedItem: includeItem(item),
@@ -28,32 +28,19 @@
                     :label="item"
                     @change="(bool) => onChangeSelect(item, bool)"
                 />
-                <div
-                    v-if="!multiple"
-                    class="items non-multi-selectable"
-                    @click="onChangeSelect(item, undefined)"
-                >
+                <div v-if="!multiple" class="items non-multi-selectable" @click="onChangeSelect(item, undefined)">
                     {{ item }}
                 </div>
             </div>
             <div
-                v-show="
-                    allowAdd &&
-                        fieldValue.length > 0 &&
-                        !includeItem(fieldValue)
-                "
+                v-show="allowAdd && fieldValue.length > 0 && !includeItem(fieldValue)"
                 class="enteredItem add"
                 @click="addItem(fieldValue)"
             >
-                <SimpleIcon
-                    class="add-icon"
-                    size="16px"
-                >
+                <SimpleIcon class="add-icon" size="16px">
                     <DeleteButton />
                 </SimpleIcon>
-                <div class="items non-multi-selectable">
-                    "{{ fieldValue }}"を追加
-                </div>
+                <div class="items non-multi-selectable">"{{ fieldValue }}"を追加</div>
             </div>
         </div>
     </div>
@@ -69,7 +56,7 @@ export default defineComponent({
         DeleteButton,
         SimpleInput,
         SimpleCheckbox,
-        SimpleIcon
+        SimpleIcon,
     },
     props: {
         caption: {
@@ -125,11 +112,9 @@ export default defineComponent({
             if (bool === true) {
                 selectedItemsCurrent = [...props.selectedItems, item];
             } else if (bool === false) {
-                selectedItemsCurrent = props.selectedItems.filter(
-                    (element: string) => {
-                        return element !== item;
-                    }
-                );
+                selectedItemsCurrent = props.selectedItems.filter((element: string) => {
+                    return element !== item;
+                });
             } else {
                 selectedItemsCurrent = [item];
             }
@@ -140,7 +125,7 @@ export default defineComponent({
         };
         const addItem = (item: string) => {
             isEntered.value = false;
-            if (props.multiple) {
+            if (!props.multiple) {
                 context.emit('remove');
             }
             context.emit('add:item', item);
@@ -158,9 +143,7 @@ export default defineComponent({
                 };
                 const sccapeString = regExpEscape(props.fieldValue);
                 return props.items?.filter((item: string) => {
-                    return new RegExp(sccapeString.toLowerCase()).test(
-                        item.toLowerCase()
-                    );
+                    return new RegExp(sccapeString.toLowerCase()).test(item.toLowerCase());
                 });
             } else {
                 return props.items;
@@ -170,10 +153,7 @@ export default defineComponent({
             return props.selectedItems.indexOf(item) !== -1;
         });
         const currentSelectItem = computed(() => (item: string) => {
-            return (
-                currentSelect.value === item &&
-                props.selectedItems.indexOf(item) !== -1
-            );
+            return currentSelect.value === item && props.selectedItems.indexOf(item) !== -1;
         });
         const mouseleave = () => {
             isEntered.value = false;
@@ -244,6 +224,6 @@ export default defineComponent({
     align-items: center;
 }
 .add-icon {
-    transform: rotate(45deg)
+    transform: rotate(45deg);
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div @mousedown="mousedown" @mouseleave="mouseleave">
-        <!-- <SimpleInput
+        <SimpleInput
             placeholder="日付を選択"
             :value="inputValue"
             @change:value="inputChange"
@@ -9,29 +9,29 @@
         >
         </SimpleInput>
         <div v-if="isEntered || isFocus" class="float-box">
-            <div class="datepicker-header">
-                <span class="datepicker-year-header">2022</span>
-                <span class="datepicker-date-header">1月12日</span>
-            </div>
-        </div> -->
-        <DatePickVue :highLights="highLights"></DatePickVue>
+            <SimpleCalender
+                select
+                :selected="currentSelectDate"
+                @change="handleSelectDateChange"
+            ></SimpleCalender>
+        </div>
     </div>
 </template>
 <script lang="ts">
-// import SimpleInput from '../SimpleInput/SimpleInput.vue';
-import DatePickVue from './DatePick.vue';
-import { monthBoolean } from '../types/week';
-import { defineComponent, ref, PropType } from '@vue/composition-api';
+import SimpleInput from '../SimpleInput/SimpleInput.vue';
+import SimpleCalender from '../SimpleCalender/SimpleCalender.vue';
+import { format } from 'date-fns';
+import { defineComponent, ref } from '@vue/composition-api';
 
 export default defineComponent({
     components: {
-        // SimpleInput,
-        DatePickVue,
+        SimpleInput,
+        SimpleCalender,
     },
     props: {
-        highLights: {
-            type: Array as PropType<monthBoolean>,
-            default: undefined,
+        selected: {
+            type: Date,
+            default: () => new Date(),
             required: false,
         },
     },
@@ -54,6 +54,12 @@ export default defineComponent({
         const inputChange = (newValue: string) => {
             inputValue.value = newValue;
         };
+        const currentSelectDate = ref<Date>();
+        const handleSelectDateChange = (date: Date) => {
+            console.log(date);
+            currentSelectDate.value = date;
+            inputValue.value = format(date, 'yyyy年MM月dd日');
+        };
         return {
             isFocus,
             isEntered,
@@ -63,6 +69,8 @@ export default defineComponent({
             outFocus,
             inputValue,
             inputChange,
+            currentSelectDate,
+            handleSelectDateChange,
         };
     },
 });
@@ -74,18 +82,15 @@ export default defineComponent({
     position: absolute;
     box-sizing: border-box;
     background: $surface;
-    width: 340px;
-    height: 340px;
     border-radius: 7px;
     border: 1px solid #efefef;
     box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
+    padding-bottom: $space-6;
 }
 .datepicker-header {
     display: flex;
     flex-flow: column;
     align-items: flex-start;
-    width: 100%;
-    height: 100px;
     background: $theme-color;
 }
 .datepicker-year-header {
