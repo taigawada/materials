@@ -4,7 +4,7 @@
     "private": false,
     "description": "",
     "type": "module",
-    "types": "./types/build.d.ts",
+    "types": "./types/index.d.ts",
     "main": "./dist/icons2.js",
     "scripts": {
         "build": "vite build",

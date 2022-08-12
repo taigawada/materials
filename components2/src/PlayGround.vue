@@ -73,7 +73,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, reactive } from '@vue/composition-api';
-import SimpleButton from '@/SimpleButton/SimpleButton.vue';
+import SimpleButton from './components/SimpleButton/SimpleButton.vue';
 import SimpleTabs from './components/SimpleTabs/SimpleTabs.vue';
 import SimpleActions from './components/SimpleActions/SimpleActions.vue';
 import SimpleCheckbox from './components/SimpleCheckbox/SimpleCheckbox.vue';
