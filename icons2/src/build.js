@@ -1,5 +1,5 @@
 import ArrowDown from "@/ArrowDown.svg";
-import ArrowUp from "@/ArrowDown.svg";
+import ArrowUp from "@/ArrowUp.svg";
 import ArrowLeft from "@/ArrowLeft.svg";
 import ArrowRight from "@/ArrowRight.svg";
 import CheckMark from "@/CheckMark.svg";
