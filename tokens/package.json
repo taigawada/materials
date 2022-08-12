@@ -1,0 +1,30 @@
+{
+  "name": "@simple-education/tokens",
+  "version": "0.1.0",
+  "private": false,
+  "description": "",
+  "main": "index.ts",
+  "exports": {
+    "./eslint": {
+      "import": "./.eslintrc.js",
+      "require": "./.eslintrc.js"
+    },
+    "./tsconfig": {
+      "import": "./tsconfig.json",
+      "require": "./tsconfig.json"
+    },
+    "./style": {
+      "import": "./stylesheet.scss",
+      "require": "./stylesheet.scss"
+    }
+  },
+  "author": "TaigaWada",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.5.0"
+  },
+  "dependencies": {
+    "vue-template-compiler": "^2.6.14"
+  }
+}

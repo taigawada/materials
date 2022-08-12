@@ -1,0 +1,26 @@
+{
+  "extends": "@simple-education/tokens/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "src/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue", "src/installCompositionApi.js",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+    "name": "simple-education",
+    "license": "UNLICENSED",
+    "private": true,
+    "workspaces": [
+        "components2",
+        "icons2",
+        "tokens"
+    ],
+    "devDependencies": {
+        "eslint": "^8.21.0"
+    }
+}

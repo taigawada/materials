@@ -1,0 +1,54 @@
+<template>
+    <div class="tag-base">
+        <span class="text"><slot></slot></span>
+        <div
+            class="remove"
+            @click="hundleClickRemove">
+            <SimpleIcon
+                color="rgba(255, 255, 255, 1)"
+            >
+                <RemoveButton />
+            </SimpleIcon>
+        </div>
+    </div>
+</template>
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api';
+import SimpleIcon from '../SimpleIcon/SimpleIcon.vue';
+import { RemoveButton } from '@simple-education/icons2';
+export default defineComponent({
+    components: {
+        RemoveButton,
+        SimpleIcon,
+    },
+    setup(_, context) {
+        const hundleClickRemove = () => {
+            context.emit('remove');
+        };
+        return {
+            hundleClickRemove,
+        };
+    },
+});
+</script>
+<style scoped lang="scss">
+@use '~/@simple-education/tokens/stylesheet.scss' as *;
+.tag-base {
+    display: inline-flex;
+    align-items: center;
+    background: #2c3e50;
+    color: $surface;
+    font-size: $font-size-4;
+    border-radius: 3.5px;
+    padding: 1px 10px;
+    margin: 0 3px;
+    opacity: 0.3;
+}
+.remove {
+    height: 17px;
+    position: relative;
+    enable-background: new 0 0 512 512;
+    cursor: pointer;
+    margin-left: 10px;
+}
+</style>
