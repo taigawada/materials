@@ -1,26 +1,17 @@
 {
-  "extends": "@simple-education/tokens/tsconfig",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
+    "extends": "@simple-education/tokens/tsconfig",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+        "resolveJsonModule": true,
+        "emitDeclarationOnly": true,
+        "declaration": true,
+        "declarationMap": true,
+        "declarationDir": "./types"
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
-    "resolveJsonModule": true
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "exclude": ["node_modules"]
 }
