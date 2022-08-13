@@ -22,7 +22,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, watchEffect, PropType } from '@vue/composition-api';
+import { defineComponent, watchEffect, PropType } from 'vue-demi';
 import { CloseCross } from '@simple-education/icons2';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 interface MainAction {

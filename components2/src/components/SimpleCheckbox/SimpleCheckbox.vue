@@ -15,7 +15,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue-demi';
 import { CheckMark } from '@simple-education/icons2';
 export default defineComponent({
     components: {

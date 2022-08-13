@@ -92,8 +92,9 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from '@vue/composition-api';
+import { defineComponent, ref, computed } from 'vue-demi';
 import SimpleSpinner from '../SimpleSpinner/SimpleSpinner.vue';
+
 export default defineComponent({
     components: {
         SimpleSpinner,

@@ -4,7 +4,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, PropType } from '@vue/composition-api';
+import { defineComponent, computed, PropType } from 'vue-demi';
 
 export default defineComponent({
     props: {

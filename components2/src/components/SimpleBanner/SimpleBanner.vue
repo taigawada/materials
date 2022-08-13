@@ -11,7 +11,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue-demi';
 import { ExclamationMark } from '@simple-education/icons2';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 export default defineComponent({

@@ -2,7 +2,7 @@
     <div class="loader" :style="styles"></div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, PropType } from '@vue/composition-api';
+import { defineComponent, computed, PropType } from 'vue-demi';
 type Size = 'tiny' | 'normal' | 'large';
 export default defineComponent({
     props: {

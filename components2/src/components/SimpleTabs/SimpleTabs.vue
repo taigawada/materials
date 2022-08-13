@@ -1,6 +1,13 @@
 <template>
     <div class="base">
-        <div v-for="(tab, index) in tabs" :key="tab.id" class="tab" @mouseenter="mouseenter(index)" @mouseleave="mouseleave" @click="hundleSelect(index)">
+        <div
+            v-for="(tab, index) in tabs"
+            :key="tab.id"
+            class="tab"
+            @mouseenter="mouseenter(index)"
+            @mouseleave="mouseleave"
+            @click="hundleSelect(index)"
+        >
             <span
                 :class="{
                     enteredText: isEntered === index && isEntered !== selected,
@@ -14,7 +21,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, PropType } from '@vue/composition-api';
+import { defineComponent, ref, PropType } from 'vue-demi';
 interface Tab {
     id: string;
     label: string;

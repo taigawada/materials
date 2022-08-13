@@ -31,7 +31,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, PropType } from '@vue/composition-api';
+import { defineComponent, computed, PropType } from 'vue-demi';
 import { ExclamationMark, SelectArrow } from '@simple-education/icons2';
 interface Item {
     value: string;

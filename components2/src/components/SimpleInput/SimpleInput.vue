@@ -9,7 +9,14 @@
             {{ caption }}
         </div>
         <div class="wrapper">
-            <input v-model="text" :placeholder="placeholder" class="input" :readonly="readonly" @focus="handleFocusIn" @focusout="handleFocusOut" />
+            <input
+                v-model="text"
+                :placeholder="placeholder"
+                class="input"
+                :readonly="readonly"
+                @focus="handleFocusIn"
+                @focusout="handleFocusOut"
+            />
             <div v-show="appearRemoveButton" class="remove">
                 <DeleteCross class="delete-icon" @click="hundleRemove" />
             </div>
@@ -17,7 +24,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api';
+import { defineComponent, computed } from 'vue-demi';
 import { DeleteCross } from '@simple-education/icons2';
 export default defineComponent({
     components: {

@@ -1,6 +1,14 @@
 <template>
     <div @mousedown="mousedown" @mouseleave="mouseleave">
-        <SimpleInput placeholder="日付を選択" readonly :value="inputValue" @change:value="inputChange" @focusIn="inFocus" @focusOut="outFocus"> </SimpleInput>
+        <SimpleInput
+            placeholder="日付を選択"
+            readonly
+            :value="inputValue"
+            @change:value="inputChange"
+            @focusIn="inFocus"
+            @focusOut="outFocus"
+        >
+        </SimpleInput>
         <div v-if="isEntered || isFocus" class="date-picker_float-box">
             <SimpleCalender select :selected="currentSelectDate" @change="handleSelectDateChange"></SimpleCalender>
         </div>
@@ -10,7 +18,7 @@
 import SimpleInput from '../SimpleInput/SimpleInput.vue';
 import SimpleCalender from '../SimpleCalender/SimpleCalender.vue';
 import { format } from 'date-fns';
-import { defineComponent, ref } from '@vue/composition-api';
+import { defineComponent, ref } from 'vue-demi';
 
 export default defineComponent({
     components: {

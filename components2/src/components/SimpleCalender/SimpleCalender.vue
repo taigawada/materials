@@ -34,7 +34,7 @@
     </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, ref, PropType, reactive, watchEffect } from '@vue/composition-api';
+import { computed, defineComponent, ref, PropType, reactive, watchEffect } from 'vue-demi';
 import {
     format,
     startOfMonth,
@@ -137,7 +137,9 @@ export default defineComponent({
                 console.log(highLightsPositions.value);
                 return highLightsPositions.value.find(
                     (elememt) =>
-                        elememt[0] === differenceInWeeks(date, startOfMonth(date)) && elememt[1] === getDay(date) - weekStartsOn() && isSameMonth(date, currentShowDate.value)
+                        elememt[0] === differenceInWeeks(date, startOfMonth(date)) &&
+                        elememt[1] === getDay(date) - weekStartsOn() &&
+                        isSameMonth(date, currentShowDate.value)
                 );
             } else {
                 if (props.select) {

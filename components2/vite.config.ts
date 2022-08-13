@@ -2,14 +2,18 @@ import path from 'path';
 import { defineConfig } from 'vite';
 import { createVuePlugin as vue2 } from 'vite-plugin-vue2';
 
-console.log(path.resolve(__dirname, 'src/components'));
 export default defineConfig({
     plugins: [vue2()],
+    optimizeDeps: {
+        exclude: ['vue-demi'],
+    },
     resolve: {
-        alias: {
-            '~': '../node_modules/',
-            '@': path.resolve(__dirname, 'src/components/'),
-        },
+        alias: [
+            { find: '~', replacement: '../node_modules/' },
+            { find: '@', replacement: path.resolve(__dirname, 'src/components/') },
+            // vue-demi の仕様により、composition apiを正しく読み込めないのをaliasで矯正
+            { find: /^@vue\/composition-api$/, replacement: '@vue/composition-api/dist/vue-composition-api.mjs' },
+        ],
     },
     build: {
         lib: {

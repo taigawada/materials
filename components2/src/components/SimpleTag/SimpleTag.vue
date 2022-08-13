@@ -5,7 +5,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue-demi';
 import { CloseCross } from '@simple-education/icons2';
 export default defineComponent({
     components: {

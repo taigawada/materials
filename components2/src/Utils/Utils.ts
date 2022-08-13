@@ -24,7 +24,7 @@ const dayOfWeekStr = (start: 'monday' | 'sunday' | 0 | 1, index: number) => {
 };
 
 import { useWindowScroll } from '@vueuse/core';
-import { reactive, toRefs, watch } from '@vue/composition-api';
+import { reactive, toRefs, watch } from 'vue-demi';
 const useScroll = () => {
     const { x, y } = useWindowScroll();
 
