@@ -74,16 +74,20 @@
                 @remove="handleTextFieldRemove"
             />
         </SimpleModal>
-        <p>WeeklySelector</p>
-        <!-- <div>
-            <WeeklySelector :weekValue="weekState.week" @change="changeWeek" @addWeek="changeWeek" @delWeek="changeWeek" />
-        </div> -->
+        <p>WeeklySelector & Calender</p>
         <div>
-            <SimpleCalender></SimpleCalender>
+            <WeeklySelector :weekValue="weekState.week" @change="changeWeek" @addWeek="changeWeek" @delWeek="changeWeek" />
+        </div>
+        <div>
+            <SimpleCalender :highLights="weekState.week"></SimpleCalender>
         </div>
         <p>date picker</p>
         <SimpleDatePicker style="width: 20%; margin: 0 auto"></SimpleDatePicker>
-        <SimpleSmoothPicker></SimpleSmoothPicker>
+        <SimpleStack>
+            <SimpleSmoothPicker whichSide="left"></SimpleSmoothPicker>
+            <SimpleSmoothPicker></SimpleSmoothPicker>
+            <SimpleSmoothPicker whichSide="right"></SimpleSmoothPicker>
+        </SimpleStack>
         <div style="height: 800px"></div>
     </div>
 </template>
@@ -106,6 +110,10 @@ import SimpleDatePicker from './components/SImpleDatePicker/SimpleDatePicker.vue
 import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
 import SimpleSmoothPicker from './components/SimpleSmoothPicker/SimpleSmoothPicker.vue';
 
+import { weekBoolean, monthBoolean } from './types/week';
+interface WeekState {
+    week: monthBoolean;
+}
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
 export default defineComponent({
@@ -219,10 +227,10 @@ export default defineComponent({
             modalOpen.value = !modalOpen.value;
         };
         // WeeklySelector
-        const weekState = reactive({
+        const weekState = reactive<WeekState>({
             week: [[false, false, false, false, false, false, false]],
         });
-        const changeWeek = (newValue: boolean[][]) => {
+        const changeWeek = (newValue: weekBoolean[]) => {
             weekState.week = newValue;
         };
         // Tags, Combobox
@@ -245,6 +253,11 @@ export default defineComponent({
         };
         const comboSelectedChange = (selected: Array<string>) => {
             comboSelected.value = selected;
+        };
+        // SmoothPIcker
+        const smoothPickerSelectItem = ref<number | string>();
+        const handleSmoothPickerChange = (selected: number | string) => {
+            smoothPickerSelectItem.value = selected;
         };
         return {
             disabled,
@@ -278,6 +291,8 @@ export default defineComponent({
             handleAddItems,
             handleRemoveItem,
             comboSelectedChange,
+            smoothPickerSelectItem,
+            handleSmoothPickerChange,
         };
     },
 });

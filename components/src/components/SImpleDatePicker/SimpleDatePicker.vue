@@ -82,5 +82,6 @@ export default defineComponent({
     border: 1px solid #efefef;
     box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
     padding-bottom: $space-6;
+    z-index: 100;
 }
 </style>

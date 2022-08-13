@@ -106,7 +106,7 @@ export default defineComponent({
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: $modal-background;
 }
 .header {
     display: flex;
@@ -120,7 +120,7 @@ export default defineComponent({
     margin-left: $space-4;
 }
 .content {
-    width: 80%;
+    width: 90%;
     margin: 10px auto;
     max-height: 360px;
 }
