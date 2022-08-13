@@ -5,7 +5,7 @@
 monorepo 構成
 
 ```
-polaris/
+materials/
 ├── components #component repo
 ├── icons # SVG アイコンのソースと VueComponent
 ├── tokens # stylesheet.scss, tsconfig, eslintrc...etc
