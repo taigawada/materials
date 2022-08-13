@@ -25,7 +25,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted, watchEffect, PropType } from '@vue/composition-api';
+import { defineComponent, ref, computed, onMounted, watchEffect, PropType } from 'vue-demi';
 import { ArrowDown } from '@simple-education/icons2';
 interface Actions {
     label: string;

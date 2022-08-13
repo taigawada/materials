@@ -68,7 +68,8 @@
             <SimpleCalender :highLights="weekState.week"></SimpleCalender>
         </div>
         <p>date picker</p>
-        <SimpleDatePicker style="width: 20%; margin: 0 auto"> </SimpleDatePicker>
+        <SimpleDatePicker style="width: 20%; margin: 0 auto"></SimpleDatePicker>
+        <SimpleSmoothPicker></SimpleSmoothPicker>
         <div style="height: 800px"></div>
     </div>
 </template>
@@ -89,6 +90,7 @@ import SimpleCombobox from './components/SimpleCombobox/SimpleCombobox.vue';
 import SimpleStack from './components/SimpleStack/SimpleStack.vue';
 import SimpleDatePicker from './components/SImpleDatePicker/SimpleDatePicker.vue';
 import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
+import SimpleSmoothPicker from './components/SimpleSmoothPicker/SimpleSmoothPicker.vue';
 
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
@@ -110,6 +112,7 @@ export default defineComponent({
         SimpleStack,
         SimpleDatePicker,
         SimpleCalender,
+        SimpleSmoothPicker,
     },
     setup() {
         // SimpleButton

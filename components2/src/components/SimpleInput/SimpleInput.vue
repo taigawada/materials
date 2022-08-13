@@ -9,7 +9,7 @@
             {{ caption }}
         </div>
         <div class="wrapper">
-            <input v-model="text" :placeholder="placeholder" class="input" @focus="handleFocusIn" @focusout="handleFocusOut" />
+            <input v-model="text" :placeholder="placeholder" class="input" :readonly="readonly" @focus="handleFocusIn" @focusout="handleFocusOut" />
             <div v-show="appearRemoveButton" class="remove">
                 <DeleteCross class="delete-icon" @click="hundleRemove" />
             </div>
@@ -41,6 +41,10 @@ export default defineComponent({
         remove: {
             type: Boolean,
             required: false,
+        },
+        readonly: {
+            type: Boolean,
+            require: false,
         },
     },
     setup(props, context) {

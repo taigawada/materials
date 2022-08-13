@@ -133,13 +133,16 @@ export default defineComponent({
         });
         const currentSelectedDate = ref<Date | undefined>(props.selected);
         const showHighLights = (date: Date) => {
-            if (highLightsPositions.value.length > 0) {
+            if (highLightsPositions.value.length > 0 && !currentSelectedDate.value) {
+                console.log(highLightsPositions.value);
                 return highLightsPositions.value.find(
                     (elememt) =>
                         elememt[0] === differenceInWeeks(date, startOfMonth(date)) && elememt[1] === getDay(date) - weekStartsOn() && isSameMonth(date, currentShowDate.value)
                 );
             } else {
-                return currentSelectedDate.value ? isSameDay(date, currentSelectedDate.value) : false;
+                if (props.select) {
+                    return currentSelectedDate.value ? isSameDay(date, currentSelectedDate.value) : false;
+                }
             }
         };
         const handleDateSelect = (date: Date, weekIndex: number, weekDayIndex: number) => {
