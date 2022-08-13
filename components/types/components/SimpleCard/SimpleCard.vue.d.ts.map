@@ -1,0 +1,1 @@
+{"version":3,"file":"SimpleCard.vue.d.ts","sourceRoot":"","sources":["../../../src/components/SimpleCard/SimpleCard.vue.tsx"],"names":[],"mappings":"AACA,OAAO,EAA6B,QAAQ,EAAE,MAAM,UAAU,CAAC;AAG/D,UAAU,MAAM;IACZ,IAAI,EAAE,MAAM,CAAC;IACb,QAAQ,CAAC,EAAE,OAAO,CAAC;IACnB,OAAO,CAAC,EAAE,OAAO,CAAC;CACrB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AACD,wBAqCG"}
