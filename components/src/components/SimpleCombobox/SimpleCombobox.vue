@@ -45,7 +45,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, PropType } from 'vue-demi';
-import { DeleteCross } from '@simple-education/icons2';
+import { DeleteCross } from '@simple-education/icons';
 import SimpleInput from '../SimpleInput/SimpleInput.vue';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
 export default defineComponent({

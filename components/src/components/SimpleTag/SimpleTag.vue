@@ -6,7 +6,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue-demi';
-import { CloseCross } from '@simple-education/icons2';
+import { CloseCross } from '@simple-education/icons';
 export default defineComponent({
     components: {
         CloseCross,

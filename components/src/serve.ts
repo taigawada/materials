@@ -3,7 +3,7 @@ import { createApp } from 'vue3';
 import { install, isVue3 } from 'vue-demi';
 install();
 
-console.log(isVue3 ? 'running on Vue3' : 'running on Vue2');
+console.log(`running on ${isVue3 ? 'Vue3' : 'Vue2'}`);
 
 import PlayGround from './PlayGround.vue';
 

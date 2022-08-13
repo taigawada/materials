@@ -29,7 +29,7 @@
     "author": "TaigaWada",
     "license": "MIT",
     "dependencies": {
-        "@simple-education/icons2": "^0.1.0",
+        "@simple-education/icons": "^0.1.0",
         "@simple-education/tokens": "^0.1.0",
         "@vueuse/core": "^9.1.0",
         "date-fns": "^2.29.1",

@@ -26,7 +26,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted, watchEffect, PropType } from 'vue-demi';
-import { ArrowDown } from '@simple-education/icons2';
+import { ArrowDown } from '@simple-education/icons';
 interface Actions {
     label: string;
     onAction: () => unknown;

@@ -12,7 +12,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue-demi';
-import { ExclamationMark } from '@simple-education/icons2';
+import { ExclamationMark } from '@simple-education/icons';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 export default defineComponent({
     components: {

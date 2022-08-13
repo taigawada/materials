@@ -41,7 +41,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed, PropType } from 'vue-demi';
 import { dayOfWeekStr } from '../../utils/utils';
-import { ArrowDown, ArrowUp } from '@simple-education/icons2';
+import { ArrowDown, ArrowUp } from '@simple-education/icons';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 import SimpleStack from '../SimpleStack/SimpleStack.vue';
 type Week = boolean[];

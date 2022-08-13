@@ -50,7 +50,7 @@ import {
     isSameDay,
     differenceInWeeks,
 } from 'date-fns';
-import { ArrowLeft, ArrowRight } from '@simple-education/icons2';
+import { ArrowLeft, ArrowRight } from '@simple-education/icons';
 import { monthBoolean } from '../../types/week';
 import { dayOfWeekStr } from '../../utils/utils';
 

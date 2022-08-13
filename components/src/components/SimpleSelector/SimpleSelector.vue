@@ -32,7 +32,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue-demi';
-import { ExclamationMark, SelectArrow } from '@simple-education/icons2';
+import { ExclamationMark, SelectArrow } from '@simple-education/icons';
 interface Item {
     value: string;
     label: string;

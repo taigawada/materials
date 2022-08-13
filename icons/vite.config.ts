@@ -14,8 +14,8 @@ export default defineConfig({
     build: {
         lib: {
             entry: path.resolve(__dirname, "./src/build.js"),
-            name: "icons2",
-            fileName: "icons2",
+            name: "icons",
+            fileName: "icons",
         },
         rollupOptions: {
             external: ["vue"],

@@ -25,7 +25,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue-demi';
-import { DeleteCross } from '@simple-education/icons2';
+import { DeleteCross } from '@simple-education/icons';
 export default defineComponent({
     components: {
         DeleteCross,
