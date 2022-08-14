@@ -101,8 +101,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
     search: boolean;
-    placeholder: string;
     caption: string;
+    placeholder: string;
     remove: boolean;
     items: string[];
     fieldValue: string;
@@ -125,8 +125,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     outFocus: () => void;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
     search: boolean;
-    placeholder: string;
     caption: string;
+    placeholder: string;
     remove: boolean;
     items: string[];
     fieldValue: string;
@@ -135,8 +135,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     multiple: boolean;
 } & {}, {
     search: boolean;
-    placeholder: string;
     caption: string;
+    placeholder: string;
     remove: boolean;
     allowAdd: boolean;
     multiple: boolean;

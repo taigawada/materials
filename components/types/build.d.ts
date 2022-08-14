@@ -1,3 +1,3 @@
-import SimpleActions from './components/SimpleActions/SimpleActions.vue';
-export { SimpleActions };
+import SimpleSmoothPicker from './components/SimpleSmoothPicker/SimpleSmoothPicker.vue';
+export { SimpleSmoothPicker };
 //# sourceMappingURL=build.d.ts.map

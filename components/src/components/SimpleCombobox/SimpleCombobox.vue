@@ -44,6 +44,7 @@
     </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { defineComponent, ref, computed, PropType } from 'vue-demi';
 import { DeleteCross } from '@simple-education/icons';
 import SimpleInput from '../SimpleInput/SimpleInput.vue';

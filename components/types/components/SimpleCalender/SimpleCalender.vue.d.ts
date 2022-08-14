@@ -137,8 +137,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         required: false;
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
-    selected: Date;
     select: boolean;
+    selected: Date;
     start: "monday" | "sunday";
     showRelatedDays: boolean;
     highLights: monthBoolean;
@@ -226,14 +226,14 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         '--cursor-calender-date': string;
     }>;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
-    selected: Date;
     select: boolean;
+    selected: Date;
     start: "monday" | "sunday";
     showRelatedDays: boolean;
     highLights: monthBoolean;
 } & {}, {
-    selected: Date;
     select: boolean;
+    selected: Date;
     start: "monday" | "sunday";
     showRelatedDays: boolean;
     highLights: monthBoolean;

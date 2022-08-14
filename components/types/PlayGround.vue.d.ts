@@ -1,3 +1,4 @@
+import { weekBoolean } from './types/week';
 declare const _default: import("vue").ComponentOptions<import("vue").default, import("@vue/composition-api").ShallowUnwrapRef<{
     disabled: import("@vue/composition-api").Ref<boolean>;
     loading: import("@vue/composition-api").Ref<boolean>;
@@ -31,9 +32,9 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     modalOpen: import("@vue/composition-api").Ref<boolean>;
     handleModalOpen: () => void;
     weekState: {
-        week: boolean[][];
+        week: [boolean, boolean, boolean, boolean, boolean, boolean, boolean][];
     };
-    changeWeek: (newValue: boolean[][]) => void;
+    changeWeek: (newValue: weekBoolean[]) => void;
     comboSelected: import("@vue/composition-api").Ref<string[]>;
     comboField: import("@vue/composition-api").Ref<string>;
     comboFieldChange: (newValue: string) => void;
@@ -41,6 +42,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     handleAddItems: (item: string) => void;
     handleRemoveItem: (item: string) => void;
     comboSelectedChange: (selected: Array<string>) => void;
+    smoothPickerSelectItem: import("@vue/composition-api").Ref<string | number | undefined>;
+    handleSmoothPickerChange: (selected: number | string) => void;
 }> & import("@vue/composition-api").Data, {}, {}, {}, import("@vue/composition-api").ExtractPropTypes<{}>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{} & {}, import("@vue/composition-api").ShallowUnwrapRef<{
     disabled: import("@vue/composition-api").Ref<boolean>;
     loading: import("@vue/composition-api").Ref<boolean>;
@@ -74,9 +77,9 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     modalOpen: import("@vue/composition-api").Ref<boolean>;
     handleModalOpen: () => void;
     weekState: {
-        week: boolean[][];
+        week: [boolean, boolean, boolean, boolean, boolean, boolean, boolean][];
     };
-    changeWeek: (newValue: boolean[][]) => void;
+    changeWeek: (newValue: weekBoolean[]) => void;
     comboSelected: import("@vue/composition-api").Ref<string[]>;
     comboField: import("@vue/composition-api").Ref<string>;
     comboFieldChange: (newValue: string) => void;
@@ -84,6 +87,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     handleAddItems: (item: string) => void;
     handleRemoveItem: (item: string) => void;
     comboSelectedChange: (selected: Array<string>) => void;
+    smoothPickerSelectItem: import("@vue/composition-api").Ref<string | number | undefined>;
+    handleSmoothPickerChange: (selected: number | string) => void;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {} & {}, {}, true>);
 export default _default;
 //# sourceMappingURL=PlayGround.vue.d.ts.map

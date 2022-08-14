@@ -11,6 +11,7 @@ if (isVue3) {
     createApp(PlayGround).mount('#app');
 } else {
     new Vue({
+        /* @ts-ignore */
         render: (h) => h(PlayGround),
     }).$mount('#app');
 }

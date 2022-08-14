@@ -54,8 +54,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         required: false;
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
-    open: boolean;
     title: string;
+    open: boolean;
     mainAction: MainAction;
     subAction: SubAction;
 } & {}, import("@vue/composition-api").ShallowUnwrapRef<{
@@ -63,8 +63,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     onSubAction: () => void;
     handleDestroy: () => void;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
-    open: boolean;
     title: string;
+    open: boolean;
     mainAction: MainAction;
     subAction: SubAction;
 } & {}, {

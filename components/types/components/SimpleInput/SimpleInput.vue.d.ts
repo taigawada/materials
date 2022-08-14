@@ -51,9 +51,9 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         require: boolean;
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
+    caption: string;
     value: string;
     placeholder: string;
-    caption: string;
     remove: boolean;
     readonly: boolean;
 } & {}, import("@vue/composition-api").ShallowUnwrapRef<{
@@ -63,14 +63,14 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     text: import("@vue/composition-api").WritableComputedRef<string>;
     appearRemoveButton: import("@vue/composition-api").ComputedRef<boolean>;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
+    caption: string;
     value: string;
     placeholder: string;
-    caption: string;
     remove: boolean;
     readonly: boolean;
 } & {}, {
-    placeholder: string;
     caption: string;
+    placeholder: string;
     remove: boolean;
     readonly: boolean;
 }, true>);

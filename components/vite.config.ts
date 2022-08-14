@@ -6,13 +6,13 @@ export default defineConfig({
     optimizeDeps: {
         exclude: ['vue-demi'],
     },
-    plugins: [vue2()],
     resolve: {
         alias: [
             { find: '~', replacement: '../node_modules/' },
             { find: '@', replacement: path.resolve(__dirname, 'src/components/') },
             // vue-demi の仕様により、composition apiを正しく読み込めないのをaliasで矯正
             { find: /^@vue\/composition-api$/, replacement: '@vue/composition-api/dist/vue-composition-api.mjs' },
+            // { find: /^vue$/, replacement: 'vue3' },
         ],
     },
     build: {
@@ -30,4 +30,5 @@ export default defineConfig({
             },
         },
     },
+    plugins: [vue2()],
 });

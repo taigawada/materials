@@ -3,12 +3,11 @@
     "version": "0.1.0",
     "private": false,
     "description": "",
-    "type": "module",
     "types": "types/build.d.ts",
-    "main": "dist/components.js",
+    "main": "dist/components.mjs",
     "exports": {
         ".": {
-            "import": "./dist/components.js",
+            "import": "./dist/components.mjs",
             "require": "./dist/components.umd.cjs"
         },
         "./style": {
@@ -19,7 +18,8 @@
     "scripts": {
         "serve:2": "vue-demi-switch 2 && vite",
         "serve:3": "vue-demi-switch 3 vue3 && vite",
-        "build": "vue-tsc & vite build",
+        "build": "vue-demi-switch 2 && vue-tsc && vite build",
+        "build:3": "vue-demi-switch 3 vue3 && vite build",
         "format": "prettier -w src/**/*.{ts,vue}"
     },
     "eslintIgnore": [
@@ -33,12 +33,12 @@
         "@simple-education/tokens": "^0.1.0",
         "@vueuse/core": "^9.1.0",
         "date-fns": "^2.29.1",
-        "sass": "^1.54.3",
-        "sass-loader": "^13.0.2",
         "vue-demi": "^0.13.7"
     },
     "devDependencies": {
         "@types/node": "^18.6.3",
+        "sass": "^1.54.3",
+        "sass-loader": "^13.0.2",
         "@typescript-eslint/eslint-plugin": "^5.32.0",
         "@typescript-eslint/parser": "^5.32.0",
         "@vue/eslint-config-typescript": "^11.0.0",

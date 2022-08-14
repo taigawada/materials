@@ -1,16 +1,16 @@
 <template>
-    <div class="smooth-picker-base" :style="styles(null)">
-        <div class="smooth-picker_select_rect" :style="styles(null)"></div>
+    <div class="smooth-picker-base" :style="smoothPickerStyles(null)">
+        <div class="smooth-picker_select_rect" :style="smoothPickerStyles(null)"></div>
         <span class="smooth-picker-suffix-text">{{ suffix }}</span>
         <div ref="insideContent" class="smooth-picker-box">
             <div class="smooth-picker-roll">
                 <div
                     v-for="(item, index) in showInsideItems"
                     :key="String(item) + String(index)"
-                    :style="styles(index)"
+                    :style="smoothPickerStyles(index)"
                     class="smooth-picker_item calcScale"
                 >
-                    <span class="pars-text">{{ item }}</span>
+                    {{ item }}
                 </div>
             </div>
         </div>
@@ -21,6 +21,7 @@ import { defineComponent, ref, PropType, watchEffect } from 'vue-demi';
 import { useScroll } from '@vueuse/core';
 
 export default defineComponent({
+    name: 'SimpleSmoothPicker',
     props: {
         items: {
             type: Array as PropType<string[] | number[]>,
@@ -77,8 +78,8 @@ export default defineComponent({
                 context.emit('change', props.items[selectIndex]);
             }
         });
-        const styles = (ownIndex: number | null) => {
-            let result;
+        function smoothPickerStyles(ownIndex: number | null) {
+            let result = undefined;
             if (ownIndex) {
                 result =
                     1 -
@@ -90,17 +91,16 @@ export default defineComponent({
                 '--smooth-picker-content-width': props.width,
                 '--smooth-picker-box-height': `calc(${props.itemContetHeight}px * 5)`,
                 '--smooth-picker-item-height': props.itemContetHeight + 'px',
-                '--contraction-ratio': ownIndex ? result : undefined,
+                '--contraction-ratio': result,
                 '--border-left': isLeft ? '7px' : '0',
                 '--border-right': isRight ? '7px' : '0',
             };
-        };
+        }
         return {
             showInsideItems,
-            y,
             centerShowIndex,
             insideContent,
-            styles,
+            smoothPickerStyles,
         };
     },
 });

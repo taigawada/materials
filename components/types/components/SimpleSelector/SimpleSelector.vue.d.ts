@@ -67,27 +67,27 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         required: false;
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
+    caption: string;
     disabled: boolean;
     error: string;
     value: string;
-    caption: string;
     initialValue: string;
     items: Item[];
 } & {}, import("@vue/composition-api").ShallowUnwrapRef<{
     select: import("@vue/composition-api").WritableComputedRef<string>;
     isError: import("@vue/composition-api").ComputedRef<boolean>;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
+    caption: string;
     disabled: boolean;
     error: string;
     value: string;
-    caption: string;
     initialValue: string;
     items: Item[];
 } & {}, {
+    caption: string;
     disabled: boolean;
     error: string;
     value: string;
-    caption: string;
     initialValue: string;
 }, true>);
 export default _default;
