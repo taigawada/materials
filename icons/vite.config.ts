@@ -10,6 +10,7 @@ export default defineConfig({
             "~": "../node_modules/",
             "@": path.resolve(__dirname, "./src/icons/"),
         },
+        dedupe: ["vue"],
     },
     build: {
         lib: {

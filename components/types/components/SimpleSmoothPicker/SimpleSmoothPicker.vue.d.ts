@@ -1,6 +1,5 @@
 import { PropType } from 'vue-demi';
 declare const _default: import("vue").ComponentOptions<import("vue").default, import("@vue/composition-api").ShallowUnwrapRef<{
-    y: import("@vue/composition-api").Ref<number>;
     showInsideItems: import("@vue/composition-api").Ref<(string | number | null)[]>;
     centerShowIndex: import("@vue/composition-api").Ref<number>;
     insideContent: import("@vue/composition-api").Ref<HTMLElement | null>;
@@ -8,7 +7,7 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         '--smooth-picker-content-width': string;
         '--smooth-picker-box-height': string;
         '--smooth-picker-item-height': string;
-        '--contraction-ratio': number | undefined;
+        '--contraction-ratio': undefined;
         '--border-left': string;
         '--border-right': string;
     };
@@ -85,15 +84,14 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         required: false;
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
-    selected: string | number;
-    width: string;
     items: string[] | number[];
     suffix: string;
+    selected: string | number;
+    width: string;
     itemContetHeight: number;
     distanceToDisplay: number;
     whichSide: "left" | "right" | undefined;
 } & {}, import("@vue/composition-api").ShallowUnwrapRef<{
-    y: import("@vue/composition-api").Ref<number>;
     showInsideItems: import("@vue/composition-api").Ref<(string | number | null)[]>;
     centerShowIndex: import("@vue/composition-api").Ref<number>;
     insideContent: import("@vue/composition-api").Ref<HTMLElement | null>;
@@ -101,23 +99,23 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         '--smooth-picker-content-width': string;
         '--smooth-picker-box-height': string;
         '--smooth-picker-item-height': string;
-        '--contraction-ratio': number | undefined;
+        '--contraction-ratio': undefined;
         '--border-left': string;
         '--border-right': string;
     };
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
-    selected: string | number;
-    width: string;
     items: string[] | number[];
     suffix: string;
+    selected: string | number;
+    width: string;
     itemContetHeight: number;
     distanceToDisplay: number;
     whichSide: "left" | "right" | undefined;
 } & {}, {
-    selected: string | number;
-    width: string;
     items: string[] | number[];
     suffix: string;
+    selected: string | number;
+    width: string;
     itemContetHeight: number;
     distanceToDisplay: number;
     whichSide: "left" | "right" | undefined;

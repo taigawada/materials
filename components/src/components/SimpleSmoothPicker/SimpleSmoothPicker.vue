@@ -80,11 +80,12 @@ export default defineComponent({
         });
         function smoothPickerStyles(ownIndex: number | null) {
             let result = undefined;
-            if (ownIndex) {
-                result =
-                    1 -
-                    Math.abs(y.value - (ownIndex! - 2) * props.itemContetHeight) ** 2 / (props.itemContetHeight * props.distanceToDisplay);
-            }
+            console.log(ownIndex);
+            // if (ownIndex) {
+            //     result =
+            //         1 -
+            //         Math.abs(y.value - (ownIndex! - 2) * props.itemContetHeight) ** 2 / (props.itemContetHeight * props.distanceToDisplay);
+            // }
             const isLeft = props.whichSide === 'left';
             const isRight = props.whichSide === 'right';
             return {
@@ -106,7 +107,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '../../../../node_modules/@simple-education/tokens/stylesheet.scss' as *;
 .smooth-picker-base {
     position: relative;
     display: inline-block;

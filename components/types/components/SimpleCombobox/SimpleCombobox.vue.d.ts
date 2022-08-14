@@ -102,9 +102,9 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
     search: boolean;
     caption: string;
+    items: string[];
     placeholder: string;
     remove: boolean;
-    items: string[];
     fieldValue: string;
     selectedItems: string[];
     allowAdd: boolean;
@@ -126,9 +126,9 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
     search: boolean;
     caption: string;
+    items: string[];
     placeholder: string;
     remove: boolean;
-    items: string[];
     fieldValue: string;
     selectedItems: string[];
     allowAdd: boolean;

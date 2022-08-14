@@ -68,21 +68,21 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
     caption: string;
+    items: Item[];
     disabled: boolean;
     error: string;
     value: string;
     initialValue: string;
-    items: Item[];
 } & {}, import("@vue/composition-api").ShallowUnwrapRef<{
     select: import("@vue/composition-api").WritableComputedRef<string>;
     isError: import("@vue/composition-api").ComputedRef<boolean>;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
     caption: string;
+    items: Item[];
     disabled: boolean;
     error: string;
     value: string;
     initialValue: string;
-    items: Item[];
 } & {}, {
     caption: string;
     disabled: boolean;
