@@ -6,7 +6,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue-demi';
-import { CloseCross } from '@simple-education/icons';
+import { CloseCross } from '@simple-education-dev/icons';
 export default defineComponent({
     components: {
         CloseCross,
@@ -22,7 +22,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .tag-base {
     display: inline-flex;
     align-items: center;

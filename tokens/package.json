@@ -1,23 +1,32 @@
 {
-  "name": "@simple-education/tokens",
-  "version": "0.1.0",
-  "private": false,
-  "description": "",
-  "main": "index.ts",
-  "exports": {
-    "./eslint": {
-      "import": "./.eslintrc.js",
-      "require": "./.eslintrc.js"
+    "name": "@simple-education-dev/tokens",
+    "version": "0.1.2",
+    "private": false,
+    "description": "",
+    "main": "index.ts",
+    "files": [
+        ".eslintrc.js",
+        "tsconfig.json",
+        "stylesheet.scss"
+    ],
+    "exports": {
+        "./eslint": {
+            "import": "./.eslintrc.js",
+            "require": "./.eslintrc.js"
+        },
+        "./tsconfig": {
+            "import": "./tsconfig.json",
+            "require": "./tsconfig.json"
+        },
+        "./styles": {
+            "import": "./stylesheet.scss",
+            "require": "./stylesheet.scss"
+        }
     },
-    "./tsconfig": {
-      "import": "./tsconfig.json",
-      "require": "./tsconfig.json"
-    },
-    "./style": {
-      "import": "./stylesheet.scss",
-      "require": "./stylesheet.scss"
-    }
-  },
-  "author": "TaigaWada",
-  "license": "MIT"
+    "sideEffects": [
+        "*.json",
+        "*.scss"
+    ],
+    "author": "TaigaWada",
+    "license": "MIT"
 }

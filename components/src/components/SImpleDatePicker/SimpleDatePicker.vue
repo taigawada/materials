@@ -72,7 +72,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .date-picker_float-box {
     display: block;
     position: absolute;

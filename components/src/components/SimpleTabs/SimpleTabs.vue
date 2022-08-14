@@ -59,7 +59,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .base {
     display: flex;
     justify-content: space-between;

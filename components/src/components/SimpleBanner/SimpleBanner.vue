@@ -12,7 +12,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue-demi';
-import { ExclamationMark } from '@simple-education/icons';
+import { ExclamationMark } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 export default defineComponent({
     components: {
@@ -41,7 +41,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .base {
     width: 100%;
     display: flex;

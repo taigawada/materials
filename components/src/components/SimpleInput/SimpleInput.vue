@@ -25,7 +25,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue-demi';
-import { DeleteCross } from '@simple-education/icons';
+import { DeleteCross } from '@simple-education-dev/icons';
 export default defineComponent({
     components: {
         DeleteCross,
@@ -87,7 +87,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .wrapper {
     display: flex;
     align-items: center;

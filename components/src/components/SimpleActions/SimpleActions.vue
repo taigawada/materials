@@ -26,7 +26,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, onMounted, watchEffect, PropType } from 'vue-demi';
-import { ArrowDown } from '@simple-education/icons';
+import { ArrowDown } from '@simple-education-dev/icons';
 interface Actions {
     label: string;
     onAction: () => unknown;
@@ -99,7 +99,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .base {
     display: inline-flex;
 }

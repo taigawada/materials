@@ -84,9 +84,9 @@
         <p>date picker</p>
         <SimpleDatePicker style="width: 20%; margin: 0 auto"></SimpleDatePicker>
         <SimpleStack>
-            <SimpleSmoothPicker whichSide="left"></SimpleSmoothPicker>
-            <SimpleSmoothPicker></SimpleSmoothPicker>
-            <SimpleSmoothPicker whichSide="right"></SimpleSmoothPicker>
+            <SimpleSmoothPicker :items="['午前', '午後']" whichSide="left" selected="午前"></SimpleSmoothPicker>
+            <SimpleSmoothPicker :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" suffix="時" :selected="8"></SimpleSmoothPicker>
+            <SimpleSmoothPicker whichSide="right" suffix="分" :selected="30"></SimpleSmoothPicker>
         </SimpleStack>
         <div style="height: 800px"></div>
     </div>

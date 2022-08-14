@@ -16,7 +16,7 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue-demi';
-import { CheckMark } from '@simple-education/icons';
+import { CheckMark } from '@simple-education-dev/icons';
 export default defineComponent({
     components: {
         CheckMark,
@@ -44,7 +44,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .base {
     display: flex;
     align-items: center;

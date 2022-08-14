@@ -50,7 +50,7 @@ import {
     isSameDay,
     differenceInWeeks,
 } from 'date-fns';
-import { ArrowLeft, ArrowRight } from '@simple-education/icons';
+import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
 import { monthBoolean } from '../../types/week';
 import { dayOfWeekStr } from '../../utils/utils';
 
@@ -221,7 +221,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .temp-base {
     display: inline-block;
 }

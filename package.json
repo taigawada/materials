@@ -1,7 +1,7 @@
 {
     "name": "simple-education-dev",
     "license": "UNLICENSED",
-    "private": true,
+    "private": false,
     "scripts": {
         "build": "npm run build --workspaces --if-present"
     },
@@ -11,12 +11,7 @@
         "tokens"
     ],
     "devDependencies": {
-        "@vue/composition-api": "^1.7.0",
         "vite": "^3.0.6",
-        "vite-plugin-vue2": "^2.0.2",
         "vue-tsc": "^0.40.1"
-    },
-    "dependencies": {
-        "vue-template-compiler": "~2.6.14"
     }
 }

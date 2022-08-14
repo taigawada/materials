@@ -32,7 +32,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue-demi';
-import { ExclamationMark, SelectArrow } from '@simple-education/icons';
+import { ExclamationMark, SelectArrow } from '@simple-education-dev/icons';
 interface Item {
     value: string;
     label: string;
@@ -95,7 +95,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .form {
     display: flex;
     align-items: center;

@@ -46,7 +46,7 @@
 <script lang="ts">
 // @ts-nocheck
 import { defineComponent, ref, computed, PropType } from 'vue-demi';
-import { DeleteCross } from '@simple-education/icons';
+import { DeleteCross } from '@simple-education-dev/icons';
 import SimpleInput from '../SimpleInput/SimpleInput.vue';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
 export default defineComponent({
@@ -183,7 +183,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .float-box {
     display: block;
     position: relative;

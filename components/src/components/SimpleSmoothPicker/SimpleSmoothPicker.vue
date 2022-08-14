@@ -25,7 +25,7 @@ export default defineComponent({
     props: {
         items: {
             type: Array as PropType<string[] | number[]>,
-            default: () => [...Array(100).keys()],
+            default: () => [...Array(60).keys()],
             required: false,
         },
         selected: {
@@ -80,12 +80,11 @@ export default defineComponent({
         });
         function smoothPickerStyles(ownIndex: number | null) {
             let result = undefined;
-            console.log(ownIndex);
-            // if (ownIndex) {
-            //     result =
-            //         1 -
-            //         Math.abs(y.value - (ownIndex! - 2) * props.itemContetHeight) ** 2 / (props.itemContetHeight * props.distanceToDisplay);
-            // }
+            if (ownIndex) {
+                result =
+                    1 -
+                    Math.abs(y.value - (ownIndex! - 2) * props.itemContetHeight) ** 2 / (props.itemContetHeight * props.distanceToDisplay);
+            }
             const isLeft = props.whichSide === 'left';
             const isRight = props.whichSide === 'right';
             return {
@@ -107,7 +106,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '../../../../node_modules/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .smooth-picker-base {
     position: relative;
     display: inline-block;

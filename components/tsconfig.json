@@ -1,5 +1,5 @@
 {
-    "extends": "@simple-education/tokens/tsconfig",
+    "extends": "@simple-education-dev/tokens/tsconfig",
     "compilerOptions": {
         "baseUrl": ".",
         "paths": {

@@ -23,7 +23,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, watchEffect, PropType } from 'vue-demi';
-import { CloseCross } from '@simple-education/icons';
+import { CloseCross } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 interface MainAction {
     text: string;
@@ -87,7 +87,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-@use '~/@simple-education/tokens/stylesheet.scss' as *;
+@use '@simple-education-dev/tokens/styles' as *;
 .card {
     position: fixed;
     top: 50%;

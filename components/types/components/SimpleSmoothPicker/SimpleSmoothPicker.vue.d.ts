@@ -7,7 +7,7 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         '--smooth-picker-content-width': string;
         '--smooth-picker-box-height': string;
         '--smooth-picker-item-height': string;
-        '--contraction-ratio': undefined;
+        '--contraction-ratio': number | undefined;
         '--border-left': string;
         '--border-right': string;
     };
@@ -84,10 +84,10 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         required: false;
     };
 }>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{
-    items: string[] | number[];
-    suffix: string;
     selected: string | number;
     width: string;
+    items: string[] | number[];
+    suffix: string;
     itemContetHeight: number;
     distanceToDisplay: number;
     whichSide: "left" | "right" | undefined;
@@ -99,23 +99,23 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
         '--smooth-picker-content-width': string;
         '--smooth-picker-box-height': string;
         '--smooth-picker-item-height': string;
-        '--contraction-ratio': undefined;
+        '--contraction-ratio': number | undefined;
         '--border-left': string;
         '--border-right': string;
     };
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {
-    items: string[] | number[];
-    suffix: string;
     selected: string | number;
     width: string;
+    items: string[] | number[];
+    suffix: string;
     itemContetHeight: number;
     distanceToDisplay: number;
     whichSide: "left" | "right" | undefined;
 } & {}, {
-    items: string[] | number[];
-    suffix: string;
     selected: string | number;
     width: string;
+    items: string[] | number[];
+    suffix: string;
     itemContetHeight: number;
     distanceToDisplay: number;
     whichSide: "left" | "right" | undefined;
