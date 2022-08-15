@@ -1,17 +1,17 @@
 <template>
-    <div class="base">
+    <div class="simple-selector_base">
         <div
             :class="{
-                caption: caption !== '_caption_initial',
+                captionText: caption !== '_caption_initial',
             }"
-            class="caption-hidden"
+            class="simple-selector_caption-hidden"
         >
             {{ caption }}
         </div>
-        <div class="form">
+        <div class="simple-selector_form-element">
             <select
                 v-model="select"
-                class="select-box"
+                class="simple-selector_select-box"
                 :disabled="disabled"
                 :class="{
                     selectBoxError: isError,
@@ -22,11 +22,11 @@
                     {{ item.label }}
                 </option>
             </select>
-            <SelectArrow class="select-icon" />
+            <SelectArrow class="simple-selector_select-icon" />
         </div>
-        <div v-show="isError" class="error">
-            <ExclamationMark class="exclamation" />
-            <span class="error-text">{{ error }}</span>
+        <div v-show="isError" class="simple-selector_error-message">
+            <ExclamationMark class="simple-selector_error-exclamation" />
+            <span class="simple-selector_error-text">{{ error }}</span>
         </div>
     </div>
 </template>
@@ -96,38 +96,37 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.form {
+.simple-selector_base {
+    text-align: left;
+}
+.simple-selector_form-element {
     display: flex;
     align-items: center;
 }
-.select-box {
+.simple-selector_select-box {
     font-size: $font-size-4;
     appearance: none;
     padding: $space-025 $space-8 $space-025 $space-2;
     box-sizing: border-box;
-    border: 1px solid #d5d5d5;
+    border: 1px solid $border;
     border-radius: 5px;
-    background: #fff;
+    background: $surface;
 }
-.caption-hidden {
+.simple-selector_caption-hidden {
     padding: 0 5px;
     display: block;
     text-align: left;
     opacity: 0;
 }
-.caption {
+.captionText {
     opacity: 1;
 }
-.selectBoxError {
-    border: 1px solid #ff7979;
-    background: rgb(255, 240, 240);
-}
-.select-box:focus {
-    border: 1px solid #ffc255;
+.simple-selector_select-box:focus {
+    border: 1px solid $theme-color;
     z-index: 10;
     outline: 0;
 }
-.select-icon {
+.simple-selector_select-icon {
     width: 15px;
     height: 15px;
     fill: $surface-black;
@@ -135,17 +134,26 @@ export default defineComponent({
     right: $space-6;
     z-index: 11;
 }
-.error {
-    display: flex;
+.selectBoxError {
+    border: 1px solid $surface-error;
+    background: $surface-error-alpha;
 }
-.exclamation {
+.selectBoxError:focus {
+    border: 1px solid $surface-error;
+    background: $surface-error-alpha;
+}
+.simple-selector_error-message {
+    display: inline-flex;
+    align-items: center;
+}
+.simple-selector_error-text {
+    font-size: $font-size-3;
+    color: $text-error;
+}
+.simple-selector_error-exclamation {
     width: 15px;
     height: 15px;
-    fill: $error;
-    margin-left: 3px;
-    margin-right: 5px;
-}
-.error-text {
-    color: #c40000;
+    fill: $surface-error;
+    margin: 0 $space-2 0 $space-1;
 }
 </style>

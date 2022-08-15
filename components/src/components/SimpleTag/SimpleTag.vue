@@ -1,7 +1,7 @@
 <template>
-    <div class="tag-base">
+    <div class="simple-tag_base">
         <span class="text"><slot></slot></span>
-        <CloseCross class="remove-icon" @click="hundleClickRemove" />
+        <CloseCross class="simple-tag_remove-icon" @click="hundleClickRemove" />
     </div>
 </template>
 <script lang="ts">
@@ -23,7 +23,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.tag-base {
+.simple-tag_base {
     display: inline-flex;
     align-items: center;
     background: #2c3e50;
@@ -34,7 +34,7 @@ export default defineComponent({
     margin: 0 3px;
     opacity: 0.3;
 }
-.remove-icon {
+.simple-tag_remove-icon {
     width: 17px;
     height: 16px;
     fill: $surface;

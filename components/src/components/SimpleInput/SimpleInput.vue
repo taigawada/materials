@@ -1,36 +1,49 @@
 <template>
-    <div class="base">
+    <div class="simple-input_container" :style="widthStyle()">
         <div
             :class="{
                 caption: caption !== '_caption_initial',
             }"
-            class="caption-hidden"
+            class="simple-input_caption-hidden"
         >
             {{ caption }}
         </div>
-        <div class="wrapper">
+        <div class="simple-input_input-field">
             <input
                 v-model="text"
                 :placeholder="placeholder"
-                class="input"
+                class="simple-input_input-element"
+                :class="{
+                    inputError: isError,
+                }"
                 :readonly="readonly"
                 @focus="handleFocusIn"
                 @focusout="handleFocusOut"
             />
-            <div v-show="appearRemoveButton" class="remove">
-                <DeleteCross class="delete-icon" @click="hundleRemove" />
+            <div v-show="appearRemoveButton" class="simple-input_remove">
+                <DeleteCross class="simple-input_remove-icon" @click="hundleRemove" />
             </div>
+        </div>
+        <div v-show="isError" class="simple-input_error-message">
+            <ExclamationMark class="simple-input_error-exclamation" />
+            <span class="simple-input_error-text">{{ error }}</span>
         </div>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent, computed } from 'vue-demi';
-import { DeleteCross } from '@simple-education-dev/icons';
+import { DeleteCross, ExclamationMark } from '@simple-education-dev/icons';
 export default defineComponent({
     components: {
         DeleteCross,
+        ExclamationMark,
     },
     props: {
+        width: {
+            type: String,
+            default: 'auto',
+            required: false,
+        },
         value: {
             type: String,
             required: true,
@@ -52,6 +65,11 @@ export default defineComponent({
         readonly: {
             type: Boolean,
             require: false,
+        },
+        error: {
+            type: String,
+            default: undefined,
+            required: false,
         },
     },
     setup(props, context) {
@@ -76,23 +94,39 @@ export default defineComponent({
                 return false;
             }
         });
+        const isError = computed(() => {
+            if (props.error) {
+                return props.error.length > 0;
+            } else {
+                return false;
+            }
+        });
+        const widthStyle = () => ({
+            '--simple-input-width': props.width,
+        });
         return {
             handleFocusIn,
             handleFocusOut,
             hundleRemove,
             text,
             appearRemoveButton,
+            isError,
+            widthStyle,
         };
     },
 });
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.wrapper {
+.simple-input_container {
+    text-align: left;
+    width: var(--simple-input-width);
+}
+.simple-input_input-field {
     display: flex;
     align-items: center;
 }
-.caption-hidden {
+.simple-input_caption-hidden {
     pointer-events: none;
     padding: 0 $space-1;
     display: block;
@@ -103,7 +137,7 @@ export default defineComponent({
     pointer-events: auto;
     opacity: 1;
 }
-.input {
+.simple-input_input-element {
     width: 100%;
     flex-shrink: 0;
     padding: $space-025 $space-3;
@@ -113,21 +147,43 @@ export default defineComponent({
     transition-delay: 0.1s;
     box-sizing: border-box;
 }
-.input:focus {
+.simple-input_input-element:focus {
     border: 1px solid $theme-color;
     z-index: 10;
     outline: 0;
 }
-.remove {
+.simple-input_remove {
     height: 18px;
     position: relative;
     right: $space-8;
     cursor: pointer;
     z-index: 110;
 }
-.delete-icon {
+.simple-input_remove-icon {
     width: 18px;
     height: 18px;
     fill: $surface-black;
+}
+.inputError {
+    border: 1px solid $surface-error;
+    background: $surface-error-alpha;
+}
+.inputError:focus {
+    border: 1px solid $surface-error;
+    background: $surface-error-alpha;
+}
+.simple-input_error-message {
+    display: inline-flex;
+    align-items: center;
+}
+.simple-input_error-text {
+    font-size: $font-size-3;
+    color: $text-error;
+}
+.simple-input_error-exclamation {
+    width: 15px;
+    height: 15px;
+    fill: $surface-error;
+    margin: 0 $space-2 0 $space-1;
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
-    <div class="base">
+    <div class="simple-checkbox_base">
         <div
-            class="checkbox"
+            class="simple-checkbox_checkbox-container"
             :class="{
                 checkedBackground: value,
             }"
             @click="hundleChange"
         >
-            <CheckMark class="checkmark" />
+            <CheckMark class="simple-checkbox_checkmark-icon" />
         </div>
-        <span v-show="label !== undefined" class="label-text" @click="hundleChange">
+        <span v-show="label !== undefined" class="simple-checkbox_label-text" @click="hundleChange">
             {{ label }}
         </span>
     </div>
@@ -45,15 +45,15 @@ export default defineComponent({
 
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.base {
+.simple-checkbox_base {
     display: flex;
     align-items: center;
 }
-.label-text {
+.simple-checkbox_label-text {
     margin-left: $space-4;
     cursor: pointer;
 }
-.checkbox {
+.simple-checkbox_checkbox-container {
     width: 17px;
     height: 17px;
     background: $surface;
@@ -67,7 +67,7 @@ export default defineComponent({
     border: 1px solid $checked;
     background: $checked;
 }
-.checkmark {
+.simple-checkbox_checkmark-icon {
     width: 17px;
     height: 17px;
     fill: $surface;

@@ -3,15 +3,11 @@ import { defineConfig } from 'vite';
 import { createVuePlugin as vue2 } from 'vite-plugin-vue2';
 
 export default defineConfig({
-    optimizeDeps: {
-        exclude: ['vue-demi'],
-    },
     resolve: {
         alias: [
             { find: '~', replacement: '../node_modules/' },
             { find: '@', replacement: path.resolve(__dirname, 'src/components/') },
         ],
-        dedupe: ['vue-demi'],
     },
     build: {
         lib: {
@@ -20,9 +16,10 @@ export default defineConfig({
             fileName: 'components',
         },
         rollupOptions: {
-            external: ['vue-demi'],
+            external: ['vue-demi', 'vue'],
             output: {
                 globals: {
+                    vue2: 'vue',
                     'vue-demi': 'VueDemi',
                 },
             },

@@ -5,7 +5,9 @@
         <p>buttons</p>
         <SimpleButton primary :disabled="disabled" :loading="loading" @click="handleButtonClick"> ボタン </SimpleButton>
         <p>Actions</p>
-        <SimpleActions :open="actionsOpen" :actions="actions" @click="actionsOpenToggle" @close="onClose"> その他の操作 </SimpleActions>
+        <SimpleActions :open="actionsOpen" :actions="actions" @click="actionsOpenToggle" @close="onClose">
+            その他の操作
+        </SimpleActions>
         <p>Input, Checkbox & Card</p>
         <SimpleCard
             width="50%"
@@ -21,11 +23,17 @@
                 caption="生徒氏名"
                 placeholder="名前を入力してください"
                 remove
+                error="入力は必須です。"
                 @change:value="handleFieldChange"
                 @remove="handleTextFieldRemove"
             />
             <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
-            <SimpleSelector :value="selectRef" :items="selectItems" @change="handleSelectChange" />
+            <SimpleSelector
+                :value="selectRef"
+                :items="selectItems"
+                error="選択は必須です。"
+                @change="handleSelectChange"
+            />
         </SimpleCard>
         <p>Banner</p>
         <SimpleBanner style="width: 40%; margin: 0 auto" title="今日までの提出物" buttonLabel="確認" @action="action">
@@ -62,8 +70,9 @@
                 text: 'キャンセル',
             }"
             :open="modalOpen"
-            @subAction="handleModalOpen"
-            @destroy="handleModalOpen"
+            @mainAction="modalMainAction"
+            @subAction="handleDestroy"
+            @destroy="handleDestroy"
         >
             <SimpleInput
                 :value="fieldvalue"
@@ -76,7 +85,12 @@
         </SimpleModal>
         <p>WeeklySelector & Calender</p>
         <div>
-            <WeeklySelector :weekValue="weekState.week" @change="changeWeek" @addWeek="changeWeek" @delWeek="changeWeek" />
+            <WeeklySelector
+                :weekValue="weekState.week"
+                @change="changeWeek"
+                @addWeek="changeWeek"
+                @delWeek="changeWeek"
+            />
         </div>
         <div>
             <SimpleCalender :highLights="weekState.week"></SimpleCalender>
@@ -85,7 +99,11 @@
         <SimpleDatePicker style="width: 20%; margin: 0 auto"></SimpleDatePicker>
         <SimpleStack>
             <SimpleSmoothPicker :items="['午前', '午後']" whichSide="left" selected="午前"></SimpleSmoothPicker>
-            <SimpleSmoothPicker :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]" suffix="時" :selected="8"></SimpleSmoothPicker>
+            <SimpleSmoothPicker
+                :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
+                suffix="時"
+                :selected="8"
+            ></SimpleSmoothPicker>
             <SimpleSmoothPicker whichSide="right" suffix="分" :selected="30"></SimpleSmoothPicker>
         </SimpleStack>
         <div style="height: 800px"></div>
@@ -224,7 +242,13 @@ export default defineComponent({
         // Modal
         const modalOpen = ref(false);
         const handleModalOpen = () => {
+            modalOpen.value = true;
+        };
+        const handleDestroy = () => {
             modalOpen.value = !modalOpen.value;
+        };
+        const modalMainAction = () => {
+            console.log('mainAction');
         };
         // WeeklySelector
         const weekState = reactive<WeekState>({
@@ -282,6 +306,8 @@ export default defineComponent({
             selectItems,
             modalOpen,
             handleModalOpen,
+            handleDestroy,
+            modalMainAction,
             weekState,
             changeWeek,
             comboSelected,

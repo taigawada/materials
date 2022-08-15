@@ -1,13 +1,15 @@
 <template>
-    <div class="base">
-        <div class="header">
-            <ExclamationMark class="excla_mark" />
-            <div v-show="title !== undefined" class="heading">{{ title }}</div>
+    <div class="simple-banner_base">
+        <div class="simple-banner_header">
+            <ExclamationMark class="simple-banner_exclamation_mark" />
+            <div v-show="title !== undefined" class="simple-banner_heading">{{ title }}</div>
         </div>
-        <div class="content">
+        <div class="simple-banner-content">
             <slot></slot>
         </div>
-        <SimpleButton v-show="buttonLabel !== undefined" plain class="button" @click="hundleClick">{{ buttonLabel }}</SimpleButton>
+        <SimpleButton v-show="buttonLabel !== undefined" plain class="simple-banner_button" @click="hundleClick">
+            {{ buttonLabel }}
+        </SimpleButton>
     </div>
 </template>
 <script lang="ts">
@@ -42,38 +44,38 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.base {
+.simple-banner_base {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background: $theme-color-alpha;
-    border: 1px solid $theme-color;
+    background: $surface-warning-alpha;
+    border: 1px solid $surface-warning;
     border-radius: $border-radius-1;
     box-sizing: border-box;
     padding: $space-2 $space-3;
 }
-.header {
+.simple-banner_header {
     font-size: $font-size-4;
     display: flex;
     align-items: center;
 }
-.heading {
+.simple-banner_heading {
     margin: 0 $space-5;
 }
-.content {
+.simple-banner_content {
     font-size: $font-size-4;
     padding: $space-1 0;
     text-align: left;
     display: inline;
 }
-.button {
+.simple-banner_button {
     margin: 0 0 0 auto;
 }
-.excla_mark {
+.simple-banner_exclamation_mark {
     width: 18px;
     height: 18px;
-    fill: $warning-deep;
+    fill: $surface-warning-deep;
 }
 </style>

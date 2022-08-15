@@ -1,7 +1,7 @@
 <template>
-    <div class="card" :style="cardWidth">
+    <div class="simple-card_base" :style="cardWidth">
         <slot></slot>
-        <div v-if="mainAction !== undefined || subAction !== undefined" class="actions">
+        <div v-if="mainAction !== undefined || subAction !== undefined" class="simple-card_actions">
             <div>
                 <SimpleButton
                     v-if="subAction"
@@ -48,10 +48,20 @@ export default defineComponent({
         },
         mainAction: {
             type: Object as PropType<Action>,
+            default: () => ({
+                text: '',
+                disabled: false,
+                loading: false,
+            }),
             require: false,
         },
         subAction: {
             type: Object as PropType<Action>,
+            default: () => ({
+                text: '',
+                disabled: false,
+                loading: false,
+            }),
             require: false,
         },
     },
@@ -77,7 +87,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.card {
+.simple-card_base {
     display: inline-block;
     box-sizing: border-box;
     width: var(--card-width);
@@ -86,7 +96,7 @@ export default defineComponent({
     padding: $space-4 $space-10;
     box-shadow: $boxshadow;
 }
-.actions {
+.simple-card_actions {
     margin-top: $space-8;
     margin-bottom: $space-3;
     display: flex;

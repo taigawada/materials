@@ -1,11 +1,11 @@
 <template>
-    <div class="base">
+    <div class="weekly-selector_base">
         <div v-for="weekIndex in weekArray" :key="'week' + weekIndex">
-            <div v-show="weekLength > 1" class="caption">第{{ weekIndex + 1 }}週</div>
-            <div class="weekdays">
+            <div v-show="weekLength > 1" class="weekly-selector_week-caption">第{{ weekIndex + 1 }}週</div>
+            <div class="weekly-selector_weekdays">
                 <div v-for="index in weekdaysArray" :key="'weekdays' + weekIndex + index">
                     <div
-                        class="box"
+                        class="weekly-selector_box"
                         :class="{
                             leftSide: index === 0,
                             rightSide: index === weekdaysLength - 1,
@@ -24,16 +24,20 @@
                 </div>
             </div>
         </div>
-        <SimpleButton v-show="weekValue.length === 1" plain class="addWeek" @click="handleAddWeek">
+        <SimpleButton v-show="weekValue.length === 1" plain class="weekly-selector_add-week" @click="handleAddWeek">
             <SimpleStack alignment="center" distribution="center">
-                <ArrowDown class="week-add-icon" />
-                月ごと
+                <template #default="style">
+                    <ArrowDown class="weekly-selector_week-add-icon" :style="style.spacing" />
+                    月ごと
+                </template>
             </SimpleStack>
         </SimpleButton>
-        <SimpleButton v-show="weekValue.length !== 1" plain class="addWeek" @click="handleDelWeek">
+        <SimpleButton v-show="weekValue.length !== 1" plain class="weekly-selector_add-week" @click="handleDelWeek">
             <SimpleStack alignment="center" distribution="center">
-                <ArrowUp class="week-add-icon" />
-                週ごと
+                <template #default="style">
+                    <ArrowUp class="weekly-selector_week-add-icon" :style="style.spacing" />
+                    週ごと
+                </template>
             </SimpleStack>
         </SimpleButton>
     </div>
@@ -117,15 +121,15 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.base {
+.weekly-selector_base {
     display: inline-block;
 }
-.weekdays {
+.weekly-selector_weekdays {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.box {
+.weekly-selector_box {
     display: block;
     background: rgba(255, 255, 255, 1);
     border-top: 0.5px solid #727272;
@@ -153,22 +157,19 @@ export default defineComponent({
     color: #ffffff;
     cursor: pointer;
 }
-.addWeek {
+.weekly-selector_add-week {
     margin: 5px 0;
     text-align: left;
 }
-.caption {
+.weekly-selector_week-caption {
     text-align: left;
     font-size: 12px;
 }
-.week-add-icon {
+.weekly-selector_week-add-icon {
     width: 14px;
     height: 14px;
     fill: $selected;
     cursor: pointer;
-}
-.hidden {
-    pointer-events: none;
-    opacity: 0;
+    margin: var(--child-margin);
 }
 </style>

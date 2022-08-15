@@ -1,19 +1,29 @@
 <template>
-    <div v-if="open" class="overlay">
-        <div class="card">
-            <div class="header">
-                <div class="title">{{ title }}</div>
-                <CloseCross class="close-icon" @click="handleDestroy" />
+    <div v-if="open" class="simple-modal_overlay">
+        <div class="simple-modal_card">
+            <div class="simple-modal_card-header">
+                <div class="simple-modal_card-title">{{ title }}</div>
+                <CloseCross class="simple-modal_close-icon" @click="handleDestroy" />
             </div>
-            <div class="content">
+            <div class="simple-modal_content-container">
                 <slot></slot>
             </div>
-            <div class="footer">
-                <div class="actions">
-                    <SimpleButton normal :disabled="subAction?.disabled" :loading="subAction?.loading" @click="onSubAction">
+            <div class="simple-modal_card-footer">
+                <div class="simple-modal_card-actions">
+                    <SimpleButton
+                        normal
+                        :disabled="subAction?.disabled"
+                        :loading="subAction?.loading"
+                        @click="onSubAction"
+                    >
                         {{ subAction?.text }}
                     </SimpleButton>
-                    <SimpleButton primary :disabled="mainAction?.disabled" :loading="mainAction?.loading" @click="onMainAction">
+                    <SimpleButton
+                        primary
+                        :disabled="mainAction?.disabled"
+                        :loading="mainAction?.loading"
+                        @click="onMainAction"
+                    >
                         {{ mainAction?.text }}
                     </SimpleButton>
                 </div>
@@ -22,7 +32,8 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, watchEffect, PropType } from 'vue-demi';
+import { defineComponent, ref, watchEffect, PropType } from 'vue-demi';
+import { useScrollLock, onKeyStroke, onKeyPressed } from '@vueuse/core';
 import { CloseCross } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 interface MainAction {
@@ -62,6 +73,8 @@ export default defineComponent({
         },
     },
     setup(props, context) {
+        const documentRef = ref(document.documentElement);
+        const scrollLock = useScrollLock(documentRef);
         const onMainAction = () => {
             context.emit('mainAction');
         };
@@ -71,11 +84,20 @@ export default defineComponent({
         const handleDestroy = () => {
             context.emit('destroy');
         };
+        onKeyPressed(['Enter'], () => {
+            if (props.open === true) context.emit('mainAction');
+        });
+        onKeyPressed(['Escape'], () => {
+            if (props.open === true) context.emit('destroy');
+        });
+        onKeyStroke(['Tab'], (e) => {
+            if (props.open === true) e.preventDefault();
+        });
         watchEffect(() => {
             if (props.open === true) {
-                document.documentElement.style.overflow = 'hidden';
+                scrollLock.value = true;
             } else {
-                document.documentElement.style.overflow = 'auto';
+                scrollLock.value = false;
             }
         });
         return {
@@ -88,17 +110,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.card {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
-}
-.overlay {
+.simple-modal_overlay {
     z-index: 100;
     display: block;
     position: fixed;
@@ -108,7 +120,17 @@ export default defineComponent({
     height: 100%;
     background-color: $modal-background;
 }
-.header {
+.simple-modal_card {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+}
+.simple-modal_card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -116,28 +138,28 @@ export default defineComponent({
     font-size: $font-size-9;
     border-bottom: 0.2px solid #a8a8a8;
 }
-.title {
+.simple-modal_card-title {
     margin-left: $space-4;
 }
-.content {
+.simple-modal_content-container {
     width: 90%;
     margin: 10px auto;
     max-height: 360px;
 }
-.footer {
+.simple-modal_card-footer {
     position: relative;
     display: block;
     height: 70px;
     border-top: 0.2px solid #a8a8a8;
 }
-.actions {
+.simple-modal_card-actions {
     display: inline-flex;
     position: absolute;
     top: 50%;
     right: 20px;
     transform: translateY(-50%);
 }
-.close-icon {
+.simple-modal_close-icon {
     width: 24px;
     height: 24px;
     fill: $surface-black;

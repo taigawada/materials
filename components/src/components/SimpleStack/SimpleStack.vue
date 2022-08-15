@@ -1,6 +1,6 @@
 <template>
-    <div class="stack-base" :style="styles">
-        <slot :style="spacingStyle"></slot>
+    <div class="simple-stack_base" :style="styles">
+        <slot :spacing="spacingStyle()"></slot>
     </div>
 </template>
 <script lang="ts">
@@ -59,7 +59,7 @@ export default defineComponent({
             wrap: props.wrap ? 'wrap' : 'no-wrap',
         }));
         const spacingStyle = () => ({
-            margin: `0 ${props.spacing}`,
+            '--child-margin': `0 ${props.spacing}`,
         });
         return {
             styles,
@@ -69,7 +69,7 @@ export default defineComponent({
 });
 </script>
 <style scoped lang="scss">
-.stack-base {
+.simple-stack_base {
     display: inline-flex;
     align-items: var(--align-items);
     justify-content: var(--justify-content);

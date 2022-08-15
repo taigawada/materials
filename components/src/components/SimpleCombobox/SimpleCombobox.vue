@@ -11,11 +11,11 @@
             @remove="fieldRemove"
         >
         </SimpleInput>
-        <div v-if="isEntered || isFocus" class="float-box">
+        <div v-if="isEntered || isFocus" class="simple-combobox_float-box">
             <div
                 v-for="(item, index) in filtered"
                 :key="item + index"
-                class="enteredItem"
+                class="simple-combobox_entered_item"
                 :class="{
                     checkedItem: includeItem(item),
                     currentSelect: currentSelectItem(item),
@@ -23,22 +23,22 @@
             >
                 <SimpleCheckbox
                     v-if="multiple"
-                    class="items"
+                    class="simple-combobox_item"
                     :value="includeItem(item)"
                     :label="item"
                     @change="(bool) => onChangeSelect(item, bool)"
                 />
-                <div v-if="!multiple" class="items non-multi-selectable" @click="onChangeSelect(item, undefined)">
+                <div v-if="!multiple" class="simple-combobox_item non-multi-selectable" @click="onChangeSelect(item, undefined)">
                     {{ item }}
                 </div>
             </div>
             <div
                 v-show="allowAdd && fieldValue.length > 0 && !includeItem(fieldValue)"
-                class="enteredItem add"
+                class="simple-combobox_entered_item simple-combobox_add-newvalue"
                 @click="addItem(fieldValue)"
             >
-                <DeleteCross class="add-icon" />
-                <div class="items non-multi-selectable">"{{ fieldValue }}"を追加</div>
+                <DeleteCross class="simple-combobox_add-icon" />
+                <div class="simple-combobox_item non-multi-selectable">"{{ fieldValue }}"を追加</div>
             </div>
         </div>
     </div>
@@ -184,7 +184,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.float-box {
+.simple-combobox_float-box {
     display: block;
     position: relative;
     box-sizing: border-box;
@@ -196,7 +196,7 @@ export default defineComponent({
     box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
     overflow: scroll;
 }
-.enteredItem:hover {
+.simple-combobox_entered_item:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 .checkedItem {
@@ -207,7 +207,7 @@ export default defineComponent({
     border: 1px solid #3c82d6;
     border-radius: 5px;
 }
-.items {
+.simple-combobox_item {
     margin-left: 10px;
 }
 .non-multi-selectable {
@@ -215,12 +215,12 @@ export default defineComponent({
     text-align: left;
     padding: 10px 0;
 }
-.add {
+.simple-combobox_add-newvalue {
     padding-left: 16px;
     display: flex;
     align-items: center;
 }
-.add-icon {
+.simple-combobox_add-icon {
     width: 16px;
     height: 16px;
     fill: $surface-black;

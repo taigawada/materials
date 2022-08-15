@@ -1,4 +1,3 @@
 import SimpleSmoothPicker from './components/SimpleSmoothPicker/SimpleSmoothPicker.vue';
-import BuildTest from './BuildTest.vue';
-export { SimpleSmoothPicker, BuildTest, };
+export { SimpleSmoothPicker, };
 //# sourceMappingURL=build.d.ts.map

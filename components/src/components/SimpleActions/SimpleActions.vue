@@ -1,8 +1,8 @@
 <template>
-    <div ref="thisComponent" class="base">
+    <div ref="simpleActionComponentBase" class="simple-action-base">
         <a
             ref="activator"
-            class="activator"
+            class="simple-action_activator"
             :class="{
                 entered: isEntered,
             }"
@@ -12,13 +12,18 @@
             @mousedown="mousedown"
             @mouseup="mouseup"
         >
-            <a class="activator-text">
+            <a class="simple-action_activator-text">
                 <slot></slot>
             </a>
             <ArrowDown style="width: 16px" />
         </a>
-        <div v-if="open" class="popover" :style="parentWidth">
-            <div v-for="(action, index) in actions" :key="action.label + index" class="item" @click="action.onAction">
+        <div v-if="open" class="simple-action_popover" :style="parentWidth">
+            <div
+                v-for="(action, index) in actions"
+                :key="action.label + index"
+                class="simple-action_action_content"
+                @click="action.onAction"
+            >
                 {{ action.label }}
             </div>
         </div>
@@ -59,9 +64,9 @@ export default defineComponent({
         const mouseleave = (): void => {
             isEntered.value = false;
         };
-        const thisComponent = ref();
+        const simpleActionComponentBase = ref();
         const closeActions = (event: Event) => {
-            const el = thisComponent.value;
+            const el = simpleActionComponentBase.value;
             if (!el.contains(event.target as HTMLElement)) {
                 context.emit('close');
             }
@@ -89,7 +94,7 @@ export default defineComponent({
             mouseup,
             mouseenter,
             mouseleave,
-            thisComponent,
+            simpleActionComponentBase,
             activator,
             activatorWidth,
             parentWidth,
@@ -100,10 +105,10 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.base {
+.simple-action-base {
     display: inline-flex;
 }
-.activator {
+.simple-action_activator {
     display: inline-flex;
     align-items: center;
     background: $surface;
@@ -113,7 +118,7 @@ export default defineComponent({
     padding: $space-2 $space-3;
     cursor: pointer;
 }
-.activator-text {
+.simple-action_activator-text {
     color: $text;
     text-decoration: none;
     pointer-events: none;
@@ -124,16 +129,16 @@ export default defineComponent({
     text-decoration: none;
     background: $normal-hovered;
 }
-.popover::before {
+.simple-action_popover::before {
     content: '';
     border: 10px solid transparent;
-    border-bottom: 10px solid #ffffff;
+    border-bottom: 10px solid $surface;
     position: absolute;
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
 }
-.popover {
+.simple-action_popover {
     position: absolute;
     display: inline-block;
     width: auto;
@@ -144,12 +149,12 @@ export default defineComponent({
     border-radius: $border-radius-1;
     transform: translateX(calc((var(--parent-width) - 100%) / 2));
 }
-.item {
+.simple-action_action_content {
     margin: $space-2;
     padding: $space-2;
     cursor: pointer;
 }
-.item:hover {
+.simple-action_action_content:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 </style>

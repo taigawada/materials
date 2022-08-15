@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="simple-button_container">
         <!-- disabled -->
         <a
             v-if="disabled"
@@ -27,7 +27,7 @@
             <a :class="{ textLoading: !plain }">
                 <slot></slot>
             </a>
-            <div v-show="!plain" class="spinner">
+            <div v-show="!plain" class="simple-button_spinner">
                 <SimpleSpinner size="normal" :color="spinnerColor" />
             </div>
         </a>
@@ -187,7 +187,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.wrapper {
+.simple-button_container {
     padding: 0 $space-1;
 }
 .base-prime {
@@ -285,7 +285,7 @@ export default defineComponent({
     text-decoration: none;
     pointer-events: none;
 }
-.spinner {
+.simple-button_spinner {
     position: absolute;
     pointer-events: none;
     left: 50%;

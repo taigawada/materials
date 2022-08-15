@@ -16,9 +16,9 @@
         }
     },
     "scripts": {
-        "serve:2": "vue-demi-switch 2 && vite",
+        "serve": "vite",
         "serve:3": "vue-demi-switch 3 vue3 && vite",
-        "build": "vue-demi-switch 2 && vue-tsc && vite build",
+        "build": "vue-demi-switch 2 vue2 && vue-tsc && vite build",
         "build:3": "vue-demi-switch 3 vue3 && vite build",
         "format": "prettier -w src/**/*.{ts,vue}"
     },
@@ -30,7 +30,7 @@
     "license": "MIT",
     "dependencies": {
         "@simple-education-dev/icons": "^0.1.0",
-        "@simple-education-dev/tokens": "^0.1.2",
+        "@simple-education-dev/tokens": "^0.1.3",
         "@vueuse/core": "^9.1.0",
         "date-fns": "^2.29.1",
         "vue-demi": "^0.13.7"
@@ -48,10 +48,8 @@
         "sass-loader": "^13.0.2",
         "typescript": "^4.7.4",
         "vite-plugin-vue2": "^2.0.2",
-        "vue": "^2.6.14",
-        "vue-template-compiler": "~2.6.14",
-        "vue-tsc": "^0.40.1",
-        "vue3": "npm:vue@^3"
+        "vue": "~2.6.14",
+        "vue-template-compiler": "~2.6.14"
     },
     "peerDependencies": {
         "@vue/composition-api": "^1.7.0"

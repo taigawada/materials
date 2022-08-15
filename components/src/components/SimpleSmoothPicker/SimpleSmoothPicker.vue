@@ -1,7 +1,7 @@
 <template>
-    <div class="smooth-picker-base" :style="smoothPickerStyles(null)">
+    <div class="smooth-picker_base" :style="smoothPickerStyles(null)">
         <div class="smooth-picker_select_rect" :style="smoothPickerStyles(null)"></div>
-        <span class="smooth-picker-suffix-text">{{ suffix }}</span>
+        <span class="smooth-picker_suffix-text">{{ suffix }}</span>
         <div ref="insideContent" class="smooth-picker-box">
             <div class="smooth-picker-roll">
                 <div
@@ -68,11 +68,18 @@ export default defineComponent({
             showInsideItems.value = [null, null, ...props.items, null, null];
         });
         watchEffect(() => {
-            const scrollQuantity = Math.max(props.items.findIndex((elm) => props.selected === elm) * props.itemContetHeight, 0);
+            const scrollQuantity = Math.max(
+                props.items.findIndex((elm) => props.selected === elm) * props.itemContetHeight,
+                0
+            );
             insideContent.value?.scrollTo(0, scrollQuantity);
         });
         watchEffect(() => {
-            if (y.value % props.itemContetHeight < 5 && y.value > -1 && props.items.length * props.itemContetHeight > y.value) {
+            if (
+                y.value % props.itemContetHeight < 5 &&
+                y.value > -1 &&
+                props.items.length * props.itemContetHeight > y.value
+            ) {
                 const selectIndex = (y.value / props.itemContetHeight) | 0;
                 centerShowIndex.value = selectIndex;
                 context.emit('change', props.items[selectIndex]);
@@ -83,7 +90,8 @@ export default defineComponent({
             if (ownIndex) {
                 result =
                     1 -
-                    Math.abs(y.value - (ownIndex! - 2) * props.itemContetHeight) ** 2 / (props.itemContetHeight * props.distanceToDisplay);
+                    Math.abs(y.value - (ownIndex! - 2) * props.itemContetHeight) ** 2 /
+                        (props.itemContetHeight * props.distanceToDisplay);
             }
             const isLeft = props.whichSide === 'left';
             const isRight = props.whichSide === 'right';
@@ -107,7 +115,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.smooth-picker-base {
+.smooth-picker_base {
     position: relative;
     display: inline-block;
     height: var(--smooth-picker-box-height);
@@ -141,7 +149,7 @@ export default defineComponent({
     border-bottom-left-radius: var(--border-left);
 }
 
-.smooth-picker-suffix-text {
+.smooth-picker_suffix-text {
     position: absolute;
     width: auto;
     right: $space-3;

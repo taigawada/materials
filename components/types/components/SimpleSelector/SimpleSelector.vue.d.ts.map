@@ -1,1 +1,1 @@
-{"version":3,"file":"SimpleSelector.vue.d.ts","sourceRoot":"","sources":["../../../src/components/SimpleSelector/SimpleSelector.vue.tsx"],"names":[],"mappings":"AACA,OAAO,EAA6B,QAAQ,EAAE,MAAM,UAAU,CAAC;AAE/D,UAAU,IAAI;IACV,KAAK,EAAE,MAAM,CAAC;IACd,KAAK,EAAE,MAAM,CAAC;CACjB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AACD,wBAuDG"}
+{"version":3,"file":"SimpleSelector.vue.d.ts","sourceRoot":"","sources":["../../../src/components/SimpleSelector/SimpleSelector.vue.tsx"],"names":[],"mappings":";AAOA,wBAuDG"}

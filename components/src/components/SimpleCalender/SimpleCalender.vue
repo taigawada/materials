@@ -1,14 +1,14 @@
 <template>
-    <div class="temp-base">
-        <div class="select-date-container">
-            <ArrowLeft class="paginate-icon" @click="handleSubMonth" />
+    <div class="simple-calender_container">
+        <div class="simple-calender_heading">
+            <ArrowLeft class="simple-calender_paginate-icon" @click="handleSubMonth" />
             <span>{{ showDateString() }}</span>
-            <ArrowRight class="paginate-icon" @click="handleAddMonth" />
+            <ArrowRight class="simple-calender_paginate-icon" @click="handleAddMonth" />
         </div>
 
         <table>
             <tr>
-                <th v-for="dayOfWeekIndex in dayWeekArray" :key="'dayOfWeek' + dayOfWeekIndex" class="calender-header">
+                <th v-for="dayOfWeekIndex in dayWeekArray" :key="'dayOfWeek' + dayOfWeekIndex" class="simple-calender_weekofday-header">
                     {{ dayOfWeekStr(start, dayOfWeekIndex) }}
                 </th>
             </tr>
@@ -16,11 +16,11 @@
                 <td
                     v-for="(day, weekDayIndex) in week"
                     :key="'day' + weekDayIndex"
-                    class="calender-data"
+                    class="simple-calender_date-data"
                     :class="{
-                        calender_show_related_days: !isSameMonth(day, currentShowDate),
-                        calender_data_entered: select && isEntered(weekIndex, weekDayIndex) && isSameMonth(day, currentShowDate),
-                        calender_data_selected: showHighLights(day),
+                        calenderShowRelatedDays: !isSameMonth(day, currentShowDate),
+                        calenderDataEntered: select && isEntered(weekIndex, weekDayIndex) && isSameMonth(day, currentShowDate),
+                        calenderDataSelected: showHighLights(day),
                     }"
                     :style="pointer"
                     @click="handleDateSelect(day, weekIndex, weekDayIndex)"
@@ -134,7 +134,6 @@ export default defineComponent({
         const currentSelectedDate = ref<Date | undefined>(props.selected);
         const showHighLights = (date: Date) => {
             if (highLightsPositions.value.length > 0 && !currentSelectedDate.value) {
-                console.log(highLightsPositions.value);
                 return highLightsPositions.value.find(
                     (elememt) =>
                         elememt[0] === differenceInWeeks(date, startOfMonth(date)) &&
@@ -222,41 +221,41 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.temp-base {
+.simple-calender_container {
     display: inline-block;
 }
-.select-date-container {
+.simple-calender_heading {
     display: flex;
     margin: $space-5 auto;
     align-items: center;
     justify-content: space-around;
 }
-.paginate-icon {
+.simple-calender_paginate-icon {
     width: 16px;
     height: 16px;
     fill: $surface-black;
     cursor: pointer;
 }
-.calender-header {
+.simple-calender_weekofday-header {
     font-weight: 100;
     color: $text;
     padding: $space-2 $space-5;
 }
-.calender-data {
+.simple-calender_date-data {
     font-size: $font-size-3;
     color: $surface-black;
     padding: $space-2 $space-5;
     border-radius: 5px;
     cursor: var(--cursor-calender-date);
 }
-.calender_data_entered {
+.calenderDataEntered {
     background: $hovered;
 }
-.calender_data_selected {
+.calenderDataSelected {
     color: $surface;
     background: $selected;
 }
-.calender_show_related_days {
+.calenderShowRelatedDays {
     color: $text-disabled;
 }
 </style>

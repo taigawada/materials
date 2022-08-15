@@ -1,5 +1,5 @@
 <template>
-    <div class="loader" :style="styles"></div>
+    <div class="simple-spinner_loader" :style="styles"></div>
 </template>
 <script lang="ts">
 import { defineComponent, computed, PropType } from 'vue-demi';
@@ -50,12 +50,12 @@ export default defineComponent({
 </script>
 <style scoped>
 .loader,
-.loader:after {
+.simple-spinner_loader:after {
     border-radius: 50%;
     width: var(--spinner-size);
     height: var(--spinner-size);
 }
-.loader {
+.simple-spinner_loader {
     display: inline-block;
     font-size: 10px;
     position: relative;
@@ -67,10 +67,10 @@ export default defineComponent({
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
-    -webkit-animation: rotateAnime 0.7s infinite linear;
-    animation: rotateAnim 0.7s infinite linear;
+    -webkit-animation: SpinnerRotateAnim 0.7s infinite linear;
+    animation: SpinnerRotateAnim 0.7s infinite linear;
 }
-@-webkit-keyframes rotateAnim {
+@-webkit-keyframes SpinnerRotateAnim {
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
@@ -80,7 +80,7 @@ export default defineComponent({
         transform: rotate(360deg);
     }
 }
-@keyframes rotateAnim {
+@keyframes SpinnerRotateAnim {
     0% {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);

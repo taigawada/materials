@@ -1,1 +1,1 @@
-{"version":3,"file":"SimpleTabs.vue.d.ts","sourceRoot":"","sources":["../../../src/components/SimpleTabs/SimpleTabs.vue.tsx"],"names":[],"mappings":"AACA,OAAO,EAAwB,QAAQ,EAAE,MAAM,UAAU,CAAC;AAC1D,UAAU,GAAG;IACT,EAAE,EAAE,MAAM,CAAC;IACX,KAAK,EAAE,MAAM,CAAC;CACjB;;0BAcoC,MAAM;;wBAIR,MAAM;;;;;;;;;;;;;;;;;;;;;;;;;;0BAJJ,MAAM;;wBAIR,MAAM;;;;;;;;AAjBzC,wBA8BG"}
+{"version":3,"file":"SimpleTabs.vue.d.ts","sourceRoot":"","sources":["../../../src/components/SimpleTabs/SimpleTabs.vue.tsx"],"names":[],"mappings":";AAMA,wBA8BG"}
