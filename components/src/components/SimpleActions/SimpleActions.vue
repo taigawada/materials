@@ -1,5 +1,5 @@
 <template>
-    <div ref="simpleActionComponentBase" class="simple-action-base">
+    <div ref="simpleActionComponentBase" class="simple-action_base">
         <a
             ref="activator"
             class="simple-action_activator"
@@ -30,7 +30,8 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted, watchEffect, PropType } from 'vue-demi';
+import { defineComponent, ref, computed, watchEffect, PropType } from 'vue-demi';
+import { useElementSize } from '@vueuse/core';
 import { ArrowDown } from '@simple-education-dev/icons';
 interface Actions {
     label: string;
@@ -79,13 +80,9 @@ export default defineComponent({
             }
         });
         const activator = ref<HTMLImageElement | null>(null);
-        const activatorWidth = ref('');
-        onMounted(() => {
-            const activatorRect = activator.value!.getBoundingClientRect();
-            activatorWidth.value = activatorRect!.width + 'px';
-        });
+        const { width } = useElementSize(activator);
         const parentWidth = computed(() => ({
-            '--parent-width': `${activatorWidth.value}`,
+            '--parent-width': String(width.value + 26) + 'px',
         }));
         return {
             onClick,
@@ -96,7 +93,6 @@ export default defineComponent({
             mouseleave,
             simpleActionComponentBase,
             activator,
-            activatorWidth,
             parentWidth,
             ArrowDown,
         };
@@ -105,13 +101,14 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
-.simple-action-base {
+.simple-action_base {
     display: inline-flex;
 }
 .simple-action_activator {
     display: inline-flex;
     align-items: center;
     background: $surface;
+    box-sizing: border-box;
     border: solid 1px $border;
     border-radius: $border-radius-1;
     text-decoration: none;
@@ -150,7 +147,7 @@ export default defineComponent({
     transform: translateX(calc((var(--parent-width) - 100%) / 2));
 }
 .simple-action_action_content {
-    margin: $space-2;
+    margin: $space-1;
     padding: $space-2;
     cursor: pointer;
 }

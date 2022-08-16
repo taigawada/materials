@@ -23,17 +23,27 @@
                 caption="生徒氏名"
                 placeholder="名前を入力してください"
                 remove
-                error="入力は必須です。"
                 @change:value="handleFieldChange"
                 @remove="handleTextFieldRemove"
             />
             <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
-            <SimpleSelector
-                :value="selectRef"
-                :items="selectItems"
-                error="選択は必須です。"
-                @change="handleSelectChange"
-            />
+            <div style="text-align: left">
+                <SimpleSelector
+                    :value="selectRef"
+                    :items="selectItems"
+                    caption="セレクトボックス"
+                    @change="handleSelectChange"
+                />
+            </div>
+            <div style="text-align: left">
+                <SimpleSelector
+                    radio
+                    :value="selectRef"
+                    caption="ラジオボタン"
+                    :items="selectItems"
+                    @change="handleSelectChange"
+                />
+            </div>
         </SimpleCard>
         <p>Banner</p>
         <SimpleBanner style="width: 40%; margin: 0 auto" title="今日までの提出物" buttonLabel="確認" @action="action">
@@ -41,9 +51,16 @@
         </SimpleBanner>
         <p>Tags, Combobox</p>
         <SimpleStack>
-            <SimpleTag v-for="(item, index) in comboSelected" :key="item + index" @remove="handleRemoveItem(item)">
-                {{ item }}
-            </SimpleTag>
+            <template #default="style">
+                <SimpleTag
+                    v-for="(item, index) in comboSelected"
+                    :key="item + index"
+                    :style="style.spacing"
+                    @remove="handleRemoveItem(item)"
+                >
+                    {{ item }}
+                </SimpleTag>
+            </template>
         </SimpleStack>
         <SimpleCombobox
             style="width: 40%; margin: 0 auto"
@@ -221,22 +238,27 @@ export default defineComponent({
             {
                 value: '1-A',
                 label: '1年A組',
+                helpText: '1年A組の全生徒を対象にします。',
             },
             {
                 value: '1-B',
                 label: '1年B組',
+                helpText: '1年B組の全生徒を対象にします。',
             },
             {
                 value: '1-C',
                 label: '1年C組',
+                helpText: '1年C組の全生徒を対象にします。',
             },
             {
                 value: '1-D',
                 label: '1年D組',
+                helpText: '1年D組の全生徒を対象にします。',
             },
             {
                 value: '1-E',
                 label: '1年E組',
+                helpText: '1年E組の全生徒を対象にします。',
             },
         ];
         // Modal

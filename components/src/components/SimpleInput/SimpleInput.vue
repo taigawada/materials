@@ -127,6 +127,7 @@ export default defineComponent({
     align-items: center;
 }
 .simple-input_caption-hidden {
+    font-size: $font-size-3;
     pointer-events: none;
     padding: 0 $space-1;
     display: block;

@@ -1,5 +1,5 @@
 <template>
-    <div class="simple-card_base" :style="cardWidth">
+    <div class="simple-card_base" :style="cardWidth()">
         <slot></slot>
         <div v-if="mainAction !== undefined || subAction !== undefined" class="simple-card_actions">
             <div>
@@ -28,7 +28,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue-demi';
+import { defineComponent, PropType } from 'vue-demi';
 import SimpleButton from '../SimpleButton/SimpleButton.vue';
 
 interface Action {
@@ -72,10 +72,8 @@ export default defineComponent({
         const hundleSubActionClick = () => {
             context.emit('subAction');
         };
-        const cardWidth = computed(() => {
-            return {
-                '--card-width': props.width,
-            };
+        const cardWidth = () => ({
+            '--card-width': props.width,
         });
         return {
             hundleMainActionClick,

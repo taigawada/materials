@@ -1,8 +1,8 @@
 <template>
-    <div class="simple-spinner_loader" :style="styles"></div>
+    <div class="simple-spinner_loader" :style="styles()"></div>
 </template>
 <script lang="ts">
-import { defineComponent, computed, PropType } from 'vue-demi';
+import { defineComponent, PropType } from 'vue-demi';
 type Size = 'tiny' | 'normal' | 'large';
 export default defineComponent({
     props: {
@@ -18,7 +18,7 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const styles = computed(() => {
+        const styles = () => {
             let size = '2.5em';
             if (props.size === 'tiny') {
                 size = '1.5em';
@@ -41,7 +41,7 @@ export default defineComponent({
                 '--spinner-size': size,
                 '--spinner-border-weight': borderWeight,
             };
-        });
+        };
         return {
             styles,
         };
@@ -49,7 +49,7 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.loader,
+.simple-spinner_loader,
 .simple-spinner_loader:after {
     border-radius: 50%;
     width: var(--spinner-size);
@@ -64,21 +64,8 @@ export default defineComponent({
     border-right: var(--spinner-border-weight) solid var(--spinner-color-alpha);
     border-bottom: var(--spinner-border-weight) solid var(--spinner-color-alpha);
     border-left: var(--spinner-border-weight) solid var(--spinner-color);
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
     transform: translateZ(0);
-    -webkit-animation: SpinnerRotateAnim 0.7s infinite linear;
     animation: SpinnerRotateAnim 0.7s infinite linear;
-}
-@-webkit-keyframes SpinnerRotateAnim {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-        transform: rotate(360deg);
-    }
 }
 @keyframes SpinnerRotateAnim {
     0% {

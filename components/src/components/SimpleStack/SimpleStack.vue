@@ -13,6 +13,10 @@ export default defineComponent({
             default: '5px',
             required: false,
         },
+        vertical: {
+            type: Boolean,
+            required: false,
+        },
         alignment: {
             type: String as PropType<'lower' | 'center' | 'upper'>,
             default: 'center',
@@ -56,11 +60,15 @@ export default defineComponent({
         const styles = computed(() => ({
             '--align-items': alignment(),
             '--justify-content': distribution(),
-            wrap: props.wrap ? 'wrap' : 'no-wrap',
+            '--flex-direction-wrap': `${props.vertical ? 'column' : 'row'} ${props.wrap ? 'wrap' : 'nowrap'}`,
         }));
-        const spacingStyle = () => ({
-            '--child-margin': `0 ${props.spacing}`,
-        });
+        const spacingStyle = () => {
+            if (props.vertical) {
+                return { margin: `${props.spacing} 0` };
+            } else {
+                return { margin: `0 ${props.spacing}` };
+            }
+        };
         return {
             styles,
             spacingStyle,
@@ -71,6 +79,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .simple-stack_base {
     display: inline-flex;
+    flex-flow: var(--flex-direction-wrap);
     align-items: var(--align-items);
     justify-content: var(--justify-content);
 }
