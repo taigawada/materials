@@ -8,7 +8,11 @@
 
         <table>
             <tr>
-                <th v-for="dayOfWeekIndex in dayWeekArray" :key="'dayOfWeek' + dayOfWeekIndex" class="simple-calender_weekofday-header">
+                <th
+                    v-for="dayOfWeekIndex in dayWeekArray"
+                    :key="'dayOfWeek' + dayOfWeekIndex"
+                    class="simple-calender_weekofday-header"
+                >
                     {{ dayOfWeekStr(start, dayOfWeekIndex) }}
                 </th>
             </tr>
@@ -19,7 +23,8 @@
                     class="simple-calender_date-data"
                     :class="{
                         calenderShowRelatedDays: !isSameMonth(day, currentShowDate),
-                        calenderDataEntered: select && isEntered(weekIndex, weekDayIndex) && isSameMonth(day, currentShowDate),
+                        calenderDataEntered:
+                            select && isEntered(weekIndex, weekDayIndex) && isSameMonth(day, currentShowDate),
                         calenderDataSelected: showHighLights(day),
                     }"
                     :style="pointer"
@@ -51,8 +56,8 @@ import {
     differenceInWeeks,
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
-import { monthBoolean } from '../../types/week';
-import { dayOfWeekStr } from '../../utils/utils';
+import { monthBoolean } from '@/types/types';
+import { dayOfWeekStr } from '@/utils/utils';
 
 interface Entered {
     weekIndex: null | number;

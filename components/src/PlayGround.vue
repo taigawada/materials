@@ -31,16 +31,7 @@
                 <SimpleSelector
                     :value="selectRef"
                     :items="selectItems"
-                    caption="セレクトボックス"
-                    @change="handleSelectChange"
-                />
-            </div>
-            <div style="text-align: left">
-                <SimpleSelector
-                    radio
-                    :value="selectRef"
-                    caption="ラジオボタン"
-                    :items="selectItems"
+                    caption="クラスを選択"
                     @change="handleSelectChange"
                 />
             </div>
@@ -112,17 +103,17 @@
         <div>
             <SimpleCalender :highLights="weekState.week"></SimpleCalender>
         </div>
-        <p>date picker</p>
-        <SimpleDatePicker style="width: 20%; margin: 0 auto"></SimpleDatePicker>
+        <p>date picker % time picker</p>
         <SimpleStack>
-            <SimpleSmoothPicker :items="['午前', '午後']" whichSide="left" selected="午前"></SimpleSmoothPicker>
-            <SimpleSmoothPicker
-                :items="[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]"
-                suffix="時"
-                :selected="8"
-            ></SimpleSmoothPicker>
-            <SimpleSmoothPicker whichSide="right" suffix="分" :selected="30"></SimpleSmoothPicker>
+            <SimpleDatePicker></SimpleDatePicker>
+            <SimpleTimePicker :time="timePickerValue" @change="handleTimePickerChange"></SimpleTimePicker>
         </SimpleStack>
+        <p>datetime picker</p>
+        <SimpleDateTimePicker
+            style="width: 20%; margin: 0 auto"
+            :time="timePickerValue"
+            @change="handleTimePickerChange"
+        ></SimpleDateTimePicker>
         <div style="height: 800px"></div>
     </div>
 </template>
@@ -143,9 +134,10 @@ import SimpleCombobox from './components/SimpleCombobox/SimpleCombobox.vue';
 import SimpleStack from './components/SimpleStack/SimpleStack.vue';
 import SimpleDatePicker from './components/SImpleDatePicker/SimpleDatePicker.vue';
 import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
-import SimpleSmoothPicker from './components/SimpleSmoothPicker/SimpleSmoothPicker.vue';
+import SimpleTimePicker from './components/SimpleTimePicker/SimpleTimePicker.vue';
+import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTimePicker.vue';
 
-import { weekBoolean, monthBoolean } from './types/week';
+import { weekBoolean, monthBoolean, TimeObject } from './types/types';
 interface WeekState {
     week: monthBoolean;
 }
@@ -169,7 +161,8 @@ export default defineComponent({
         SimpleStack,
         SimpleDatePicker,
         SimpleCalender,
-        SimpleSmoothPicker,
+        SimpleTimePicker,
+        SimpleDateTimePicker,
     },
     setup() {
         // SimpleButton
@@ -305,6 +298,18 @@ export default defineComponent({
         const handleSmoothPickerChange = (selected: number | string) => {
             smoothPickerSelectItem.value = selected;
         };
+        // time & date picker
+        const nowDate = new Date();
+        const timePickerValue: TimeObject = {
+            meridiem: nowDate.getHours() < 12 ? '午前' : '午後',
+            hours: nowDate.getHours(),
+            minutes: nowDate.getMinutes(),
+        };
+        const handleTimePickerChange = (newValue: TimeObject) => {
+            timePickerValue.meridiem = newValue.meridiem;
+            timePickerValue.hours = newValue.hours;
+            timePickerValue.minutes = newValue.minutes;
+        };
         return {
             disabled,
             loading,
@@ -341,6 +346,8 @@ export default defineComponent({
             comboSelectedChange,
             smoothPickerSelectItem,
             handleSmoothPickerChange,
+            timePickerValue,
+            handleTimePickerChange,
         };
     },
 });

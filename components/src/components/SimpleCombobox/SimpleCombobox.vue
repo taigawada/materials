@@ -19,7 +19,10 @@
                 :class="{
                     checkedItem: includeItem(item),
                     currentSelect: currentSelectItem(item),
+                    enteredItem: enteredItem(index),
                 }"
+                @mouseenter="mouseenterItem(index)"
+                @mouseleave="mouseleaveItem"
             >
                 <SimpleCheckbox
                     v-if="multiple"
@@ -28,7 +31,11 @@
                     :label="item"
                     @change="(bool) => onChangeSelect(item, bool)"
                 />
-                <div v-if="!multiple" class="simple-combobox_item non-multi-selectable" @click="onChangeSelect(item, undefined)">
+                <div
+                    v-if="!multiple"
+                    class="simple-combobox_item non-multi-selectable"
+                    @click="onChangeSelect(item, undefined)"
+                >
                     {{ item }}
                 </div>
             </div>
@@ -164,6 +171,16 @@ export default defineComponent({
         const outFocus = () => {
             isFocus.value = false;
         };
+        const enteredItemRef = ref<number | null>(null);
+        const mouseenterItem = (index: number) => {
+            enteredItemRef.value = index;
+        };
+        const mouseleaveItem = () => {
+            enteredItemRef.value = null;
+        };
+        const enteredItem = (index: number) => {
+            return enteredItemRef.value === index;
+        };
         return {
             isFocus,
             isEntered,
@@ -178,6 +195,10 @@ export default defineComponent({
             mousedown,
             inFocus,
             outFocus,
+            enteredItemRef,
+            mouseenterItem,
+            mouseleaveItem,
+            enteredItem,
         };
     },
 });
@@ -196,7 +217,7 @@ export default defineComponent({
     box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
     overflow: scroll;
 }
-.simple-combobox_entered_item:hover {
+.enteredItem {
     background: rgba(0, 0, 0, 0.05);
 }
 .checkedItem {

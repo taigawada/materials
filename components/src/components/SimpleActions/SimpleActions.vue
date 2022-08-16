@@ -31,7 +31,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, watchEffect, PropType } from 'vue-demi';
-import { useElementSize } from '@vueuse/core';
+import { useElementSize, onClickOutside } from '@vueuse/core';
 import { ArrowDown } from '@simple-education-dev/icons';
 interface Actions {
     label: string;
@@ -67,16 +67,13 @@ export default defineComponent({
         };
         const simpleActionComponentBase = ref();
         const closeActions = (event: Event) => {
-            const el = simpleActionComponentBase.value;
-            if (!el.contains(event.target as HTMLElement)) {
+            if (!simpleActionComponentBase.value.contains(event.target as HTMLElement)) {
                 context.emit('close');
             }
         };
         watchEffect(() => {
             if (props.open === true) {
-                document.addEventListener('click', closeActions);
-            } else {
-                document.removeEventListener('click', closeActions);
+                onClickOutside(simpleActionComponentBase, (event) => closeActions(event));
             }
         });
         const activator = ref<HTMLImageElement | null>(null);

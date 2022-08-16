@@ -6,7 +6,7 @@ export default defineConfig({
     resolve: {
         alias: [
             { find: '~', replacement: '../node_modules/' },
-            { find: '@', replacement: path.resolve(__dirname, 'src/components/') },
+            { find: '@', replacement: path.resolve(__dirname, 'src/') },
         ],
     },
     build: {
@@ -26,4 +26,7 @@ export default defineConfig({
         },
     },
     plugins: [vue2()],
+    server: {
+        host: true,
+    },
 });

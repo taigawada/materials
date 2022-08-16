@@ -6,7 +6,7 @@
             <div class="smooth-picker-roll">
                 <div
                     v-for="(item, index) in showInsideItems"
-                    :key="String(item) + String(index)"
+                    :key="String(item) + '|' + String(index)"
                     :style="smoothPickerStyles(index)"
                     class="smooth-picker_item calcScale"
                 >
@@ -17,7 +17,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, PropType, watchEffect } from 'vue-demi';
+import { defineComponent, ref, PropType, watchEffect, watch, onMounted, toRefs } from 'vue-demi';
 import { useScroll } from '@vueuse/core';
 
 export default defineComponent({
@@ -25,8 +25,7 @@ export default defineComponent({
     props: {
         items: {
             type: Array as PropType<string[] | number[]>,
-            default: () => [...Array(60).keys()],
-            required: false,
+            required: true,
         },
         selected: {
             type: [String, Number],
@@ -43,18 +42,18 @@ export default defineComponent({
             default: '80px',
             required: false,
         },
-        itemContetHeight: {
+        itemContentHeight: {
             type: Number,
-            default: 30,
+            default: 40,
             required: false,
         },
         distanceToDisplay: {
             type: Number,
-            default: 500,
+            default: 800,
             required: false,
         },
         whichSide: {
-            type: String as PropType<'left' | 'right' | undefined>,
+            type: String as PropType<'left' | 'right' | 'center' | undefined>,
             default: undefined,
             required: false,
         },
@@ -62,25 +61,33 @@ export default defineComponent({
     setup(props, context) {
         const showInsideItems = ref<(string | number | null)[]>([]);
         const insideContent = ref<HTMLElement | null>(null);
-        const { y } = useScroll(insideContent);
+        const { y, isScrolling } = useScroll(insideContent);
         const centerShowIndex = ref<number>(0);
+        // propsのitemが更新されると最初と最後にnullが二つずつ挿入される
         watchEffect(() => {
             showInsideItems.value = [null, null, ...props.items, null, null];
         });
-        watchEffect(() => {
-            const scrollQuantity = Math.max(
-                props.items.findIndex((elm) => props.selected === elm) * props.itemContetHeight,
-                0
-            );
+        // マウント後、初期値の位置までスクロールする
+        onMounted(() => {
+            const scrollQuantity = props.items.findIndex((elm) => props.selected === elm) * props.itemContentHeight;
             insideContent.value?.scrollTo(0, scrollQuantity);
         });
-        watchEffect(() => {
+        // selectedの値が変わったときに、その時点でスクロールされていなければその位置までスクロールする
+        const { selected } = toRefs(props);
+        watch(selected, () => {
+            const scrollQuantity = props.items.findIndex((elm) => props.selected === elm) * props.itemContentHeight;
+            if (!isScrolling.value) {
+                insideContent.value?.scrollTo(0, scrollQuantity);
+            }
+        });
+        // スクロールが行われた時、最も中心に近い値がエミットされる
+        watch(y, () => {
             if (
-                y.value % props.itemContetHeight < 5 &&
+                y.value % props.itemContentHeight < 5 &&
                 y.value > -1 &&
-                props.items.length * props.itemContetHeight > y.value
+                props.items.length * props.itemContentHeight > y.value
             ) {
-                const selectIndex = (y.value / props.itemContetHeight) | 0;
+                const selectIndex = (y.value / props.itemContentHeight) | 0;
                 centerShowIndex.value = selectIndex;
                 context.emit('change', props.items[selectIndex]);
             }
@@ -90,15 +97,25 @@ export default defineComponent({
             if (ownIndex) {
                 result =
                     1 -
-                    Math.abs(y.value - (ownIndex! - 2) * props.itemContetHeight) ** 2 /
-                        (props.itemContetHeight * props.distanceToDisplay);
+                    Math.abs(y.value - (ownIndex - 2) * props.itemContentHeight) ** 2 /
+                        (props.itemContentHeight * props.distanceToDisplay);
             }
-            const isLeft = props.whichSide === 'left';
-            const isRight = props.whichSide === 'right';
+            let isLeft = true;
+            let isRight = true;
+            if (props.whichSide === 'center') {
+                isLeft = false;
+                isRight = false;
+            } else if (props.whichSide === 'left') {
+                isLeft = true;
+                isRight = false;
+            } else if (props.whichSide === 'right') {
+                isLeft = false;
+                isRight = true;
+            }
             return {
                 '--smooth-picker-content-width': props.width,
-                '--smooth-picker-box-height': `calc(${props.itemContetHeight}px * 5)`,
-                '--smooth-picker-item-height': props.itemContetHeight + 'px',
+                '--smooth-picker-box-height': `calc(${props.itemContentHeight}px * 5)`,
+                '--smooth-picker-item-height': props.itemContentHeight + 'px',
                 '--contraction-ratio': result,
                 '--border-left': isLeft ? '7px' : '0',
                 '--border-right': isRight ? '7px' : '0',
@@ -142,7 +159,7 @@ export default defineComponent({
     width: 100%;
     top: 50%;
     transform: translateY(-50%);
-    background: $surface-black-alpha;
+    background: rgba(60, 130, 214, 0.1);
     border-top-right-radius: var(--border-right);
     border-bottom-right-radius: var(--border-right);
     border-top-left-radius: var(--border-left);
