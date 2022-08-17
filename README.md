@@ -18,7 +18,7 @@ materials/
 npm install
 ```
 
-# preserve
+# build
 
 ```
 npm run build
