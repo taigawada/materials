@@ -5,9 +5,11 @@
             :class="{
                 checkedBackground: value,
             }"
+            :style="CheckboxSize()"
             @click="hundleChange"
         >
-            <CheckMark class="simple-checkbox_checkmark-icon" />
+            <!-- <CheckMark :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" /> -->
+            <HyphenBar :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" />
         </div>
         <span v-show="label !== undefined" class="simple-checkbox_label-text" @click="hundleChange">
             {{ label }}
@@ -16,10 +18,11 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue-demi';
-import { CheckMark } from '@simple-education-dev/icons';
+import { CheckMark, HyphenBar } from '@simple-education-dev/icons';
 export default defineComponent({
     components: {
         CheckMark,
+        HyphenBar,
     },
     props: {
         label: {
@@ -31,13 +34,22 @@ export default defineComponent({
             type: Boolean,
             required: true,
         },
+        size: {
+            type: String,
+            default: '17px',
+            required: false,
+        },
     },
     setup(props, context) {
         const hundleChange = () => {
             context.emit('change', !props.value);
         };
+        const CheckboxSize = () => ({
+            '--checkbox-size': props.size,
+        });
         return {
             hundleChange,
+            CheckboxSize,
         };
     },
 });
@@ -54,11 +66,11 @@ export default defineComponent({
     cursor: pointer;
 }
 .simple-checkbox_checkbox-container {
-    width: 17px;
-    height: 17px;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
     background: $surface;
     border: 1px solid $border;
-    border-radius: 4px;
+    border-radius: calc(var(--checkbox-size) / 4);
     transition: background 0.1s, border 0.1s;
     cursor: pointer;
     margin: 10px 0;
@@ -68,8 +80,8 @@ export default defineComponent({
     background: $checked;
 }
 .simple-checkbox_checkmark-icon {
-    width: 17px;
-    height: 17px;
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
     fill: $surface;
 }
 </style>

@@ -55,7 +55,7 @@ import {
     subMonths,
     isSameMonth,
     isSameDay,
-    isPast,
+    isFuture,
     differenceInWeeks,
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
@@ -160,7 +160,7 @@ export default defineComponent({
             }
         };
         const handleDateSelect = (date: Date, weekIndex: number, weekDayIndex: number) => {
-            if (props.allowPast || !isPast(date)) {
+            if (props.allowPast || isFuture(date) || isSameDay(new Date(), date)) {
                 if (props.select && isSameMonth(date, currentShowDate.value)) {
                     if (weekDayIndex === 6) weekDayIndex = -weekStartsOn();
                     currentSelectedDate.value = date;
@@ -189,7 +189,7 @@ export default defineComponent({
         };
         const isPastDay = (day: Date) => {
             if (!props.allowPast) {
-                return !isPast(day);
+                return isFuture(day) || isSameDay(new Date(), day);
             } else {
                 return true;
             }

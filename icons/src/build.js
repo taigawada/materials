@@ -6,6 +6,7 @@ import CheckMark from "@/CheckMark.svg";
 import CloseCross from "@/CloseCross.svg";
 import DeleteCross from "@/DeleteCross.svg";
 import ExclamationMark from "@/ExclamationMark.svg";
+import HyphenBar from "@/HyphenBar.svg";
 import PaginationEnd from "@/PaginationEnd.svg";
 import SelectArrow from "@/SelectArrow.svg";
 
@@ -18,6 +19,7 @@ export {
     CloseCross,
     DeleteCross,
     ExclamationMark,
+    HyphenBar,
     PaginationEnd,
     SelectArrow,
 };

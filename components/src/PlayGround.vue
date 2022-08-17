@@ -36,6 +36,17 @@
                 />
             </div>
         </SimpleCard>
+        <p>Resource List</p>
+        <div style="width: 40%; margin: 0 auto">
+            <SimpleResourceList select :selectedItems="resourceListSelected" @change="handleResourceListChange">
+                <template #default="render">
+                    <SimpleStack alignment="center">
+                        {{ render.item.name }}
+                        {{ render.item.id }}
+                    </SimpleStack>
+                </template>
+            </SimpleResourceList>
+        </div>
         <p>Banner</p>
         <SimpleBanner style="width: 40%; margin: 0 auto" title="今日までの提出物" buttonLabel="確認" @action="action">
             <b>百マス計算</b>
@@ -143,6 +154,7 @@ import SimpleTimePicker from './components/SimpleTimePicker/SimpleTimePicker.vue
 import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTimePicker.vue';
 
 import { weekBoolean, monthBoolean, TimeObject } from './types/types';
+import SimpleResourceList from './components/SimpleResourceList/SimpleResourceList.vue';
 interface WeekState {
     week: monthBoolean;
 }
@@ -168,6 +180,7 @@ export default defineComponent({
         SimpleCalender,
         SimpleTimePicker,
         SimpleDateTimePicker,
+        SimpleResourceList,
     },
     setup() {
         // SimpleButton
@@ -325,6 +338,11 @@ export default defineComponent({
             timePickerValue.hours = newValue.hours;
             timePickerValue.minutes = newValue.minutes;
         };
+        // ResourceList
+        const resourceListSelected = ref<string[]>([]);
+        const handleResourceListChange = (newArray: string[]) => {
+            resourceListSelected.value = newArray;
+        };
         return {
             disabled,
             loading,
@@ -365,6 +383,8 @@ export default defineComponent({
             handleTimePickerChange,
             datetimePickerValue,
             handleDateTimePickerChange,
+            resourceListSelected,
+            handleResourceListChange,
         };
     },
 });
