@@ -221,33 +221,33 @@ export default defineComponent({
     background: $surface;
     width: 100%;
     height: var(--float-box-height);
-    border-radius: 7px;
-    border: 1px solid #efefef;
-    box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
+    border-radius: $border-radius-1;
+    border: 1px solid $surface;
+    box-shadow: $boxshadow;
     overflow: scroll;
     text-align: left;
 }
 .enteredItem {
-    background: rgba(0, 0, 0, 0.05);
+    background: $hovered;
 }
 .checkedItem {
-    background: rgba(60, 130, 214, 0.1);
+    background: $checked-alpha;
 }
 .currentSelect {
     width: calc(100% - 3px);
-    border: 1px solid #3c82d6;
+    border: 1px solid $checked;
     border-radius: 5px;
 }
 .simple-combobox_item {
-    margin-left: 10px;
+    margin-left: $space-3;
 }
 .non-multi-selectable {
     cursor: pointer;
     text-align: left;
-    padding: 10px 0;
+    padding: $space-3 0;
 }
 .simple-combobox_add-newvalue {
-    padding-left: 16px;
+    padding-left: $space-4;
     display: flex;
     align-items: center;
 }

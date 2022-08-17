@@ -47,5 +47,21 @@ const useScroll = () => {
         ...toRefs(state),
     };
 };
+function sortFn(key: string, order: 'asc' | 'desc' = 'asc', escape: string | RegExp = /[-/\\^$*+?#. ()|[\]{}]/g) {
+    return (a: any, b: any) => {
+        if (!Object.prototype.hasOwnProperty.call(a, key) || !Object.prototype.hasOwnProperty.call(b, key)) {
+            return 0;
+        }
+        const elementA = typeof a[key] === 'string' ? a[key].toUpperCase().replace(escape, '') : a[key];
+        const elementB = typeof b[key] === 'string' ? b[key].toUpperCase().replace(escape, '') : b[key];
+        let comparison = 0;
+        if (elementA > elementB) {
+            comparison = 1;
+        } else if (elementA < elementB) {
+            comparison = -1;
+        }
+        return order == 'desc' ? comparison * -1 : comparison;
+    };
+}
 
-export { dayOfWeekStr, useScroll };
+export { dayOfWeekStr, useScroll, sortFn };

@@ -12,6 +12,9 @@
         "declarationMap": true,
         "declarationDir": "./types"
     },
+    "vueCompilerOptions": {
+        "experimentalDisableTemplateSupport": true
+    },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
     "exclude": ["node_modules"]
 }

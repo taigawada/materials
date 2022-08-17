@@ -17,9 +17,7 @@
     },
     "scripts": {
         "serve": "vite",
-        "serve:3": "vue-demi-switch 3 vue3 && vite",
-        "build": "vue-demi-switch 2 vue2 && vue-tsc && vite build",
-        "build:3": "vue-demi-switch 3 vue3 && vite build",
+        "build": "vue-demi-switch 2 && vue-tsc && vite build",
         "format": "prettier -w src/**/*.{ts,vue}"
     },
     "eslintIgnore": [

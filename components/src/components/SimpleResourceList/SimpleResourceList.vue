@@ -11,7 +11,11 @@
                         @change="handleBuldCheckBoxChange"
                     ></SimpleCheckbox>
                 </th>
-                <th><slot name="header"></slot></th>
+                <th>
+                    <div class="simple-resource-list_slot-data" :style="rowStyles()">
+                        <slot name="header"></slot>
+                    </div>
+                </th>
             </tr>
             <tr
                 v-for="(item, index) in items"
@@ -28,8 +32,10 @@
                         @change="(bool) => handleItemCheckedChange(bool, item.id)"
                     ></SimpleCheckbox>
                 </td>
-                <td class="simple-resource-list_slot-data">
-                    <slot name="data" class="simple-resource-list_slot" :item="item"></slot>
+                <td>
+                    <div class="simple-resource-list_slot-data" :style="rowStyles()">
+                        <slot name="data" class="simple-resource-list_slot" :item="item"></slot>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -42,27 +48,24 @@ export default defineComponent({
     components: { SimpleCheckbox },
     props: {
         items: {
-            type: Array as PropType<any>,
-            default: () => [
-                {
-                    id: '#0001',
-                    name: 'taigawada',
-                },
-                {
-                    id: '#0002',
-                    name: 'niwasann',
-                },
-                {
-                    id: '#0003',
-                    name: 'naokihirata',
-                },
-            ],
+            type: Array as PropType<{ id: string | number }[]>,
+            default: () => [],
             required: false,
         },
         selectedItems: {
-            type: Array as PropType<string[]>,
+            type: Array as PropType<(string | number)[]>,
             default: () => [],
             required: false,
+        },
+        height: {
+            type: String,
+            default: '50px',
+            required: false,
+        },
+        weight: {
+            type: Array as PropType<number[]>,
+            default: () => [1],
+            required: true,
         },
     },
     setup(props, context) {
@@ -78,7 +81,7 @@ export default defineComponent({
         const indeterminateRef = ref(false);
         const handleBuldCheckBoxChange = (bool: boolean) => {
             bulkCheckBox.value = bool;
-            let newSelectedItems: string[] = [];
+            let newSelectedItems: (string | number)[] = [];
             if (bool) {
                 newSelectedItems = props.items.map((item) => item.id);
             }
@@ -104,6 +107,10 @@ export default defineComponent({
             if (newSelectedItems.length === 0) bulkCheckBox.value = false;
             context.emit('change', newSelectedItems);
         };
+        const rowStyles = () => ({
+            '--child-item-weights': props.weight.map((num) => num + 'fr').join(' '),
+            '--child-item-height': props.height,
+        });
         return {
             itemCheckBox,
             handleClickRow,
@@ -112,6 +119,7 @@ export default defineComponent({
             handleBuldCheckBoxChange,
             isSelected,
             handleItemCheckedChange,
+            rowStyles,
         };
     },
 });
@@ -150,9 +158,15 @@ export default defineComponent({
     position: relative;
     vertical-align: top;
 }
-// .simple-resource-list_slot-data {
-//     display: grid;
-// }
+.simple-resource-list_slot-data {
+    display: grid;
+    align-items: center;
+    grid-template-rows: var(--child-item-height);
+    grid-template-columns: var(--child-item-weights);
+}
+.simple-resource-list_slot-data div {
+    font-size: $font-size-6;
+}
 .simple-resource-list_checkbox {
     position: absolute;
     left: 50%;

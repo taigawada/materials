@@ -2,11 +2,11 @@
     <div class="simple-selector_base">
         <div
             :class="{
-                captionText: caption !== '_caption_initial',
+                captionText: caption !== undefined,
             }"
             class="simple-selector_caption-hidden"
         >
-            {{ caption }}
+            {{ caption === undefined ? ' ' : caption }}
         </div>
         <div v-if="radio === true">
             <SimpleStack vertical>
@@ -111,7 +111,7 @@ export default defineComponent({
         },
         caption: {
             type: String,
-            default: '_caption_initial',
+            default: undefined,
             required: false,
         },
         error: {
@@ -195,6 +195,7 @@ export default defineComponent({
 .simple-selector_select-box {
     font-size: $font-size-4;
     line-height: $font-size-4;
+    color: $text;
     appearance: none;
     padding: 11.5px $space-8 11.5px $space-2;
     box-sizing: border-box;

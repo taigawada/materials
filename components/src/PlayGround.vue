@@ -40,18 +40,20 @@
         </SimpleCard>
         <p>Resource List</p>
         <div style="width: 40%; margin: 0 auto">
-            <SimpleResourceList select :selectedItems="resourceListSelected" @change="handleResourceListChange">
+            <SimpleResourceList
+                :items="resourceItems"
+                select
+                :selectedItems="resourceListSelected"
+                :weight="[1, 1]"
+                @change="handleResourceListChange"
+            >
                 <template #header>
-                    <ResourceItem :weight="[1, 2]">
-                        <div>id</div>
-                        <div>name</div>
-                    </ResourceItem>
+                    <ResourceItem sort @sort="handleResourceSortById">id</ResourceItem>
+                    <ResourceItem>name</ResourceItem>
                 </template>
                 <template #data="render">
-                    <ResourceItem :weight="[1, 2]">
-                        <div>{{ render.item.id }}</div>
-                        <div>{{ render.item.name }}</div>
-                    </ResourceItem>
+                    <ResourceItem>{{ render.item.id }}</ResourceItem>
+                    <ResourceItem>{{ render.item.name }}</ResourceItem>
                 </template>
             </SimpleResourceList>
         </div>
@@ -123,7 +125,7 @@
             <SimpleCalender :highLights="weekState.week"></SimpleCalender>
         </div>
         <SimpleCard style="width: 30%; margin: 0 auto">
-            <p>date picker % time picker</p>
+            <p>date picker & time picker</p>
             <SimpleDatePicker style="margin: 0 auto"></SimpleDatePicker>
             <SimpleTimePicker
                 style="margin: 0 auto"
@@ -163,6 +165,7 @@ import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTi
 import ResourceItem from './components/ResourceItem/ResourceItem.vue';
 
 import { weekBoolean, monthBoolean, TimeObject } from './types/types';
+import { sortFn } from './utils/utils';
 import SimpleResourceList from './components/SimpleResourceList/SimpleResourceList.vue';
 interface WeekState {
     week: monthBoolean;
@@ -349,9 +352,26 @@ export default defineComponent({
             timePickerValue.minutes = newValue.minutes;
         };
         // ResourceList
+        const resourceItems = ref([
+            {
+                id: '#0001',
+                name: 'taigawada',
+            },
+            {
+                id: '#0002',
+                name: 'niwasann',
+            },
+            {
+                id: '#0003',
+                name: 'naokihirata',
+            },
+        ]);
         const resourceListSelected = ref<string[]>([]);
         const handleResourceListChange = (newArray: string[]) => {
             resourceListSelected.value = newArray;
+        };
+        const handleResourceSortById = (order: 'asc' | 'desc') => {
+            resourceItems.value.sort(sortFn('id', order));
         };
         return {
             disabled,
@@ -393,8 +413,10 @@ export default defineComponent({
             handleTimePickerChange,
             datetimePickerValue,
             handleDateTimePickerChange,
+            resourceItems,
             resourceListSelected,
             handleResourceListChange,
+            handleResourceSortById,
         };
     },
 });
