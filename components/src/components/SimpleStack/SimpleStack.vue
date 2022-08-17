@@ -78,7 +78,7 @@ export default defineComponent({
 </script>
 <style scoped lang="scss">
 .simple-stack_base {
-    display: inline-flex;
+    display: flex;
     flex-flow: var(--flex-direction-wrap);
     align-items: var(--align-items);
     justify-content: var(--justify-content);

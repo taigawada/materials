@@ -11,7 +11,7 @@
             @remove="fieldRemove"
         >
         </SimpleInput>
-        <div v-if="isEntered || isFocus" class="simple-combobox_float-box">
+        <div v-if="isEntered || isFocus" class="simple-combobox_float-box" :style="floatBoxHeightStyle()">
             <div
                 v-for="(item, index) in filtered"
                 :key="item + index"
@@ -105,6 +105,11 @@ export default defineComponent({
             default: false,
             required: false,
         },
+        floatBoxHeight: {
+            type: String,
+            default: '180px',
+            required: false,
+        },
     },
     setup(props, context) {
         const isFocus = ref(false);
@@ -125,7 +130,7 @@ export default defineComponent({
             if (!props.multiple) {
                 isEntered.value = false;
             }
-            context.emit('change:selected', selectedItemsCurrent);
+            context.emit('change', selectedItemsCurrent);
         };
         const addItem = (item: string) => {
             isEntered.value = false;
@@ -181,6 +186,9 @@ export default defineComponent({
         const enteredItem = (index: number) => {
             return enteredItemRef.value === index;
         };
+        const floatBoxHeightStyle = () => ({
+            '--float-box-height': props.floatBoxHeight,
+        });
         return {
             isFocus,
             isEntered,
@@ -199,6 +207,7 @@ export default defineComponent({
             mouseenterItem,
             mouseleaveItem,
             enteredItem,
+            floatBoxHeightStyle,
         };
     },
 });
@@ -211,11 +220,12 @@ export default defineComponent({
     box-sizing: border-box;
     background: $surface;
     width: 100%;
-    height: 180px;
+    height: var(--float-box-height);
     border-radius: 7px;
     border: 1px solid #efefef;
     box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
     overflow: scroll;
+    text-align: left;
 }
 .enteredItem {
     background: rgba(0, 0, 0, 0.05);

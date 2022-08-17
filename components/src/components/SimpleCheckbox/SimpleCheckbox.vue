@@ -1,6 +1,7 @@
 <template>
     <div class="simple-checkbox_base">
         <div
+            ref="childBox"
             class="simple-checkbox_checkbox-container"
             :class="{
                 checkedBackground: value,
@@ -8,8 +9,8 @@
             :style="CheckboxSize()"
             @click="hundleChange"
         >
-            <!-- <CheckMark :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" /> -->
-            <HyphenBar :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" />
+            <CheckMark v-show="!indeterminate" :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" />
+            <HyphenBar v-show="indeterminate" :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" />
         </div>
         <span v-show="label !== undefined" class="simple-checkbox_label-text" @click="hundleChange">
             {{ label }}
@@ -33,6 +34,10 @@ export default defineComponent({
         value: {
             type: Boolean,
             required: true,
+        },
+        indeterminate: {
+            type: Boolean,
+            required: false,
         },
         size: {
             type: String,
@@ -58,10 +63,11 @@ export default defineComponent({
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
 .simple-checkbox_base {
-    display: flex;
+    display: inline-flex;
     align-items: center;
 }
 .simple-checkbox_label-text {
+    padding: $space-3 0;
     margin-left: $space-4;
     cursor: pointer;
 }
@@ -73,7 +79,6 @@ export default defineComponent({
     border-radius: calc(var(--checkbox-size) / 4);
     transition: background 0.1s, border 0.1s;
     cursor: pointer;
-    margin: 10px 0;
 }
 .checkedBackground {
     border: 1px solid $checked;

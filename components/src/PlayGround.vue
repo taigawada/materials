@@ -26,7 +26,9 @@
                 @change:value="handleFieldChange"
                 @remove="handleTextFieldRemove"
             />
-            <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
+            <div style="text-align: left">
+                <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
+            </div>
             <div style="text-align: left">
                 <SimpleSelector
                     :value="selectRef"
@@ -39,17 +41,23 @@
         <p>Resource List</p>
         <div style="width: 40%; margin: 0 auto">
             <SimpleResourceList select :selectedItems="resourceListSelected" @change="handleResourceListChange">
-                <template #default="render">
-                    <SimpleStack alignment="center">
-                        {{ render.item.name }}
-                        {{ render.item.id }}
-                    </SimpleStack>
+                <template #header>
+                    <ResourceItem :weight="[1, 2]">
+                        <div>id</div>
+                        <div>name</div>
+                    </ResourceItem>
+                </template>
+                <template #data="render">
+                    <ResourceItem :weight="[1, 2]">
+                        <div>{{ render.item.id }}</div>
+                        <div>{{ render.item.name }}</div>
+                    </ResourceItem>
                 </template>
             </SimpleResourceList>
         </div>
         <p>Banner</p>
         <SimpleBanner style="width: 40%; margin: 0 auto" title="今日までの提出物" buttonLabel="確認" @action="action">
-            <b>百マス計算</b>
+            <span style="font-weight: 500">百マス計算</span>
         </SimpleBanner>
         <p>Tags, Combobox</p>
         <SimpleStack>
@@ -65,7 +73,7 @@
             </template>
         </SimpleStack>
         <SimpleCombobox
-            style="width: 40%; margin: 0 auto"
+            style="width: 20%; margin: 0 auto"
             :fieldValue="comboField"
             :items="comboItems"
             :selectedItems="comboSelected"
@@ -75,7 +83,7 @@
             @fieldChange="comboFieldChange"
             @remove="comboFieldRemove"
             @add:item="handleAddItems"
-            @change:selected="comboSelectedChange"
+            @change="comboSelectedChange"
         >
         </SimpleCombobox>
         <p>Modal</p>
@@ -152,6 +160,7 @@ import SimpleDatePicker from './components/SImpleDatePicker/SimpleDatePicker.vue
 import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
 import SimpleTimePicker from './components/SimpleTimePicker/SimpleTimePicker.vue';
 import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTimePicker.vue';
+import ResourceItem from './components/ResourceItem/ResourceItem.vue';
 
 import { weekBoolean, monthBoolean, TimeObject } from './types/types';
 import SimpleResourceList from './components/SimpleResourceList/SimpleResourceList.vue';
@@ -181,6 +190,7 @@ export default defineComponent({
         SimpleTimePicker,
         SimpleDateTimePicker,
         SimpleResourceList,
+        ResourceItem,
     },
     setup() {
         // SimpleButton

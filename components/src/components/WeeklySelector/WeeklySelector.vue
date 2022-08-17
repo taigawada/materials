@@ -25,7 +25,7 @@
             </div>
         </div>
         <SimpleButton v-show="weekValue.length === 1" plain class="weekly-selector_add-week" @click="handleAddWeek">
-            <SimpleStack alignment="center" distribution="center">
+            <SimpleStack alignment="center" distribution="left">
                 <template #default="style">
                     <ArrowDown class="weekly-selector_week-add-icon" :style="style.spacing" />
                     月ごと
@@ -33,7 +33,7 @@
             </SimpleStack>
         </SimpleButton>
         <SimpleButton v-show="weekValue.length !== 1" plain class="weekly-selector_add-week" @click="handleDelWeek">
-            <SimpleStack alignment="center" distribution="center">
+            <SimpleStack alignment="center" distribution="left">
                 <template #default="style">
                     <ArrowUp class="weekly-selector_week-add-icon" :style="style.spacing" />
                     週ごと
