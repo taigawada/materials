@@ -164,6 +164,10 @@ export default defineComponent({
     border-bottom-right-radius: var(--border-right);
     border-top-left-radius: var(--border-left);
     border-bottom-left-radius: var(--border-left);
+    border-top: 1.5px solid $selected;
+    border-bottom: 1.5px solid $selected;
+    border-right: calc(var(--border-right) * 0.21) solid $selected;
+    border-left: calc(var(--border-left) * 0.21) solid $selected;
 }
 
 .smooth-picker_suffix-text {

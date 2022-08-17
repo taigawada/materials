@@ -5,8 +5,7 @@
             <span>{{ showDateString() }}</span>
             <ArrowRight class="simple-calender_paginate-icon" @click="handleAddMonth" />
         </div>
-
-        <table>
+        <table class="simple-calender_table">
             <tr>
                 <th
                     v-for="dayOfWeekIndex in dayWeekArray"
@@ -22,9 +21,12 @@
                     :key="'day' + weekDayIndex"
                     class="simple-calender_date-data"
                     :class="{
-                        calenderShowRelatedDays: !isSameMonth(day, currentShowDate),
+                        calenderShowDisable: !isSameMonth(day, currentShowDate) || !isPastDay(day),
                         calenderDataEntered:
-                            select && isEntered(weekIndex, weekDayIndex) && isSameMonth(day, currentShowDate),
+                            select &&
+                            isEntered(weekIndex, weekDayIndex) &&
+                            isSameMonth(day, currentShowDate) &&
+                            isPastDay(day),
                         calenderDataSelected: showHighLights(day),
                     }"
                     :style="pointer"
@@ -53,6 +55,7 @@ import {
     subMonths,
     isSameMonth,
     isSameDay,
+    isPast,
     differenceInWeeks,
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
@@ -80,6 +83,11 @@ export default defineComponent({
         selected: {
             type: Date,
             default: undefined,
+            required: false,
+        },
+        allowPast: {
+            type: Boolean,
+            default: true,
             required: false,
         },
         showRelatedDays: {
@@ -152,10 +160,14 @@ export default defineComponent({
             }
         };
         const handleDateSelect = (date: Date, weekIndex: number, weekDayIndex: number) => {
-            if (weekDayIndex === 6) weekDayIndex = -weekStartsOn();
-            currentSelectedDate.value = date;
-            highLightsPositions.value = [[weekIndex, weekDayIndex]];
-            context.emit('change', date);
+            if (props.allowPast || !isPast(date)) {
+                if (props.select && isSameMonth(date, currentShowDate.value)) {
+                    if (weekDayIndex === 6) weekDayIndex = -weekStartsOn();
+                    currentSelectedDate.value = date;
+                    highLightsPositions.value = [[weekIndex, weekDayIndex]];
+                    context.emit('change', date);
+                }
+            }
         };
         const showDateString = () => format(currentShowDate.value, 'yyyy年MM月');
         const handleAddMonth = () => {
@@ -173,6 +185,13 @@ export default defineComponent({
                 } else {
                     return '';
                 }
+            }
+        };
+        const isPastDay = (day: Date) => {
+            if (!props.allowPast) {
+                return !isPast(day);
+            } else {
+                return true;
             }
         };
         const dayWeekArray = [...Array(7).keys()];
@@ -219,6 +238,7 @@ export default defineComponent({
             handleSubMonth,
             getCalendarArray,
             isSameMonth,
+            isPastDay,
             pointer,
         };
     },
@@ -227,10 +247,11 @@ export default defineComponent({
 <style scoped lang="scss">
 @use '@simple-education-dev/tokens/styles' as *;
 .simple-calender_container {
-    display: inline-block;
+    display: inline;
 }
 .simple-calender_heading {
-    display: flex;
+    width: 100%;
+    display: inline-flex;
     margin: $space-5 auto;
     align-items: center;
     justify-content: space-around;
@@ -241,15 +262,19 @@ export default defineComponent({
     fill: $surface-black;
     cursor: pointer;
 }
+.simple-calender_table {
+    display: inline-table;
+    width: 100%;
+}
 .simple-calender_weekofday-header {
     font-weight: 100;
     color: $text;
-    padding: $space-2 $space-5;
+    padding: $space-2 0;
 }
 .simple-calender_date-data {
     font-size: $font-size-3;
     color: $surface-black;
-    padding: $space-2 $space-5;
+    padding: $space-2 0;
     border-radius: 5px;
     cursor: var(--cursor-calender-date);
 }
@@ -260,7 +285,8 @@ export default defineComponent({
     color: $surface;
     background: $selected;
 }
-.calenderShowRelatedDays {
+.calenderShowDisable {
     color: $text-disabled;
+    cursor: default;
 }
 </style>

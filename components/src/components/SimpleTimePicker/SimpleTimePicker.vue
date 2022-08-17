@@ -1,9 +1,16 @@
 <template>
     <div @mousedown="mousedown" @mouseleave="mouseleave">
-        <SimpleInput placeholder="時間を選択" readonly :value="inputValue" @focusIn="inFocus" @focusOut="outFocus">
+        <SimpleInput
+            :caption="caption"
+            :placeholder="placeholder"
+            readonly
+            :value="inputValue"
+            @focusIn="inFocus"
+            @focusOut="outFocus"
+        >
         </SimpleInput>
         <div v-if="isEntered || isFocus" class="simple-time-picker_float-box">
-            <TimePIcker :time="selectedDate" @change="handleTimeChange"></TimePIcker>
+            <TimePIcker :interval="interval" :time="selectedDate" @change="handleTimeChange"></TimePIcker>
         </div>
     </div>
 </template>
@@ -18,6 +25,21 @@ export default defineComponent({
         TimePIcker,
     },
     props: {
+        caption: {
+            type: String,
+            default: undefined,
+            required: false,
+        },
+        placeholder: {
+            type: String,
+            default: '時間を選択',
+            required: false,
+        },
+        interval: {
+            type: Number as PropType<12 | 24>,
+            default: 24,
+            required: false,
+        },
         time: {
             type: Object as PropType<TimeObject>,
             required: true,
@@ -74,13 +96,19 @@ export default defineComponent({
 @use '@simple-education-dev/tokens/styles' as *;
 .simple-time-picker_float-box {
     display: block;
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
-    background: $surface;
-    border-radius: 7px;
-    border: 1px solid #efefef;
-    box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
-    padding: $space-2 $space-5;
-    z-index: 100;
+    width: 100%;
 }
+// .simple-time-picker_float-box {
+//     display: block;
+//     position: absolute;
+//     box-sizing: border-box;
+//     background: $surface;
+//     border-radius: 7px;
+//     border: 1px solid #efefef;
+//     box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
+//     padding: $space-2 $space-5;
+//     z-index: 100;
+// }
 </style>

@@ -1,9 +1,21 @@
 <template>
     <div @mousedown="mousedown" @mouseleave="mouseleave">
-        <SimpleInput placeholder="日付を選択" readonly :value="inputValue" @focusIn="inFocus" @focusOut="outFocus">
+        <SimpleInput
+            :caption="caption"
+            :placeholder="placeholder"
+            readonly
+            :value="inputValue"
+            @focusIn="inFocus"
+            @focusOut="outFocus"
+        >
         </SimpleInput>
         <div v-if="isEntered || isFocus" class="simple-datetime-picker_float-box">
-            <SimpleCalender select :selected="currentSelectDate" @change="handleSelectDateChange"></SimpleCalender>
+            <SimpleCalender
+                select
+                :selected="currentSelectDate"
+                :allowPast="allowPast"
+                @change="handleSelectDateChange"
+            ></SimpleCalender>
             <TimePicker :time="currentSelectTime" @change="handleTimeChange"></TimePicker>
         </div>
     </div>
@@ -23,12 +35,31 @@ export default defineComponent({
         TimePicker,
     },
     props: {
+        caption: {
+            type: String,
+            default: undefined,
+            required: false,
+        },
+        placeholder: {
+            type: String,
+            default: '日時を選択',
+            required: false,
+        },
+        allowPast: {
+            type: Boolean,
+            required: false,
+        },
         time: {
             type: Object as PropType<TimeObject>,
             required: true,
         },
+        format: {
+            type: String,
+            default: 'yyyy年MM月dd日HH時mm分',
+            required: false,
+        },
     },
-    setup(props) {
+    setup(props, context) {
         const isFocus = ref(false);
         const isEntered = ref(false);
         const mouseleave = () => {
@@ -54,21 +85,35 @@ export default defineComponent({
             currentSelectTime.meridiem = newValue.meridiem;
             currentSelectTime.hours = newValue.hours;
             currentSelectTime.minutes = newValue.minutes;
+            let newDate = null;
             if (currentSelectDate.value !== undefined) {
                 if (newValue.meridiem !== null) {
                     let shiftHours = 0;
                     if (newValue.meridiem === '午後') shiftHours = 12;
-                    inputValue.value = format(
-                        addHours(set(currentSelectDate.value, newValue), shiftHours),
-                        'yyyy年MM月dd日HH時mm分'
-                    );
+                    newDate = addHours(set(currentSelectDate.value, newValue), shiftHours); // 午後なら12時間追加
+                    inputValue.value = format(newDate, 'yyyy年MM月dd日HH時mm分');
                 } else {
-                    inputValue.value = format(set(currentSelectDate.value, newValue), 'yyyy年MM月dd日HH時mm分');
+                    newDate = set(currentSelectDate.value, newValue);
                 }
+                context.emit('change', newDate);
+                inputValue.value = format(newDate, 'yyyy年MM月dd日HH時mm分');
             }
         };
         const handleSelectDateChange = (date: Date) => {
             currentSelectDate.value = date;
+            const currentSelectDeepCopy = { ...currentSelectTime };
+            if (currentSelectDeepCopy.meridiem === '午後') {
+                currentSelectDeepCopy.hours = currentSelectDeepCopy.hours + 12;
+            }
+            const setTime = {
+                ...currentSelectDeepCopy,
+                year: date.getFullYear(),
+                month: date.getMonth(),
+                date: date.getDate(),
+            };
+            const newDate = set(currentSelectDate.value, setTime);
+            context.emit('change', newDate);
+            inputValue.value = format(newDate, props.format);
         };
         return {
             isFocus,

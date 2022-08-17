@@ -4,7 +4,7 @@
         <div v-if="mainAction !== undefined || subAction !== undefined" class="simple-card_actions">
             <div>
                 <SimpleButton
-                    v-if="subAction"
+                    v-if="subAction.text.length > 0"
                     normal
                     :disabled="subAction.disabled"
                     :loading="subAction.loading"
@@ -15,7 +15,7 @@
             </div>
             <div>
                 <SimpleButton
-                    v-if="mainAction"
+                    v-if="mainAction.text.length > 0"
                     primary
                     :disabled="mainAction.disabled"
                     :loading="mainAction.loading"

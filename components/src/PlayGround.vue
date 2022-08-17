@@ -100,20 +100,25 @@
                 @delWeek="changeWeek"
             />
         </div>
-        <div>
+        <div style="width: 40%; margin: 0 auto">
             <SimpleCalender :highLights="weekState.week"></SimpleCalender>
         </div>
-        <p>date picker % time picker</p>
-        <SimpleStack>
-            <SimpleDatePicker></SimpleDatePicker>
-            <SimpleTimePicker :time="timePickerValue" @change="handleTimePickerChange"></SimpleTimePicker>
-        </SimpleStack>
-        <p>datetime picker</p>
-        <SimpleDateTimePicker
-            style="width: 20%; margin: 0 auto"
-            :time="timePickerValue"
-            @change="handleTimePickerChange"
-        ></SimpleDateTimePicker>
+        <SimpleCard style="width: 30%; margin: 0 auto">
+            <p>date picker % time picker</p>
+            <SimpleDatePicker style="margin: 0 auto"></SimpleDatePicker>
+            <SimpleTimePicker
+                style="margin: 0 auto"
+                :time="timePickerValue"
+                @change="handleTimePickerChange"
+            ></SimpleTimePicker>
+            <p>datetime picker</p>
+            <SimpleDateTimePicker
+                style="margin: 0 auto"
+                allowPast
+                :time="datetimePickerValue"
+                @change="handleDateTimePickerChange"
+            ></SimpleDateTimePicker>
+        </SimpleCard>
         <div style="height: 800px"></div>
     </div>
 </template>
@@ -301,11 +306,21 @@ export default defineComponent({
         // time & date picker
         const nowDate = new Date();
         const timePickerValue: TimeObject = {
-            meridiem: nowDate.getHours() < 12 ? '午前' : '午後',
+            meridiem: null, // nowDate.getHours() < 12 ? '午前' : '午後',
             hours: nowDate.getHours(),
             minutes: nowDate.getMinutes(),
         };
         const handleTimePickerChange = (newValue: TimeObject) => {
+            timePickerValue.meridiem = newValue.meridiem;
+            timePickerValue.hours = newValue.hours;
+            timePickerValue.minutes = newValue.minutes;
+        };
+        const datetimePickerValue: TimeObject = {
+            meridiem: nowDate.getHours() < 12 ? '午前' : '午後',
+            hours: nowDate.getHours(),
+            minutes: nowDate.getMinutes(),
+        };
+        const handleDateTimePickerChange = (newValue: TimeObject) => {
             timePickerValue.meridiem = newValue.meridiem;
             timePickerValue.hours = newValue.hours;
             timePickerValue.minutes = newValue.minutes;
@@ -348,6 +363,8 @@ export default defineComponent({
             handleSmoothPickerChange,
             timePickerValue,
             handleTimePickerChange,
+            datetimePickerValue,
+            handleDateTimePickerChange,
         };
     },
 });

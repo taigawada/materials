@@ -2,11 +2,11 @@
     <div class="simple-input_container" :style="widthStyle()">
         <div
             :class="{
-                caption: caption !== '_caption_initial',
+                caption: caption !== undefined,
             }"
             class="simple-input_caption-hidden"
         >
-            {{ caption }}
+            {{ caption === undefined ? '_' : caption }}
         </div>
         <div class="simple-input_input-field">
             <input
@@ -55,7 +55,7 @@ export default defineComponent({
         },
         caption: {
             type: String,
-            default: '_caption_initial',
+            default: undefined,
             required: false,
         },
         remove: {

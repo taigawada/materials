@@ -1,9 +1,22 @@
 <template>
     <div @mousedown="mousedown" @mouseleave="mouseleave">
-        <SimpleInput placeholder="日付を選択" readonly :value="inputValue" @focusIn="inFocus" @focusOut="outFocus">
+        <SimpleInput
+            :caption="caption"
+            :placeholder="placeholder"
+            readonly
+            :value="inputValue"
+            @focusIn="inFocus"
+            @focusOut="outFocus"
+        >
         </SimpleInput>
         <div v-if="isEntered || isFocus" class="simple-date-picker_float-box">
-            <SimpleCalender select :selected="currentSelectDate" @change="handleSelectDateChange"></SimpleCalender>
+            <SimpleCalender
+                select
+                :selected="currentSelectDate"
+                :allowPast="allowPast"
+                :showRelatedDays="showRelatedDays"
+                @change="handleSelectDateChange"
+            ></SimpleCalender>
         </div>
     </div>
 </template>
@@ -19,9 +32,28 @@ export default defineComponent({
         SimpleCalender,
     },
     props: {
+        caption: {
+            type: String,
+            default: undefined,
+            required: false,
+        },
+        placeholder: {
+            type: String,
+            default: '日付を選択',
+            required: false,
+        },
         selected: {
             type: Date,
             default: () => new Date(),
+            required: false,
+        },
+        allowPast: {
+            type: Boolean,
+            required: false,
+        },
+        showRelatedDays: {
+            type: Boolean,
+            default: false,
             required: false,
         },
     },
@@ -64,13 +96,8 @@ export default defineComponent({
 @use '@simple-education-dev/tokens/styles' as *;
 .simple-date-picker_float-box {
     display: block;
-    position: absolute;
+    position: relative;
     box-sizing: border-box;
-    background: $surface;
-    border-radius: 7px;
-    border: 1px solid #efefef;
-    box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
-    padding-bottom: $space-6;
-    z-index: 100;
+    width: 100%;
 }
 </style>
