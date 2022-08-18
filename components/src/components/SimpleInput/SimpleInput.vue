@@ -23,6 +23,7 @@
             <div v-show="appearRemoveButton" class="simple-input_remove">
                 <DeleteCross class="simple-input_remove-icon" @click="hundleRemove" />
             </div>
+            <slot></slot>
         </div>
         <div v-show="isError" class="simple-input_error-message">
             <ExclamationMark class="simple-input_error-exclamation" />

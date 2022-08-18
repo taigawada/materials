@@ -9,7 +9,7 @@ import ExclamationMark from "@/ExclamationMark.svg";
 import HyphenBar from "@/HyphenBar.svg";
 import PaginationEnd from "@/PaginationEnd.svg";
 import SelectArrow from "@/SelectArrow.svg";
-import SerchGlass from "@/SerchGlass.svg";
+import SearchGlass from "@/SearchGlass.svg";
 import ThreePintLeader from "@/ThreePointLeader.svg";
 
 export {
@@ -24,6 +24,6 @@ export {
     HyphenBar,
     PaginationEnd,
     SelectArrow,
-    SerchGlass,
+    SearchGlass,
     ThreePintLeader,
 };

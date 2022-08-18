@@ -53,12 +53,13 @@
 <script lang="ts">
 // @ts-nocheck
 import { defineComponent, ref, computed, PropType } from 'vue-demi';
-import { DeleteCross } from '@simple-education-dev/icons';
+import { DeleteCross, SearchGlass } from '@simple-education-dev/icons';
 import SimpleInput from '../SimpleInput/SimpleInput.vue';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
 export default defineComponent({
     components: {
         DeleteCross,
+        SearchGlass,
         SimpleInput,
         SimpleCheckbox,
     },
