@@ -138,12 +138,13 @@ export default defineComponent({
     width: auto;
     height: auto;
     margin-top: 60px;
-    background: #ffffff;
+    background: $surface;
     box-shadow: $boxshadow;
     border-radius: $border-radius-1;
     transform: translateX(calc((var(--parent-width) - 100%) / 2));
 }
 .simple-action_action_content {
+    font-size: $font-size-3;
     margin: $space-1;
     padding: $space-2;
     cursor: pointer;

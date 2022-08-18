@@ -67,5 +67,6 @@ $border-radius-05: 0.225rem;
 $border-radius-1: 0.45rem;
 $border-radius-2: 0.625rem;
 
-$boxshadow: 2px 2px rgba(0, 0, 0, 0.1);
+$boxshadow: rgba(15, 26, 38, 0.04) 0px 2px 20px 0px,
+    rgba(15, 26, 38, 0.08) 0px 8px 32px 0px;
 $modal-background: rgba(0, 0, 0, 0.75);

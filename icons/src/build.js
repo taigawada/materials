@@ -10,7 +10,7 @@ import HyphenBar from "@/HyphenBar.svg";
 import PaginationEnd from "@/PaginationEnd.svg";
 import SelectArrow from "@/SelectArrow.svg";
 import SearchGlass from "@/SearchGlass.svg";
-import ThreePintLeader from "@/ThreePointLeader.svg";
+import ThreePointLeader from "@/ThreePointLeader.svg";
 
 export {
     ArrowDown,
@@ -25,5 +25,5 @@ export {
     PaginationEnd,
     SelectArrow,
     SearchGlass,
-    ThreePintLeader,
+    ThreePointLeader,
 };

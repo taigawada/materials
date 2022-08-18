@@ -43,6 +43,7 @@
             <SimpleResourceList
                 :items="resourceItems"
                 select
+                :multiActions="actions"
                 :selectedItems="resourceListSelected"
                 :weight="[1, 1]"
                 @change="handleResourceListChange"
@@ -54,6 +55,15 @@
                 <template #data="render">
                     <ResourceItem>{{ render.item.id }}</ResourceItem>
                     <ResourceItem>{{ render.item.name }}</ResourceItem>
+                </template>
+                <template #pagination>
+                    <SimplePagination
+                        :length="9"
+                        :current="currentSelectPage"
+                        @next="handleNext"
+                        @previous="handlePrevious"
+                        @change="handlePageChange"
+                    ></SimplePagination>
                 </template>
             </SimpleResourceList>
         </div>
@@ -163,6 +173,7 @@ import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
 import SimpleTimePicker from './components/SimpleTimePicker/SimpleTimePicker.vue';
 import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTimePicker.vue';
 import ResourceItem from './components/ResourceItem/ResourceItem.vue';
+import SimplePagination from './components/SimplePagination/SimplePagination.vue';
 
 import { weekBoolean, monthBoolean, TimeObject } from './types/types';
 import { sortFn } from './utils/utils';
@@ -194,6 +205,7 @@ export default defineComponent({
         SimpleDateTimePicker,
         SimpleResourceList,
         ResourceItem,
+        SimplePagination,
     },
     setup() {
         // SimpleButton
@@ -373,8 +385,12 @@ export default defineComponent({
         const handleResourceSortById = (order: 'asc' | 'desc') => {
             resourceItems.value.sort(sortFn('id', order));
         };
-        const handleItemClick = (index: number) => {
-            console.log(index);
+        // pagination
+        const currentSelectPage = ref(0);
+        const handleNext = () => currentSelectPage.value++;
+        const handlePrevious = () => currentSelectPage.value--;
+        const handlePageChange = (index: number) => {
+            currentSelectPage.value = index;
         };
         return {
             disabled,
@@ -420,7 +436,10 @@ export default defineComponent({
             resourceListSelected,
             handleResourceListChange,
             handleResourceSortById,
-            handleItemClick,
+            currentSelectPage,
+            handlePrevious,
+            handleNext,
+            handlePageChange,
         };
     },
 });

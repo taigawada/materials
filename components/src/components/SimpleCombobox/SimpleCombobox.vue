@@ -10,6 +10,8 @@
             @focusOut="outFocus"
             @remove="fieldRemove"
         >
+            <SearchGlass v-show="isEntered || isFocus" class="simple-combobox_input_icon"></SearchGlass>
+            <ArrowDown v-show="!(isEntered || isFocus)" class="simple-combobox_input_arrow-down"></ArrowDown>
         </SimpleInput>
         <div v-if="isEntered || isFocus" class="simple-combobox_float-box" :style="floatBoxHeightStyle()">
             <div
@@ -53,13 +55,14 @@
 <script lang="ts">
 // @ts-nocheck
 import { defineComponent, ref, computed, PropType } from 'vue-demi';
-import { DeleteCross, SearchGlass } from '@simple-education-dev/icons';
+import { DeleteCross, SearchGlass, ArrowDown } from '@simple-education-dev/icons';
 import SimpleInput from '../SimpleInput/SimpleInput.vue';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
 export default defineComponent({
     components: {
         DeleteCross,
         SearchGlass,
+        ArrowDown,
         SimpleInput,
         SimpleCheckbox,
     },
@@ -247,6 +250,16 @@ export default defineComponent({
     cursor: pointer;
     text-align: left;
     padding: $space-3 0;
+}
+.simple-combobox_input_icon {
+    width: 18px;
+    height: 18px;
+    fill: $surface-black;
+}
+.simple-combobox_input_arrow-down {
+    width: 12px;
+    height: 12px;
+    fill: $surface-black;
 }
 .simple-combobox_add-newvalue {
     padding-left: $space-4;

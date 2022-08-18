@@ -20,10 +20,12 @@
                 @focus="handleFocusIn"
                 @focusout="handleFocusOut"
             />
-            <div v-show="appearRemoveButton" class="simple-input_remove">
+            <div v-show="appearRemoveButton && !isSlot()" class="simple-input_remove">
                 <DeleteCross class="simple-input_remove-icon" @click="hundleRemove" />
             </div>
-            <slot></slot>
+            <div v-show="isSlot()" class="simple-input_remove">
+                <slot></slot>
+            </div>
         </div>
         <div v-show="isError" class="simple-input_error-message">
             <ExclamationMark class="simple-input_error-exclamation" />
@@ -102,6 +104,9 @@ export default defineComponent({
                 return false;
             }
         });
+        const isSlot = () => {
+            return context.slots.default !== undefined ? true : false;
+        };
         const widthStyle = () => ({
             '--simple-input-width': props.width,
         });
@@ -112,6 +117,7 @@ export default defineComponent({
             text,
             appearRemoveButton,
             isError,
+            isSlot,
             widthStyle,
         };
     },

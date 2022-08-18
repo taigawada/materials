@@ -8,14 +8,49 @@
                         :indeterminate="indeterminateRef"
                         size="20px"
                         :value="bulkCheckBox"
-                        @change="handleBuldCheckBoxChange"
+                        @change="handleBulkCheckBoxChange"
                     ></SimpleCheckbox>
                 </th>
-                <th>
+                <th v-show="selectedItems.length === 0">
                     <div class="simple-resource-list_slot-data" :style="rowStyles()">
                         <slot name="header"></slot>
                     </div>
                 </th>
+                <td v-show="selectedItems.length > 0" class="simple-resource-list_slot-data-label-wrapper">
+                    <SimpleStack distribution="left">
+                        <template #default="style">
+                            <div class="simple-resource-list_select-info" :style="style.spacing">
+                                <span class="simple-resource-list_select-info-text">
+                                    {{ selectedItems.length }}件のデータを選択中
+                                </span>
+                            </div>
+                            <div
+                                v-if="mainAction !== undefined"
+                                class="simple-resource-list_bulk-main-action"
+                                :style="style.spacing"
+                            >
+                                <SimpleButton plain @click="mainAction.onAction">{{ mainAction.label }}</SimpleButton>
+                            </div>
+                            <div
+                                v-show="multiActions !== undefined"
+                                class="simple-resource-list_bulk-multi-actions"
+                                :style="style.spacing"
+                            >
+                                <SimpleButton plain @click="handleBulkButtonClick">その他の操作</SimpleButton>
+                                <div v-if="bulkPopoverOpen" ref="bulkMultiAction" class="simple-resource-list_popover">
+                                    <div
+                                        v-for="(action, index) in multiActions"
+                                        :key="action.label + index"
+                                        class="simple-resource-list_action-content"
+                                        @click="action.onAction"
+                                    >
+                                        {{ action.label }}
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </SimpleStack>
+                </td>
             </tr>
             <tr
                 v-for="(item, index) in items"
@@ -39,17 +74,26 @@
                 </td>
             </tr>
         </table>
+        <div class="padding-elemet"></div>
+        <slot name="pagination"></slot>
     </div>
 </template>
 <script lang="ts">
 // @ts-nocheck
-import { defineComponent, ref, PropType } from 'vue-demi';
+import { defineComponent, ref, watchEffect, PropType } from 'vue-demi';
+import { onClickOutside } from '@vueuse/core';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
+import SimpleButton from '../SimpleButton/SimpleButton.vue';
+import SimpleStack from '../SimpleStack/SimpleStack.vue';
 interface ItemClickFunc {
     (arg0: number): void;
 }
+interface Actions {
+    label: string;
+    onAction: () => unknown;
+}
 export default defineComponent({
-    components: { SimpleCheckbox },
+    components: { SimpleCheckbox, SimpleButton, SimpleStack },
     props: {
         items: {
             type: Array as PropType<{ id: string | number }[]>,
@@ -59,6 +103,16 @@ export default defineComponent({
         selectedItems: {
             type: Array as PropType<(string | number)[]>,
             default: () => [],
+            required: false,
+        },
+        mainAction: {
+            type: Object as PropType<Actions>,
+            default: undefined,
+            required: false,
+        },
+        multiActions: {
+            type: Array as PropType<Actions[]>,
+            default: undefined,
             required: false,
         },
         height: {
@@ -92,7 +146,7 @@ export default defineComponent({
         };
         const bulkCheckBox = ref(false);
         const indeterminateRef = ref(false);
-        const handleBuldCheckBoxChange = (bool: boolean) => {
+        const handleBulkCheckBoxChange = (bool: boolean) => {
             bulkCheckBox.value = bool;
             let newSelectedItems: (string | number)[] = [];
             if (bool) {
@@ -101,12 +155,25 @@ export default defineComponent({
             indeterminateRef.value = false;
             context.emit('change', newSelectedItems);
         };
+        const bulkPopoverOpen = ref(false);
+        const handleBulkButtonClick = () => {
+            bulkPopoverOpen.value = !bulkPopoverOpen.value;
+        };
+        const bulkMultiAction = ref();
+        const closeActions = (event: Event) => {
+            if (!bulkMultiAction.value.contains(event.target as HTMLElement)) {
+                bulkPopoverOpen.value = false;
+            }
+        };
+        watchEffect(() => {
+            if (bulkPopoverOpen.value === true) {
+                onClickOutside(bulkMultiAction, (event) => closeActions(event));
+            }
+        });
         const isSelected = (id: string | number) => {
             return props.selectedItems.indexOf(id) !== -1;
         };
         const handleItemCheckedChange = (bool: boolean, id: string | number) => {
-            console.log(bool);
-            console.log(id);
             const newSelectedItems = [...props.selectedItems];
             if (bool) {
                 newSelectedItems.push(id);
@@ -131,7 +198,10 @@ export default defineComponent({
             handleClickRow,
             bulkCheckBox,
             indeterminateRef,
-            handleBuldCheckBoxChange,
+            handleBulkCheckBoxChange,
+            bulkMultiAction,
+            bulkPopoverOpen,
+            handleBulkButtonClick,
             isSelected,
             handleItemCheckedChange,
             rowStyles,
@@ -147,6 +217,9 @@ export default defineComponent({
     padding-bottom: $border-radius-2;
     background: $surface;
     border-radius: $border-radius-2;
+}
+.padding-elemet {
+    height: 10px;
 }
 .simple-resource-list_base {
     width: 100%;
@@ -168,6 +241,40 @@ export default defineComponent({
     width: 40px;
     position: relative;
     vertical-align: top;
+}
+.simple-resource-list_slot-data-label-wrapper {
+    text-align: left;
+}
+.simple-resource-list_popover::before {
+    content: '';
+    border: 10px solid transparent;
+    border-bottom: 10px solid $surface;
+    position: absolute;
+    top: -20px;
+    left: 20%;
+    transform: translateX(-50%);
+}
+.simple-resource-list_select-info-text {
+    font-size: $font-size-3;
+}
+.simple-resource-list_popover {
+    position: absolute;
+    display: inline-block;
+    width: auto;
+    height: auto;
+    margin-top: 10px;
+    background: $surface;
+    box-shadow: rgba(15, 26, 38, 0.04) 0px 2px 20px 0px, rgba(15, 26, 38, 0.08) 0px 8px 32px 0px;
+    border-radius: $border-radius-1;
+}
+.simple-resource-list_action-content {
+    font-size: $font-size-3;
+    margin: $space-1;
+    padding: $space-2;
+    cursor: pointer;
+}
+.simple-resource-list_action-content:hover {
+    background: $hovered;
 }
 .simple-resource-list_check-column {
     position: relative;
