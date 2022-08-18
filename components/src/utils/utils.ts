@@ -63,5 +63,4 @@ function sortFn(key: string, order: 'asc' | 'desc' = 'asc', escape: string | Reg
         return order == 'desc' ? comparison * -1 : comparison;
     };
 }
-
 export { dayOfWeekStr, useScroll, sortFn };

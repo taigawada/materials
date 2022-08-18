@@ -9,6 +9,8 @@ import ExclamationMark from "@/ExclamationMark.svg";
 import HyphenBar from "@/HyphenBar.svg";
 import PaginationEnd from "@/PaginationEnd.svg";
 import SelectArrow from "@/SelectArrow.svg";
+import SerchGlass from "@/SerchGlass.svg";
+import ThreePintLeader from "@/ThreePointLeader.svg";
 
 export {
     ArrowDown,
@@ -22,4 +24,6 @@ export {
     HyphenBar,
     PaginationEnd,
     SelectArrow,
+    SerchGlass,
+    ThreePintLeader,
 };

@@ -122,8 +122,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     caption: string;
     remove: boolean;
     items: string[];
-    selectedItems: string[];
     fieldValue: string;
+    selectedItems: string[];
     allowAdd: boolean;
     multiple: boolean;
     floatBoxHeight: string;
@@ -154,8 +154,8 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     caption: string;
     remove: boolean;
     items: string[];
-    selectedItems: string[];
     fieldValue: string;
+    selectedItems: string[];
     allowAdd: boolean;
     multiple: boolean;
     floatBoxHeight: string;

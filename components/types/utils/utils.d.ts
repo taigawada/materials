@@ -5,5 +5,6 @@ declare const useScroll: () => {
     x: import("@vue/composition-api").Ref<number>;
     y: import("@vue/composition-api").Ref<number>;
 };
-export { dayOfWeekStr, useScroll };
+declare function sortFn(key: string, order?: 'asc' | 'desc', escape?: string | RegExp): (a: any, b: any) => number;
+export { dayOfWeekStr, useScroll, sortFn };
 //# sourceMappingURL=utils.d.ts.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"SimpleBanner.vue.d.ts","sourceRoot":"","sources":["../../../src/components/SimpleBanner/SimpleBanner.vue.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAIA,wBAwBG"}
+{"version":3,"file":"SimpleBanner.vue.d.ts","sourceRoot":"","sources":["../../../src/components/SimpleBanner/SimpleBanner.vue.tsx"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAIA,wBAwBG"}

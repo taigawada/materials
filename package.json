@@ -3,6 +3,7 @@
     "license": "UNLICENSED",
     "private": false,
     "scripts": {
+        "serve": "npm run serve -w components",
         "build": "npm run build --workspaces --if-present"
     },
     "workspaces": [

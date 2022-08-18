@@ -145,8 +145,12 @@ export default defineComponent({
     font-size: $font-size-5;
     border-radius: $border-radius-1;
     border: 1px solid $border-weak;
-    transition-delay: 0.1s;
+    transition: border 0.5s;
     box-sizing: border-box;
+}
+.simple-input_input-element:hover {
+    border: 1px solid $border;
+    transition: border 0.5s;
 }
 .simple-input_input-element:focus {
     border: 1px solid $theme-color;

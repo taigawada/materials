@@ -14,5 +14,6 @@ import SimpleStack from './components/SimpleStack/SimpleStack.vue';
 import SimpleDatePicker from './components/SImpleDatePicker/SimpleDatePicker.vue';
 import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
 import SimpleSmoothPicker from './components/SimpleSmoothPicker/SimpleSmoothPicker.vue';
-export { SimpleButton, SimpleTabs, SimpleActions, SimpleCheckbox, SimpleBanner, SimpleInput, SimpleCard, SimpleTag, SimpleModal, SimpleSelector, WeeklySelector, SimpleCombobox, SimpleStack, SimpleDatePicker, SimpleCalender, SimpleSmoothPicker, };
+import { sortFn } from './utils/utils';
+export { SimpleButton, SimpleTabs, SimpleActions, SimpleCheckbox, SimpleBanner, SimpleInput, SimpleCard, SimpleTag, SimpleModal, SimpleSelector, WeeklySelector, SimpleCombobox, SimpleStack, SimpleDatePicker, SimpleCalender, SimpleSmoothPicker, sortFn, };
 //# sourceMappingURL=build.d.ts.map

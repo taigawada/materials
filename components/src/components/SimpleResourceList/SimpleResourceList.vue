@@ -42,8 +42,12 @@
     </div>
 </template>
 <script lang="ts">
+// @ts-nocheck
 import { defineComponent, ref, PropType } from 'vue-demi';
 import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox.vue';
+interface ItemClickFunc {
+    (arg0: number): void;
+}
 export default defineComponent({
     components: { SimpleCheckbox },
     props: {
@@ -67,14 +71,23 @@ export default defineComponent({
             default: () => [1],
             required: true,
         },
+        onClickItem: {
+            type: Function as PropType<ItemClickFunc>,
+            default: undefined,
+            required: false,
+        },
     },
     setup(props, context) {
         // trクリックでチェックボックスを操作する
         // checkboxとtrが同時押しできないようにクリックイベントを監視
         const itemCheckBox = ref();
         const handleClickRow = (index: number, event: Event) => {
-            if (!itemCheckBox.value[index].$el.contains(event.target as HTMLElement)) {
-                itemCheckBox.value[index].hundleChange();
+            if (typeof props.onClickItem === 'undefined') {
+                if (!itemCheckBox.value[index].$el.contains(event.target as HTMLElement)) {
+                    itemCheckBox.value[index].hundleChange();
+                }
+            } else {
+                props.onClickItem(index);
             }
         };
         const bulkCheckBox = ref(false);
@@ -88,10 +101,12 @@ export default defineComponent({
             indeterminateRef.value = false;
             context.emit('change', newSelectedItems);
         };
-        const isSelected = (id: string) => {
+        const isSelected = (id: string | number) => {
             return props.selectedItems.indexOf(id) !== -1;
         };
-        const handleItemCheckedChange = (bool: boolean, id: string) => {
+        const handleItemCheckedChange = (bool: boolean, id: string | number) => {
+            console.log(bool);
+            console.log(id);
             const newSelectedItems = [...props.selectedItems];
             if (bool) {
                 newSelectedItems.push(id);
@@ -143,7 +158,7 @@ export default defineComponent({
     height: 50px;
 }
 .simple-resource-list_row {
-    border-top: 1px solid $border;
+    border-top: 1px solid $border-weak;
     cursor: pointer;
 }
 .simple-resource-list_row:hover {

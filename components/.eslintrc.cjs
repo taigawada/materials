@@ -17,5 +17,6 @@ module.exports = {
         'vue/html-indent': ['error', 4],
         'vue/attribute-hyphenation': ['off'],
         'vue/v-on-event-hyphenation': ['off'],
+        'no-unused-vars': ['error', { argsIgnorePattern: 'arg[0-9]{1,2}' }],
     },
 };

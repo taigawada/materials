@@ -15,7 +15,7 @@
             <a class="simple-action_activator-text">
                 <slot></slot>
             </a>
-            <ArrowDown style="width: 16px" />
+            <ArrowDown style="width: 12px" />
         </a>
         <div v-if="open" class="simple-action_popover" :style="parentWidth">
             <div
@@ -149,6 +149,6 @@ export default defineComponent({
     cursor: pointer;
 }
 .simple-action_action_content:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: $hovered;
 }
 </style>

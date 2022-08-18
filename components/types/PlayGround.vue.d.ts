@@ -51,8 +51,14 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     handleTimePickerChange: (newValue: TimeObject) => void;
     datetimePickerValue: TimeObject;
     handleDateTimePickerChange: (newValue: TimeObject) => void;
+    resourceItems: import("@vue/composition-api").Ref<{
+        id: string;
+        name: string;
+    }[]>;
     resourceListSelected: import("@vue/composition-api").Ref<string[]>;
     handleResourceListChange: (newArray: string[]) => void;
+    handleResourceSortById: (order: 'asc' | 'desc') => void;
+    handleItemClick: (index: number) => void;
 }> & import("@vue/composition-api").Data, {}, {}, {}, import("@vue/composition-api").ExtractPropTypes<{}>> & Omit<import("vue").VueConstructor<import("vue").default>, never> & (new (...args: any[]) => import("@vue/composition-api").ComponentRenderProxy<{} & {}, import("@vue/composition-api").ShallowUnwrapRef<{
     disabled: import("@vue/composition-api").Ref<boolean>;
     loading: import("@vue/composition-api").Ref<boolean>;
@@ -105,8 +111,14 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     handleTimePickerChange: (newValue: TimeObject) => void;
     datetimePickerValue: TimeObject;
     handleDateTimePickerChange: (newValue: TimeObject) => void;
+    resourceItems: import("@vue/composition-api").Ref<{
+        id: string;
+        name: string;
+    }[]>;
     resourceListSelected: import("@vue/composition-api").Ref<string[]>;
     handleResourceListChange: (newArray: string[]) => void;
+    handleResourceSortById: (order: 'asc' | 'desc') => void;
+    handleItemClick: (index: number) => void;
 }>, import("@vue/composition-api").Data, {}, {}, {}, {}, {}, {} & {}, {}, true>);
 export default _default;
 //# sourceMappingURL=PlayGround.vue.d.ts.map

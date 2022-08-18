@@ -116,6 +116,7 @@ export default defineComponent({
         const isEntered = ref(false);
         const currentSelect = ref('');
         const onChangeSelect = (item: string, bool: boolean | undefined) => {
+            console.log('on');
             currentSelect.value = item;
             let selectedItemsCurrent: string[] = [];
             if (bool === true) {

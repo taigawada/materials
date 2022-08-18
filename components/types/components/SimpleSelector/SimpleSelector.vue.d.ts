@@ -35,7 +35,7 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     };
     caption: {
         type: StringConstructor;
-        default: string;
+        default: undefined;
         required: false;
     };
     error: {
@@ -70,7 +70,7 @@ declare const _default: import("vue").ComponentOptions<import("vue").default, im
     };
     caption: {
         type: StringConstructor;
-        default: string;
+        default: undefined;
         required: false;
     };
     error: {

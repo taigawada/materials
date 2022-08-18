@@ -373,6 +373,9 @@ export default defineComponent({
         const handleResourceSortById = (order: 'asc' | 'desc') => {
             resourceItems.value.sort(sortFn('id', order));
         };
+        const handleItemClick = (index: number) => {
+            console.log(index);
+        };
         return {
             disabled,
             loading,
@@ -417,6 +420,7 @@ export default defineComponent({
             resourceListSelected,
             handleResourceListChange,
             handleResourceSortById,
+            handleItemClick,
         };
     },
 });
