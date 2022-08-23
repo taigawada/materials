@@ -5,10 +5,10 @@
     "description": "",
     "type": "module",
     "types": "types/build.d.ts",
-    "main": "dist/components.es.js",
+    "main": "dist/components.js",
     "exports": {
         ".": {
-            "import": "./dist/components.es.js",
+            "import": "./dist/components.js",
             "require": "./dist/components.umd.cjs"
         },
         "./style": {
