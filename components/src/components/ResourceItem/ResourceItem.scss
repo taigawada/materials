@@ -1,0 +1,10 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.resource_item__child {
+    display: grid;
+    align-items: center;
+    grid-template-rows: var(--child-item-height);
+    grid-template-columns: var(--child-item-weights);
+}
+.resource_item__base div {
+    font-size: $font-size-6;
+}

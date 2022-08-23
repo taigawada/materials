@@ -1,10 +1,13 @@
 import path from "path";
 import { defineConfig } from "vite";
-import { createVuePlugin as vue2 } from "vite-plugin-vue2";
-import { createSvgPlugin } from "vite-plugin-vue2-svg";
+// import { createSvgPlugin } from "vite-plugin-vue2-svg";
+import vueSvgPlugin from "vite-plugin-vue-svg";
 
-export default defineConfig({
-    plugins: [vue2(), createSvgPlugin()],
+const config = {
+    plugins: [
+        vueSvgPlugin(),
+        // process.env.VUE_VERSION === "3" ? createSvgPlugin() : vueSvgPlugin(),
+    ],
     resolve: {
         alias: {
             "~": "../node_modules/",
@@ -27,4 +30,6 @@ export default defineConfig({
             },
         },
     },
-});
+};
+
+export default defineConfig(config);

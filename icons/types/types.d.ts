@@ -1,16 +1,16 @@
-import ArrowDown from "./src/icons/ArrowDown.svg";
-import ArrowUp from "./src/icons/ArrowUp.svg";
-import ArrowLeft from "./src/icons/ArrowLeft.svg";
-import ArrowRight from "./src/icons/ArrowRight.svg";
-import CheckMark from "./src/icons/CheckMark.svg";
-import CloseCross from "./src/icons/CloseCross.svg";
-import DeleteCross from "./src/icons/DeleteCross.svg";
-import ExclamationMark from "./src/icons/ExclamationMark.svg";
-import HyphenBar from "./src/icons/HyphenBar.svg";
-import PaginationEnd from "./src/icons/PaginationEnd.svg";
-import SelectArrow from "./src/icons/SelectArrow.svg";
-import SearchGlass from "./src/icons/SearchGlass.svg";
-import ThreePointLeader from "./src/icons/ThreePointLeader.svg";
+import ArrowDown from "./src/icons/ArrowDown.svg?raw";
+import ArrowUp from "./src/icons/ArrowUp.svg?raw";
+import ArrowLeft from "./src/icons/ArrowLeft.svg?raw";
+import ArrowRight from "./src/icons/ArrowRight.svg?raw";
+import CheckMark from "./src/icons/CheckMark.svg?raw";
+import CloseCross from "./src/icons/CloseCross.svg?raw";
+import DeleteCross from "./src/icons/DeleteCross.svg?raw";
+import ExclamationMark from "./src/icons/ExclamationMark.svg?raw";
+import HyphenBar from "./src/icons/HyphenBar.svg?raw";
+import PaginationEnd from "./src/icons/PaginationEnd.svg?raw";
+import SelectArrow from "./src/icons/SelectArrow.svg?raw";
+import SearchGlass from "./src/icons/SearchGlass.svg?raw";
+import ThreePointLeader from "./src/icons/ThreePointLeader.svg?raw";
 
 export {
     ArrowDown,

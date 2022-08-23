@@ -16,5 +16,5 @@
         "experimentalDisableTemplateSupport": false
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "src/PlayGround.vue", "src/serve.ts"]
 }

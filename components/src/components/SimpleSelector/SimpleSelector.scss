@@ -1,0 +1,99 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_selector__base {
+    display: inline-block;
+    text-align: left;
+}
+.simple_selector__caption_hidden {
+    font-size: $font-size-3;
+    padding: 0 5px;
+    display: block;
+    text-align: left;
+    opacity: 0;
+}
+.simple_selector__caption_text {
+    opacity: 1;
+}
+.simple_selector__radio_elements {
+    margin: $space-05 0;
+}
+.simple_selector__radio_text {
+    font-size: $font-size-6;
+}
+.simple_selector__radio_helptext {
+    margin-left: calc(21px + $space-1);
+    color: $text;
+    font-size: $font-size-4;
+}
+.simple_selector__radio_circle {
+    margin-right: $space-1;
+    position: relative;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: $surface;
+    border: 0.125rem solid $border-weak;
+    transition: border 0.2s;
+    cursor: pointer;
+}
+.radio_circle__selected {
+    background: $surface;
+    border: 0.125rem solid $selected;
+}
+.radio_circle__inside {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: $selected;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: background 0.2s;
+}
+.simple_selector__form_element {
+    display: flex;
+    align-items: center;
+}
+.simple_selector__select_box {
+    font-size: $font-size-4;
+    line-height: $font-size-4;
+    color: $text;
+    appearance: none;
+    padding: 11.5px $space-8 11.5px $space-2;
+    box-sizing: border-box;
+    border: 1px solid $border-weak;
+    border-radius: 5px;
+    background: $surface;
+}
+.simple_selector__select_box:focus {
+    border: 1px solid $theme-color;
+    z-index: 10;
+    outline: 0;
+}
+.simple_selector__select_icon {
+    position: relative;
+    right: $space-6;
+    z-index: 11;
+}
+.select_box__error {
+    border: 1px solid $surface-error;
+    background: $surface-error-alpha;
+}
+.select_box__error:focus {
+    border: 1px solid $surface-error;
+    background: $surface-error-alpha;
+}
+.simple_selector__error_message {
+    display: inline-flex;
+    align-items: center;
+}
+.simple_selector__error_text {
+    font-size: $font-size-3;
+    color: $text-error;
+}
+.simple_selector__error_exclamation {
+    width: 15px;
+    height: 15px;
+    fill: $surface-error;
+    margin: 0 $space-2 0 $space-1;
+}

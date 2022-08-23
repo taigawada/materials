@@ -1,0 +1,107 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_button__container {
+    padding: 0 $space-1;
+}
+.simple_button__base_prime {
+    position: relative;
+    background: $text-white;
+    background: $primary-base;
+    border-radius: $border-radius-1;
+    text-decoration: none;
+    margin-bottom: $space-05;
+    padding-top: var(--props-size);
+    padding-bottom: var(--props-size);
+}
+.simple_button__wrapper_prime {
+    position: relative;
+    background: $primary;
+    border-radius: $border-radius-1;
+    text-decoration: none;
+    padding-top: var(--props-size);
+    padding-bottom: calc(var(--props-size) - 2px);
+}
+.simple_button__text_prime {
+    padding: $space-4 $space-4;
+    color: $text-white;
+    text-decoration: none;
+    pointer-events: none;
+}
+.simple_button__base_normal {
+    color: $normal;
+    border: solid 1px $border;
+    border-radius: $border-radius-1;
+    text-decoration: none;
+    padding-top: calc(var(--props-size) - 1px);
+    padding-bottom: calc(var(--props-size) - 1px);
+    cursor: pointer;
+}
+.simple_button__text_normal {
+    padding: $space-4 $space-4;
+    color: $text;
+    text-decoration: none;
+    pointer-events: none;
+}
+.simple_button__base_plain {
+    cursor: pointer;
+    color: $plain;
+    font-size: calc(var(--props-size) * 1.5);
+    text-decoration: none;
+}
+.simple_button__entered_prime {
+    cursor: pointer;
+    text-decoration: none;
+    background: $primary-hovered;
+}
+.simple_button__entered_normal {
+    cursor: pointer;
+    text-decoration: none;
+    background: $normal-pressed;
+}
+.simple_button__entered_plain {
+    cursor: pointer;
+    text-decoration: none;
+    color: $plain-hovered;
+}
+.simple_button__disable_prime {
+    position: relative;
+    background: $primary-disabled;
+    border-radius: $border-radius-1;
+    text-decoration: none;
+    pointer-events: none;
+    padding-top: calc(var(--props-size) + 1px);
+    padding-bottom: calc(var(--props-size) + 1px);
+}
+.simple_button__disable_normal {
+    position: relative;
+    background: #dedede;
+    border-radius: $border-radius-1;
+    text-decoration: none;
+    pointer-events: none;
+    padding-top: calc(var(--props-size) + 1px);
+    padding-bottom: calc(var(--props-size) + 1px);
+    opacity: 0.6;
+}
+.simple_button__disable_plain {
+    color: $plain-disabled;
+    pointer-events: none;
+}
+.simple_button__disabled_text {
+    padding: 1em 1em;
+    color: $text;
+    text-decoration: none;
+    pointer-events: none;
+}
+.simple_button__text_loading {
+    opacity: 0;
+    padding: $space-4 $space-4;
+    color: $text-white;
+    text-decoration: none;
+    pointer-events: none;
+}
+.simple_button__spinner {
+    position: absolute;
+    pointer-events: none;
+    left: 50%;
+    top: 57%;
+    transform: translate(-50%, -50%);
+}

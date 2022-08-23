@@ -1,0 +1,35 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_action__base {
+    display: inline-flex;
+}
+.simple_action__activator {
+    display: inline-flex;
+    align-items: center;
+    background: $surface;
+    box-sizing: border-box;
+    border: solid 1px $border;
+    border-radius: $border-radius-1;
+    text-decoration: none;
+    padding: $space-2 $space-3;
+    cursor: pointer;
+}
+.simple_action__activator_text {
+    color: $text;
+    text-decoration: none;
+    pointer-events: none;
+    padding-right: $space-1;
+}
+.entered {
+    cursor: pointer;
+    text-decoration: none;
+    background: $normal-hovered;
+}
+.simple_action__action_content {
+    font-size: $font-size-3;
+    margin: $space-1;
+    padding: $space-2;
+    cursor: pointer;
+}
+.simple_action__action_content:hover {
+    background: $hovered;
+}

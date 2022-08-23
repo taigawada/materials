@@ -1,0 +1,30 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_banner__base {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background: $surface-warning-alpha;
+    border: 1px solid $surface-warning;
+    border-radius: $border-radius-1;
+    box-sizing: border-box;
+    padding: $space-2 $space-3;
+}
+.simple_banner__header {
+    font-size: $font-size-4;
+    display: flex;
+    align-items: center;
+}
+.simple_banner__heading {
+    margin: 0 $space-5;
+}
+.simple_banner__content {
+    font-size: $font-size-4;
+    padding: $space-1 0;
+    text-align: left;
+    display: inline;
+}
+.simple_banner__button {
+    margin: 0 0 0 auto;
+}

@@ -1,12 +1,17 @@
 import path from 'path';
 import { defineConfig } from 'vite';
-import { createVuePlugin as vue2 } from 'vite-plugin-vue2';
+import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
+    plugins: [vue()],
+    optimizeDeps: {
+        exclude: ['vue-demi'],
+    },
     resolve: {
         alias: [
             { find: '~', replacement: '../node_modules/' },
             { find: '@', replacement: path.resolve(__dirname, 'src/') },
+            { find: 'globalStyleSheet', replacement: '@simple-education-dev/tokens/styles' },
         ],
     },
     build: {
@@ -16,16 +21,16 @@ export default defineConfig({
             fileName: 'components',
         },
         rollupOptions: {
-            external: ['vue-demi', 'vue'],
+            external: ['vue', 'vue-demi', '@vueuse/core'],
             output: {
                 globals: {
-                    vue2: 'vue',
+                    vue: 'vue',
                     'vue-demi': 'VueDemi',
+                    '@vueuse/core': '@vueuse/core',
                 },
             },
         },
     },
-    plugins: [vue2()],
     server: {
         host: true,
     },

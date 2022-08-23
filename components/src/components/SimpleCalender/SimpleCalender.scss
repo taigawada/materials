@@ -1,0 +1,44 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_calender___container {
+    display: inline;
+}
+.simple_calender__heading {
+    width: 100%;
+    display: inline-flex;
+    margin: $space-5 auto;
+    align-items: center;
+    justify-content: space-around;
+}
+.simple_calender__paginate_icon {
+    width: 16px;
+    height: 16px;
+    fill: $surface-black;
+    cursor: pointer;
+}
+.simple_calender__table {
+    display: inline-table;
+    width: 100%;
+}
+.simple_calender__weekofday_header {
+    font-weight: 100;
+    color: $text;
+    padding: $space-2 0;
+}
+.simple_calender__date_data {
+    font-size: $font-size-3;
+    color: $surface-black;
+    padding: $space-2 0;
+    border-radius: 5px;
+    cursor: var(--cursor-calender-data);
+}
+.calenderDataEntered {
+    background: $hovered;
+}
+.calenderDataSelected {
+    color: $surface;
+    background: $selected;
+}
+.calenderShowDisable {
+    color: $text-disabled;
+    cursor: default;
+}

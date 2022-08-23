@@ -1,0 +1,91 @@
+@use 'globalStyleSheet' as *;
+.simple_resource_list__container {
+    display: inline-block;
+    width: 100%;
+    padding-bottom: $border-radius-2;
+    background: $surface;
+    border-radius: $border-radius-2;
+}
+.padding__elemet {
+    height: 10px;
+}
+.simple_resource_list__base {
+    width: 100%;
+    height: calc(100% - 100px);
+    display: table;
+    border-collapse: collapse;
+}
+.simple_resource_list__header {
+    width: 40px;
+    position: relative;
+    vertical-align: top;
+}
+.simple_resource_list__header_row {
+    height: 50px;
+}
+.simple_resource_list__row {
+    border-top: 1px solid $border-weak;
+    cursor: pointer;
+}
+.simple_resource_list__row:hover {
+    background: $hovered;
+}
+.simple_resource_list__slot_data_label_wrapper {
+    text-align: left;
+}
+.simple_resource_list__popover::before {
+    content: '';
+    border: 10px solid transparent;
+    border-bottom: 10px solid $surface;
+    position: absolute;
+    top: -20px;
+    left: 20%;
+    transform: translateX(-50%);
+}
+.simple_resource_list__select_info_text {
+    font-size: $font-size-3;
+}
+.simple_resource_list__header_actions {
+    display: flex;
+    align-items: center;
+}
+.simple_resource_list__bulk_action {
+    display: inline-flex;
+    font-size: $font-size-3;
+    color: $plain;
+    cursor: pointer;
+    padding: $space-1;
+    border-radius: $border-radius-05;
+    margin: 0 $space-1;
+}
+.simple_resource_list__bulk_action:hover {
+    background: $hovered;
+}
+.simple_resource_list__action_content {
+    font-size: $font-size-3;
+    margin: $space-1;
+    padding: $space-2;
+    cursor: pointer;
+}
+.simple_resource_list__action_content:hover {
+    background: $hovered;
+}
+.simple_resource_list__check_column {
+    position: relative;
+    vertical-align: top;
+}
+.simple_resource_list__slot_data {
+    display: grid;
+    align-items: center;
+    grid-template-rows: var(--child-item-height);
+    grid-template-columns: var(--child-item-weights);
+}
+.simple_resource_list__slot_data div {
+    font-size: $font-size-6;
+}
+.simple_resource_list__checkbox {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

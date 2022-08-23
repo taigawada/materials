@@ -5,7 +5,7 @@
         <p>buttons</p>
         <SimpleButton primary :disabled="disabled" :loading="loading" @click="handleButtonClick"> ボタン </SimpleButton>
         <p>Actions</p>
-        <SimpleActions :open="actionsOpen" :actions="actions" @click="actionsOpenToggle" @close="onClose">
+        <SimpleActions :open="actionsOpen" :actions="actions" @click:activator="actionsOpenToggle" @close="onClose">
             その他の操作
         </SimpleActions>
         <p>Input, Checkbox & Card</p>
@@ -13,10 +13,12 @@
             width="50%"
             :mainAction="{
                 text: '追加',
+                onAction: handleCardOnMainAction,
             }"
             :subAction="{
                 text: 'キャンセル',
             }"
+            @subAction="handleDestroy"
         >
             <SimpleInput
                 :value="fieldvalue"
@@ -27,14 +29,23 @@
                 @remove="handleTextFieldRemove"
             />
             <div style="text-align: left">
-                <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
-            </div>
-            <div style="text-align: left">
                 <SimpleSelector
                     :value="selectRef"
                     :items="selectItems"
                     caption="クラスを選択"
-                    @change="handleSelectChange"
+                    @change:select="handleSelectChange"
+                />
+            </div>
+            <div style="text-align: left">
+                <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
+            </div>
+            <div style="text-align: left">
+                <SimpleSelector
+                    radio
+                    :value="selectRef"
+                    :items="selectItems"
+                    caption="クラスを選択"
+                    @change:select="handleSelectChange"
                 />
             </div>
         </SimpleCard>
@@ -43,6 +54,10 @@
             <SimpleResourceList
                 :items="resourceItems"
                 select
+                :mainAction="{
+                    label: '選択解除',
+                    onAction: handleCardOnMainAction,
+                }"
                 :multiActions="actions"
                 :selectedItems="resourceListSelected"
                 :weight="[1, 1]"
@@ -71,6 +86,13 @@
         <SimpleBanner style="width: 40%; margin: 0 auto" title="今日までの提出物" buttonLabel="確認" @action="action">
             <span style="font-weight: 500">百マス計算</span>
         </SimpleBanner>
+        <p>Smooth Picker</p>
+        <p>selected: {{ smoothPickerSelected }}</p>
+        <SimpleSmoothPicker
+            :items="smoothPickerItems"
+            :selected="smoothPickerSelected"
+            @change="handleSmoothPickerChange"
+        ></SimpleSmoothPicker>
         <p>Tags, Combobox</p>
         <SimpleStack>
             <template #default="style">
@@ -92,10 +114,11 @@
             allowAdd
             remove
             multiple
+            search
             @fieldChange="comboFieldChange"
             @remove="comboFieldRemove"
             @add:item="handleAddItems"
-            @change="comboSelectedChange"
+            @change:select="comboSelectedChange"
         >
         </SimpleCombobox>
         <p>Modal</p>
@@ -126,58 +149,70 @@
         <div>
             <WeeklySelector
                 :weekValue="weekState.week"
-                @change="changeWeek"
-                @addWeek="changeWeek"
-                @delWeek="changeWeek"
+                @change:week="changeWeek"
+                @add:week="changeWeek"
+                @del:week="changeWeek"
             />
         </div>
         <div style="width: 40%; margin: 0 auto">
             <SimpleCalender :highLights="weekState.week"></SimpleCalender>
         </div>
-        <SimpleCard style="width: 30%; margin: 0 auto">
-            <p>date picker & time picker</p>
-            <SimpleDatePicker style="margin: 0 auto"></SimpleDatePicker>
-            <SimpleTimePicker
-                style="margin: 0 auto"
-                :time="timePickerValue"
-                @change="handleTimePickerChange"
-            ></SimpleTimePicker>
-            <p>datetime picker</p>
-            <SimpleDateTimePicker
-                style="margin: 0 auto"
-                allowPast
-                :time="datetimePickerValue"
-                @change="handleDateTimePickerChange"
-            ></SimpleDateTimePicker>
-        </SimpleCard>
+        <div style="margin-top: 30px">
+            <SimpleCard style="width: 30%; margin: 0 auto">
+                <p>date picker & time picker</p>
+                <SimpleDatePicker
+                    style="margin: 0 auto"
+                    :inputValue="dateInputValue"
+                    @change:date="handleDateChange"
+                ></SimpleDatePicker>
+                <SimpleTimePicker
+                    style="margin: 0 auto"
+                    :inputValue="timeInputValue"
+                    @change:time="handleTimeChange"
+                ></SimpleTimePicker>
+            </SimpleCard>
+        </div>
+        <div style="margin-top: 30px">
+            <SimpleCard style="width: 30%; margin: 0 auto">
+                <p>datetime picker</p>
+                <SimpleDateTimePicker
+                    style="margin: 0 auto"
+                    allowPast
+                    :inputValue="datetimeInputValue"
+                    @change:datetime="handleDatetimeChange"
+                ></SimpleDateTimePicker>
+            </SimpleCard>
+        </div>
         <div style="height: 800px"></div>
     </div>
 </template>
 <script lang="ts">
 import { defineComponent, ref, reactive } from 'vue-demi';
-import SimpleButton from './components/SimpleButton/SimpleButton.vue';
-import SimpleTabs from './components/SimpleTabs/SimpleTabs.vue';
-import SimpleActions from './components/SimpleActions/SimpleActions.vue';
-import SimpleCheckbox from './components/SimpleCheckbox/SimpleCheckbox.vue';
-import SimpleBanner from './components/SimpleBanner/SimpleBanner.vue';
-import SimpleInput from './components/SimpleInput/SimpleInput.vue';
-import SimpleCard from './components/SimpleCard/SimpleCard.vue';
-import SimpleTag from './components/SimpleTag/SimpleTag.vue';
-import SimpleModal from './components/SimpleModal/SimpleModal.vue';
-import SimpleSelector from './components/SimpleSelector/SimpleSelector.vue';
-import WeeklySelector from './components/WeeklySelector/WeeklySelector.vue';
-import SimpleCombobox from './components/SimpleCombobox/SimpleCombobox.vue';
-import SimpleStack from './components/SimpleStack/SimpleStack.vue';
-import SimpleDatePicker from './components/SImpleDatePicker/SimpleDatePicker.vue';
-import SimpleCalender from './components/SimpleCalender/SimpleCalender.vue';
-import SimpleTimePicker from './components/SimpleTimePicker/SimpleTimePicker.vue';
-import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTimePicker.vue';
-import ResourceItem from './components/ResourceItem/ResourceItem.vue';
-import SimplePagination from './components/SimplePagination/SimplePagination.vue';
+import SimpleButton from './components/SimpleButton/SimpleButton';
+import SimpleTabs from './components/SimpleTabs/SimpleTabs';
+import SimpleActions from './components/SimpleActions/SimpleActions';
+import SimpleCheckbox from './components/SimpleCheckbox/SimpleCheckbox';
+import SimpleBanner from './components/SimpleBanner/SimpleBanner';
+import SimpleInput from './components/SimpleInput/SimpleInput';
+import SimpleCard from './components/SimpleCard/SimpleCard';
+import SimpleTag from './components/SimpleTag/SimpleTag';
+import SimpleModal from './components/SimpleModal/SimpleModal';
+import SimpleSelector from './components/SimpleSelector/SimpleSelector';
+import SimpleSmoothPicker from './components/SimpleSmoothPicker/SimpleSmoothPicker';
+import WeeklySelector from './components/WeeklySelector/WeeklySelector';
+import SimpleCombobox from './components/SimpleCombobox/SimpleCombobox';
+import SimpleStack from './components/SimpleStack/SimpleStack';
+import SimpleDatePicker from './components/SimpleDatePicker/SimpleDatePicker';
+import SimpleCalender from './components/SimpleCalender/SimpleCalender';
+import SimpleTimePicker from './components/SimpleTimePicker/SimpleTimePicker';
+import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTimePicker';
+import SimpleResourceList from './components/SimpleResourceList/SimpleResourceList';
+import ResourceItem from './components/ResourceItem/ResourceItem';
+import SimplePagination from './components/SimplePagination/SimplePagination';
 
-import { weekBoolean, monthBoolean, TimeObject } from './types/types';
+import { weekBoolean, monthBoolean } from './types/types';
 import { sortFn } from './utils/utils';
-import SimpleResourceList from './components/SimpleResourceList/SimpleResourceList.vue';
+import { format } from 'date-fns';
 interface WeekState {
     week: monthBoolean;
 }
@@ -186,32 +221,34 @@ const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve,
 export default defineComponent({
     name: 'App',
     components: {
+        SimpleTabs,
         SimpleButton,
         SimpleActions,
-        SimpleTabs,
+        SimplePagination,
         SimpleBanner,
+        SimpleCard,
         SimpleCheckbox,
         SimpleInput,
-        SimpleCard,
-        SimpleTag,
-        SimpleModal,
         SimpleSelector,
-        WeeklySelector,
-        SimpleCombobox,
         SimpleStack,
-        SimpleDatePicker,
+        SimpleTag,
+        SimpleCombobox,
+        SimpleModal,
+        SimpleSmoothPicker,
+        WeeklySelector,
         SimpleCalender,
-        SimpleTimePicker,
-        SimpleDateTimePicker,
         SimpleResourceList,
         ResourceItem,
-        SimplePagination,
+        SimpleTimePicker,
+        SimpleDatePicker,
+        SimpleDateTimePicker,
     },
     setup() {
         // SimpleButton
         const disabled = ref(false);
         const loading = ref(false);
         const handleButtonClick = async () => {
+            console.log('clickParent');
             loading.value = true;
             await sleep(1000);
             loading.value = false;
@@ -229,6 +266,7 @@ export default defineComponent({
         ];
         const tabSelected = ref(0);
         const handleTabSelect = (select: number) => {
+            console.log('select');
             tabSelected.value = select;
         };
         // SimpleActions
@@ -297,6 +335,10 @@ export default defineComponent({
                 helpText: '1年E組の全生徒を対象にします。',
             },
         ];
+        // Card
+        const handleCardOnMainAction = () => {
+            alert(`${fieldvalue.value}\n${checked.value}\n${selectRef.value}`);
+        };
         // Modal
         const modalOpen = ref(false);
         const handleModalOpen = () => {
@@ -334,34 +376,23 @@ export default defineComponent({
             currentSelect.splice(currentSelect.indexOf(item), 1);
         };
         const comboSelectedChange = (selected: Array<string>) => {
+            console.log(selected);
             comboSelected.value = selected;
         };
-        // SmoothPIcker
-        const smoothPickerSelectItem = ref<number | string>();
-        const handleSmoothPickerChange = (selected: number | string) => {
-            smoothPickerSelectItem.value = selected;
+        // Time Picker
+        const timeInputValue = ref('');
+        const handleTimeChange = (newValue: Date) => {
+            timeInputValue.value = format(newValue, 'HH時mm分');
         };
-        // time & date picker
-        const nowDate = new Date();
-        const timePickerValue: TimeObject = {
-            meridiem: null, // nowDate.getHours() < 12 ? '午前' : '午後',
-            hours: nowDate.getHours(),
-            minutes: nowDate.getMinutes(),
+        // Date Picker
+        const dateInputValue = ref('');
+        const handleDateChange = (newDate: Date) => {
+            dateInputValue.value = format(newDate, 'yyyy年MM月dd日');
         };
-        const handleTimePickerChange = (newValue: TimeObject) => {
-            timePickerValue.meridiem = newValue.meridiem;
-            timePickerValue.hours = newValue.hours;
-            timePickerValue.minutes = newValue.minutes;
-        };
-        const datetimePickerValue: TimeObject = {
-            meridiem: nowDate.getHours() < 12 ? '午前' : '午後',
-            hours: nowDate.getHours(),
-            minutes: nowDate.getMinutes(),
-        };
-        const handleDateTimePickerChange = (newValue: TimeObject) => {
-            timePickerValue.meridiem = newValue.meridiem;
-            timePickerValue.hours = newValue.hours;
-            timePickerValue.minutes = newValue.minutes;
+        // Datetime Picker
+        const datetimeInputValue = ref('');
+        const handleDatetimeChange = (newDate: Date) => {
+            datetimeInputValue.value = format(newDate, 'yyyy年MM月dd日HH時mm分');
         };
         // ResourceList
         const resourceItems = ref([
@@ -392,6 +423,12 @@ export default defineComponent({
         const handlePageChange = (index: number) => {
             currentSelectPage.value = index;
         };
+        // smooth picker
+        const smoothPickerItems = [...new Array(100).keys()];
+        const smoothPickerSelected = ref(0);
+        const handleSmoothPickerChange = (newValue: number) => {
+            smoothPickerSelected.value = newValue;
+        };
         return {
             disabled,
             loading,
@@ -410,6 +447,7 @@ export default defineComponent({
             handleFieldChange,
             comboFieldRemove,
             handleTextFieldRemove,
+            handleCardOnMainAction,
             selectRef,
             handleSelectChange,
             selectItems,
@@ -426,12 +464,8 @@ export default defineComponent({
             handleAddItems,
             handleRemoveItem,
             comboSelectedChange,
-            smoothPickerSelectItem,
+            smoothPickerSelected,
             handleSmoothPickerChange,
-            timePickerValue,
-            handleTimePickerChange,
-            datetimePickerValue,
-            handleDateTimePickerChange,
             resourceItems,
             resourceListSelected,
             handleResourceListChange,
@@ -440,6 +474,13 @@ export default defineComponent({
             handlePrevious,
             handleNext,
             handlePageChange,
+            smoothPickerItems,
+            timeInputValue,
+            handleTimeChange,
+            dateInputValue,
+            handleDateChange,
+            datetimeInputValue,
+            handleDatetimeChange,
         };
     },
 });

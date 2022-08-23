@@ -1,12 +1,8 @@
-import Vue from 'vue';
-import { install, isVue3 } from 'vue-demi';
-install();
+import { createApp } from 'vue';
+import { isVue3 } from 'vue-demi';
 
 console.log(`running on ${isVue3 ? 'Vue3' : 'Vue2'}`);
 
 import PlayGround from './PlayGround.vue';
 
-new Vue({
-    /* @ts-ignore */
-    render: (h) => h(PlayGround),
-}).$mount('#app');
+createApp(PlayGround).mount('#app');

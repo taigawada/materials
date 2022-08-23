@@ -1,0 +1,21 @@
+@use 'globalStyleSheet' as *;
+
+.simple_popover__popover {
+    position: absolute;
+    width: auto;
+    height: auto;
+    margin-top: 10px;
+    background: $surface;
+    box-shadow: rgba(15, 26, 38, 0.2) 0px 2px 20px 0px, rgba(15, 26, 38, 0.08) 0px 8px 32px 0px;
+    border-radius: $border-radius-1;
+    z-index: 100;
+}
+.simple_popover__popover::before {
+    content: '';
+    border: 10px solid transparent;
+    border-bottom: 10px solid $surface;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}

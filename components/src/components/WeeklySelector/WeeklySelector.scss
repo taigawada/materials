@@ -1,0 +1,52 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.weekly_selector__base {
+    display: inline-block;
+}
+.weekly_selector__weekdays {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.weekly_selector__box {
+    display: block;
+    background: rgba(255, 255, 255, 1);
+    border-top: 0.5px solid #727272;
+    border-left: 0.25px solid #727272;
+    border-right: 0.25px solid #727272;
+    border-bottom: 0.5px solid #727272;
+    padding: 5px 40px;
+    cursor: pointer;
+}
+.weekly_selector__box_left_side {
+    border-left: 0.5px solid #727272;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.weekly_selector__box_right_side {
+    border-right: 0.5px solid #727272;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.weekly_selector__box_selected {
+    background: #3c82d6;
+    cursor: pointer;
+}
+.weekly_selector__box_selected_text {
+    color: #ffffff;
+    cursor: pointer;
+}
+.weekly_selector__add_week {
+    margin: 5px 0;
+    text-align: left;
+}
+.weekly_selector__week_caption {
+    text-align: left;
+    font-size: 12px;
+}
+.weekly_selector__week_add_icon {
+    width: 14px;
+    height: 14px;
+    fill: $selected;
+    cursor: pointer;
+    margin: var(--child-margin);
+}

@@ -1,0 +1,28 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_checkbox__base {
+    display: inline-flex;
+    align-items: center;
+}
+.simple_checkbox__label_text {
+    padding: $space-3 0;
+    margin-left: $space-4;
+    cursor: pointer;
+}
+.simple_checkbox__checkbox_container {
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    background: $surface;
+    border: 1px solid $border;
+    border-radius: calc(var(--checkbox-size) / 4);
+    transition: background 0.1s, border 0.1s;
+    cursor: pointer;
+}
+.simple_checkbox__checked_background {
+    border: 1px solid $checked;
+    background: $checked;
+}
+.simple_checkbox__checkmark-icon {
+    width: var(--checkbox-size);
+    height: var(--checkbox-size);
+    fill: $surface;
+}

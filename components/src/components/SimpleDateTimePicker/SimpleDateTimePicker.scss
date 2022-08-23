@@ -1,0 +1,12 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_datetime_picker__float_box {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    background: $surface;
+    border-radius: 7px;
+    border: 1px solid #efefef;
+    box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
+    padding: $space-2 $space-5;
+    z-index: 100;
+}

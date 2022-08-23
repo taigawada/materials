@@ -1,0 +1,49 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_combobox__float_box {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    background: $surface;
+    width: 100%;
+    height: var(--float-box-height);
+    border-radius: $border-radius-1;
+    border: 1px solid $surface;
+    box-shadow: $boxshadow;
+    overflow: scroll;
+    text-align: left;
+}
+.enteredItem {
+    background: $hovered;
+}
+.checkedItem {
+    background: $checked-alpha;
+}
+.currentSelect {
+    width: calc(100% - 3px);
+    border: 1px solid $checked;
+    border-radius: 5px;
+}
+.simple_combobox__item {
+    margin-left: $space-3;
+}
+.non_multi_selectable {
+    cursor: pointer;
+    text-align: left;
+    padding: $space-3 0;
+}
+.simple_combobox__input_arrow_down {
+    width: 12px;
+    height: 12px;
+    fill: $surface-black;
+}
+.simple_combobox__add_newvalue {
+    padding-left: $space-4;
+    display: flex;
+    align-items: center;
+}
+.simple_combobox__add_newvalue:hover {
+    background: $hovered;
+}
+.simple_combobox__add_icon {
+    transform: rotate(45deg);
+}

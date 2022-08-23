@@ -1,0 +1,45 @@
+@use '@simple-education-dev/tokens/styles' as *;
+.simple_pagination__container {
+    width: 100%;
+}
+.simple_pagination__flex_box {
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+}
+.simple_pagination__selected {
+    background: $selected;
+    color: $surface;
+}
+.simple_pagination__index_text {
+    margin: 0 $space-2;
+    padding: $space-1 $space-2;
+    border-radius: $border-radius-1;
+    font-size: $font-size-6;
+    cursor: pointer;
+}
+.simple_pagination__hovered {
+    background: $hovered;
+}
+.simple_pagination__arrow_icons {
+    padding: $space-3 $space-2;
+    margin: 0 $space-2;
+    border-radius: $border-radius-1;
+}
+.simple_pagination__arrow_icons:hover {
+    background: $hovered;
+}
+.simple_pagination__threepoint_leader {
+    margin: 0 $space-2;
+}
+.simple-pagination_dot-base {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 0.1px solid $surface-black;
+    cursor: pointer;
+}
+.intermediateSelected {
+    fill: $selected;
+}
