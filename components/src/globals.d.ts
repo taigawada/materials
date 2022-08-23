@@ -1,3 +1,9 @@
+// .vueファイル
+declare module '*.vue' {
+    import Vue from 'vue';
+    export default Vue;
+}
+// .tsxファイル
 import Vue, { VNode } from 'vue';
 
 declare global {
@@ -20,3 +26,9 @@ declare module 'vue/types/options' {
         [key: string]: any;
     }
 }
+
+// .scssファイル
+declare module '*.scss';
+
+// globalStyleSheet
+declare module 'globalStyleSheet';
