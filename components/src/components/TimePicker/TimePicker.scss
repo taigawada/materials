@@ -1,1 +1,8 @@
 @use 'globalStyleSheet' as *;
+.simple_timepicker__base {
+    font-family: Helvetica, 'ヒラギノ角ゴ ProN';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
