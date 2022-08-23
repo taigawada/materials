@@ -1,9 +1,5 @@
 @use '@simple-education-dev/tokens/styles' as *;
 .simple_datetime_picker__float_box {
-    font-family: Helvetica, 'ヒラギノ角ゴ ProN';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
     display: block;
     position: absolute;
@@ -11,7 +7,7 @@
     background: $surface;
     border-radius: 7px;
     border: 1px solid #efefef;
-    box-shadow: 0.5px 0.5px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: $border-box;
     padding: $space-2 $space-5;
     z-index: 100;
 }

@@ -1,10 +1,6 @@
 @use 'globalStyleSheet' as *;
 
 .simple_popover__popover {
-    font-family: Helvetica, 'ヒラギノ角ゴ ProN';
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
     position: absolute;
     width: auto;
