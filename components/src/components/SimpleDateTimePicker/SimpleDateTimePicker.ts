@@ -109,6 +109,10 @@ export default defineComponent({
                     h(TimePicker, {
                         interval: props.interval,
                         time: currentSelectTime,
+                        props: {
+                            interval: props.interval,
+                            time: currentSelectTime,
+                        },
                         onChange: handleTimeChange,
                         on: {
                             change: handleTimeChange,
@@ -150,25 +154,5 @@ export default defineComponent({
                     datetimePickerNode(),
                 ]
             );
-        //     <div @mousedown="mousedown" @mouseleave="mouseleave">
-        //         <SimpleInput
-        //             :caption="caption"
-        //             :placeholder="placeholder"
-        //             readonly
-        //             :value="inputValue"
-        //             @focusIn="inFocus"
-        //             @focusOut="outFocus"
-        //         >
-        //         </SimpleInput>
-        //         <div v-if="isEntered || isFocus" class="simple-datetime-picker_float-box">
-        //             <SimpleCalender
-        //                 select
-        //                 :selected="currentSelectDate"
-        //                 :allowPast="allowPast"
-        //                 @change="handleSelectDateChange"
-        //             ></SimpleCalender>
-        //             <TimePicker :time="currentSelectTime" @change="handleTimeChange"></TimePicker>
-        //         </div>
-        //     </div>
     },
 });

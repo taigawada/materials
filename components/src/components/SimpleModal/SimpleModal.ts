@@ -1,4 +1,4 @@
-import { defineComponent, ref, watchEffect, PropType, h } from 'vue-demi';
+import { defineComponent, ref, watchEffect, PropType, h, isVue3 } from 'vue-demi';
 import { useScrollLock, onKeyStroke, onKeyPressed } from '@vueuse/core';
 import { CloseCross } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton/SimpleButton';
@@ -104,7 +104,7 @@ export default defineComponent({
                                 click: onSubAction,
                             },
                         },
-                        () => props.subAction.text
+                        isVue3 ? () => props.subAction.text : props.subAction.text
                     ),
                     h(
                         SimpleButton,
@@ -122,7 +122,7 @@ export default defineComponent({
                                 click: onMainAction,
                             },
                         },
-                        () => props.mainAction.text
+                        isVue3 ? () => props.mainAction.text : props.mainAction.text
                     ),
                 ]),
             ]);

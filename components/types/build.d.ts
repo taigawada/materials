@@ -21,6 +21,6 @@ import SimpleResourceList from './components/SimpleResourceList/SimpleResourceLi
 import ResourceItem from './components/ResourceItem/ResourceItem';
 import SimplePagination from './components/SimplePagination/SimplePagination';
 import SimpleIcon from './components/SimpleIcon/SimpleIcon';
-import { sortFn } from './utils/utils';
-export { SimpleButton, SimpleTabs, SimplePopover, SimpleActions, SimpleCheckbox, SimpleBanner, SimpleInput, SimpleCard, SimpleTag, SimpleModal, SimpleSelector, WeeklySelector, SimpleCombobox, SimpleStack, SimpleDatePicker, SimpleCalender, SimpleTimePicker, SimpleDateTimePicker, SimpleSmoothPicker, SimpleIcon, SimpleResourceList, ResourceItem, SimplePagination, sortFn, };
+import { sortItems } from './utils/utils';
+export { SimpleButton, SimpleTabs, SimplePopover, SimpleActions, SimpleCheckbox, SimpleBanner, SimpleInput, SimpleCard, SimpleTag, SimpleModal, SimpleSelector, WeeklySelector, SimpleCombobox, SimpleStack, SimpleDatePicker, SimpleCalender, SimpleTimePicker, SimpleDateTimePicker, SimpleSmoothPicker, SimpleIcon, SimpleResourceList, ResourceItem, SimplePagination, sortItems, };
 //# sourceMappingURL=build.d.ts.map

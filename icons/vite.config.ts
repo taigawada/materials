@@ -1,13 +1,9 @@
 import path from "path";
 import { defineConfig } from "vite";
-// import { createSvgPlugin } from "vite-plugin-vue2-svg";
-import vueSvgPlugin from "vite-plugin-vue-svg";
+import svgLoader from "vite-svg-loader";
 
 const config = {
-    plugins: [
-        vueSvgPlugin(),
-        // process.env.VUE_VERSION === "3" ? createSvgPlugin() : vueSvgPlugin(),
-    ],
+    plugins: [svgLoader()],
     resolve: {
         alias: {
             "~": "../node_modules/",

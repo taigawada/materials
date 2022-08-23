@@ -121,7 +121,7 @@ export default defineComponent({
                     h('a', { class: [{ simple_button__text_loading: !props.plain }] }, [
                         context.slots.default ? context.slots.default() : 'Button',
                     ]),
-                    h('div', { class: [{ simple_button__spinner: true }] }, loadingSpinnerNode()),
+                    h('div', { class: [{ simple_button__spinner: true }] }, [loadingSpinnerNode()]),
                 ]
             );
         };

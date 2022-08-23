@@ -1,4 +1,4 @@
-import { defineComponent, PropType, h, VNode } from 'vue-demi';
+import { defineComponent, PropType, h, VNode, isVue3 } from 'vue-demi';
 import { ExclamationMark, SelectArrow } from '@simple-education-dev/icons';
 import SimpleStack from '../SimpleStack/SimpleStack';
 import SimpleIcon from '../SimpleIcon/SimpleIcon';
@@ -75,7 +75,7 @@ export default defineComponent({
         const radioNode = () => {
             return props.items.map((item) => {
                 return h('div', { class: [{ simple_selector__radio_elements: true }], key: item.value }, [
-                    h(SimpleStack, { distribution: 'left', props: { distribution: 'left' } }, () => [
+                    h('div', { class: [{ simple_selector__radio_container: true }] }, [
                         h(
                             'div',
                             {
@@ -88,27 +88,39 @@ export default defineComponent({
                                 onClick: () => handleRadioClick(item.value),
                                 on: { click: () => handleRadioClick(item.value) },
                             },
-                            h('div', { class: [{ radio_circle__inside: props.value === item.value }] })
+                            [h('div', { class: [{ radio_circle__inside: props.value === item.value }] })]
                         ),
-                        h('div', { class: [{ simple_selector__radio_text: true }] }, item.label),
+                        [
+                            h(
+                                'div',
+                                {
+                                    class: [{ simple_selector__radio_text: true }],
+                                    onClick: () => handleRadioClick(item.value),
+                                    on: { click: () => handleRadioClick(item.value) },
+                                },
+                                item.label
+                            ),
+                        ],
                     ]),
-                    h('div', { class: [{ simple_selector__radio_helptext: true }] }, item.helpText),
+                    [h('div', { class: [{ simple_selector__radio_helptext: true }] }, item.helpText)],
                 ]);
             });
         };
         const simpleSelecorRadioNode = () => {
             if (props.radio) {
-                return h(
-                    'div',
-                    { class: [{ classTest: true }] },
-                    h(SimpleStack, { vertical: true, props: { vertical: true } }, () => radioNode())
-                );
+                return h('div', { class: [{ classTest: true }] }, [
+                    h(
+                        SimpleStack,
+                        { vertical: true, props: { vertical: true } },
+                        isVue3 ? () => radioNode() : radioNode()
+                    ),
+                ]);
             }
         };
         const selectBoxElements = () => [
-            h('option', { value: '', attr: { hidden: true, value: '' } }, props.initialValue),
+            h('option', { value: '', domProps: { hidden: true, value: '' } }, props.initialValue),
             ...props.items.map((item) => {
-                return h('option', { key: item.value, value: item.value, attr: { value: item.value } }, item.label);
+                return h('option', { key: item.value, value: item.value, domProps: { value: item.value } }, item.label);
             }),
         ];
         const simpleSelectorSelectElement = (): VNode | undefined => {
@@ -119,7 +131,7 @@ export default defineComponent({
                         {
                             class: [{ simple_selector__select_box: true, select_box__error: isError() }],
                             value: props.value,
-                            attr: {
+                            domProps: {
                                 value: props.value,
                             },
                             onChange: (event: { target: HTMLSelectElement }) => handleSelectChange(event),
@@ -155,7 +167,7 @@ export default defineComponent({
                             fill: 'rgba(255, 121, 121, 1)',
                         },
                     }),
-                    h('span', { class: [{ simple_selector__error_text: true }] }, props.error),
+                    [h('span', { class: [{ simple_selector__error_text: true }] }, props.error)],
                 ]);
             }
         };

@@ -13,10 +13,16 @@
 .simple_selector__caption_text {
     opacity: 1;
 }
+.simple_selector__radio_container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
 .simple_selector__radio_elements {
     margin: $space-05 0;
 }
 .simple_selector__radio_text {
+    cursor: pointer;
     font-size: $font-size-6;
 }
 .simple_selector__radio_helptext {

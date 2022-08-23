@@ -15,6 +15,7 @@ export default defineConfig({
         ],
     },
     build: {
+        minify: 'esbuild',
         lib: {
             entry: path.resolve(__dirname, './src/build.ts'),
             name: 'components',

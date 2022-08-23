@@ -230,7 +230,7 @@ export default defineComponent({
                 ]);
             }
         };
-        const headerRowNode = () =>
+        const headerRowNode = (): VNode =>
             h('tr', { class: [{ simple_resource_list__header_row: true }] }, [
                 h('th', { class: [{ simple_resource_list__header: true }] }, [
                     h(SimpleCheckbox, {
@@ -251,12 +251,11 @@ export default defineComponent({
                 ]),
                 [SelectedHeaderNode()],
             ]);
-        const dataRowNode = () =>
+        const dataRowNode = (): VNode[] =>
             props.items.map((item, index) => {
                 return h(
                     'tr',
                     {
-                        key: item.id,
                         class: [{ simple_resource_list__row: true }],
                         onClick: (event: Event) => handleClickRow(index, event),
                         on: {
@@ -265,8 +264,9 @@ export default defineComponent({
                     },
                     [
                         h('td', { class: [{ simple_resource_list__check_column: true }] }, [
-                            // @ts-ignore
+                            // @ts-ignore (todo -> 型エラーの原因探す)
                             h(SimpleCheckbox, {
+                                key: item.id,
                                 ref: isVue3 ? setItemRef : 'itemCheckBoxes',
                                 refInFor: true,
                                 class: [{ simple_resource_list__checkbox: true }],

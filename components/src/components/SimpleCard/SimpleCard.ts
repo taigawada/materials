@@ -1,4 +1,4 @@
-import { defineComponent, PropType, h } from 'vue-demi';
+import { defineComponent, PropType, h, isVue3 } from 'vue-demi';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import './SimpleCard.scss';
 
@@ -65,7 +65,7 @@ export default defineComponent({
                         click: hundleMainActionClick,
                     },
                 },
-                () => props.mainAction.text
+                isVue3 ? () => props.mainAction.text : props.mainAction.text
             );
         const subActionNode = () =>
             h(
@@ -74,13 +74,13 @@ export default defineComponent({
                     normal: true,
                     disabled: props.subAction.disabled,
                     loading: props.subAction.loading,
-                    props: { primary: true, disabled: props.subAction.disabled, loading: props.subAction.loading },
+                    props: { normal: true, disabled: props.subAction.disabled, loading: props.subAction.loading },
                     onClick: hundleSubActionClick,
                     on: {
                         click: hundleSubActionClick,
                     },
                 },
-                () => props.subAction.text
+                isVue3 ? () => props.subAction.text : props.subAction.text
             );
         const actionsNode = () =>
             h('div', { class: [{ simple_card__actions: true }] }, [

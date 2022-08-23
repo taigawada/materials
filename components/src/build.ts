@@ -21,7 +21,7 @@ import SimpleResourceList from './components/SimpleResourceList/SimpleResourceLi
 import ResourceItem from './components/ResourceItem/ResourceItem';
 import SimplePagination from './components/SimplePagination/SimplePagination';
 import SimpleIcon from './components/SimpleIcon/SimpleIcon';
-import { sortFn } from './utils/utils';
+import { sortItems } from './utils/utils';
 
 export {
     SimpleButton,
@@ -47,5 +47,5 @@ export {
     SimpleResourceList,
     ResourceItem,
     SimplePagination,
-    sortFn,
+    sortItems,
 };

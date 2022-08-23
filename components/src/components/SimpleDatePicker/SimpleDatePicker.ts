@@ -1,4 +1,4 @@
-import { defineComponent, ref, h, onMounted } from 'vue-demi';
+import { defineComponent, ref, h, onMounted, VNode } from 'vue-demi';
 import SimpleInput from '../SimpleInput/SimpleInput';
 import SimpleCalender from '../SimpleCalender/SimpleCalender';
 import './SimpleDatePicker.scss';
@@ -57,7 +57,7 @@ export default defineComponent({
             currentSelectDate.value = date;
             context.emit('change:date', date);
         };
-        const datePickerNode = () => {
+        const datePickerNode = (): VNode | undefined => {
             if (isEntered.value || isFocus.value) {
                 return h(SimpleCalender, {
                     select: true,
@@ -110,25 +110,5 @@ export default defineComponent({
                     datePickerNode(),
                 ]
             );
-        // <div @mousedown="mousedown" @mouseleave="mouseleave">
-        //     <SimpleInput
-        //         :caption="caption"
-        //         :placeholder="placeholder"
-        //         readonly
-        //         :value="inputValue"
-        //         @focusIn="inFocus"
-        //         @focusOut="outFocus"
-        //     >
-        //     </SimpleInput>
-        //     <div v-if="isEntered || isFocus" class="simple-date-picker_float-box">
-        //         <SimpleCalender
-        //             select
-        //             :selected="currentSelectDate"
-        //             :allowPast="allowPast"
-        //             :showRelatedDays="showRelatedDays"
-        //             @change="handleSelectDateChange"
-        //         ></SimpleCalender>
-        //     </div>
-        // </div>
     },
 });

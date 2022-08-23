@@ -22,32 +22,7 @@ const dayOfWeekStr = (start: 'monday' | 'sunday' | 0 | 1, index: number) => {
             return '日';
     }
 };
-
-import { useWindowScroll } from '@vueuse/core';
-import { reactive, toRefs, watch } from 'vue-demi';
-const useScroll = () => {
-    const { x, y } = useWindowScroll();
-
-    const state = reactive<{
-        isUp: boolean;
-        isDown: boolean;
-    }>({
-        isUp: false,
-        isDown: false,
-    });
-
-    watch(y, (newY, oldY) => {
-        state.isUp = newY < oldY;
-        state.isDown = newY > oldY;
-    });
-
-    return {
-        x,
-        y,
-        ...toRefs(state),
-    };
-};
-function sortFn(key: string, order: 'asc' | 'desc' = 'asc', escape: string | RegExp = /[-/\\^$*+?#. ()|[\]{}]/g) {
+function sortItems(key: string, order: 'asc' | 'desc' = 'asc', escape: string | RegExp = /[-/\\^$*+?#. ()|[\]{}]/g) {
     return (a: any, b: any) => {
         if (!Object.prototype.hasOwnProperty.call(a, key) || !Object.prototype.hasOwnProperty.call(b, key)) {
             return 0;
@@ -63,4 +38,4 @@ function sortFn(key: string, order: 'asc' | 'desc' = 'asc', escape: string | Reg
         return order == 'desc' ? comparison * -1 : comparison;
     };
 }
-export { dayOfWeekStr, useScroll, sortFn };
+export { dayOfWeekStr, sortItems };

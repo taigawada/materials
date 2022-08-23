@@ -1,3 +1,4 @@
+import { VNode } from 'vue-demi';
 import './SimpleDatePicker.scss';
 declare const _default: import("vue-demi").DefineComponent<{
     initialDate: {
@@ -28,7 +29,7 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: boolean;
         required: false;
     };
-}, () => import("vue-demi").VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
+}, () => VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
     [key: string]: any;
 }>, unknown, {}, {}, import("vue-demi").ComponentOptionsMixin, import("vue-demi").ComponentOptionsMixin, Record<string, any>, string, import("vue-demi").VNodeProps & import("vue-demi").AllowedComponentProps & import("vue-demi").ComponentCustomProps, Readonly<import("vue-demi").ExtractPropTypes<{
     initialDate: {

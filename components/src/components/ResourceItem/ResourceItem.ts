@@ -1,38 +1,37 @@
-import { defineComponent, h, isVue3, ref } from 'vue-demi';
+import { defineComponent, h, isVue3 } from 'vue-demi';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
 import SimpleStack from '../SimpleStack/SimpleStack';
 import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import './ResourceItem.scss';
 export default defineComponent({
     props: {
         sort: {
             type: Boolean,
             required: false,
         },
+        asc: {
+            type: Boolean,
+            required: false,
+        },
     },
     setup(props, context) {
-        const sortStatus = ref(true);
-        const handleSortClick = (order: 'asc' | 'desc') => {
-            if (order === 'asc') {
-                sortStatus.value = true;
-            } else if (order === 'desc') {
-                sortStatus.value = false;
-            }
-            context.emit('sort', order);
+        const handleSortClick = () => {
+            context.emit('sort', !props.asc);
         };
         const sortIcons = (style: { spacing: object }) => {
             return h(SimpleIcon, {
                 style: [style.spacing],
                 props: {
-                    source: sortStatus.value ? ArrowDown : ArrowUp,
+                    source: props.asc ? ArrowDown : ArrowUp,
                     size: '13px',
                     clickable: true,
                 },
-                source: sortStatus.value ? ArrowDown : ArrowUp,
+                source: props.asc ? ArrowDown : ArrowUp,
                 size: '13px',
                 clickable: true,
-                onClick: sortStatus.value ? () => handleSortClick('desc') : () => handleSortClick('asc'),
+                onClick: handleSortClick,
                 on: {
-                    click: sortStatus.value ? () => handleSortClick('desc') : () => handleSortClick('asc'),
+                    click: handleSortClick,
                 },
             });
         };

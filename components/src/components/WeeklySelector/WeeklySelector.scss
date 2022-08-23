@@ -35,6 +35,11 @@
     color: #ffffff;
     cursor: pointer;
 }
+.weekly_selector__add_week_container {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
 .weekly_selector__add_week {
     margin: 5px 0;
     text-align: left;

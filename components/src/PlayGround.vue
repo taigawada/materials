@@ -50,6 +50,7 @@
             </div>
         </SimpleCard>
         <p>Resource List</p>
+        <p>{{ resourceItems }}</p>
         <div style="width: 40%; margin: 0 auto">
             <SimpleResourceList
                 :items="resourceItems"
@@ -64,7 +65,7 @@
                 @change="handleResourceListChange"
             >
                 <template #header>
-                    <ResourceItem sort @sort="handleResourceSortById">id</ResourceItem>
+                    <ResourceItem sort :asc="idOrder" @sort="handleResourceSortById">id</ResourceItem>
                     <ResourceItem>name</ResourceItem>
                 </template>
                 <template #data="render">
@@ -73,7 +74,7 @@
                 </template>
                 <template #pagination>
                     <SimplePagination
-                        :length="9"
+                        :length="19"
                         :current="currentSelectPage"
                         @next="handleNext"
                         @previous="handlePrevious"
@@ -211,7 +212,7 @@ import ResourceItem from './components/ResourceItem/ResourceItem';
 import SimplePagination from './components/SimplePagination/SimplePagination';
 
 import { weekBoolean, monthBoolean } from './types/types';
-import { sortFn } from './utils/utils';
+import { sortItems } from './utils/utils';
 import { format } from 'date-fns';
 interface WeekState {
     week: monthBoolean;
@@ -413,8 +414,10 @@ export default defineComponent({
         const handleResourceListChange = (newArray: string[]) => {
             resourceListSelected.value = newArray;
         };
-        const handleResourceSortById = (order: 'asc' | 'desc') => {
-            resourceItems.value.sort(sortFn('id', order));
+        const idOrder = ref(true);
+        const handleResourceSortById = (order) => {
+            resourceItems.value.sort(sortItems('id', order ? 'asc' : 'desc'));
+            idOrder.value = order;
         };
         // pagination
         const currentSelectPage = ref(0);
@@ -469,6 +472,7 @@ export default defineComponent({
             resourceItems,
             resourceListSelected,
             handleResourceListChange,
+            idOrder,
             handleResourceSortById,
             currentSelectPage,
             handlePrevious,

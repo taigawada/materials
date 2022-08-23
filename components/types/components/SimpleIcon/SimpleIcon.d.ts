@@ -1,3 +1,4 @@
+import './SimpleIcon.scss';
 declare const _default: import("vue-demi").DefineComponent<{
     source: {
         type: StringConstructor;

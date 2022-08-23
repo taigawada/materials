@@ -44,11 +44,16 @@ export default defineComponent({
     },
     setup(props, context) {
         const handleRemove = () => {
-            console.log('click');
             context.emit('remove');
         };
         const handleInputChange = (event: { target: HTMLInputElement }) => {
             context.emit('change:value', event.target.value);
+        };
+        const handleFocusin = () => {
+            context.emit('focusin');
+        };
+        const handleFocusout = () => {
+            context.emit('focusout');
         };
         const appearRemoveButton = () => {
             if (props.value) {
@@ -122,9 +127,16 @@ export default defineComponent({
                     onInput: (event: { target: HTMLInputElement }) => handleInputChange(event),
                     on: {
                         input: (event: { target: HTMLInputElement }) => handleInputChange(event),
+                        // Vue2,3でinputのイベント名を合わせる
+                        // Vue3: focusin, focusout
+                        // Vue2:
+                        //     focus -> focusin
+                        //     blur -> focusout
+                        focus: handleFocusin,
+                        blur: handleFocusout,
                     },
                 }),
-                h('div', { class: [{ simple_input__remove: true }] }, iconsNode()),
+                [h('div', { class: [{ simple_input__remove: true }] }, [iconsNode()])],
             ]);
         const inputErrorNode = () => {
             if (isError()) {
@@ -140,15 +152,15 @@ export default defineComponent({
                             fill: 'rgba(255, 121, 121, 1)',
                         },
                     }),
-                    h('span', { class: [{ simple_input__error_text: true }] }, props.error),
+                    [h('span', { class: [{ simple_input__error_text: true }] }, props.error)],
                 ]);
             }
         };
         return () =>
             h('div', { class: [{ simple_input__container: true }], style: [widthStyle()] }, [
-                h('div', captionNode()),
-                h('div', inputElementNode()),
-                h('div', inputErrorNode()),
+                h('div', [captionNode()]),
+                h('div', [inputElementNode()]),
+                h('div', [inputErrorNode()]),
             ]);
     },
 });

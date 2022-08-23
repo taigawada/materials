@@ -84,6 +84,10 @@ export default defineComponent({
                         h(TimePicker, {
                             interval: props.interval,
                             time: selectedDate,
+                            props: {
+                                interval: props.interval,
+                                time: selectedDate,
+                            },
                             onChange: handleTimeChange,
                             on: {
                                 change: handleTimeChange,

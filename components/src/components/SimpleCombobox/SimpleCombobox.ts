@@ -145,6 +145,7 @@ export default defineComponent({
                     placeholder: props.placeholder,
                     value: props.fieldValue,
                     remove: props.remove,
+                    icon: showIcon ? SearchGlass : ArrowDown,
                 },
                 'onChange:value': fieldChange,
                 onFocusin: inFocus,
@@ -184,6 +185,10 @@ export default defineComponent({
                             style: [{ display: props.multiple ? 'inline-flex' : 'none' }],
                             value: includeItem(item),
                             label: item,
+                            props: {
+                                value: includeItem(item),
+                                label: item,
+                            },
                             onChange: (bool: boolean) => onChangeSelect(item, bool),
                             on: {
                                 change: (bool: boolean) => onChangeSelect(item, bool),

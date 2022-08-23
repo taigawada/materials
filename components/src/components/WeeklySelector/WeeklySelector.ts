@@ -1,8 +1,7 @@
-import { defineComponent, ref, computed, PropType, h, VNode } from 'vue-demi';
+import { defineComponent, ref, computed, PropType, h, VNode, isVue3 } from 'vue-demi';
 import { dayOfWeekStr } from '../../utils/utils';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton/SimpleButton';
-import SimpleStack from '../SimpleStack/SimpleStack';
 import SimpleIcon from '../SimpleIcon/SimpleIcon';
 import './WeeklySelector.scss';
 type Week = boolean[];
@@ -58,7 +57,7 @@ export default defineComponent({
             return props.weekValue[week][weekDay];
         };
         const iconNode = (add: boolean) => {
-            return h(SimpleStack, { distribution: 'left', props: { distribution: 'left' } }, () => [
+            return h('div', { class: [{ weekly_selector__add_week_container: true }] }, [
                 h(
                     SimpleButton,
                     {
@@ -70,7 +69,7 @@ export default defineComponent({
                             click: add ? handleAddWeek : handleDelWeek,
                         },
                     },
-                    () => (add ? '月ごと' : '週ごと')
+                    isVue3 ? () => (add ? '月ごと' : '週ごと') : add ? '月ごと' : '週ごと'
                 ),
                 h(SimpleIcon, {
                     source: add ? ArrowDown : ArrowUp,
@@ -109,11 +108,13 @@ export default defineComponent({
                                 click: () => handleClick(weekIndex, weekdayIndex),
                             },
                         },
-                        h(
-                            'span',
-                            { class: [{ weekly_selector__box_selected_text: enabled(weekIndex, weekdayIndex) }] },
-                            dayOfWeekStr(props.start, weekdayIndex)
-                        )
+                        [
+                            h(
+                                'span',
+                                { class: [{ weekly_selector__box_selected_text: enabled(weekIndex, weekdayIndex) }] },
+                                dayOfWeekStr(props.start, weekdayIndex)
+                            ),
+                        ]
                     ),
                 ]);
             });

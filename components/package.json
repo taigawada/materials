@@ -2,7 +2,7 @@
     "name": "@simple-education-dev/components",
     "version": "0.1.1",
     "private": false,
-    "description": "",
+    "description": "Vue2 & 3 Universal Component Library for SimpleEducation",
     "type": "module",
     "types": "types/build.d.ts",
     "main": "dist/components.js",
@@ -26,7 +26,7 @@
         "vite.config.ts"
     ],
     "author": "TaigaWada",
-    "license": "MIT",
+    "license": "UNLICENSED",
     "dependencies": {
         "@simple-education-dev/icons": "^0.1.8",
         "@simple-education-dev/tokens": "^0.1.4",

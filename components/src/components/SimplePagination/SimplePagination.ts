@@ -53,7 +53,6 @@ export default defineComponent({
             if (props.current < 4) {
                 return index + 1;
             } else if (props.current > props.length - 5) {
-                console.log('this');
                 return props.length - 4 + index;
             } else {
                 return props.current - 1 + index;
@@ -107,7 +106,6 @@ export default defineComponent({
                         },
                         1
                     ),
-
                     h(SimpleIcon, {
                         class: [{ simple_pagination__threepoint_leader: true }],
                         style: [{ display: props.current > 3 ? 'inline' : 'none' }],
@@ -213,65 +211,5 @@ export default defineComponent({
                     }),
                 ]),
             ]);
-        // <template>
-        //     <div class="simple-pagination_container">
-        //         <SimpleStack class="simple-pagination_flex-box" spacing="10px">
-        //             <template #default="style">
-        //                 <ArrowLeft
-        //                     class="simple-pagination_arrow-icons"
-        //                     :style="style.spacing"
-        //                     @click="handlePreviousPage"
-        //                 ></ArrowLeft>
-        //                 <div
-        //                     v-for="index in length"
-        //                     v-show="length < 8"
-        //                     :key="'index' + index"
-        //                     class="simple-pagination_dot-base"
-        //                     :class="{
-        //                         selected: isSelected(index - 1),
-        //                     }"
-        //                     :style="style.spacing"
-        //                     @click="handleChange(index - 1)"
-        //                 ></div>
-        //                 <div
-        //                     v-for="firstthreeIndex in 3"
-        //                     v-show="length >= 8"
-        //                     :key="'indexFirstThree' + firstthreeIndex"
-        //                     class="simple-pagination_dot-base"
-        //                     :class="{
-        //                         selected: isSelected(firstthreeIndex - 1),
-        //                     }"
-        //                     :style="style.spacing"
-        //                     @click="handleChange(firstthreeIndex - 1)"
-        //                 ></div>
-        //                 <ThreePointLeader
-        //                     v-show="length >= 8"
-        //                     class="simple-pagination_three-point-leader"
-        //                     :class="{
-        //                         intermediateSelected: isIntermediateSelected(),
-        //                     }"
-        //                     :style="style.spacing"
-        //                 ></ThreePointLeader>
-        //                 <div
-        //                     v-for="lastThreeIndex in 3"
-        //                     v-show="length >= 8"
-        //                     :key="'indexLastThree' + lastThreeIndex"
-        //                     class="simple-pagination_dot-base"
-        //                     :class="{
-        //                         selected: isSelected(length + lastThreeIndex - 4),
-        //                     }"
-        //                     :style="style.spacing"
-        //                     @click="handleChange(length + lastThreeIndex - 4)"
-        //                 ></div>
-        //                 <ArrowRight
-        //                     class="simple-pagination_arrow-icons"
-        //                     :style="style.spacing"
-        //                     @click="handleNextPage"
-        //                 ></ArrowRight>
-        //             </template>
-        //         </SimpleStack>
-        //         <div>{{ current + 1 }}{{ suffix }} / {{ length }}{{ suffix }}</div>
-        //     </div>
-        // </template>
     },
 });

@@ -1,4 +1,5 @@
 import { defineComponent, h } from 'vue-demi';
+import './SimpleIcon.scss';
 
 export default defineComponent({
     props: {
@@ -21,7 +22,10 @@ export default defineComponent({
             required: false,
         },
     },
-    setup(props) {
+    setup(props, context) {
+        const handleIconClick = () => {
+            context.emit('click');
+        };
         return () =>
             h('svg', {
                 class: [{ simpleIconBase: true }],
@@ -33,6 +37,10 @@ export default defineComponent({
                 ],
                 innerHTML: props.source,
                 domProps: { innerHTML: props.source },
+                // Vue2環境のみ、Clickイベントが機能しないのでこのコンポーネントから伝播させる
+                on: {
+                    click: handleIconClick,
+                },
             });
     },
 });
