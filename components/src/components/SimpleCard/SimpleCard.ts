@@ -92,34 +92,5 @@ export default defineComponent({
                 context.slots.default ? context.slots.default() : null,
                 props.mainAction !== undefined || props.subAction !== undefined ? actionsNode() : null,
             ]);
-        // <template>
-        //     <div class="simple-card_base" :style="cardWidth()">
-        //         <slot></slot>
-        //         <div v-if="mainAction !== undefined || subAction !== undefined" class="simple-card_actions">
-        //             <div>
-        //                 <SimpleButton
-        //                     v-if="subAction.text.length > 0"
-        //                     normal
-        //                     :disabled="subAction.disabled"
-        //                     :loading="subAction.loading"
-        //                     @click="hundleSubActionClick"
-        //                 >
-        //                     {{ subAction.text }}
-        //                 </SimpleButton>
-        //             </div>
-        //             <div>
-        //                 <SimpleButton
-        //                     v-if="mainAction.text.length > 0"
-        //                     primary
-        //                     :disabled="mainAction.disabled"
-        //                     :loading="mainAction.loading"
-        //                     @click="hundleMainActionClick"
-        //                 >
-        //                     {{ mainAction.text }}
-        //                 </SimpleButton>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </template>
     },
 });

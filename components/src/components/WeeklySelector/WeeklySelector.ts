@@ -132,47 +132,5 @@ export default defineComponent({
                 ...weeksNode(),
                 iconNode(props.weekValue.length === 1),
             ]);
-        // <div class="weekly-selector_base">
-        //     <div v-for="weekIndex in weekArray" :key="'week' + weekIndex">
-        //         <div v-show="weekLength > 1" class="weekly-selector_week-caption">第{{ weekIndex + 1 }}週</div>
-        //         <div class="weekly-selector_weekdays">
-        //             <div v-for="index in weekdaysArray" :key="'weekdays' + weekIndex + index">
-        //                 <div
-        //                     class="weekly-selector_box"
-        //                     :class="{
-        //                         leftSide: index === 0,
-        //                         rightSide: index === weekdaysLength - 1,
-        //                         selected: enabled(weekIndex, index),
-        //                     }"
-        //                     @click="handleClick(weekIndex, index)"
-        //                 >
-        //                     <span
-        //                         :class="{
-        //                             selectedText: enabled(weekIndex, index),
-        //                         }"
-        //                     >
-        //                         {{ dayOfWeekStr(start, index) }}
-        //                     </span>
-        //                 </div>
-        //             </div>
-        //         </div>
-        //     </div>
-        //     <SimpleButton v-show="weekValue.length === 1" plain class="weekly-selector_add-week" @click="handleAddWeek">
-        //         <SimpleStack alignment="center" distribution="left">
-        //             <template #default="style">
-        //                 <ArrowDown class="weekly-selector_week-add-icon" :style="style.spacing" />
-        //                 月ごと
-        //             </template>
-        //         </SimpleStack>
-        //     </SimpleButton>
-        //     <SimpleButton v-show="weekValue.length !== 1" plain class="weekly-selector_add-week" @click="handleDelWeek">
-        //         <SimpleStack alignment="center" distribution="left">
-        //             <template #default="style">
-        //                 <ArrowUp class="weekly-selector_week-add-icon" :style="style.spacing" />
-        //                 週ごと
-        //             </template>
-        //         </SimpleStack>
-        //     </SimpleButton>
-        // </div>
     },
 });

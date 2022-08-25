@@ -37,7 +37,7 @@ export default defineComponent({
                 ],
                 innerHTML: props.source,
                 domProps: { innerHTML: props.source },
-                // Vue2環境のみ、Clickイベントが機能しないのでこのコンポーネントから伝播させる
+                // Vue2環境のみ、clickイベントが発火しないのでこのコンポーネントから伝播させる
                 on: {
                     click: handleIconClick,
                 },

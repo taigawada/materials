@@ -140,36 +140,5 @@ export default defineComponent({
             }
         };
         return () => mainNode();
-        // <div v-if="open" class="simple-modal_overlay">
-        //     <div class="simple-modal_card">
-        //         <div class="simple-modal_card-header">
-        //             <div class="simple-modal_card-title">{{ title }}</div>
-        //             <CloseCross class="simple-modal_close-icon" @click="handleDestroy" />
-        //         </div>
-        //         <div class="simple-modal_content-container">
-        //             <slot></slot>
-        //         </div>
-        //         <div class="simple-modal_card-footer">
-        //             <div class="simple-modal_card-actions">
-        //                 <SimpleButton
-        //                     normal
-        //                     :disabled="subAction?.disabled"
-        //                     :loading="subAction?.loading"
-        //                     @click="onSubAction"
-        //                 >
-        //                     {{ subAction?.text }}
-        //                 </SimpleButton>
-        //                 <SimpleButton
-        //                     primary
-        //                     :disabled="mainAction?.disabled"
-        //                     :loading="mainAction?.loading"
-        //                     @click="onMainAction"
-        //                 >
-        //                     {{ mainAction?.text }}
-        //                 </SimpleButton>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
     },
 });

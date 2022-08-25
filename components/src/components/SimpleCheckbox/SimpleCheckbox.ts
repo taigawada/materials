@@ -93,23 +93,5 @@ export default defineComponent({
                 ),
                 labelTextNode(),
             ]);
-        // <template>
-        //     <div class="simple-checkbox_base">
-        //         <div
-        //             class="simple-checkbox_checkbox-container"
-        //             :class="{
-        //                 checkedBackground: value,
-        //             }"
-        //             :style="CheckboxSize()"
-        //             @click="hundleChange"
-        //         >
-        //             <CheckMark v-show="!indeterminate" :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" />
-        //             <HyphenBar v-show="indeterminate" :style="CheckboxSize()" class="simple-checkbox_checkmark-icon" />
-        //         </div>
-        //         <span v-show="label !== undefined" class="simple-checkbox_label-text" @click="hundleChange">
-        //             {{ label }}
-        //         </span>
-        //     </div>
-        // </template>
     },
 });
