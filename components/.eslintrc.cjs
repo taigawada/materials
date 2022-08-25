@@ -4,7 +4,7 @@ module.exports = {
         es2021: true,
         node: true,
     },
-    extends: ['eslint:recommended', 'plugin:vue/recommended', '@vue/typescript'],
+    extends: ['eslint:recommended', 'plugin:vue/recommended', '@vue/typescript', 'prettier'],
     parser: 'vue-eslint-parser',
     parserOptions: {
         parser: '@typescript-eslint/parser',

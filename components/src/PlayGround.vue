@@ -50,7 +50,6 @@
             </div>
         </SimpleCard>
         <p>Resource List</p>
-        <p>{{ resourceItems }}</p>
         <div style="width: 40%; margin: 0 auto">
             <SimpleResourceList
                 :items="resourceItems"
@@ -156,7 +155,7 @@
             />
         </div>
         <div style="width: 40%; margin: 0 auto">
-            <SimpleCalender :highLights="weekState.week"></SimpleCalender>
+            <SimpleCalender :highLights="weekState.week" :showRelatedDays="false"></SimpleCalender>
         </div>
         <div style="margin-top: 30px">
             <SimpleCard style="width: 30%; margin: 0 auto">
