@@ -16,7 +16,7 @@ import {
     differenceInWeeks,
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleIcon from '../SimpleIcon';
 import { monthBoolean } from '@/types/types';
 import { dayOfWeekStr } from '@/utils/utils';
 import './SimpleCalender.scss';

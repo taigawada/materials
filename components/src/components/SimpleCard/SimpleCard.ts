@@ -1,5 +1,5 @@
 import { defineComponent, PropType, h, isVue3 } from 'vue-demi';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../SimpleButton';
 import './SimpleCard.scss';
 
 interface Action {

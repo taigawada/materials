@@ -1,8 +1,8 @@
 import { defineComponent, ref, computed, PropType, h, VNode } from 'vue-demi';
 import { DeleteCross, SearchGlass, ArrowDown } from '@simple-education-dev/icons';
-import SimpleInput from '../SimpleInput/SimpleInput';
-import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleInput from '../SimpleInput';
+import SimpleCheckbox from '../SimpleCheckbox';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleCombobox.scss';
 export default defineComponent({
     props: {

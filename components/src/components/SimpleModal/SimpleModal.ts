@@ -1,8 +1,8 @@
 import { defineComponent, ref, watchEffect, PropType, h, isVue3 } from 'vue-demi';
 import { useScrollLock, onKeyStroke, onKeyPressed } from '@vueuse/core';
 import { CloseCross } from '@simple-education-dev/icons';
-import SimpleButton from '../SimpleButton/SimpleButton';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleButton from '../SimpleButton';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleModal.scss';
 interface MainAction {
     text: string;

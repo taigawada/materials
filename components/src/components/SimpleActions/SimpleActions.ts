@@ -1,7 +1,7 @@
 import { defineComponent, ref, onMounted, PropType, h, isVue3, onUpdated } from 'vue-demi';
 import { ArrowDown } from '@simple-education-dev/icons';
-import SimplePopover from '../SimplePopover/SimplePopover';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimplePopover from '../SimplePopover';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleActions.scss';
 interface Actions {
     label: string;

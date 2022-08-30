@@ -1,1 +1,1 @@
-{"version":3,"file":"SimplePagination.d.ts","sourceRoot":"","sources":["../../../src/components/SimplePagination/SimplePagination.ts"],"names":[],"mappings":"AAIA,OAAO,yBAAyB,CAAC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAEjC,wBAgNG"}
+{"version":3,"file":"SimplePagination.d.ts","sourceRoot":"","sources":["../../../src/components/SimplePagination/SimplePagination.ts"],"names":[],"mappings":"AAAA,OAAO,EAAyD,KAAK,EAAE,MAAM,UAAU,CAAC;AAKxF,OAAO,yBAAyB,CAAC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAEjC,wBAkTG"}

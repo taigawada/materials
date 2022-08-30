@@ -1,8 +1,8 @@
 import { defineComponent, ref, computed, PropType, h, VNode, isVue3 } from 'vue-demi';
 import { dayOfWeekStr } from '../../utils/utils';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
-import SimpleButton from '../SimpleButton/SimpleButton';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleButton from '../SimpleButton';
+import SimpleIcon from '../SimpleIcon';
 import './WeeklySelector.scss';
 type Week = boolean[];
 type Start = 'monday' | 'sunday';

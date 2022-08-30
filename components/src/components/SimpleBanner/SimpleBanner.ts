@@ -1,7 +1,7 @@
 import { defineComponent, h } from 'vue-demi';
 import { ExclamationMark } from '@simple-education-dev/icons';
-import SimpleButton from '../SimpleButton/SimpleButton';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleButton from '../SimpleButton';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleBanner.scss';
 export default defineComponent({
     props: {

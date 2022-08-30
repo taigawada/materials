@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue-demi';
 import { DeleteCross, ExclamationMark } from '@simple-education-dev/icons';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleInput.scss';
 export default defineComponent({
     props: {

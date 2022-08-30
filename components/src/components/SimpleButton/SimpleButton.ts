@@ -1,5 +1,5 @@
 import { defineComponent, ref, h, VNode } from 'vue-demi';
-import SimpleSpinner from '../SimpleSpinner/SimpleSpinner';
+import SimpleSpinner from '../SimpleSpinner';
 import './SimpleButton.scss';
 
 export default defineComponent({

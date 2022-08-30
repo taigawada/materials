@@ -1,6 +1,6 @@
 import { defineComponent, ref, PropType, onBeforeUpdate, onUpdated, h, isVue3, VNode, onMounted } from 'vue-demi';
-import SimpleCheckbox from '../SimpleCheckbox/SimpleCheckbox';
-import SimplePopover from '../SimplePopover/SimplePopover';
+import SimpleCheckbox from '../SimpleCheckbox';
+import SimplePopover from '../SimplePopover';
 import './SimpleResourceList.scss';
 interface ItemClickFunc {
     (arg0: number): void;

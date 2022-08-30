@@ -1,7 +1,7 @@
 import { defineComponent, PropType, h, VNode, isVue3 } from 'vue-demi';
 import { ExclamationMark, SelectArrow } from '@simple-education-dev/icons';
-import SimpleStack from '../SimpleStack/SimpleStack';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleStack from '../SimpleStack';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleSelector.scss';
 interface Item {
     value: string;

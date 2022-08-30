@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue-demi';
 import { CloseCross } from '@simple-education-dev/icons';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleTag.scss';
 export default defineComponent({
     setup(_, context) {

@@ -15,6 +15,11 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: () => never[];
         required: false;
     };
+    select: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: false;
+    };
     selectedItems: {
         type: PropType<(string | number)[]>;
         default: () => never[];
@@ -55,6 +60,11 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: () => never[];
         required: false;
     };
+    select: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: false;
+    };
     selectedItems: {
         type: PropType<(string | number)[]>;
         default: () => never[];
@@ -91,6 +101,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     items: {
         id: string | number;
     }[];
+    select: boolean;
     selectedItems: (string | number)[];
     multiActions: Actions[];
     weight: number[];

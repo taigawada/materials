@@ -1,6 +1,6 @@
 import { defineComponent, ref, h, onMounted, VNode } from 'vue-demi';
-import SimpleInput from '../SimpleInput/SimpleInput';
-import SimpleCalender from '../SimpleCalender/SimpleCalender';
+import SimpleInput from '../SimpleInput';
+import SimpleCalender from '../SimpleCalender';
 import './SimpleDatePicker.scss';
 
 export default defineComponent({
