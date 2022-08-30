@@ -15,6 +15,6 @@
     "vueCompilerOptions": {
         "experimentalDisableTemplateSupport": false
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/utils/CancellationToken.js"],
     "exclude": ["node_modules", "src/PlayGround.vue", "src/serve.ts"]
 }

@@ -20,6 +20,11 @@ export default defineComponent({
             default: () => [],
             required: false,
         },
+        select: {
+            type: Boolean,
+            default: true,
+            required: false,
+        },
         selectedItems: {
             type: Array as PropType<(string | number)[]>,
             default: () => [],
@@ -232,23 +237,27 @@ export default defineComponent({
         };
         const headerRowNode = (): VNode =>
             h('tr', { class: [{ simple_resource_list__header_row: true }] }, [
-                h('th', { class: [{ simple_resource_list__header: true }] }, [
-                    h(SimpleCheckbox, {
-                        class: [{ simple_resource_list__checkbox: true }],
-                        indeterminate: indeterminateRef.value,
-                        size: '20px',
-                        value: bulkCheckBox.value,
-                        props: {
-                            indeterminate: indeterminateRef.value,
-                            size: '20px',
-                            value: bulkCheckBox.value,
-                        },
-                        onChange: handleBulkCheckBoxChange,
-                        on: {
-                            change: handleBulkCheckBoxChange,
-                        },
-                    }),
-                ]),
+                /* eslint-disable */
+                props.select
+                    ? h('th', { class: [{ simple_resource_list__header: true }] }, [
+                          h(SimpleCheckbox, {
+                              class: [{ simple_resource_list__checkbox: true }],
+                              indeterminate: indeterminateRef.value,
+                              size: '20px',
+                              value: bulkCheckBox.value,
+                              props: {
+                                  indeterminate: indeterminateRef.value,
+                                  size: '20px',
+                                  value: bulkCheckBox.value,
+                              },
+                              onChange: handleBulkCheckBoxChange,
+                              on: {
+                                  change: handleBulkCheckBoxChange,
+                              },
+                          }),
+                      ])
+                    : undefined,
+                /* eslint-enable */
                 [SelectedHeaderNode()],
             ]);
         const dataRowNode = (): VNode[] =>
@@ -263,25 +272,29 @@ export default defineComponent({
                         },
                     },
                     [
-                        h('td', { class: [{ simple_resource_list__check_column: true }] }, [
-                            // @ts-ignore (todo -> 型エラーの原因探す)
-                            h(SimpleCheckbox, {
-                                key: item.id,
-                                ref: isVue3 ? setItemRef : 'itemCheckBoxes',
-                                refInFor: true,
-                                class: [{ simple_resource_list__checkbox: true }],
-                                value: isSelected(item.id),
-                                size: '20px',
-                                props: {
-                                    value: isSelected(item.id),
-                                    size: '20px',
-                                },
-                                onChange: (bool: boolean) => handleItemCheckedChange(bool, item.id),
-                                on: {
-                                    change: (bool: boolean) => handleItemCheckedChange(bool, item.id),
-                                },
-                            }),
-                        ]),
+                        /* eslint-disable */
+                        props.select
+                            ? h('td', { class: [{ simple_resource_list__check_column: true }] }, [
+                                  // @ts-ignore (todo -> 型エラーの原因探す)
+                                  h(SimpleCheckbox, {
+                                      key: item.id,
+                                      ref: isVue3 ? setItemRef : 'itemCheckBoxes',
+                                      refInFor: true,
+                                      class: [{ simple_resource_list__checkbox: true }],
+                                      value: isSelected(item.id),
+                                      size: '20px',
+                                      props: {
+                                          value: isSelected(item.id),
+                                          size: '20px',
+                                      },
+                                      onChange: (bool: boolean) => handleItemCheckedChange(bool, item.id),
+                                      on: {
+                                          change: (bool: boolean) => handleItemCheckedChange(bool, item.id),
+                                      },
+                                  }),
+                              ])
+                            : undefined,
+                        /* eslint-enable */
                         h(
                             'td',
                             { class: [{ simple_resource_list__slot_data: true }], style: [rowStyles()] },

@@ -1,3 +1,4 @@
+/** @param */
 const dayOfWeekStr = (start: 'monday' | 'sunday' | 0 | 1, index: number) => {
     let shifter = 0;
     if (start === 'monday' || start === 1) {

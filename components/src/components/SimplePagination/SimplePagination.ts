@@ -1,7 +1,8 @@
-import { defineComponent, ref, h } from 'vue-demi';
+import { defineComponent, ref, onMounted, onUpdated, h, isVue3, VNode } from 'vue-demi';
 import { onKeyPressed } from '@vueuse/core';
 import { ArrowLeft, ArrowRight, ThreePointLeader } from '@simple-education-dev/icons';
-import SimpleIcon from '../SimpleIcon/SimpleIcon';
+import SimpleIcon from '../SimpleIcon';
+import SimplePopover from '../SimplePopover';
 import './SimplePagination.scss';
 
 export default defineComponent({
@@ -58,7 +59,77 @@ export default defineComponent({
                 return props.current - 1 + index;
             }
         };
-        const pagesNode = () => {
+        const previousPageActivator = ref<HTMLElement | null>(null);
+        const nextPageActivator = ref<HTMLElement | null>(null);
+        // @ts-ignore
+        const refs = context.refs;
+        onMounted(() => {
+            if (!isVue3) {
+                previousPageActivator.value = refs.previousPageActivator;
+                nextPageActivator.value = refs.nextPageActivator;
+            }
+        });
+        onUpdated(() => {
+            if (!isVue3) {
+                previousPageActivator.value = refs.previousPageActivator;
+                nextPageActivator.value = refs.nextPageActivator;
+            }
+        });
+        const previousButtonHovered = ref(false);
+        const nextButtonHovered = ref(false);
+        let previousHoverTimerId: any;
+        const previousEnter = async () => {
+            previousHoverTimerId = setTimeout(() => {
+                previousButtonHovered.value = true;
+            }, 1000);
+        };
+        const previousLeave = () => {
+            clearTimeout(previousHoverTimerId);
+            previousButtonHovered.value = false;
+        };
+        let nextHoverTimerId: any;
+        const nextEnter = async () => {
+            nextHoverTimerId = setTimeout(() => {
+                nextButtonHovered.value = true;
+            }, 1000);
+        };
+        const nextLeave = () => {
+            clearTimeout(nextHoverTimerId);
+            nextButtonHovered.value = false;
+        };
+        const previousKeyHelpPopover = () => {
+            return h(
+                SimplePopover,
+                {
+                    open: previousButtonHovered.value,
+                    activatorRef: previousPageActivator,
+                    props: {
+                        open: previousButtonHovered.value,
+                        activatorRef: previousPageActivator,
+                    },
+                },
+                isVue3
+                    ? () => [h('div', { class: [{ keyHelpText: true }] }, 'j')]
+                    : [h('div', { class: [{ keyHelpText: true }] }, 'j')]
+            );
+        };
+        const nextKeyHelpPopover = () => {
+            return h(
+                SimplePopover,
+                {
+                    open: nextButtonHovered.value,
+                    activatorRef: nextPageActivator,
+                    props: {
+                        open: nextButtonHovered.value,
+                        activatorRef: nextPageActivator,
+                    },
+                },
+                isVue3
+                    ? () => [h('div', { class: [{ keyHelpText: true }] }, 'k')]
+                    : [h('div', { class: [{ keyHelpText: true }] }, 'k')]
+            );
+        };
+        const pagesNode = (): VNode[] => {
             if (props.length <= 7) {
                 return [...new Array(props.length).keys()].map((pageIndex) => {
                     return h(
@@ -178,37 +249,65 @@ export default defineComponent({
         return () =>
             h('div', { class: [{ simple_pagination__container: true }] }, [
                 h('div', { class: [{ simple_pagination__flex_box: true }] }, [
-                    h(SimpleIcon, {
-                        class: [{ simple_pagination__arrow_icons: true }],
-                        source: ArrowLeft,
-                        size: '14px',
-                        clickable: true,
-                        props: {
-                            source: ArrowLeft,
-                            size: '14px',
-                            clickable: true,
+                    h(
+                        'div',
+                        {
+                            ref: isVue3 ? previousPageActivator : 'previousPageActivator',
+                            style: [{ display: 'inline-flex' }],
                         },
-                        onClick: handlePreviousPage,
-                        on: {
-                            click: handlePreviousPage,
-                        },
-                    }),
+                        [
+                            h(SimpleIcon, {
+                                class: [{ simple_pagination__arrow_icons: true }],
+                                source: ArrowLeft,
+                                size: '14px',
+                                clickable: true,
+                                props: {
+                                    source: ArrowLeft,
+                                    size: '14px',
+                                    clickable: true,
+                                },
+                                onClick: handlePreviousPage,
+                                onMouseenter: previousEnter,
+                                onMouseleave: previousLeave,
+                                on: {
+                                    click: handlePreviousPage,
+                                    mouseenter: previousEnter,
+                                    mouseleave: previousLeave,
+                                },
+                            }),
+                            previousKeyHelpPopover(),
+                        ]
+                    ),
                     ...pagesNode(),
-                    h(SimpleIcon, {
-                        class: [{ simple_pagination__arrow_icons: true }],
-                        source: ArrowRight,
-                        size: '14px',
-                        clickable: true,
-                        props: {
-                            source: ArrowRight,
-                            size: '14px',
-                            clickable: true,
+                    h(
+                        'div',
+                        {
+                            ref: isVue3 ? nextPageActivator : 'nextPageActivator',
+                            style: [{ display: 'inline-flex' }],
                         },
-                        onClick: handleNextPage,
-                        on: {
-                            click: handleNextPage,
-                        },
-                    }),
+                        [
+                            h(SimpleIcon, {
+                                class: [{ simple_pagination__arrow_icons: true }],
+                                source: ArrowRight,
+                                size: '14px',
+                                clickable: true,
+                                props: {
+                                    source: ArrowRight,
+                                    size: '14px',
+                                    clickable: true,
+                                },
+                                onClick: handleNextPage,
+                                onMouseenter: nextEnter,
+                                onMouseleave: nextLeave,
+                                on: {
+                                    click: handleNextPage,
+                                    mouseenter: nextEnter,
+                                    mouseleave: nextLeave,
+                                },
+                            }),
+                            nextKeyHelpPopover(),
+                        ]
+                    ),
                 ]),
             ]);
     },

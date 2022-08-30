@@ -45,7 +45,7 @@ export default defineComponent({
                 case 'center':
                     return 'center';
                 case 'right':
-                    return 'flex-end';
+                    return 'end';
                 case 'spaceBetween':
                     return 'space-between';
                 case 'spaceAround':

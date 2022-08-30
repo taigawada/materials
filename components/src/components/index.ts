@@ -21,3 +21,4 @@ export * from './SimpleResourceList';
 export * from './ResourceItem';
 export * from './SimplePagination';
 export * from './SimpleIcon';
+export * from './SimpleSkelton';

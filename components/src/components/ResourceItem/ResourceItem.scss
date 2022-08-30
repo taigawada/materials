@@ -5,6 +5,7 @@
     align-items: center;
     grid-template-rows: var(--child-item-height);
     grid-template-columns: var(--child-item-weights);
+    justify-self: var(--item-distribution);
 }
 .resource_item__base div {
     font-size: $font-size-6;

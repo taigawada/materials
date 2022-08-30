@@ -1,4 +1,4 @@
-import { defineComponent, h, isVue3 } from 'vue-demi';
+import { defineComponent, h, isVue3, PropType } from 'vue-demi';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
 import SimpleStack from '../SimpleStack/SimpleStack';
 import SimpleIcon from '../SimpleIcon/SimpleIcon';
@@ -13,10 +13,26 @@ export default defineComponent({
             type: Boolean,
             required: false,
         },
+        distribution: {
+            type: String as PropType<'left' | 'center' | 'right'>,
+            default: 'center',
+            required: false,
+        },
     },
     setup(props, context) {
         const handleSortClick = () => {
             context.emit('sort', !props.asc);
+        };
+
+        const justifySelf = () => {
+            switch (props.distribution) {
+                case 'left':
+                    return 'start';
+                case 'center':
+                    return 'normal';
+                case 'right':
+                    return 'end';
+            }
         };
         const sortIcons = (style: { spacing: object }) => {
             return h(SimpleIcon, {
@@ -62,6 +78,9 @@ export default defineComponent({
                 return h('div', context.slots.default ? context.slots.default() : 'header');
             }
         };
-        return () => h('div', { class: [{ resource_item__child: true }] }, [childItemNode()]);
+        return () =>
+            h('div', { class: [{ resource_item__child: true }], style: [{ '--item-distribution': justifySelf() }] }, [
+                childItemNode(),
+            ]);
     },
 });

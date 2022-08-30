@@ -1,0 +1,38 @@
+@use 'globalStyleSheet' as *;
+$skelton-base-color: rgb(245, 245, 245);
+$skelton-highlight-color: rgba(255, 255, 255, 1);
+.simple_skelton__base {
+    position: relative;
+    width: 90%;
+    height: 16px;
+    overflow: hidden;
+    margin: 0 auto;
+    border-radius: $border-radius-1;
+    z-index: 1;
+}
+.simple_skelton__background {
+    background: linear-gradient(
+        -45deg,
+        $skelton-base-color,
+        $skelton-base-color calc(50% - 20px),
+        $skelton-highlight-color 50%,
+        $skelton-base-color calc(50% + 20px),
+        $skelton-base-color
+    );
+    width: 140%;
+    transform: translateY(0);
+    animation: GradientAnimation 2.2s 0.5s infinite ease-in reverse;
+}
+.simple_skelton__background::before {
+    content: '';
+    padding-top: 100%;
+    display: block;
+}
+@keyframes GradientAnimation {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(calc(-100% + 16px));
+    }
+}

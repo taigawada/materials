@@ -2,8 +2,6 @@
     <div id="app">
         <SimpleTabs :tabs="tabs" :selected="tabSelected" @change="handleTabSelect" />
         <h1>Playground</h1>
-        <p>buttons</p>
-        <SimpleButton primary :disabled="disabled" :loading="loading" @click="handleButtonClick"> ボタン </SimpleButton>
         <p>Actions</p>
         <SimpleActions :open="actionsOpen" :actions="actions" @click:activator="actionsOpenToggle" @close="onClose">
             その他の操作
@@ -50,17 +48,20 @@
             </div>
         </SimpleCard>
         <p>Resource List</p>
+        <p>buttons</p>
+        <SimpleButton primary :disabled="disabled" :loading="loading" @click="handleButtonClick"> ボタン </SimpleButton>
+        <div style="height: 20px"></div>
         <div style="width: 40%; margin: 0 auto">
             <SimpleResourceList
                 :items="resourceItems"
-                select
+                :select="true"
                 :mainAction="{
                     label: '選択解除',
                     onAction: handleCardOnMainAction,
                 }"
                 :multiActions="actions"
                 :selectedItems="resourceListSelected"
-                :weight="[1, 1]"
+                :weight="[4, 4, 1]"
                 @change="handleResourceListChange"
             >
                 <template #header>
@@ -68,8 +69,15 @@
                     <ResourceItem>name</ResourceItem>
                 </template>
                 <template #data="render">
-                    <ResourceItem>{{ render.item.id }}</ResourceItem>
-                    <ResourceItem>{{ render.item.name }}</ResourceItem>
+                    <ResourceItem>
+                        <component :is="loading ? 'SimpleSkelton' : 'span'">{{ render.item.id }}</component>
+                    </ResourceItem>
+                    <ResourceItem>
+                        <component :is="loading ? 'SimpleSkelton' : 'span'">{{ render.item.name }}</component>
+                    </ResourceItem>
+                    <ResourceItem distribution="right">
+                        <SimpleIcon :source="ThreePointLeader" clickable @click.stop="handleNext"></SimpleIcon>
+                    </ResourceItem>
                 </template>
                 <template #pagination>
                     <SimplePagination
@@ -209,6 +217,10 @@ import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTi
 import SimpleResourceList from './components/SimpleResourceList/SimpleResourceList';
 import ResourceItem from './components/ResourceItem/ResourceItem';
 import SimplePagination from './components/SimplePagination/SimplePagination';
+import SimpleSkelton from './components/SimpleSkelton/SimpleSkelton';
+import SimpleIcon from './components/SimpleIcon/SimpleIcon';
+
+import { ThreePointLeader } from '@simple-education-dev/icons';
 
 import { weekBoolean, monthBoolean } from './types/types';
 import { sortItems } from './utils/utils';
@@ -242,6 +254,8 @@ export default defineComponent({
         SimpleTimePicker,
         SimpleDatePicker,
         SimpleDateTimePicker,
+        SimpleSkelton,
+        SimpleIcon,
     },
     setup() {
         // SimpleButton
@@ -414,7 +428,7 @@ export default defineComponent({
             resourceListSelected.value = newArray;
         };
         const idOrder = ref(true);
-        const handleResourceSortById = (order) => {
+        const handleResourceSortById = (order: boolean) => {
             resourceItems.value.sort(sortItems('id', order ? 'asc' : 'desc'));
             idOrder.value = order;
         };
@@ -484,6 +498,7 @@ export default defineComponent({
             handleDateChange,
             datetimeInputValue,
             handleDatetimeChange,
+            ThreePointLeader,
         };
     },
 });

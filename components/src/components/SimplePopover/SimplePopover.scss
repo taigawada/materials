@@ -13,10 +13,10 @@
 }
 .simple_popover__popover::before {
     content: '';
-    border: 10px solid transparent;
-    border-bottom: 10px solid $surface;
+    border: 5px solid transparent;
+    border-bottom: 5px solid $surface;
     position: absolute;
-    top: -20px;
+    top: -10px;
     left: 50%;
     transform: translateX(-50%);
 }
