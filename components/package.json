@@ -28,7 +28,7 @@
     "author": "TaigaWada",
     "license": "UNLICENSED",
     "dependencies": {
-        "@simple-education-dev/icons": "^0.1.8",
+        "@simple-education-dev/icons": "^0.1.9",
         "@simple-education-dev/tokens": "^0.1.4",
         "@vueuse/core": "^9.1.0",
         "date-fns": "^2.29.1",

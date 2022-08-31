@@ -10,11 +10,11 @@
         <SimpleCard
             width="50%"
             :mainAction="{
-                text: '追加',
+                label: '追加',
                 onAction: handleCardOnMainAction,
             }"
             :subAction="{
-                text: 'キャンセル',
+                label: 'キャンセル',
             }"
             @subAction="handleDestroy"
         >
@@ -49,7 +49,9 @@
         </SimpleCard>
         <p>Resource List</p>
         <p>buttons</p>
-        <SimpleButton primary :disabled="disabled" :loading="loading" @click="handleButtonClick"> ボタン </SimpleButton>
+        <SimpleButton normal fill :disabled="disabled" :loading="loading" @click="handleButtonClick">
+            ボタン
+        </SimpleButton>
         <div style="height: 20px"></div>
         <div style="width: 40%; margin: 0 auto">
             <SimpleResourceList
@@ -280,7 +282,6 @@ export default defineComponent({
         ];
         const tabSelected = ref(0);
         const handleTabSelect = (select: number) => {
-            console.log('select');
             tabSelected.value = select;
         };
         // SimpleActions

@@ -118,7 +118,11 @@ export default defineComponent({
             }
         };
         const selectBoxElements = () => [
-            h('option', { value: '', domProps: { hidden: true, value: '' } }, props.initialValue),
+            h(
+                'option',
+                { value: '', domProps: { hidden: true, value: '', disabled: true }, disabled: true },
+                props.initialValue
+            ),
             ...props.items.map((item) => {
                 return h('option', { key: item.value, value: item.value, domProps: { value: item.value } }, item.label);
             }),

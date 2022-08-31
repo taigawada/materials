@@ -7,7 +7,8 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
     buttonLabel: {
         type: StringConstructor;
-        required: true;
+        default: undefined;
+        required: false;
     };
 }, () => import("vue-demi").VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
     [key: string]: any;
@@ -19,10 +20,12 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
     buttonLabel: {
         type: StringConstructor;
-        required: true;
+        default: undefined;
+        required: false;
     };
 }>>, {
     title: string;
+    buttonLabel: string;
 }>;
 export default _default;
 //# sourceMappingURL=SimpleBanner.d.ts.map

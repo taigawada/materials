@@ -1,7 +1,7 @@
 import { PropType } from 'vue-demi';
 import './SimpleCard.scss';
 interface Action {
-    text: string;
+    label: string;
     disabled?: boolean;
     loading?: boolean;
     onAction?: () => unknown;
@@ -15,7 +15,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     mainAction: {
         type: PropType<Action>;
         default: () => {
-            text: string;
+            label: string;
             disabled: boolean;
             loading: boolean;
         };
@@ -24,7 +24,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     subAction: {
         type: PropType<Action>;
         default: () => {
-            text: string;
+            label: string;
             disabled: boolean;
             loading: boolean;
         };
@@ -41,7 +41,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     mainAction: {
         type: PropType<Action>;
         default: () => {
-            text: string;
+            label: string;
             disabled: boolean;
             loading: boolean;
         };
@@ -50,7 +50,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     subAction: {
         type: PropType<Action>;
         default: () => {
-            text: string;
+            label: string;
             disabled: boolean;
             loading: boolean;
         };

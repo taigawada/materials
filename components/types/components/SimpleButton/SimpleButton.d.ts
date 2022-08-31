@@ -30,6 +30,10 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: BooleanConstructor;
         required: false;
     };
+    fill: {
+        type: BooleanConstructor;
+        required: false;
+    };
     size: {
         type: NumberConstructor;
         default: number;
@@ -67,6 +71,10 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: BooleanConstructor;
         required: false;
     };
+    fill: {
+        type: BooleanConstructor;
+        required: false;
+    };
     size: {
         type: NumberConstructor;
         default: number;
@@ -74,6 +82,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
 }>>, {
     normal: boolean;
+    fill: boolean;
     size: number;
     primary: boolean;
     plain: boolean;

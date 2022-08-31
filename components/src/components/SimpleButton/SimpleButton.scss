@@ -10,6 +10,7 @@
     background: $text-white;
     background: $primary-base;
     border-radius: $border-radius-1;
+    box-sizing: border-box;
     text-decoration: none;
     margin-bottom: $space-05;
     padding-top: var(--props-size);
@@ -24,10 +25,14 @@
     padding-bottom: calc(var(--props-size) - 2px);
 }
 .simple_button__text_prime {
+    font-size: $font-size-6;
     padding: $space-4 $space-4;
     color: $text-white;
     text-decoration: none;
     pointer-events: none;
+}
+.simple_button__text_prime[fill='true'] {
+    padding: $space-4 calc(50% - $font-size-6 * var(--slot-text-length));
 }
 .simple_button__base_normal {
     color: $normal;
@@ -39,10 +44,14 @@
     cursor: pointer;
 }
 .simple_button__text_normal {
+    font-size: $font-size-6;
     padding: $space-4 $space-4;
     color: $text;
     text-decoration: none;
     pointer-events: none;
+}
+.simple_button__text_normal[fill='true'] {
+    padding: $space-4 calc(50% - $font-size-6 * var(--slot-text-length));
 }
 .simple_button__base_plain {
     cursor: pointer;
@@ -89,10 +98,16 @@
     pointer-events: none;
 }
 .simple_button__disabled_text {
-    padding: 1em 1em;
+    padding: $space-4 $space-4;
     color: $text;
     text-decoration: none;
     pointer-events: none;
+}
+.simple_button__disabled_text[fill='true'] {
+    padding: $space-4 calc(50% - $font-size-6 * var(--slot-text-length));
+}
+.simple_button__disabled_text_primary {
+    color: $surface;
 }
 .simple_button__text_loading {
     opacity: 0;
@@ -100,6 +115,9 @@
     color: $text-white;
     text-decoration: none;
     pointer-events: none;
+}
+.simple_button__text_loading[fill='true'] {
+    padding: $space-4 calc(50% - $font-size-6 * var(--slot-text-length));
 }
 .simple_button__spinner {
     position: absolute;

@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue-demi';
+import { defineComponent, h, isVue3 } from 'vue-demi';
 import { ExclamationMark } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton';
 import SimpleIcon from '../SimpleIcon';
@@ -12,7 +12,8 @@ export default defineComponent({
         },
         buttonLabel: {
             type: String,
-            required: true,
+            default: undefined,
+            required: false,
         },
     },
     setup(props, context) {
@@ -21,13 +22,17 @@ export default defineComponent({
         };
         const buttonNode = () => {
             if (props.buttonLabel !== undefined) {
-                return h(SimpleButton, {
-                    class: [{ simple_banner__button: true }],
-                    plain: true,
-                    props: { plain: true },
-                    onClick: handleClick,
-                    on: { click: handleClick },
-                });
+                return h(
+                    SimpleButton,
+                    {
+                        class: [{ simple_banner__button: true }],
+                        plain: true,
+                        props: { plain: true },
+                        onClick: handleClick,
+                        on: { click: handleClick },
+                    },
+                    isVue3 ? () => [props.buttonLabel] : [props.buttonLabel]
+                );
             }
         };
         return () =>

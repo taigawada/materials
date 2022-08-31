@@ -11,6 +11,9 @@ import PaginationEnd from "./src/icons/PaginationEnd.svg?raw";
 import SelectArrow from "./src/icons/SelectArrow.svg?raw";
 import SearchGlass from "./src/icons/SearchGlass.svg?raw";
 import ThreePointLeader from "./src/icons/ThreePointLeader.svg?raw";
+import TextColor from "./src/icons/TextColor.svg?raw";
+import LinkChain from "./src/icons/LinkChain.svg?raw";
+import LinkUnChain from "./src/icons/LinkUnChain.svg?raw";
 
 export {
     ArrowDown,
@@ -26,4 +29,7 @@ export {
     SelectArrow,
     SearchGlass,
     ThreePointLeader,
+    TextColor,
+    LinkChain,
+    LinkUnChain,
 };

@@ -3,7 +3,7 @@ import SimpleButton from '../SimpleButton';
 import './SimpleCard.scss';
 
 interface Action {
-    text: string;
+    label: string;
     disabled?: boolean;
     loading?: boolean;
     onAction?: () => unknown;
@@ -18,7 +18,7 @@ export default defineComponent({
         mainAction: {
             type: Object as PropType<Action>,
             default: () => ({
-                text: '',
+                label: '',
                 disabled: false,
                 loading: false,
             }),
@@ -27,7 +27,7 @@ export default defineComponent({
         subAction: {
             type: Object as PropType<Action>,
             default: () => ({
-                text: '',
+                label: '',
                 disabled: false,
                 loading: false,
             }),
@@ -65,7 +65,7 @@ export default defineComponent({
                         click: hundleMainActionClick,
                     },
                 },
-                isVue3 ? () => props.mainAction.text : props.mainAction.text
+                isVue3 ? () => props.mainAction.label : props.mainAction.label
             );
         const subActionNode = () =>
             h(
@@ -80,12 +80,12 @@ export default defineComponent({
                         click: hundleSubActionClick,
                     },
                 },
-                isVue3 ? () => props.subAction.text : props.subAction.text
+                isVue3 ? () => props.subAction.label : props.subAction.label
             );
         const actionsNode = () =>
             h('div', { class: [{ simple_card__actions: true }] }, [
-                props.subAction.text.length > 0 ? subActionNode() : null,
-                props.subAction.text.length > 0 ? mainActionNode() : null,
+                props.subAction.label.length > 0 ? subActionNode() : null,
+                props.subAction.label.length > 0 ? mainActionNode() : null,
             ]);
         return () =>
             h('div', { class: [{ simple_card__base: true }], style: [cardWidth()] }, [
