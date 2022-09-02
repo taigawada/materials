@@ -1,7 +1,8 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .simple_action__base {
     color: #2c3e50;
     display: inline-flex;
+    z-index: 101;
 }
 .simple_action__activator {
     display: inline-flex;

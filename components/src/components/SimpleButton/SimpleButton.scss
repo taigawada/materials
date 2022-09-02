@@ -1,4 +1,4 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .simple_button__container {
     display: inline;
     color: #2c3e50;
@@ -7,22 +7,12 @@
 }
 .simple_button__base_prime {
     position: relative;
-    background: $text-white;
+    border-radius: calc(var(--props-size) * 2);
     background: $primary-base;
-    border-radius: $border-radius-1;
-    box-sizing: border-box;
     text-decoration: none;
-    margin-bottom: $space-05;
     padding-top: var(--props-size);
     padding-bottom: var(--props-size);
-}
-.simple_button__wrapper_prime {
-    position: relative;
-    background: $primary;
-    border-radius: $border-radius-1;
-    text-decoration: none;
-    padding-top: var(--props-size);
-    padding-bottom: calc(var(--props-size) - 2px);
+    box-shadow: $box-shadow-1;
 }
 .simple_button__text_prime {
     font-size: $font-size-6;
@@ -36,11 +26,12 @@
 }
 .simple_button__base_normal {
     color: $normal;
-    border: solid 1px $border;
-    border-radius: $border-radius-1;
+    background: $surface;
+    border-radius: calc(var(--props-size) * 2);
     text-decoration: none;
-    padding-top: calc(var(--props-size) - 1px);
-    padding-bottom: calc(var(--props-size) - 1px);
+    padding-top: var(--props-size);
+    padding-bottom: var(--props-size);
+    box-shadow: $box-shadow-1;
     cursor: pointer;
 }
 .simple_button__text_normal {
@@ -77,21 +68,22 @@
 .simple_button__disable_prime {
     position: relative;
     background: $primary-disabled;
-    border-radius: $border-radius-1;
-    text-decoration: none;
     pointer-events: none;
-    padding-top: calc(var(--props-size) + 1px);
-    padding-bottom: calc(var(--props-size) + 1px);
+    border-radius: calc(var(--props-size) * 2);
+    text-decoration: none;
+    padding-top: var(--props-size);
+    padding-bottom: var(--props-size);
+    box-shadow: $box-shadow-1;
 }
 .simple_button__disable_normal {
     position: relative;
-    background: #dedede;
-    border-radius: $border-radius-1;
-    text-decoration: none;
+    background: $normal-disabled;
     pointer-events: none;
-    padding-top: calc(var(--props-size) + 1px);
-    padding-bottom: calc(var(--props-size) + 1px);
-    opacity: 0.6;
+    border-radius: calc(var(--props-size) * 2);
+    text-decoration: none;
+    padding-top: var(--props-size);
+    padding-bottom: var(--props-size);
+    box-shadow: $box-shadow-1;
 }
 .simple_button__disable_plain {
     color: $plain-disabled;

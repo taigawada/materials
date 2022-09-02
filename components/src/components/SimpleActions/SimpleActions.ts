@@ -1,7 +1,8 @@
-import { defineComponent, ref, onMounted, PropType, h, isVue3, onUpdated } from 'vue-demi';
+import { defineComponent, ref, PropType, h, isVue3, onUpdated, VNode } from 'vue-demi';
 import { ArrowDown } from '@simple-education-dev/icons';
 import SimplePopover from '../SimplePopover';
-import SimpleIcon from '../SimpleIcon';
+import SimpleButton from '../SimpleButton';
+import { useElementBounding } from '@vueuse/core';
 import './SimpleActions.scss';
 interface Actions {
     label: string;
@@ -17,8 +18,25 @@ export default defineComponent({
             type: Array as PropType<Actions[]>,
             required: true,
         },
+        primary: {
+            type: Boolean,
+            default: false,
+            required: false,
+        },
+        normal: {
+            type: Boolean,
+            default: true,
+            required: false,
+        },
+        plain: {
+            type: Boolean,
+            default: false,
+            required: false,
+        },
     },
     setup(props, context) {
+        const activatorRef = ref<HTMLImageElement | null>(null);
+        const activatorRect = useElementBounding(activatorRef);
         // @ts-ignore
         const refs = context.refs;
         const onClick = () => {
@@ -27,26 +45,7 @@ export default defineComponent({
         const handleClose = () => {
             context.emit('close');
         };
-        const isEntered = ref(false);
-        const mousedown = (): void => {
-            isEntered.value = true;
-        };
-        const mouseup = (): void => {
-            isEntered.value = false;
-        };
-        const mouseenter = (): void => {
-            isEntered.value = true;
-        };
-        const mouseleave = (): void => {
-            isEntered.value = false;
-        };
-        const activatorRef = ref<HTMLImageElement | null>(null);
         // Vue2環境のみ、update時にrefを更新
-        onMounted(() => {
-            if (!isVue3) {
-                activatorRef.value = refs.activatorRef;
-            }
-        });
         onUpdated(() => {
             if (!isVue3) {
                 activatorRef.value = refs.activatorRef;
@@ -64,15 +63,15 @@ export default defineComponent({
                 action.label
             );
         });
-        const popover = () => {
+        const popover = (): VNode => {
             return h(
                 SimplePopover,
                 {
                     open: props.open,
-                    activatorRef: activatorRef,
+                    activatorRect: activatorRect,
                     props: {
                         open: props.open,
-                        activatorRef: activatorRef,
+                        activatorRect: activatorRect,
                     },
                     onClose: handleClose,
                     on: {
@@ -83,32 +82,26 @@ export default defineComponent({
             );
         };
         return () =>
-            h('div', { class: [{ simple_action__base: true }], ref: isVue3 ? activatorRef : 'activatorRef' }, [
-                h(
-                    'a',
-                    {
-                        class: [{ simple_action__activator: true, entered: isEntered.value }],
-                        on: {
-                            click: onClick,
-                            mouseenter: mouseenter,
-                            mouseleave: mouseleave,
-                            mousedown: mousedown,
-                            mouseup: mouseup,
+            h('div', [
+                h('div', { class: [{ simple_action__base: true }], ref: isVue3 ? activatorRef : 'activatorRef' }, [
+                    h(
+                        SimpleButton,
+                        {
+                            props: { normal: true, icon: ArrowDown },
+                            normal: true,
+                            icon: ArrowDown,
+                            onClick: onClick,
+                            on: {
+                                click: onClick,
+                            },
                         },
-                        onClick: onClick,
-                        onMouseenter: mouseenter,
-                        onMouseleave: mouseleave,
-                        onMousedown: mousedown,
-                        onMouseup: mouseup,
-                    },
-                    [
-                        h('a', { class: { simple_action__activator_text: true } }, [
-                            context.slots.default ? context.slots.default() : 'Actions',
-                        ]),
-                        h(SimpleIcon, { source: ArrowDown, size: '12px', props: { source: ArrowDown, size: '12px' } }),
-                    ]
-                ),
-                popover(),
+                        // prettier-ignore
+                        isVue3
+                            ? () => context.slots.default ? context.slots.default() : 'Actions'
+                            : (context.slots.default ? context.slots.default() : 'Actions')
+                    ),
+                    popover(),
+                ]),
             ]);
     },
 });

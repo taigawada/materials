@@ -1,4 +1,4 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .simple_combobox__float_box {
     color: #2c3e50;
     display: block;
@@ -9,7 +9,7 @@
     height: var(--float-box-height);
     border-radius: $border-radius-1;
     border: 1px solid $surface;
-    box-shadow: $boxshadow;
+    box-shadow: $box-shadow-1;
     overflow: scroll;
     text-align: left;
 }

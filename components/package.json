@@ -28,8 +28,8 @@
     "author": "TaigaWada",
     "license": "UNLICENSED",
     "dependencies": {
-        "@simple-education-dev/icons": "^0.1.9",
-        "@simple-education-dev/tokens": "^0.1.4",
+        "@simple-education-dev/icons": "^0.2.0",
+        "@simple-education-dev/tokens": "^0.1.5",
         "@vueuse/core": "^9.1.0",
         "date-fns": "^2.29.1",
         "vue-demi": "^0.13.7"

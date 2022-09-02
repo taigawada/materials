@@ -1,4 +1,4 @@
-import { VNode } from 'vue-demi';
+import { PropType, VNode } from 'vue-demi';
 import './SimpleButton.scss';
 declare const _default: import("vue-demi").DefineComponent<{
     primary: {
@@ -37,6 +37,21 @@ declare const _default: import("vue-demi").DefineComponent<{
     size: {
         type: NumberConstructor;
         default: number;
+        required: false;
+    };
+    icon: {
+        type: StringConstructor;
+        default: undefined;
+        required: false;
+    };
+    textColor: {
+        type: StringConstructor;
+        default: undefined;
+        required: false;
+    };
+    iconSide: {
+        type: PropType<"left" | "right">;
+        default: string;
         required: false;
     };
 }, () => VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
@@ -80,6 +95,21 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: number;
         required: false;
     };
+    icon: {
+        type: StringConstructor;
+        default: undefined;
+        required: false;
+    };
+    textColor: {
+        type: StringConstructor;
+        default: undefined;
+        required: false;
+    };
+    iconSide: {
+        type: PropType<"left" | "right">;
+        default: string;
+        required: false;
+    };
 }>>, {
     normal: boolean;
     fill: boolean;
@@ -90,6 +120,9 @@ declare const _default: import("vue-demi").DefineComponent<{
     loading: boolean;
     url: string;
     external: boolean;
+    icon: string;
+    textColor: string;
+    iconSide: "left" | "right";
 }>;
 export default _default;
 //# sourceMappingURL=SimpleButton.d.ts.map

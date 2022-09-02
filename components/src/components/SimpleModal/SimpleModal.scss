@@ -1,6 +1,6 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .simple_modal__overlay {
-    color: #2c3e50;
+    color: $surface;
     z-index: 100;
     display: block;
     position: fixed;
@@ -8,7 +8,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $modal-background;
+    background: rgba(115, 115, 115, 0.1); //$modal-background;
+    backdrop-filter: blur(5px);
+    transition: filter 2s;
 }
 .simple_modal__card {
     position: fixed;
@@ -16,9 +18,9 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    background: #ffffff;
+    background: $surface;
     border-radius: 10px;
-    box-shadow: 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: $box-shadow-1;
 }
 .simple_modal__card_header {
     display: flex;

@@ -1,4 +1,4 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .simple_card__base {
     color: #2c3e50;
     display: inline-block;
@@ -6,12 +6,10 @@
     width: var(--card-width);
     background: $surface;
     border-radius: $border-radius-2;
-    padding: $space-4 $space-10;
-    box-shadow: $boxshadow;
+    box-shadow: $box-shadow-1;
 }
 .simple_card__actions {
-    margin-top: $space-8;
-    margin-bottom: $space-3;
+    margin: $space-2 $space-10 $space-10 $space-10;
     display: flex;
     justify-content: flex-end;
 }

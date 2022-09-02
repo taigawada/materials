@@ -1,4 +1,4 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .simple_selector__base {
     color: #2c3e50;
     display: inline-block;
@@ -37,14 +37,14 @@
     width: 17px;
     height: 17px;
     border-radius: 50%;
-    background: $surface;
-    border: 0.125rem solid $border-weak;
+    background: rgba(255, 255, 255, 1);
+    border: 0.075rem solid $border-weak;
     transition: border 0.2s;
     cursor: pointer;
 }
 .radio_circle__selected {
-    background: $surface;
-    border: 0.125rem solid $selected;
+    background: rgba(255, 255, 255, 1);
+    border: 0.075rem solid $selected;
 }
 .radio_circle__inside {
     position: absolute;
@@ -70,7 +70,7 @@
     box-sizing: border-box;
     border: 1px solid $border-weak;
     border-radius: 5px;
-    background: $surface;
+    background: rgba(255, 255, 255, 1);
 }
 .simple_selector__select_box:focus {
     border: 1px solid $theme-color;

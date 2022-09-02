@@ -1,6 +1,7 @@
 import { defineComponent, ref, PropType, onBeforeUpdate, onUpdated, h, isVue3, VNode, onMounted } from 'vue-demi';
 import SimpleCheckbox from '../SimpleCheckbox';
 import SimplePopover from '../SimplePopover';
+import { useElementBounding } from '@vueuse/core';
 import './SimpleResourceList.scss';
 interface ItemClickFunc {
     (arg0: number): void;
@@ -107,6 +108,7 @@ export default defineComponent({
             context.emit('change', newSelectedItems);
         };
         const bulkPopoverOpen = ref(false);
+        const activatorRect = useElementBounding(bulkMultiActionActivator);
         const handleBulkButtonClick = () => {
             bulkPopoverOpen.value = !bulkPopoverOpen.value;
         };
@@ -185,10 +187,10 @@ export default defineComponent({
                         SimplePopover,
                         {
                             open: bulkPopoverOpen.value,
-                            activatorRef: bulkMultiActionActivator,
+                            activatorRect: activatorRect,
                             props: {
                                 open: bulkPopoverOpen.value,
-                                activatorRef: bulkMultiActionActivator,
+                                activatorRect: activatorRect,
                                 translateX: '-45px',
                             },
                             onClose: handleBulkButtonPopoverClose,

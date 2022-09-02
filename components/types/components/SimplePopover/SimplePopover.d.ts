@@ -1,13 +1,25 @@
 import { PropType, Ref } from 'vue-demi';
 import './SimplePopover.scss';
+interface ActivatorRect {
+    height: Ref<number>;
+    bottom: Ref<number>;
+    left: Ref<number>;
+    right: Ref<number>;
+    top: Ref<number>;
+    width: Ref<number>;
+    x: Ref<number>;
+    y: Ref<number>;
+    update: () => void;
+}
 declare const _default: import("vue-demi").DefineComponent<{
     open: {
         type: BooleanConstructor;
         required: true;
     };
-    activatorRef: {
-        type: PropType<Ref<HTMLElement | null>>;
-        required: true;
+    activatorRect: {
+        type: PropType<ActivatorRect | null>;
+        default: null;
+        required: false;
     };
     translateX: {
         type: StringConstructor;
@@ -26,9 +38,10 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: BooleanConstructor;
         required: true;
     };
-    activatorRef: {
-        type: PropType<Ref<HTMLElement | null>>;
-        required: true;
+    activatorRect: {
+        type: PropType<ActivatorRect | null>;
+        default: null;
+        required: false;
     };
     translateX: {
         type: StringConstructor;
@@ -41,6 +54,7 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
 }>>, {
+    activatorRect: ActivatorRect | null;
     translateX: string;
     translateY: string;
 }>;

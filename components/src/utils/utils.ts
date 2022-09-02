@@ -36,7 +36,7 @@ function sortItems(key: string, order: 'asc' | 'desc' = 'asc', escape: string | 
         } else if (elementA < elementB) {
             comparison = -1;
         }
-        return order == 'desc' ? comparison * -1 : comparison;
+        return order === 'desc' ? comparison * -1 : comparison;
     };
 }
 export { dayOfWeekStr, sortItems };

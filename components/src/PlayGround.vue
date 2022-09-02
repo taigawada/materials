@@ -18,38 +18,48 @@
             }"
             @subAction="handleDestroy"
         >
-            <SimpleInput
-                :value="fieldvalue"
-                caption="生徒氏名"
-                placeholder="名前を入力してください"
-                remove
-                @change:value="handleFieldChange"
-                @remove="handleTextFieldRemove"
-            />
-            <div style="text-align: left">
-                <SimpleSelector
-                    :value="selectRef"
-                    :items="selectItems"
-                    caption="クラスを選択"
-                    @change:select="handleSelectChange"
+            <div style="padding: 30px">
+                <SimpleInput
+                    :value="fieldvalue"
+                    caption="生徒氏名"
+                    placeholder="名前を入力してください"
+                    remove
+                    @change:value="handleFieldChange"
+                    @remove="handleTextFieldRemove"
                 />
-            </div>
-            <div style="text-align: left">
-                <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
-            </div>
-            <div style="text-align: left">
-                <SimpleSelector
-                    radio
-                    :value="selectRef"
-                    :items="selectItems"
-                    caption="クラスを選択"
-                    @change:select="handleSelectChange"
-                />
+                <div style="text-align: left">
+                    <SimpleSelector
+                        :value="selectRef"
+                        :items="selectItems"
+                        caption="クラスを選択"
+                        @change:select="handleSelectChange"
+                    />
+                </div>
+                <div style="text-align: left">
+                    <SimpleCheckbox label="生徒の端末に即反映する" :value="checked" @change="handleChecked" />
+                </div>
+                <div style="text-align: left">
+                    <SimpleSelector
+                        radio
+                        :value="selectRef"
+                        :items="selectItems"
+                        caption="クラスを選択"
+                        @change:select="handleSelectChange"
+                    />
+                </div>
             </div>
         </SimpleCard>
         <p>Resource List</p>
         <p>buttons</p>
-        <SimpleButton normal fill :disabled="disabled" :loading="loading" @click="handleButtonClick">
+        <SimpleButton
+            normal
+            fill
+            iconSide="left"
+            :icon="ArrowDown"
+            :disabled="disabled"
+            :loading="loading"
+            @click="handleButtonClick"
+        >
             ボタン
         </SimpleButton>
         <div style="height: 20px"></div>
@@ -222,7 +232,7 @@ import SimplePagination from './components/SimplePagination/SimplePagination';
 import SimpleSkelton from './components/SimpleSkelton/SimpleSkelton';
 import SimpleIcon from './components/SimpleIcon/SimpleIcon';
 
-import { ThreePointLeader } from '@simple-education-dev/icons';
+import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
 
 import { weekBoolean, monthBoolean } from './types/types';
 import { sortItems } from './utils/utils';
@@ -500,13 +510,14 @@ export default defineComponent({
             datetimeInputValue,
             handleDatetimeChange,
             ThreePointLeader,
+            ArrowDown,
         };
     },
 });
 </script>
 <style>
 body {
-    background: #f4f4f4;
+    background: #f4f8f9;
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

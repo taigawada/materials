@@ -73,8 +73,8 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
 }>>, {
-    selected: string | number;
     width: string;
+    selected: string | number;
     suffix: string;
     itemContentHeight: number;
     distanceToDisplay: number;

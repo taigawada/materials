@@ -1,18 +1,18 @@
-import {
-    computed,
-    defineComponent,
-    ref,
-    h,
-    PropType,
-    Ref,
-    watchEffect,
-    isVue3,
-    toRefs,
-    watch,
-    onMounted,
-} from 'vue-demi';
-import { onClickOutside } from '@vueuse/core';
+import { computed, defineComponent, ref, h, PropType, watchEffect, isVue3, Ref, onMounted } from 'vue-demi';
+import { onClickOutside, useElementBounding } from '@vueuse/core';
 import './SimplePopover.scss';
+
+interface ActivatorRect {
+    height: Ref<number>;
+    bottom: Ref<number>;
+    left: Ref<number>;
+    right: Ref<number>;
+    top: Ref<number>;
+    width: Ref<number>;
+    x: Ref<number>;
+    y: Ref<number>;
+    update: () => void;
+}
 
 export default defineComponent({
     props: {
@@ -20,9 +20,10 @@ export default defineComponent({
             type: Boolean,
             required: true,
         },
-        activatorRef: {
-            type: Object as PropType<Ref<HTMLElement | null>>,
-            required: true,
+        activatorRect: {
+            type: Object as PropType<ActivatorRect | null>,
+            default: null,
+            required: false,
         },
         translateX: {
             type: String,
@@ -37,26 +38,23 @@ export default defineComponent({
     },
     setup(props, context) {
         const popoverRef = ref<HTMLElement>();
-        const activatorRect = ref<DOMRect | null>(null);
-        const popoverRect = ref<DOMRect | null>(null);
+        const popoverRect = useElementBounding(popoverRef);
         onMounted(() => {
             if (!isVue3) {
                 // @ts-ignore
                 popoverRef.value = context.refs.popoverRef;
-                popoverRect.value = popoverRef.value!.getBoundingClientRect();
-            } else {
-                popoverRect.value = popoverRef.value!.getBoundingClientRect();
             }
         });
-        const { activatorRef } = toRefs(props);
-        watch(activatorRef, () => {
-            if (activatorRef.value) {
-                activatorRect.value = activatorRef.value.getBoundingClientRect();
-            }
-        });
-        const handleClickOutside = (event: Event) => {
+        const handleClickOutside = (event: { pageX: number; pageY: number }) => {
             // @ts-ignore
-            if (!props.activatorRef.value?.contains(event.target as HTMLElement)) {
+            if (
+                !(
+                    props.activatorRect?.x.value! < event.pageX &&
+                    event.pageX < props.activatorRect?.x.value! + props.activatorRect?.width.value! &&
+                    props.activatorRect?.y.value! < event.pageY &&
+                    event.pageY < props.activatorRect?.y.value! + props.activatorRect?.height.value!
+                )
+            ) {
                 context.emit('close');
             }
         };
@@ -68,11 +66,12 @@ export default defineComponent({
         const popoverStyle = computed(() => {
             let translateX = '0px';
             let translateY = '0px';
-            if (popoverRect.value && activatorRect.value) {
-                translateX = `calc(${(activatorRect.value.width - popoverRect.value.width) / 2}px - 50%)`;
+            if (popoverRect && props.activatorRect) {
+                const result = (props.activatorRect.width.value - popoverRect.width.value) / 2;
+                translateX = `${result}px`;
             }
-            if (activatorRect.value) {
-                translateY = `${activatorRect.value.height}px`;
+            if (props.activatorRect) {
+                translateY = `${props.activatorRect.height.value}px`;
             }
             if (props.translateX !== undefined) {
                 translateX = props.translateX;
@@ -94,7 +93,7 @@ export default defineComponent({
                     class: [{ simple_popover__popover: true }],
                     style: [popoverStyle.value],
                 },
-                [props.open ? popoverNode() : undefined]
+                [popoverNode()]
             );
     },
 });

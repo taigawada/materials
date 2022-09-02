@@ -28,6 +28,10 @@ export default defineComponent({
             default: undefined,
             required: false,
         },
+        captionHidden: {
+            type: Boolean,
+            required: false,
+        },
         remove: {
             type: Boolean,
             required: false,
@@ -72,19 +76,22 @@ export default defineComponent({
         const widthStyle = () => ({
             '--simple-input-width': props.width,
         });
-        const captionNode = () =>
-            h(
-                'div',
-                {
-                    class: [
-                        {
-                            simple_input__caption_hidden: true,
-                            simple_input__caption: props.caption !== undefined,
-                        },
-                    ],
-                },
-                [props.caption === undefined ? '_' : props.caption]
-            );
+        const captionNode = () => {
+            if (!props.captionHidden) {
+                return h(
+                    'div',
+                    {
+                        class: [
+                            {
+                                simple_input__caption_hidden: true,
+                                simple_input__caption: props.caption !== undefined,
+                            },
+                        ],
+                    },
+                    [props.caption === undefined ? '_' : props.caption]
+                );
+            }
+        };
         const iconsNode = () => {
             if (appearRemoveButton()) {
                 return h(SimpleIcon, {
@@ -117,9 +124,11 @@ export default defineComponent({
                 h('input', {
                     class: [{ simple_input__input_element: true, simple_input__input_error: isError() }],
                     domProps: {
-                        readonly: props.readonly,
                         placeholder: props.placeholder,
                         value: props.value,
+                    },
+                    attrs: {
+                        readonly: props.readonly,
                     },
                     readonly: props.readonly,
                     placeholder: props.placeholder,

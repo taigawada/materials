@@ -1,4 +1,4 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .weekly_selector__base {
     display: inline-block;
 }
@@ -9,22 +9,21 @@
 }
 .weekly_selector__box {
     display: block;
-    background: rgba(255, 255, 255, 1);
-    border-top: 0.5px solid #727272;
+    background: $surface;
     border-left: 0.25px solid #727272;
     border-right: 0.25px solid #727272;
-    border-bottom: 0.5px solid #727272;
     padding: 5px 40px;
     cursor: pointer;
+    box-shadow: $box-shadow-1;
 }
 .weekly_selector__box_left_side {
     color: #2c3e50;
-    border-left: 0.5px solid #727272;
+    border-left: 0;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
 }
 .weekly_selector__box_right_side {
-    border-right: 0.5px solid #727272;
+    border-right: 0;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
 }

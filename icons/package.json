@@ -1,6 +1,6 @@
 {
     "name": "@simple-education-dev/icons",
-    "version": "0.1.9",
+    "version": "0.2.0",
     "private": false,
     "description": "",
     "type": "module",
@@ -12,7 +12,8 @@
         "format": "prettier --write src/**/*.{ts,svg}"
     },
     "files": [
-        "/src/icons"
+        "/src/icons",
+        "/types"
     ],
     "exports": {
         ".": {

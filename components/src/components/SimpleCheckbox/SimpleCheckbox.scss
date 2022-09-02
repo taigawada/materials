@@ -1,4 +1,4 @@
-@use '@simple-education-dev/tokens/styles' as *;
+@use 'globalStyleSheet' as *;
 .simple_checkbox__base {
     color: #2c3e50;
     display: inline-flex;
@@ -12,7 +12,7 @@
 .simple_checkbox__checkbox_container {
     width: var(--checkbox-size);
     height: var(--checkbox-size);
-    background: $surface;
+    background: rgba(255, 255, 255, 1);
     border: 1px solid $border;
     border-radius: calc(var(--checkbox-size) / 4);
     transition: background 0.1s, border 0.1s;
@@ -25,5 +25,5 @@
 .simple_checkbox__checkmark-icon {
     width: var(--checkbox-size);
     height: var(--checkbox-size);
-    fill: $surface;
+    fill: rgba(255, 255, 255, 1);
 }

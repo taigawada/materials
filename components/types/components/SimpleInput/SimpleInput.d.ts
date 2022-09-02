@@ -24,6 +24,10 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: undefined;
         required: false;
     };
+    captionHidden: {
+        type: BooleanConstructor;
+        required: false;
+    };
     remove: {
         type: BooleanConstructor;
         required: false;
@@ -64,6 +68,10 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: undefined;
         required: false;
     };
+    captionHidden: {
+        type: BooleanConstructor;
+        required: false;
+    };
     remove: {
         type: BooleanConstructor;
         required: false;
@@ -79,9 +87,10 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
 }>>, {
     width: string;
-    placeholder: string;
     icon: string;
+    placeholder: string;
     caption: string;
+    captionHidden: boolean;
     remove: boolean;
     readonly: boolean;
     error: string;

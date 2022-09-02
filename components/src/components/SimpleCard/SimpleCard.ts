@@ -84,13 +84,13 @@ export default defineComponent({
             );
         const actionsNode = () =>
             h('div', { class: [{ simple_card__actions: true }] }, [
-                props.subAction.label.length > 0 ? subActionNode() : null,
-                props.subAction.label.length > 0 ? mainActionNode() : null,
+                props.subAction.label.length > 0 ? subActionNode() : undefined,
+                props.subAction.label.length > 0 ? mainActionNode() : undefined,
             ]);
         return () =>
             h('div', { class: [{ simple_card__base: true }], style: [cardWidth()] }, [
-                context.slots.default ? context.slots.default() : null,
-                props.mainAction !== undefined || props.subAction !== undefined ? actionsNode() : null,
+                context.slots.default ? context.slots.default() : undefined,
+                props.mainAction !== undefined || props.subAction !== undefined ? actionsNode() : undefined,
             ]);
     },
 });

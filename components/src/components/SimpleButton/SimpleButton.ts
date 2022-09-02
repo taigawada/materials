@@ -1,5 +1,6 @@
-import { defineComponent, ref, h, VNode, VNodeNormalizedChildren, isVue3 } from 'vue-demi';
+import { defineComponent, ref, PropType, h, VNode, VNodeNormalizedChildren, isVue3 } from 'vue-demi';
 import SimpleSpinner from '../SimpleSpinner';
+import SimpleIcon from '../SimpleIcon';
 import './SimpleButton.scss';
 
 export default defineComponent({
@@ -42,6 +43,21 @@ export default defineComponent({
             default: 10,
             required: false,
         },
+        icon: {
+            type: String,
+            default: undefined,
+            required: false,
+        },
+        textColor: {
+            type: String,
+            default: undefined,
+            required: false,
+        },
+        iconSide: {
+            type: String as PropType<'left' | 'right'>,
+            default: 'right',
+            required: false,
+        },
     },
     setup(props, context) {
         const isEntered = ref(false);
@@ -82,12 +98,12 @@ export default defineComponent({
                 '--slot-text-length': textLength,
             };
         };
-        const target = () => {
-            if (props.external) {
-                return '_blank';
-            } else {
-                return '_self';
-            }
+        const target = () => (props.external ? '_blank' : '_self');
+        const iconColor = () => {
+            if (props.textColor) return props.textColor;
+            else if (props.primary) return 'rgba(255, 255, 255, 1)';
+            else if (props.normal) return 'rgba(114, 114, 114, 1)';
+            else if (props.plain) return 'rgba(53, 146, 185, 1)';
         };
         const spinnerColor = () => {
             if (props.primary && !props.normal) {
@@ -96,6 +112,13 @@ export default defineComponent({
                 return [105, 105, 105];
             } else {
                 return [255, 194, 85];
+            }
+        };
+        const sideSwitch = (domArray: unknown[]): VNode[] => {
+            if (props.iconSide === 'left') {
+                return domArray.reverse() as VNode[];
+            } else {
+                return domArray as VNode[];
             }
         };
         const disabledButtonNode = () => {
@@ -127,7 +150,19 @@ export default defineComponent({
                                 fill: props.fill,
                             },
                         },
-                        [context.slots.default ? context.slots.default() : 'Button']
+                        sideSwitch([
+                            context.slots.default ? context.slots.default() : 'Button',
+                            props.icon
+                                ? /* eslint-disable */
+                                  h(SimpleIcon, {
+                                      props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                                      source: props.icon,
+                                      size: props.size + 'px',
+                                      fill: iconColor(),
+                                  })
+                                : undefined,
+                            /* eslint-enable */
+                        ])
                     ),
                 ]
             );
@@ -165,7 +200,19 @@ export default defineComponent({
                                 fill: props.fill,
                             },
                         },
-                        [context.slots.default ? context.slots.default() : 'button']
+                        sideSwitch([
+                            context.slots.default ? context.slots.default() : 'button',
+                            props.icon
+                                ? /* eslint-disable */
+                                  h(SimpleIcon, {
+                                      props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                                      source: props.icon,
+                                      size: props.size + 'px',
+                                      fill: iconColor(),
+                                  })
+                                : undefined,
+                            /* eslint-enable */
+                        ])
                     ),
                     h('div', { class: [{ simple_button__spinner: true }] }, [loadingSpinnerNode()]),
                 ]
@@ -185,37 +232,18 @@ export default defineComponent({
                 click: handleClick,
             },
         };
-        const primaryButtonNode = (): VNode | undefined => {
-            return h('a', { class: [{ simple_button__base_prime: true }], style: [sizeToPixel()] }, [
-                h(
-                    'a',
-                    {
-                        class: { simple_button__wrapper_prime: true, simple_button__entered_prime: isEntered.value },
-                        style: [sizeToPixel()],
-                        ...buttonElement,
-                    },
-                    [
-                        h(
-                            'a',
-                            {
-                                class: [{ simple_button__text_prime: true }],
-                                style: [textLengthVar()],
-                                fill: props.fill,
-                                attrs: {
-                                    fill: props.fill,
-                                },
-                            },
-                            [context.slots.default ? context.slots.default() : 'Button']
-                        ),
-                    ]
-                ),
-            ]);
-        };
-        const normalButtonNode = (): VNode | undefined => {
+        const buttonNode = (): VNode | undefined => {
             return h(
                 'a',
                 {
-                    class: [{ simple_button__base_normal: true, simple_button__entered_normal: isEntered.value }],
+                    class: [
+                        {
+                            simple_button__base_normal: props.normal,
+                            simple_button__entered_normal: props.normal && isEntered.value,
+                            simple_button__base_prime: props.primary,
+                            simple_button__entered_prime: props.primary && isEntered.value,
+                        },
+                    ],
                     style: [sizeToPixel()],
                     ...buttonElement,
                 },
@@ -223,14 +251,31 @@ export default defineComponent({
                     h(
                         'a',
                         {
-                            class: [{ simple_button__text_normal: true }],
+                            class: [
+                                {
+                                    simple_button__text_normal: props.normal,
+                                    simple_button__text_prime: props.primary,
+                                },
+                            ],
                             style: [textLengthVar()],
                             fill: props.fill,
                             attrs: {
                                 fill: props.fill,
                             },
                         },
-                        [context.slots.default ? context.slots.default() : 'Button']
+                        sideSwitch([
+                            context.slots.default ? context.slots.default() : 'Button',
+                            props.icon
+                                ? /* eslint-disable */
+                                  h(SimpleIcon, {
+                                      props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                                      source: props.icon,
+                                      size: props.size + 'px',
+                                      fill: iconColor(),
+                                  })
+                                : undefined,
+                            /* eslint-enable */
+                        ])
                     ),
                 ]
             );
@@ -243,7 +288,19 @@ export default defineComponent({
                     style: [sizeToPixel()],
                     ...buttonElement,
                 },
-                [context.slots.default ? context.slots.default() : 'Button']
+                sideSwitch([
+                    context.slots.default ? context.slots.default() : 'Button',
+                    props.icon
+                        ? /* eslint-disable */
+                          h(SimpleIcon, {
+                              props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                              source: props.icon,
+                              size: props.size + 'px',
+                              fill: iconColor(),
+                          })
+                        : undefined,
+                    /* eslint-enable */
+                ])
             );
         };
         const button = (): VNode | undefined => {
@@ -251,12 +308,10 @@ export default defineComponent({
                 return disabledButtonNode();
             } else if (props.loading) {
                 return loadingButtonNode();
-            } else if (props.primary) {
-                return primaryButtonNode();
-            } else if (props.normal) {
-                return normalButtonNode();
             } else if (props.plain) {
                 return plainButtonNode();
+            } else {
+                return buttonNode();
             }
         };
         return () => h('div', { class: [{ simple_button__container: true }] }, [button()]);
