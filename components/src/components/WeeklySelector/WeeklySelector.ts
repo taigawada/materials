@@ -1,16 +1,14 @@
 import { defineComponent, ref, computed, PropType, h, VNode, isVue3 } from 'vue-demi';
-import { dayOfWeekStr } from '../../utils/utils';
+import { dayOfWeekStr, cyclePeriodConverter, CyclePeriod, BooleanArray } from '../../utils/utils';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton';
-import SimpleIcon from '../SimpleIcon';
 import './WeeklySelector.scss';
-type Week = boolean[];
 type Start = 'monday' | 'sunday';
 export default defineComponent({
     props: {
         weekValue: {
-            type: Array as PropType<Week[]>,
-            default: () => [[false, false, false, false, false, false, false]],
+            type: Array as PropType<CyclePeriod[]>,
+            default: () => [],
             required: true,
         },
         start: {
@@ -20,12 +18,16 @@ export default defineComponent({
         },
         sunday: {
             type: Boolean,
+            default: true,
             required: false,
         },
     },
     setup(props, context) {
-        const weekLength = ref(props.weekValue.length);
-        const weekArray = computed(() => [...Array(weekLength.value).keys()]);
+        const isEachWeek = ref(true);
+        const weekBooleanArray = computed(
+            () => cyclePeriodConverter(props.weekValue, props.start, isEachWeek.value) as BooleanArray
+        );
+        const weekArray = computed(() => [...Array(isEachWeek.value ? 1 : 4).keys()]);
         const weekdaysLength = computed(() => {
             if (props.sunday) {
                 return 7;
@@ -35,58 +37,38 @@ export default defineComponent({
         });
         const weekdaysArray = computed(() => [...Array(weekdaysLength.value).keys()]);
         const handleClick = (week: number, weekDay: number) => {
-            const changed = [...props.weekValue];
-            changed[week] = [...changed[week]];
-            changed[week][weekDay] = !changed[week][weekDay];
-
-            context.emit('change:week', changed);
+            const deepCopy = [...weekBooleanArray.value];
+            deepCopy[week] = [...deepCopy[week]];
+            deepCopy[week][weekDay] = !deepCopy[week][weekDay];
+            context.emit('change:week', cyclePeriodConverter(deepCopy, props.start, isEachWeek.value));
         };
         const handleAddWeek = () => {
-            const newWeek = [...props.weekValue];
-            [...new Array(3).keys()].map(() => newWeek.push(new Array(7).fill(false)));
-            weekLength.value = 4;
-            context.emit('change:week', newWeek);
+            isEachWeek.value = false;
+            context.emit('change:week', cyclePeriodConverter(weekBooleanArray.value, props.start, isEachWeek.value));
         };
         const handleDelWeek = () => {
-            const deletedWeek = [...props.weekValue];
-            deletedWeek.splice(1, 3);
-            weekLength.value = 1;
-            context.emit('change:week', deletedWeek);
+            isEachWeek.value = true;
+            context.emit('change:week', cyclePeriodConverter(weekBooleanArray.value, props.start, isEachWeek.value));
         };
         const enabled = (week: number, weekDay: number) => {
-            return props.weekValue[week][weekDay];
+            return weekBooleanArray.value[week][weekDay];
         };
-        const iconNode = (add: boolean) => {
+        const iconNode = () => {
             return h('div', { class: [{ weekly_selector__add_week_container: true }] }, [
                 h(
                     SimpleButton,
                     {
                         class: [{ weekly_selector__add_week: true }],
                         plain: true,
-                        props: { plain: true },
-                        onClick: add ? handleAddWeek : handleDelWeek,
+                        icon: isEachWeek.value ? ArrowDown : ArrowUp,
+                        props: { plain: true, icon: isEachWeek.value ? ArrowDown : ArrowUp },
+                        onClick: isEachWeek.value ? handleAddWeek : handleDelWeek,
                         on: {
-                            click: add ? handleAddWeek : handleDelWeek,
+                            click: isEachWeek.value ? handleAddWeek : handleDelWeek,
                         },
                     },
-                    isVue3 ? () => (add ? '月ごと' : '週ごと') : add ? '月ごと' : '週ごと'
+                    isVue3 ? () => (isEachWeek.value ? '月ごと' : '週ごと') : isEachWeek.value ? '月ごと' : '週ごと'
                 ),
-                h(SimpleIcon, {
-                    source: add ? ArrowDown : ArrowUp,
-                    size: '14px',
-                    clickable: true,
-                    fill: 'rgba(53, 146, 185, 1)',
-                    props: {
-                        source: add ? ArrowDown : ArrowUp,
-                        size: '14px',
-                        clickable: true,
-                        fill: 'rgba(53, 146, 185, 1)',
-                    },
-                    onClick: add ? handleAddWeek : handleDelWeek,
-                    on: {
-                        click: add ? handleAddWeek : handleDelWeek,
-                    },
-                }),
             ]);
         };
         const weekdaysNode = (weekIndex: number) =>
@@ -121,16 +103,12 @@ export default defineComponent({
         const weeksNode = (): VNode[] =>
             weekArray.value.map((weekIndex) => {
                 return h('div', { key: 'week' + weekIndex }, [
-                    weekLength.value > 1
+                    !isEachWeek.value
                         ? h('div', { class: [{ weekly_selector__week_caption: true }] }, String(weekIndex + 1) + '週目')
                         : null,
                     h('div', { class: [{ weekly_selector__weekdays: true }] }, weekdaysNode(weekIndex)),
                 ]);
             });
-        return () =>
-            h('div', { class: [{ weekly_selector__base: true }] }, [
-                ...weeksNode(),
-                iconNode(props.weekValue.length === 1),
-            ]);
+        return () => h('div', { class: [{ weekly_selector__base: true }] }, [...weeksNode(), iconNode()]);
     },
 });

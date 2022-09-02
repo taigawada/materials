@@ -1,6 +1,6 @@
 {
     "name": "@simple-education-dev/tokens",
-    "version": "0.1.5",
+    "version": "1.0.1-alpha.3",
     "private": false,
     "description": "",
     "main": "index.ts",
@@ -9,6 +9,9 @@
         "tsconfig.json",
         "stylesheet.scss"
     ],
+    "scripts": {
+        "publish": "echo"
+    },
     "exports": {
         "./eslint": {
             "import": "./.eslintrc.js",

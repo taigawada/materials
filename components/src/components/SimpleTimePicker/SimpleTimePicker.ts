@@ -35,7 +35,6 @@ export default defineComponent({
         const isFocus = ref(false);
         const isEntered = ref(false);
         const mouseleave = () => {
-            console.log('leave');
             isEntered.value = false;
         };
         const mousedown = () => {
@@ -67,11 +66,10 @@ export default defineComponent({
             selectedDate.hours = newValue.hours;
             selectedDate.minutes = newValue.minutes;
             const nowDate = new Date();
-            const newValueDeepCopy = { ...newValue };
-            if (newValueDeepCopy.meridiem !== null && newValueDeepCopy.meridiem !== undefined) {
-                newValueDeepCopy.hours = newValueDeepCopy.hours + newValueDeepCopy.meridiem === '午後' ? 12 : 0;
+            if (newValue.meridiem !== null && newValue.meridiem !== undefined) {
+                newValue.hours = newValue.hours + newValue.meridiem === '午後' ? 12 : 0;
             }
-            context.emit('change:time', set(nowDate, newValueDeepCopy));
+            context.emit('change:time', set(nowDate, newValue));
         };
         const timePickerNode = () => {
             if (isEntered.value || isFocus.value) {

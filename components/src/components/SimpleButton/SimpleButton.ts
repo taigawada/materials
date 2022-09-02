@@ -155,10 +155,16 @@ export default defineComponent({
                             props.icon
                                 ? /* eslint-disable */
                                   h(SimpleIcon, {
-                                      props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                                      props: {
+                                          source: props.icon,
+                                          size: props.size + 'px',
+                                          fill: iconColor(),
+                                          clickable: true,
+                                      },
                                       source: props.icon,
                                       size: props.size + 'px',
                                       fill: iconColor(),
+                                      clickable: true,
                                   })
                                 : undefined,
                             /* eslint-enable */
@@ -205,10 +211,16 @@ export default defineComponent({
                             props.icon
                                 ? /* eslint-disable */
                                   h(SimpleIcon, {
-                                      props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                                      props: {
+                                          source: props.icon,
+                                          size: props.size + 'px',
+                                          fill: iconColor(),
+                                          clickable: true,
+                                      },
                                       source: props.icon,
                                       size: props.size + 'px',
                                       fill: iconColor(),
+                                      clickable: true,
                                   })
                                 : undefined,
                             /* eslint-enable */
@@ -268,10 +280,16 @@ export default defineComponent({
                             props.icon
                                 ? /* eslint-disable */
                                   h(SimpleIcon, {
-                                      props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                                      props: {
+                                          source: props.icon,
+                                          size: props.size + 'px',
+                                          fill: iconColor(),
+                                          clickable: true,
+                                      },
                                       source: props.icon,
                                       size: props.size + 'px',
                                       fill: iconColor(),
+                                      clickable: true,
                                   })
                                 : undefined,
                             /* eslint-enable */
@@ -293,10 +311,16 @@ export default defineComponent({
                     props.icon
                         ? /* eslint-disable */
                           h(SimpleIcon, {
-                              props: { source: props.icon, size: props.size + 'px', fill: iconColor() },
+                              props: {
+                                  source: props.icon,
+                                  size: props.size + 'px',
+                                  fill: iconColor(),
+                                  clickable: true,
+                              },
                               source: props.icon,
                               size: props.size + 'px',
                               fill: iconColor(),
+                              clickable: true,
                           })
                         : undefined,
                     /* eslint-enable */

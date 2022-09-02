@@ -22,6 +22,7 @@
         "vue-tsc": "^0.40.1"
     },
     "dependencies": {
-        "@simple-education-dev/icons": "file:icons"
+        "@simple-education-dev/icons": "file:icons",
+        "@simple-education-dev/tokens": "file:tokens"
     }
 }

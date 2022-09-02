@@ -17,8 +17,7 @@ import {
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
 import SimpleIcon from '../SimpleIcon';
-import { monthBoolean } from '@/types/types';
-import { dayOfWeekStr } from '@/utils/utils';
+import { dayOfWeekStr, CyclePeriod } from '@/utils/utils';
 import './SimpleCalender.scss';
 
 interface Entered {
@@ -54,7 +53,7 @@ export default defineComponent({
             required: false,
         },
         highLights: {
-            type: Array as PropType<monthBoolean>,
+            type: Array as PropType<CyclePeriod[]>,
             default: () => [],
             required: false,
         },
@@ -75,39 +74,15 @@ export default defineComponent({
         const isEntered = (weekIndex: number, weekDayIndex: number) => {
             return nowEntered.weekIndex === weekIndex && nowEntered.weekDayIndex === weekDayIndex;
         };
-        const weekStartsOn = () => {
-            if (props.start === 'monday') return 1;
-            else return 0;
-        };
+        const weekStartsOn = computed(() => (props.start === 'monday' ? 0 : 1));
         const currentShowDate = ref<Date>(props.selected ? props.selected : new Date());
-        const highLightsPositions = computed(() => {
-            const parseResult: [number, number][] = [];
-            if (props.highLights.length === 1) {
-                props.highLights[0].map((weekOfDay, weekOfDayIndex) => {
-                    if (weekOfDayIndex === 6) weekOfDayIndex = -weekStartsOn();
-                    if (weekOfDay) {
-                        [...new Array(5).keys()].map((index) => parseResult.push([index, weekOfDayIndex]));
-                    }
-                });
-            } else {
-                props.highLights.map((week, weekIndex) => {
-                    week.map((weekOfDay, weekOfDayIndex) => {
-                        if (weekOfDayIndex === 6) weekOfDayIndex = -weekStartsOn();
-                        if (weekOfDay) {
-                            parseResult.push([weekIndex, weekOfDayIndex]);
-                        }
-                    });
-                });
-            }
-            return parseResult;
-        });
         const currentSelectedDate = ref<Date | undefined>(props.selected);
         const showHighLights = (date: Date) => {
-            if (highLightsPositions.value.length > 0 && !currentSelectedDate.value) {
-                return highLightsPositions.value.find(
+            if (props.highLights.length > 0 && !currentSelectedDate.value) {
+                return props.highLights.find(
                     (elememt) =>
-                        elememt[0] === differenceInWeeks(date, startOfMonth(date)) &&
-                        elememt[1] === getDay(date) - weekStartsOn() &&
+                        elememt.weekIndex === differenceInWeeks(date, startOfMonth(date)) &&
+                        elememt.dayOfWeekIndex === getDay(date) - weekStartsOn.value &&
                         isSameMonth(date, currentShowDate.value)
                 );
             } else {
@@ -119,7 +94,7 @@ export default defineComponent({
         const handleDateSelect = (date: Date, weekDayIndex: number) => {
             if (props.allowPast || isFuture(date) || isSameDay(new Date(), date)) {
                 if (props.select && isSameMonth(date, currentShowDate.value)) {
-                    if (weekDayIndex === 6) weekDayIndex = -weekStartsOn();
+                    if (weekDayIndex === 6) weekDayIndex = -weekStartsOn.value;
                     currentSelectedDate.value = date;
                     context.emit('change', date);
                 }
@@ -154,14 +129,14 @@ export default defineComponent({
                     end: endOfMonth(currentShowDate.value),
                 },
                 {
-                    weekStartsOn: weekStartsOn(),
+                    weekStartsOn: weekStartsOn.value,
                 }
             );
             return weekStartDate.map((startDate: Date) =>
                 eachDayOfInterval({
                     start: startDate,
                     end: endOfWeek(startDate, {
-                        weekStartsOn: weekStartsOn(),
+                        weekStartsOn: weekStartsOn.value,
                     }),
                 })
             );

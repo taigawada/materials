@@ -168,14 +168,14 @@
         <p>WeeklySelector & Calender</p>
         <div>
             <WeeklySelector
-                :weekValue="weekState.week"
+                :weekValue="weekState"
                 @change:week="changeWeek"
                 @add:week="changeWeek"
                 @del:week="changeWeek"
             />
         </div>
         <div style="width: 40%; margin: 0 auto">
-            <SimpleCalender :highLights="weekState.week" :showRelatedDays="false"></SimpleCalender>
+            <SimpleCalender :highLights="weekState" :showRelatedDays="false"></SimpleCalender>
         </div>
         <div style="margin-top: 30px">
             <SimpleCard style="width: 30%; margin: 0 auto">
@@ -207,7 +207,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, reactive } from 'vue-demi';
+import { defineComponent, ref } from 'vue-demi';
 import SimpleButton from './components/SimpleButton/SimpleButton';
 import SimpleTabs from './components/SimpleTabs/SimpleTabs';
 import SimpleActions from './components/SimpleActions/SimpleActions';
@@ -233,13 +233,8 @@ import SimpleSkelton from './components/SimpleSkelton/SimpleSkelton';
 import SimpleIcon from './components/SimpleIcon/SimpleIcon';
 
 import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
-
-import { weekBoolean, monthBoolean } from './types/types';
-import { sortItems } from './utils/utils';
+import { CyclePeriod, sortItems } from './utils/utils';
 import { format } from 'date-fns';
-interface WeekState {
-    week: monthBoolean;
-}
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
 export default defineComponent({
@@ -274,7 +269,6 @@ export default defineComponent({
         const disabled = ref(false);
         const loading = ref(false);
         const handleButtonClick = async () => {
-            console.log('clickParent');
             loading.value = true;
             await sleep(1000);
             loading.value = false;
@@ -376,11 +370,9 @@ export default defineComponent({
             console.log('mainAction');
         };
         // WeeklySelector
-        const weekState = reactive<WeekState>({
-            week: [[false, false, false, false, false, false, false]],
-        });
-        const changeWeek = (newValue: weekBoolean[]) => {
-            weekState.week = newValue;
+        const weekState = ref<CyclePeriod[]>([]);
+        const changeWeek = (newValue: CyclePeriod[]) => {
+            weekState.value = newValue;
         };
         // Tags, Combobox
         const comboField = ref('');
@@ -401,7 +393,6 @@ export default defineComponent({
             currentSelect.splice(currentSelect.indexOf(item), 1);
         };
         const comboSelectedChange = (selected: Array<string>) => {
-            console.log(selected);
             comboSelected.value = selected;
         };
         // Time Picker
