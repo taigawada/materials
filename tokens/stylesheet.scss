@@ -1,7 +1,7 @@
 $background: rgba(244, 244, 244, 1);
 $theme-color: rgba(255, 194, 85, 1);
 $theme-color-alpha: rgba(255, 194, 85, 0.2);
-$surface: rgba(236, 242, 245, 1);
+$surface: #fdffff;
 $surface-black-alpha: rgba(44, 62, 80, 0.1);
 $surface-black: rgba(44, 62, 80, 1);
 $surface-warning: rgba(255, 194, 85, 1);
@@ -24,7 +24,7 @@ $primary-disabled: rgba(255, 194, 85, 0.5);
 $normal: none;
 $normal-hovered: rgba(233, 239, 241, 1);
 $normal-pressed: rgba(233, 239, 241, 1);
-$normal-disabled: rgba(114, 114, 114, 1);
+$normal-disabled: rgba(114, 114, 114, 0.1);
 $plain: rgba(53, 146, 185, 1);
 $plain-hovered: rgba(35, 98, 124, 1);
 $plain-pressed: rgba(35, 98, 124, 1);
@@ -67,5 +67,6 @@ $border-radius-05: 0.225rem;
 $border-radius-1: 0.45rem;
 $border-radius-2: 0.625rem;
 
-$boxshadow: rgba(15, 26, 38, 0.04) 0px 2px 20px 0px, rgba(15, 26, 38, 0.08) 0px 8px 32px 0px;
+$box-shadow-1: rgba(0, 123, 255, 0.04) 0px 2px 20px 0px, rgba(15, 26, 38, 0.08) 0px 8px 32px 0px;
+$box-shadow-2: rgba(0, 123, 255, 0.04) 0px 8px 20px 0px, rgba(15, 26, 38, 0.1) 0px 8px 32px 0px;
 $modal-background: rgba(0, 0, 0, 0.75);
