@@ -22,6 +22,7 @@ import ResourceItem from './components/ResourceItem';
 import SimplePagination from './components/SimplePagination';
 import SimpleIcon from './components/SimpleIcon';
 import { sortItems } from './utils/utils';
+import { useHolidays } from './utils/useHolidays';
 
 export {
     SimpleButton,
@@ -48,4 +49,5 @@ export {
     ResourceItem,
     SimplePagination,
     sortItems,
+    useHolidays,
 };

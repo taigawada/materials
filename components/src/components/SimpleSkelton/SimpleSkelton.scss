@@ -1,38 +1,45 @@
 @use 'globalStyleSheet' as *;
-$skelton-base-color: rgb(245, 245, 245);
-$skelton-highlight-color: rgba(255, 255, 255, 1);
+$skelton-base-color-light: rgba(241, 241, 241, 1);
+$skelton-base-color-dark: rgba(233, 233, 233, 1);
 .simple_skelton__base {
-    position: relative;
-    width: 90%;
-    height: 16px;
-    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+}
+.simple_skelton__body {
+    width: var(--simple-skelton-body-width);
+    height: var(--simple-skelton-body-height);
     margin: 0 auto;
     border-radius: $border-radius-1;
     z-index: 1;
+    background: $skelton-base-color-light;
+    animation: GradientAnimation 2.2s 0.5s infinite;
 }
-.simple_skelton__background {
-    background: linear-gradient(
-        -45deg,
-        $skelton-base-color,
-        $skelton-base-color calc(50% - 20px),
-        $skelton-highlight-color 50%,
-        $skelton-base-color calc(50% + 20px),
-        $skelton-base-color
-    );
-    width: 140%;
-    transform: translateY(0);
-    animation: GradientAnimation 2.2s 0.5s infinite ease-in reverse;
+.simple_skelton__text_line {
+    height: 12px;
+    margin: $space-4 auto;
+    border-radius: $border-radius-05;
+    z-index: 1;
+    background: $skelton-base-color-light;
+    animation: GradientAnimation 2.2s 0.5s infinite;
 }
-.simple_skelton__background::before {
-    content: '';
-    padding-top: 100%;
-    display: block;
+.simple_skelton__header {
+    width: 40%;
+    height: 20px;
+    margin: $space-4 auto $space-4 0;
+    border-radius: $border-radius-1;
+    z-index: 1;
+    background: $skelton-base-color-light;
+    animation: GradientAnimation 2.2s 0.5s infinite;
 }
 @keyframes GradientAnimation {
     0% {
-        transform: translateY(0);
+        background: $skelton-base-color-light;
+    }
+    50% {
+        background: $skelton-base-color-dark;
     }
     100% {
-        transform: translateY(calc(-100% + 16px));
+        transform: $skelton-base-color-light;
     }
 }

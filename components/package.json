@@ -3,6 +3,7 @@
     "version": "0.1.1",
     "private": false,
     "description": "Vue2 & 3 Universal Component Library for SimpleEducation",
+    "type": "module",
     "types": "types/build.d.ts",
     "main": "dist/components.js",
     "exports": {
@@ -30,6 +31,7 @@
         "@simple-education-dev/icons": "^0.2.0",
         "@simple-education-dev/tokens": "^1.0.1-alpha.3",
         "@vueuse/core": "^9.1.0",
+        "axios": "^0.27.2",
         "date-fns": "^2.29.1",
         "vue-demi": "^0.13.7"
     },

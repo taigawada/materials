@@ -1,5 +1,5 @@
 import { PropType, VNode } from 'vue-demi';
-import { monthBoolean } from '@/types/types';
+import { CyclePeriod } from '@/utils/utils';
 import './SimpleCalender.scss';
 declare const _default: import("vue-demi").DefineComponent<{
     start: {
@@ -28,7 +28,7 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
     highLights: {
-        type: PropType<monthBoolean>;
+        type: PropType<CyclePeriod[]>;
         default: () => never[];
         required: false;
     };
@@ -61,7 +61,7 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
     highLights: {
-        type: PropType<monthBoolean>;
+        type: PropType<CyclePeriod[]>;
         default: () => never[];
         required: false;
     };
@@ -71,7 +71,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     select: boolean;
     allowPast: boolean;
     showRelatedDays: boolean;
-    highLights: monthBoolean;
+    highLights: CyclePeriod[];
 }>;
 export default _default;
 //# sourceMappingURL=SimpleCalender.d.ts.map

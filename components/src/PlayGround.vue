@@ -6,6 +6,10 @@
         <SimpleActions :open="actionsOpen" :actions="actions" @click:activator="actionsOpenToggle" @close="onClose">
             その他の操作
         </SimpleActions>
+        <SimpleSkelton heading></SimpleSkelton>
+        <SimpleSkelton body width="40%"></SimpleSkelton>
+        <SimpleSkelton text :line="3"></SimpleSkelton>
+
         <p>Input, Checkbox & Card</p>
         <SimpleCard
             width="50%"
@@ -51,16 +55,8 @@
         </SimpleCard>
         <p>Resource List</p>
         <p>buttons</p>
-        <SimpleButton
-            normal
-            fill
-            iconSide="left"
-            :icon="ArrowDown"
-            :disabled="disabled"
-            :loading="loading"
-            @click="handleButtonClick"
-        >
-            ボタン
+        <SimpleButton normal :icon="ArrowDown" :disabled="disabled" :loading="loading" @click="handleButtonClick">
+            プレビュー
         </SimpleButton>
         <div style="height: 20px"></div>
         <div style="width: 40%; margin: 0 auto">
@@ -82,10 +78,10 @@
                 </template>
                 <template #data="render">
                     <ResourceItem>
-                        <component :is="loading ? 'SimpleSkelton' : 'span'">{{ render.item.id }}</component>
+                        <component :is="loading ? 'SimpleSkelton' : 'span'" text>{{ render.item.id }}</component>
                     </ResourceItem>
                     <ResourceItem>
-                        <component :is="loading ? 'SimpleSkelton' : 'span'">{{ render.item.name }}</component>
+                        <component :is="loading ? 'SimpleSkelton' : 'span'" text>{{ render.item.name }}</component>
                     </ResourceItem>
                     <ResourceItem distribution="right">
                         <SimpleIcon :source="ThreePointLeader" clickable @click.stop="handleNext"></SimpleIcon>
@@ -175,7 +171,7 @@
             />
         </div>
         <div style="width: 40%; margin: 0 auto">
-            <SimpleCalender :highLights="weekState" :showRelatedDays="false"></SimpleCalender>
+            <SimpleCalender :highLights="weekState" :holidays="holidays" hiddenHighLightInHolidays></SimpleCalender>
         </div>
         <div style="margin-top: 30px">
             <SimpleCard style="width: 30%; margin: 0 auto">
@@ -207,7 +203,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue-demi';
+import { defineComponent, ref, onMounted } from 'vue-demi';
 import SimpleButton from './components/SimpleButton/SimpleButton';
 import SimpleTabs from './components/SimpleTabs/SimpleTabs';
 import SimpleActions from './components/SimpleActions/SimpleActions';
@@ -235,6 +231,8 @@ import SimpleIcon from './components/SimpleIcon/SimpleIcon';
 import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
 import { CyclePeriod, sortItems } from './utils/utils';
 import { format } from 'date-fns';
+
+import { Holidays, useHolidays } from './utils/useHolidays';
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
 export default defineComponent({
@@ -265,6 +263,11 @@ export default defineComponent({
         SimpleIcon,
     },
     setup() {
+        const holidays = ref<Holidays[] | null>(null);
+        // debug
+        onMounted(async () => {
+            holidays.value = await useHolidays();
+        });
         // SimpleButton
         const disabled = ref(false);
         const loading = ref(false);
@@ -500,6 +503,7 @@ export default defineComponent({
             handleDateChange,
             datetimeInputValue,
             handleDatetimeChange,
+            holidays,
             ThreePointLeader,
             ArrowDown,
         };

@@ -1,11 +1,11 @@
 import { PropType, VNode } from 'vue-demi';
+import { CyclePeriod } from '../../utils/utils';
 import './WeeklySelector.scss';
-declare type Week = boolean[];
 declare type Start = 'monday' | 'sunday';
 declare const _default: import("vue-demi").DefineComponent<{
     weekValue: {
-        type: PropType<Week[]>;
-        default: () => boolean[][];
+        type: PropType<CyclePeriod[]>;
+        default: () => never[];
         required: true;
     };
     start: {
@@ -15,14 +15,15 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
     sunday: {
         type: BooleanConstructor;
+        default: boolean;
         required: false;
     };
 }, () => VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
     [key: string]: any;
 }>, unknown, {}, {}, import("vue-demi").ComponentOptionsMixin, import("vue-demi").ComponentOptionsMixin, Record<string, any>, string, import("vue-demi").VNodeProps & import("vue-demi").AllowedComponentProps & import("vue-demi").ComponentCustomProps, Readonly<import("vue-demi").ExtractPropTypes<{
     weekValue: {
-        type: PropType<Week[]>;
-        default: () => boolean[][];
+        type: PropType<CyclePeriod[]>;
+        default: () => never[];
         required: true;
     };
     start: {
@@ -32,12 +33,13 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
     sunday: {
         type: BooleanConstructor;
+        default: boolean;
         required: false;
     };
 }>>, {
     start: Start;
     sunday: boolean;
-    weekValue: Week[];
+    weekValue: CyclePeriod[];
 }>;
 export default _default;
 //# sourceMappingURL=WeeklySelector.d.ts.map

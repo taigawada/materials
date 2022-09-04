@@ -19,6 +19,8 @@ import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
 import SimpleIcon from '../SimpleIcon';
 import { dayOfWeekStr, CyclePeriod } from '@/utils/utils';
 import './SimpleCalender.scss';
+import { Holidays } from '../../utils/useHolidays';
+import SimpleSpinner from '../SimpleSpinner';
 
 interface Entered {
     weekIndex: null | number;
@@ -57,8 +59,20 @@ export default defineComponent({
             default: () => [],
             required: false,
         },
+        holidays: {
+            type: Array as PropType<Holidays[] | null>,
+            default: undefined,
+            required: false,
+        },
+        hiddenHighLightInHolidays: {
+            type: Boolean,
+            required: false,
+        },
     },
     setup(props, context) {
+        const isLoading = computed(() =>
+            props.holidays !== undefined ? (props.holidays === null ? true : false) : false
+        );
         const nowEntered = reactive<Entered>({
             weekIndex: null,
             weekDayIndex: null,
@@ -77,14 +91,21 @@ export default defineComponent({
         const weekStartsOn = computed(() => (props.start === 'monday' ? 0 : 1));
         const currentShowDate = ref<Date>(props.selected ? props.selected : new Date());
         const currentSelectedDate = ref<Date | undefined>(props.selected);
-        const showHighLights = (date: Date) => {
+        const showHighLights = (date: Date, isHoliday: boolean | string) => {
             if (props.highLights.length > 0 && !currentSelectedDate.value) {
-                return props.highLights.find(
-                    (elememt) =>
-                        elememt.weekIndex === differenceInWeeks(date, startOfMonth(date)) &&
-                        elememt.dayOfWeekIndex === getDay(date) - weekStartsOn.value &&
-                        isSameMonth(date, currentShowDate.value)
-                );
+                const highLights =
+                    props.highLights.findIndex(
+                        (elememt) =>
+                            elememt.weekIndex === differenceInWeeks(date, startOfMonth(date)) &&
+                            elememt.dayOfWeekIndex === getDay(date) - weekStartsOn.value &&
+                            isSameMonth(date, currentShowDate.value)
+                    ) !== -1;
+                if (highLights) {
+                    // 祝日かどうかを判定
+                    return props.hiddenHighLightInHolidays ? (typeof isHoliday === 'string' ? false : true) : true;
+                } else {
+                    return false;
+                }
             } else {
                 if (props.select) {
                     return currentSelectedDate.value ? isSameDay(date, currentSelectedDate.value) : false;
@@ -107,15 +128,25 @@ export default defineComponent({
         const handleSubMonth = () => {
             currentShowDate.value = subMonths(currentShowDate.value, 1);
         };
+        const showHolidays = (date: Date) => {
+            let sameMonth = true;
+            if (!props.showRelatedDays) sameMonth = isSameMonth(date, currentShowDate.value);
+            if (props.holidays !== undefined && props.holidays !== null && sameMonth) {
+                const find = props.holidays.find((holiday) => isSameDay(date, holiday[0]));
+                if (find !== undefined) {
+                    return typeof find[1] === 'string' ? find[1] : false;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        };
         const showDate = (date: Date) => {
             if (props.showRelatedDays) {
                 return getDate(date);
             } else {
-                if (isSameMonth(date, currentShowDate.value)) {
-                    return getDate(date);
-                } else {
-                    return '';
-                }
+                return isSameMonth(date, currentShowDate.value) ? getDate(date) : '';
             }
         };
         const isPastDay = (day: Date) => {
@@ -148,6 +179,14 @@ export default defineComponent({
                 return { '--cursor-calender-data': 'default' };
             }
         });
+        const loadingSpinnerNode = () =>
+            h('div', { class: [{ simple_calender__loading_spinner_base: true }] }, [
+                h(SimpleSpinner, {
+                    size: 'large',
+                    color: [60, 130, 214],
+                    props: { size: 'large', color: [60, 130, 214] },
+                }),
+            ]);
         const headerNode = () =>
             h('div', { class: [{ simple_calender__heading: true }] }, [
                 h(SimpleIcon, {
@@ -196,10 +235,12 @@ export default defineComponent({
                 return h(
                     'tr',
                     week.map((date, dateIndex) => {
+                        const holiday = showHolidays(date);
                         return h(
                             'td',
                             {
                                 key: String(date),
+                                title: holiday ? holiday : '',
                                 class: [
                                     {
                                         simple_calender__date_data: true,
@@ -210,7 +251,7 @@ export default defineComponent({
                                             isEntered(weekIndex, dateIndex) &&
                                             isSameMonth(date, currentShowDate.value) &&
                                             isPastDay(date),
-                                        calenderDataSelected: showHighLights(date),
+                                        calenderDataSelected: showHighLights(date, holiday),
                                     },
                                 ],
                                 style: [pointer.value],
@@ -223,13 +264,39 @@ export default defineComponent({
                                     click: () => handleDateSelect(date, dateIndex),
                                 },
                             },
-                            showDate(date)
+                            [
+                                showDate(date),
+                                /* eslint-disable */
+                                holiday
+                                    ? h('div', {
+                                          class: [
+                                              {
+                                                  simple_calender__holidays_icon: true,
+                                                  simple_calender__holidays_icon_alpha: !isSameMonth(
+                                                      date,
+                                                      currentShowDate.value
+                                                  ),
+                                              },
+                                          ],
+                                      })
+                                    : undefined,
+                                /* eslint-enable */
+                            ]
                         );
                     })
                 );
             });
         const calenderTableNode = () =>
             h('table', { class: [{ simple_calender__table: true }] }, [h('tr', tableHeaderNode()), tableDataNode()]);
-        return () => h('div', { class: [{ simple_calender___container: true }] }, [headerNode(), calenderTableNode()]);
+        return () =>
+            h(
+                'div',
+                {
+                    class: [
+                        { simple_calender___container: true, simple_calender___container_loading: isLoading.value },
+                    ],
+                },
+                [headerNode(), calenderTableNode(), isLoading.value ? loadingSpinnerNode() : undefined]
+            );
     },
 });

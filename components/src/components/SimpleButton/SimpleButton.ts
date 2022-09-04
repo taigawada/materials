@@ -151,7 +151,7 @@ export default defineComponent({
                             },
                         },
                         sideSwitch([
-                            context.slots.default ? context.slots.default() : 'Button',
+                            h('span', context.slots.default ? context.slots.default() : 'Button'),
                             props.icon
                                 ? /* eslint-disable */
                                   h(SimpleIcon, {
@@ -207,7 +207,7 @@ export default defineComponent({
                             },
                         },
                         sideSwitch([
-                            context.slots.default ? context.slots.default() : 'button',
+                            h('span', context.slots.default ? context.slots.default() : 'Button'),
                             props.icon
                                 ? /* eslint-disable */
                                   h(SimpleIcon, {
@@ -276,7 +276,7 @@ export default defineComponent({
                             },
                         },
                         sideSwitch([
-                            context.slots.default ? context.slots.default() : 'Button',
+                            h('span', context.slots.default ? context.slots.default() : 'Button'),
                             props.icon
                                 ? /* eslint-disable */
                                   h(SimpleIcon, {
@@ -307,7 +307,7 @@ export default defineComponent({
                     ...buttonElement,
                 },
                 sideSwitch([
-                    context.slots.default ? context.slots.default() : 'Button',
+                    h('span', context.slots.default ? context.slots.default() : 'Button'),
                     props.icon
                         ? /* eslint-disable */
                           h(SimpleIcon, {

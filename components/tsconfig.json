@@ -15,6 +15,13 @@
     "vueCompilerOptions": {
         "experimentalDisableTemplateSupport": false
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/utils/CancellationToken.js"],
+    "include": [
+        "src/**/*.ts",
+        "src/**/*.tsx",
+        "src/**/*.vue",
+        "src/utils/CancellationToken.js",
+        "src/components/SimpleStack/useHolidays.js",
+        "src/components/WeeklySelector/useHolidays.js"
+    ],
     "exclude": ["node_modules", "src/PlayGround.vue", "src/serve.ts"]
 }
