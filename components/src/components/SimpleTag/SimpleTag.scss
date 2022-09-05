@@ -1,18 +1,16 @@
 @use 'globalStyleSheet' as *;
 .simple_tag__base {
-    color: #2c3e50;
     display: inline-flex;
     align-items: center;
-    background: #2c3e50;
-    color: $surface;
+    background: $surface;
     font-size: $font-size-4;
-    border-radius: 3.5px;
+    border-radius: 100vh;
+    box-shadow: $box-shadow-1;
     padding: 1px 10px;
     margin: 0 3px;
-    opacity: 0.3;
 }
 .simple_tag__text {
-    color: $surface;
+    color: $surface-black;
 }
 .simple_tag__remove_icon {
     margin-left: 10px;

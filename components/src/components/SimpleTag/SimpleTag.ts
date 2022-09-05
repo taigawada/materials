@@ -24,13 +24,11 @@ export default defineComponent({
                     h(SimpleIcon, {
                         class: [{ simple_tag__remove_icon: true }],
                         source: CloseCross,
-                        fill: 'rgba(255, 255, 255, 1)',
-                        size: '16px',
+                        size: '12px',
                         clickable: true,
                         props: {
                             source: CloseCross,
-                            fill: 'rgba(255, 255, 255, 1)',
-                            size: '16px',
+                            size: '12px',
                             clickable: true,
                         },
                         onClick: hundleClickRemove,

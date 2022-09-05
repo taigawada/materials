@@ -25,6 +25,11 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: number;
         required: false;
     };
+    disabled: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: false;
+    };
 }, () => import("vue-demi").VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
     [key: string]: any;
 }>, unknown, {}, {}, import("vue-demi").ComponentOptionsMixin, import("vue-demi").ComponentOptionsMixin, {}, string, import("vue-demi").VNodeProps & import("vue-demi").AllowedComponentProps & import("vue-demi").ComponentCustomProps, Readonly<import("vue-demi").ExtractPropTypes<{
@@ -52,7 +57,13 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: number;
         required: false;
     };
+    disabled: {
+        type: BooleanConstructor;
+        default: boolean;
+        required: false;
+    };
 }>>, {
+    disabled: boolean;
     placeholder: string;
     caption: string;
     interval: 12 | 24;
