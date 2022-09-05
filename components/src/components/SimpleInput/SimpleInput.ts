@@ -45,6 +45,10 @@ export default defineComponent({
             default: undefined,
             required: false,
         },
+        disabled: {
+            type: Boolean,
+            required: false,
+        },
     },
     setup(props, context) {
         const handleRemove = () => {
@@ -122,27 +126,38 @@ export default defineComponent({
         const inputElementNode = () =>
             h('div', { class: [{ simple_input__input_field: true }] }, [
                 h('input', {
-                    class: [{ simple_input__input_element: true, simple_input__input_error: isError() }],
+                    class: [
+                        {
+                            simple_input__input_element: true,
+                            simple_input__disabled: props.disabled,
+                            simple_input__input_error: isError(),
+                        },
+                    ],
                     domProps: {
                         placeholder: props.placeholder,
                         value: props.value,
                     },
                     attrs: {
                         readonly: props.readonly,
+                        disabled: props.disabled,
                     },
+                    disabled: props.disabled,
                     readonly: props.readonly,
                     placeholder: props.placeholder,
                     value: props.value,
                     onInput: (event: { target: HTMLInputElement }) => handleInputChange(event),
                     on: {
                         input: (event: { target: HTMLInputElement }) => handleInputChange(event),
-                        // Vue2,3でinputのイベント名を合わせる
-                        // Vue3: focusin, focusout
-                        // Vue2:
-                        //     focus -> focusin
-                        //     blur -> focusout
                         focus: handleFocusin,
                         blur: handleFocusout,
+                    },
+                    onFocus: (event: Event) => {
+                        handleFocusin();
+                        event.preventDefault();
+                    },
+                    onBlur: (event: Event) => {
+                        handleFocusout();
+                        event.preventDefault();
                     },
                 }),
                 [h('div', { class: [{ simple_input__remove: true }] }, [iconsNode()])],

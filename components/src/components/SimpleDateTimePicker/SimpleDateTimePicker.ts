@@ -40,6 +40,10 @@ export default defineComponent({
             type: Boolean,
             required: false,
         },
+        disabled: {
+            type: Boolean,
+            required: false,
+        },
     },
     setup(props, context) {
         const isFocus = ref(false);
@@ -48,7 +52,9 @@ export default defineComponent({
             isEntered.value = false;
         };
         const mousedown = () => {
-            isEntered.value = true;
+            if (!props.disabled) {
+                isEntered.value = true;
+            }
         };
         const inFocus = () => {
             isFocus.value = true;
@@ -138,11 +144,13 @@ export default defineComponent({
                         placeholder: props.placeholder,
                         readonly: true,
                         value: props.inputValue,
+                        disabled: props.disabled,
                         props: {
                             caption: props.caption,
                             placeholder: props.placeholder,
                             readonly: true,
                             value: props.inputValue,
+                            disabled: props.disabled,
                         },
                         onFocusin: inFocus,
                         onfocusout: outFocus,

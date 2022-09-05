@@ -1,6 +1,7 @@
 import { PropType, VNode } from 'vue-demi';
 import { CyclePeriod } from '@/utils/utils';
 import './SimpleCalender.scss';
+import { Holidays } from '../../utils/useHolidays';
 declare const _default: import("vue-demi").DefineComponent<{
     start: {
         type: PropType<"monday" | "sunday">;
@@ -32,9 +33,18 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: () => never[];
         required: false;
     };
+    holidays: {
+        type: PropType<Holidays[] | null>;
+        default: undefined;
+        required: false;
+    };
+    hiddenHighLightInHolidays: {
+        type: BooleanConstructor;
+        required: false;
+    };
 }, () => VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
     [key: string]: any;
-}>, unknown, {}, {}, import("vue-demi").ComponentOptionsMixin, import("vue-demi").ComponentOptionsMixin, Record<string, any>, string, import("vue-demi").VNodeProps & import("vue-demi").AllowedComponentProps & import("vue-demi").ComponentCustomProps, Readonly<import("vue-demi").ExtractPropTypes<{
+}>, unknown, {}, {}, import("vue-demi").ComponentOptionsMixin, import("vue-demi").ComponentOptionsMixin, {}, string, import("vue-demi").VNodeProps & import("vue-demi").AllowedComponentProps & import("vue-demi").ComponentCustomProps, Readonly<import("vue-demi").ExtractPropTypes<{
     start: {
         type: PropType<"monday" | "sunday">;
         default: string;
@@ -65,6 +75,15 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: () => never[];
         required: false;
     };
+    holidays: {
+        type: PropType<Holidays[] | null>;
+        default: undefined;
+        required: false;
+    };
+    hiddenHighLightInHolidays: {
+        type: BooleanConstructor;
+        required: false;
+    };
 }>>, {
     selected: Date;
     start: "monday" | "sunday";
@@ -72,6 +91,8 @@ declare const _default: import("vue-demi").DefineComponent<{
     allowPast: boolean;
     showRelatedDays: boolean;
     highLights: CyclePeriod[];
+    holidays: Holidays[] | null;
+    hiddenHighLightInHolidays: boolean;
 }>;
 export default _default;
 //# sourceMappingURL=SimpleCalender.d.ts.map

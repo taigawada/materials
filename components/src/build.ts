@@ -21,7 +21,7 @@ import SimpleResourceList from './components/SimpleResourceList';
 import ResourceItem from './components/ResourceItem';
 import SimplePagination from './components/SimplePagination';
 import SimpleIcon from './components/SimpleIcon';
-import { sortItems } from './utils/utils';
+import { sortItems, dayOfWeekStr } from './utils/utils';
 import { useHolidays } from './utils/useHolidays';
 
 export {
@@ -49,5 +49,6 @@ export {
     ResourceItem,
     SimplePagination,
     sortItems,
+    dayOfWeekStr,
     useHolidays,
 };

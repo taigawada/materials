@@ -18,7 +18,7 @@
     },
     "scripts": {
         "serve": "vite",
-        "build": "vue-demi-switch 3 && vue-tsc && vite build",
+        "build": "vue-demi-switch 3 && tsc && vite build",
         "format": "prettier -w src/**/*.{ts,tsx,vue}"
     },
     "eslintIgnore": [
@@ -44,7 +44,7 @@
         "prettier": "^2.7.1",
         "sass": "^1.54.3",
         "sass-loader": "^13.0.2",
-        "typescript": "^4.7.4",
+        "typescript": "^4.8.2",
         "vue": "^3.2.37"
     },
     "peerDependencies": {

@@ -35,6 +35,10 @@
     z-index: 10;
     outline: 0;
 }
+.simple_input__disabled {
+    background: rgba(238, 238, 238, 1);
+    cursor: no-drop;
+}
 .simple_input__remove {
     height: 18px;
     position: relative;
