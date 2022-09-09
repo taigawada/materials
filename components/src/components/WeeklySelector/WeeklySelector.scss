@@ -47,6 +47,7 @@
 .weekly_selector__week_caption {
     text-align: left;
     font-size: 12px;
+    transition: opacity 0.2s;
 }
 .weekly_selector__week_add_icon {
     width: 14px;
@@ -54,4 +55,15 @@
     fill: $selected;
     cursor: pointer;
     margin: var(--child-margin);
+}
+.weekly_selector__weeks_transition {
+    transition: height 0.4s ease-in-out;
+}
+.weeks-enter-active,
+.weeks-leave-active {
+    transition: all 500ms;
+}
+.weeks-enter-from,
+.weeks-leave-to {
+    opacity: 0;
 }

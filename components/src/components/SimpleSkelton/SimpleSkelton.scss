@@ -9,7 +9,7 @@ $skelton-base-color-dark: rgba(233, 233, 233, 1);
 .simple_skelton__body {
     width: var(--simple-skelton-body-width);
     height: var(--simple-skelton-body-height);
-    margin: 0 auto;
+    margin: $space-4 auto;
     border-radius: $border-radius-1;
     z-index: 1;
     background: $skelton-base-color-light;

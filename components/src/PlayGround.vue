@@ -122,21 +122,6 @@
                 </SimpleTag>
             </template>
         </SimpleStack>
-        <SimpleCombobox
-            style="width: 20%; margin: 0 auto"
-            :fieldValue="comboField"
-            :items="comboItems"
-            :selectedItems="comboSelected"
-            allowAdd
-            remove
-            multiple
-            search
-            @fieldChange="comboFieldChange"
-            @remove="comboFieldRemove"
-            @add:item="handleAddItems"
-            @change:select="comboSelectedChange"
-        >
-        </SimpleCombobox>
         <p>Modal</p>
         <SimpleButton normal @click="handleModalOpen"> 開く </SimpleButton>
         <SimpleModal
@@ -164,10 +149,11 @@
         <p>WeeklySelector & Calender</p>
         <div>
             <WeeklySelector
+                :isEachWeek="isEachWeek"
                 :weekValue="weekState"
                 @change:week="changeWeek"
-                @add:week="changeWeek"
-                @del:week="changeWeek"
+                @changeEach:day="isEachWeek = false"
+                @changeEach:week="isEachWeek = true"
             />
         </div>
         <div style="width: 40%; margin: 0 auto">
@@ -199,6 +185,24 @@
                 ></SimpleDateTimePicker>
             </SimpleCard>
         </div>
+        <SimpleCombobox
+            style="width: 20%; margin: 0 auto"
+            :fieldValue="comboField"
+            :items="comboItems"
+            :selectedItems="comboSelected"
+            allowAdd
+            remove
+            multiple
+            search
+            @fieldChange="comboFieldChange"
+            @remove="comboFieldRemove"
+            @add:item="handleAddItems"
+            @change:select="comboSelectedChange"
+        >
+        </SimpleCombobox>
+        <SimpleSaveBar :open="loading" />
+        <SimpleToast :active="loading" content="保存しました" error />
+
         <div style="height: 800px"></div>
     </div>
 </template>
@@ -227,6 +231,8 @@ import ResourceItem from './components/ResourceItem/ResourceItem';
 import SimplePagination from './components/SimplePagination/SimplePagination';
 import SimpleSkelton from './components/SimpleSkelton/SimpleSkelton';
 import SimpleIcon from './components/SimpleIcon/SimpleIcon';
+import SimpleSaveBar from './components/SimpleSaveBar/SimpleSaveBar';
+import SimpleToast from './components/SimpleToast/SimpleToast';
 
 import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
 import { CyclePeriod, sortItems } from './utils/utils';
@@ -261,6 +267,8 @@ export default defineComponent({
         SimpleDateTimePicker,
         SimpleSkelton,
         SimpleIcon,
+        SimpleSaveBar,
+        SimpleToast,
     },
     setup() {
         const holidays = ref<Holidays[] | null>(null);
@@ -377,6 +385,7 @@ export default defineComponent({
         const changeWeek = (newValue: CyclePeriod[]) => {
             weekState.value = newValue;
         };
+        const isEachWeek = ref(true);
         // Tags, Combobox
         const comboField = ref('');
         const comboFieldChange = (newValue: string) => {
@@ -478,6 +487,7 @@ export default defineComponent({
             modalMainAction,
             weekState,
             changeWeek,
+            isEachWeek,
             comboSelected,
             comboField,
             comboFieldChange,

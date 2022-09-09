@@ -1,9 +1,11 @@
+import './SimpleCombobox.scss';
+
 import { defineComponent, ref, computed, PropType, h, VNode } from 'vue-demi';
 import { DeleteCross, SearchGlass, ArrowDown } from '@simple-education-dev/icons';
 import SimpleInput from '../SimpleInput';
 import SimpleCheckbox from '../SimpleCheckbox';
 import SimpleIcon from '../SimpleIcon';
-import './SimpleCombobox.scss';
+
 export default defineComponent({
     props: {
         caption: {
@@ -49,8 +51,8 @@ export default defineComponent({
             required: false,
         },
         floatBoxHeight: {
-            type: String,
-            default: '180px',
+            type: Number,
+            default: 180,
             required: false,
         },
     },
@@ -130,8 +132,11 @@ export default defineComponent({
             return enteredItemRef.value === index;
         };
         const floatBoxHeightStyle = () => ({
-            '--float-box-height': props.floatBoxHeight,
+            '--float-box-height': `${props.floatBoxHeight}px`,
         });
+        // const { accordionEnter, accordionLeave, accordionAfterEnter, accordionAfterLeave } = useAccordionAnimation(
+        //     props.floatBoxHeight
+        // );
         const inputNode = () => {
             const showIcon = isEntered.value || isFocus.value;
             return h(SimpleInput, {

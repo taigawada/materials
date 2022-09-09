@@ -42,10 +42,18 @@ export default defineComponent({
         const documentRef = ref(document.documentElement);
         const scrollLock = useScrollLock(documentRef);
         const onMainAction = () => {
-            context.emit('mainAction');
+            if (props.mainAction.onAction) {
+                props.mainAction.onAction();
+            } else {
+                context.emit('mainAction');
+            }
         };
         const onSubAction = () => {
-            context.emit('subAction');
+            if (props.subAction.onAction) {
+                props.subAction.onAction();
+            } else {
+                context.emit('subAction');
+            }
         };
         const handleDestroy = () => {
             context.emit('destroy');

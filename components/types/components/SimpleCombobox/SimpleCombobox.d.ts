@@ -1,5 +1,5 @@
-import { PropType, VNode } from 'vue-demi';
 import './SimpleCombobox.scss';
+import { PropType, VNode } from 'vue-demi';
 declare const _default: import("vue-demi").DefineComponent<{
     caption: {
         type: StringConstructor;
@@ -44,8 +44,8 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
     floatBoxHeight: {
-        type: StringConstructor;
-        default: string;
+        type: NumberConstructor;
+        default: number;
         required: false;
     };
 }, () => VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
@@ -94,8 +94,8 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
     floatBoxHeight: {
-        type: StringConstructor;
-        default: string;
+        type: NumberConstructor;
+        default: number;
         required: false;
     };
 }>>, {
@@ -105,7 +105,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     remove: boolean;
     allowAdd: boolean;
     multiple: boolean;
-    floatBoxHeight: string;
+    floatBoxHeight: number;
 }>;
 export default _default;
 //# sourceMappingURL=SimpleCombobox.d.ts.map

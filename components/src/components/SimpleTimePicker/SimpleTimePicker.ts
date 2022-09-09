@@ -35,6 +35,11 @@ export default defineComponent({
             default: false,
             required: false,
         },
+        error: {
+            type: String,
+            default: undefined,
+            required: false,
+        },
     },
     setup(props, context) {
         const isFocus = ref(false);
@@ -120,12 +125,14 @@ export default defineComponent({
                         disabled: props.disabled,
                         readonly: true,
                         value: props.inputValue,
+                        error: props.error,
                         props: {
                             caption: props.caption,
                             placeholder: props.placeholder,
                             readonly: true,
                             value: props.inputValue,
                             disabled: props.disabled,
+                            error: props.error,
                         },
                         onFocusin: inFocus,
                         onfocusout: outFocus,

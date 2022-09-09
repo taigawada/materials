@@ -19,7 +19,7 @@
     "scripts": {
         "serve": "vite",
         "test": "node ./cli/start.js",
-        "build": "vue-demi-switch 3 && node ./cli/loading.js start & tsc && vite build",
+        "build": "vue-demi-switch 3 && tsc && vite build",
         "format": "prettier -w src/**/*.{ts,tsx,vue}"
     },
     "eslintIgnore": [

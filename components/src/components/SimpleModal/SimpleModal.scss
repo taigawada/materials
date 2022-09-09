@@ -1,6 +1,5 @@
 @use 'globalStyleSheet' as *;
 .simple_modal__overlay {
-    color: $surface;
     z-index: 100;
     display: block;
     position: fixed;
@@ -31,6 +30,7 @@
     border-bottom: 0.2px solid #a8a8a8;
 }
 .simple_modal__card_title {
+    font-size: $font-size-6;
     margin-left: $space-4;
 }
 .simple_modal__content_container {

@@ -1,9 +1,11 @@
+import './WeeklySelector.scss';
 import { defineComponent, computed, PropType, h, VNode, isVue3 } from 'vue-demi';
 import { dayOfWeekStr, cyclePeriodConverter, CyclePeriod, BooleanArray } from '../../utils/utils';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
 import SimpleButton from '../SimpleButton';
-import './WeeklySelector.scss';
+
 type Start = 'monday' | 'sunday';
+
 export default defineComponent({
     props: {
         weekValue: {
@@ -27,13 +29,6 @@ export default defineComponent({
         },
     },
     setup(props, context) {
-        // if (isVue3) {
-        //     context.expose({ isEachWeek });
-        // } else {
-        //     const internalInstance = getCurrentInstance();
-        //     // @ts-ignore
-        //     Object.assign(internalInstance.proxy, { isEachWeek });
-        // }
         const weekBooleanArray = computed(
             () => cyclePeriodConverter(props.weekValue, props.start, props.isEachWeek) as BooleanArray
         );
@@ -54,11 +49,19 @@ export default defineComponent({
         };
         const changeEachDay = () => {
             context.emit('changeEach:day');
-            context.emit('change:week', cyclePeriodConverter(weekBooleanArray.value, props.start, props.isEachWeek));
+            const changed = cyclePeriodConverter(
+                weekBooleanArray.value,
+                props.start,
+                props.isEachWeek
+            ) as CyclePeriod[];
+            context.emit(
+                'change:week',
+                changed.filter((el) => el.weekIndex < 4)
+            );
         };
         const changeEachWeek = () => {
             context.emit('changeEach:week');
-            context.emit('change:week', cyclePeriodConverter(weekBooleanArray.value, props.start, props.isEachWeek));
+            context.emit('change:week', []);
         };
         const enabled = (week: number, weekDay: number) => {
             return weekBooleanArray.value[week][weekDay];
@@ -112,13 +115,40 @@ export default defineComponent({
             });
         const weeksNode = (): VNode[] =>
             weekArray.value.map((weekIndex) => {
-                return h('div', { key: 'week' + weekIndex }, [
-                    !props.isEachWeek
-                        ? h('div', { class: [{ weekly_selector__week_caption: true }] }, String(weekIndex + 1) + '週目')
-                        : null,
+                return h('div', { key: weekIndex }, [
+                    h(
+                        'div',
+                        {
+                            class: [{ weekly_selector__week_caption: true }],
+                            style: [{ opacity: props.isEachWeek ? 0 : 1 }],
+                        },
+                        String(weekIndex + 1) + '週目'
+                    ),
                     h('div', { class: [{ weekly_selector__weekdays: true }] }, weekdaysNode(weekIndex)),
                 ]);
             });
-        return () => h('div', { class: [{ weekly_selector__base: true }] }, [...weeksNode(), iconNode()]);
+        const heightStyle = computed(() => {
+            if (props.isEachWeek) {
+                return { height: '52px' };
+            } else {
+                return { height: '208px' };
+            }
+        });
+        return () =>
+            h('div', { class: [{ weekly_selector__base: true }] }, [
+                h(
+                    'div',
+                    {
+                        class: [
+                            {
+                                weekly_selector__weeks_transition: true,
+                            },
+                        ],
+                        style: [heightStyle.value],
+                    },
+                    weeksNode()
+                ),
+                iconNode(),
+            ]);
     },
 });
