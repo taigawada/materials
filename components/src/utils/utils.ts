@@ -38,55 +38,5 @@ function sortItems(key: string, order: 'asc' | 'desc' = 'asc', escape: string | 
         return order === 'desc' ? comparison * -1 : comparison;
     };
 }
-interface CyclePeriod {
-    weekIndex: number;
-    dayOfWeekIndex: number;
-}
-type BooleanArray = [boolean, boolean, boolean, boolean, boolean, boolean, boolean][];
-type CyclePeriodArray = CyclePeriod[];
 
-function cyclePeriodConverter(array: unknown[], start: 'monday' | 'sunday' = 'monday', isEachWeek: boolean = true) {
-    const isBooleanArray = Array.isArray(array[0]);
-    const weekStartsOn = start === 'monday' ? 0 : 1;
-    if (isBooleanArray) {
-        const booleanArray = array as BooleanArray;
-        const parseResult: CyclePeriodArray = [];
-        if (isEachWeek) {
-            booleanArray[0].map((weekOfDay, weekOfDayIndex) => {
-                if (weekOfDay) {
-                    [...new Array(5).keys()].map((i) =>
-                        parseResult.push({ weekIndex: i, dayOfWeekIndex: weekOfDayIndex - weekStartsOn })
-                    );
-                }
-            });
-        } else {
-            booleanArray.map((week, weekIndex) => {
-                week.map((weekOfDay, weekOfDayIndex) => {
-                    if (weekOfDay) {
-                        parseResult.push({ weekIndex: weekIndex, dayOfWeekIndex: weekOfDayIndex - weekStartsOn });
-                    }
-                });
-            });
-        }
-        return parseResult;
-    } else {
-        const cyclePeriodArray = array as CyclePeriodArray;
-        const parseResult: BooleanArray = new Array(4).fill(new Array(7).fill(false));
-        const deepCopy = [...parseResult];
-        cyclePeriodArray.map((cyclePeriod) => {
-            if (cyclePeriod.weekIndex <= 3) {
-                deepCopy[cyclePeriod.weekIndex] = [...deepCopy[cyclePeriod.weekIndex]];
-                deepCopy[cyclePeriod.weekIndex][cyclePeriod.dayOfWeekIndex - weekStartsOn] = true;
-            }
-        });
-        if (isEachWeek) {
-            deepCopy.splice(1, parseResult.length - 1);
-        }
-        return deepCopy;
-    }
-}
-
-// const testData = [[false, false, false, false, false, false, true]];
-// console.log(cyclePeriodConverter(testData));
-
-export { dayOfWeekStr, sortItems, cyclePeriodConverter, CyclePeriod, BooleanArray };
+export { dayOfWeekStr, sortItems };

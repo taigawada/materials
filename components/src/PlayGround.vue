@@ -6,10 +6,6 @@
         <SimpleActions :open="actionsOpen" :actions="actions" @click:activator="actionsOpenToggle" @close="onClose">
             その他の操作
         </SimpleActions>
-        <SimpleSkelton heading></SimpleSkelton>
-        <SimpleSkelton body width="40%"></SimpleSkelton>
-        <SimpleSkelton text :line="3"></SimpleSkelton>
-
         <p>Input, Checkbox & Card</p>
         <SimpleCard
             width="50%"
@@ -235,7 +231,8 @@ import SimpleSaveBar from './components/SimpleSaveBar/SimpleSaveBar';
 import SimpleToast from './components/SimpleToast/SimpleToast';
 
 import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
-import { CyclePeriod, sortItems } from './utils/utils';
+import { CyclePeriod } from './components/WeeklySelector/useWeeklySelector';
+import { sortItems } from './utils/utils';
 import { format } from 'date-fns';
 
 import { Holidays, useHolidays } from './utils/useHolidays';

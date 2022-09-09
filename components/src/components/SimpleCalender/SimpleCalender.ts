@@ -17,7 +17,8 @@ import {
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
 import SimpleIcon from '../SimpleIcon';
-import { dayOfWeekStr, CyclePeriod } from '@/utils/utils';
+import { CyclePeriod } from '../WeeklySelector/useWeeklySelector';
+import { dayOfWeekStr } from '@/utils/utils';
 import './SimpleCalender.scss';
 import { Holidays } from '../../utils/useHolidays';
 import SimpleSpinner from '../SimpleSpinner';
@@ -88,7 +89,7 @@ export default defineComponent({
         const isEntered = (weekIndex: number, weekDayIndex: number) => {
             return nowEntered.weekIndex === weekIndex && nowEntered.weekDayIndex === weekDayIndex;
         };
-        const weekStartsOn = computed(() => (props.start === 'monday' ? 0 : 1));
+        const weekStartsOn = computed(() => (props.start === 'monday' ? 1 : 0));
         const currentShowDate = ref<Date>(props.selected ? props.selected : new Date());
         const currentSelectedDate = ref<Date | undefined>(props.selected);
         const showHighLights = (date: Date, isHoliday: boolean | string) => {
@@ -97,7 +98,7 @@ export default defineComponent({
                     props.highLights.findIndex(
                         (elememt) =>
                             elememt.weekIndex === differenceInWeeks(date, startOfMonth(date)) &&
-                            elememt.dayOfWeekIndex === getDay(date) - weekStartsOn.value &&
+                            elememt.dayOfWeekIndex === getDay(date) &&
                             isSameMonth(date, currentShowDate.value)
                     ) !== -1;
                 if (highLights) {
@@ -241,6 +242,9 @@ export default defineComponent({
                             {
                                 key: String(date),
                                 title: holiday ? holiday : '',
+                                attr: {
+                                    title: holiday ? holiday : '',
+                                },
                                 class: [
                                     {
                                         simple_calender__date_data: true,
