@@ -8,6 +8,7 @@ interface MainAction {
     text: string;
     disabled?: boolean;
     loading?: boolean;
+    isError?: boolean;
     onAction?: () => unknown;
 }
 interface SubAction {
@@ -117,11 +118,13 @@ export default defineComponent({
                     h(
                         SimpleButton,
                         {
-                            primary: true,
+                            primary: props.mainAction.isError ? false : true,
+                            error: props.mainAction.isError ? true : false,
                             disabled: props.mainAction.disabled,
                             loading: props.mainAction.loading,
                             props: {
-                                primary: true,
+                                primary: props.mainAction.isError ? false : true,
+                                error: props.mainAction.isError ? true : false,
                                 disabled: props.mainAction.disabled,
                                 loading: props.mainAction.loading,
                             },

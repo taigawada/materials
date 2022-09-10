@@ -1,5 +1,5 @@
 import { PropType, VNode } from 'vue-demi';
-import { CyclePeriod } from '@/utils/utils';
+import { CyclePeriod } from '../WeeklySelector/useWeeklySelector';
 import './SimpleCalender.scss';
 import { Holidays } from '../../utils/useHolidays';
 declare const _default: import("vue-demi").DefineComponent<{

@@ -242,7 +242,7 @@ export default defineComponent({
                             {
                                 key: String(date),
                                 title: holiday ? holiday : '',
-                                attr: {
+                                domProps: {
                                     title: holiday ? holiday : '',
                                 },
                                 class: [

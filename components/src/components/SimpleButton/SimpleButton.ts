@@ -1,4 +1,4 @@
-import { defineComponent, ref, PropType, h, VNode, VNodeNormalizedChildren, isVue3 } from 'vue-demi';
+import { defineComponent, ref, PropType, h, VNode, VNodeNormalizedChildren, isVue3, computed } from 'vue-demi';
 import SimpleSpinner from '../SimpleSpinner';
 import SimpleIcon from '../SimpleIcon';
 import './SimpleButton.scss';
@@ -10,6 +10,10 @@ export default defineComponent({
             required: false,
         },
         normal: {
+            type: Boolean,
+            required: false,
+        },
+        error: {
             type: Boolean,
             required: false,
         },
@@ -99,21 +103,20 @@ export default defineComponent({
             };
         };
         const target = () => (props.external ? '_blank' : '_self');
-        const iconColor = () => {
+        const iconColor = computed(() => {
             if (props.textColor) return props.textColor;
             else if (props.primary) return 'rgba(255, 255, 255, 1)';
             else if (props.normal) return 'rgba(114, 114, 114, 1)';
+            else if (props.error) return 'rgba(255, 255, 255, 1)';
             else if (props.plain) return 'rgba(53, 146, 185, 1)';
-        };
-        const spinnerColor = () => {
-            if (props.primary && !props.normal) {
-                return [255, 255, 85];
-            } else if (!props.primary && props.normal) {
-                return [105, 105, 105];
-            } else {
-                return [255, 194, 85];
-            }
-        };
+            else return 'rgba(255, 255, 255, 1)';
+        });
+        const spinnerColor = computed(() => {
+            if (props.primary) return [255, 255, 85];
+            else if (props.normal) return [105, 105, 105];
+            else if (props.error) return [255, 255, 255];
+            else return [255, 194, 85];
+        });
         const sideSwitch = (domArray: unknown[]): VNode[] => {
             if (props.iconSide === 'left') {
                 return domArray.reverse() as VNode[];
@@ -129,6 +132,7 @@ export default defineComponent({
                         {
                             simple_button__disable_prime: props.primary,
                             simple_button__disable_normal: props.normal,
+                            simple_button__disable_error: props.error,
                             simple_button__disable_plain: props.plain,
                         },
                     ],
@@ -141,7 +145,7 @@ export default defineComponent({
                             class: [
                                 {
                                     simple_button__disabled_text: !props.plain,
-                                    simple_button__disabled_text_primary: props.primary,
+                                    simple_button__disabled_text_primary: props.primary || props.error,
                                 },
                             ],
                             style: [textLengthVar()],
@@ -158,12 +162,12 @@ export default defineComponent({
                                       props: {
                                           source: props.icon,
                                           size: props.size + 'px',
-                                          fill: iconColor(),
+                                          fill: iconColor.value,
                                           clickable: true,
                                       },
                                       source: props.icon,
                                       size: props.size + 'px',
-                                      fill: iconColor(),
+                                      fill: iconColor.value,
                                       clickable: true,
                                   })
                                 : undefined,
@@ -177,8 +181,8 @@ export default defineComponent({
             if (!props.plain) {
                 return h(SimpleSpinner, {
                     size: 'normal',
-                    color: spinnerColor(),
-                    props: { size: 'normal', color: spinnerColor() },
+                    color: spinnerColor.value,
+                    props: { size: 'normal', color: spinnerColor.value },
                 });
             }
         };
@@ -190,6 +194,7 @@ export default defineComponent({
                         {
                             simple_button__disable_prime: props.primary,
                             simple_button__disable_normal: props.normal,
+                            simple_button__disable_error: props.error,
                             simple_button__disable_plain: props.plain,
                         },
                     ],
@@ -214,12 +219,12 @@ export default defineComponent({
                                       props: {
                                           source: props.icon,
                                           size: props.size + 'px',
-                                          fill: iconColor(),
+                                          fill: iconColor.value,
                                           clickable: true,
                                       },
                                       source: props.icon,
                                       size: props.size + 'px',
-                                      fill: iconColor(),
+                                      fill: iconColor.value,
                                       clickable: true,
                                   })
                                 : undefined,
@@ -250,10 +255,12 @@ export default defineComponent({
                 {
                     class: [
                         {
-                            simple_button__base_normal: props.normal,
-                            simple_button__entered_normal: props.normal && isEntered.value,
                             simple_button__base_prime: props.primary,
                             simple_button__entered_prime: props.primary && isEntered.value,
+                            simple_button__base_normal: props.normal,
+                            simple_button__entered_normal: props.normal && isEntered.value,
+                            simple_button__base_error: props.error,
+                            simple_button__entered_error: props.error && isEntered.value,
                         },
                     ],
                     style: [sizeToPixel()],
@@ -267,6 +274,7 @@ export default defineComponent({
                                 {
                                     simple_button__text_normal: props.normal,
                                     simple_button__text_prime: props.primary,
+                                    simple_button__text_error: props.error,
                                 },
                             ],
                             style: [textLengthVar()],
@@ -283,12 +291,12 @@ export default defineComponent({
                                       props: {
                                           source: props.icon,
                                           size: props.size + 'px',
-                                          fill: iconColor(),
+                                          fill: iconColor.value,
                                           clickable: true,
                                       },
                                       source: props.icon,
                                       size: props.size + 'px',
-                                      fill: iconColor(),
+                                      fill: iconColor.value,
                                       clickable: true,
                                   })
                                 : undefined,
@@ -314,12 +322,12 @@ export default defineComponent({
                               props: {
                                   source: props.icon,
                                   size: props.size + 'px',
-                                  fill: iconColor(),
+                                  fill: iconColor.value,
                                   clickable: true,
                               },
                               source: props.icon,
                               size: props.size + 'px',
-                              fill: iconColor(),
+                              fill: iconColor.value,
                               clickable: true,
                           })
                         : undefined,

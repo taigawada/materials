@@ -77,11 +77,11 @@ export default defineComponent({
             selectedDate.meridiem = newValue.meridiem;
             selectedDate.hours = newValue.hours;
             selectedDate.minutes = newValue.minutes;
-            const nowDate = new Date();
+            const baseDate = new Date(2019, 4, 26, 0);
             if (newValue.meridiem !== null && newValue.meridiem !== undefined) {
                 newValue.hours = newValue.hours + newValue.meridiem === '午後' ? 12 : 0;
             }
-            context.emit('change:time', set(nowDate, newValue));
+            context.emit('change:time', set(baseDate, newValue));
         };
         const timePickerNode = () => {
             if (isEntered.value || isFocus.value) {

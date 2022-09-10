@@ -1,6 +1,6 @@
 import './WeeklySelector.scss';
 import { PropType, VNode } from 'vue-demi';
-import { CyclePeriod } from '../../utils/utils';
+import { CyclePeriod } from './useWeeklySelector';
 declare type Start = 'monday' | 'sunday';
 declare const _default: import("vue-demi").DefineComponent<{
     weekValue: {

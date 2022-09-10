@@ -119,7 +119,7 @@
             </template>
         </SimpleStack>
         <p>Modal</p>
-        <SimpleButton normal @click="handleModalOpen"> 開く </SimpleButton>
+        <SimpleButton primary @click="handleModalOpen"> 開く </SimpleButton>
         <SimpleModal
             title="this is modal"
             :mainAction="{
