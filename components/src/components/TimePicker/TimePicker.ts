@@ -1,4 +1,4 @@
-import { defineComponent, ref, PropType, reactive, watch, toRefs, h } from 'vue-demi';
+import { defineComponent, PropType, reactive, watch, toRefs, h, computed } from 'vue-demi';
 import { SimpleSmoothPicker } from '../SimpleSmoothPicker';
 import { TimeObject } from '../../types/types';
 import './TimePicker.scss';
@@ -21,8 +21,15 @@ export default defineComponent({
         },
     },
     setup(props, context) {
-        const hoursArray = ref([...Array(props.interval)].map((_: unknown, i) => i));
-        const minutesArray = ref(
+        const hoursArray = computed(() => {
+            if (props.interval === 12) {
+                if (props.time.meridiem === '午前') {
+                    return [...Array(13)].map((_: unknown, i) => i);
+                }
+            }
+            return [...Array(props.interval)].map((_: unknown, i) => i);
+        });
+        const minutesArray = computed(() =>
             [...Array(60 / props.minutesInterval)].map((_: unknown, i) => i * props.minutesInterval)
         );
         const currentSelectTime = reactive<TimeObject>({
