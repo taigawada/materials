@@ -1,7 +1,7 @@
 import './SimpleSaveBar.scss';
 
 import { defineComponent, h, isVue3, PropType } from 'vue-demi';
-import SimpleButton from '../SimpleButton';
+import { SimpleButton } from '../SimpleButton';
 
 interface Button {
     label: string;
@@ -45,7 +45,11 @@ export default defineComponent({
                             normal: true,
                             disabled: props.discardButton.disabled,
                             loading: props.discardButton.loading,
-                            props: { normal: true },
+                            props: {
+                                normal: true,
+                                disabled: props.discardButton.disabled,
+                                loading: props.discardButton.loading,
+                            },
                             onClick: () => (props.discardButton.onAction ? props.discardButton.onAction() : void 0),
                             on: {
                                 click: () => (props.discardButton.onAction ? props.discardButton.onAction() : void 0),
@@ -59,7 +63,11 @@ export default defineComponent({
                             primary: true,
                             disabled: props.saveButton.disabled,
                             loading: props.saveButton.loading,
-                            props: { primary: true },
+                            props: {
+                                primary: true,
+                                disabled: props.saveButton.disabled,
+                                loading: props.saveButton.loading,
+                            },
                             onClick: () => (props.saveButton.onAction ? props.saveButton.onAction() : void 0),
                             on: {
                                 click: () => (props.saveButton.onAction ? props.saveButton.onAction() : void 0),

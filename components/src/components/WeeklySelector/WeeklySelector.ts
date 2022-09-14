@@ -3,7 +3,7 @@ import { defineComponent, computed, PropType, h, VNode, isVue3 } from 'vue-demi'
 import { dayOfWeekStr } from '@/utils/utils';
 import { cyclePeriodConverter, CyclePeriod, BooleanArray } from './useWeeklySelector';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
-import SimpleButton from '../SimpleButton';
+import { SimpleButton } from '../SimpleButton';
 
 type Start = 'monday' | 'sunday';
 

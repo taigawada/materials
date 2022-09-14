@@ -1,6 +1,6 @@
 import { defineComponent, isVue3, h, VNode, getCurrentInstance } from 'vue-demi';
 import { CheckMark, HyphenBar } from '@simple-education-dev/icons';
-import SimpleIcon from '../SimpleIcon';
+import { SimpleIcon } from '../SimpleIcon';
 import './SimpleCheckbox.scss';
 export default defineComponent({
     props: {

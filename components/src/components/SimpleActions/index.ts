@@ -1,4 +1,1 @@
-import SimpleActions from './SimpleActions';
-
-export { SimpleActions };
-export default SimpleActions;
+export { default as SimpleActions } from './SimpleActions';

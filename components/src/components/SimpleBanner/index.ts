@@ -1,4 +1,1 @@
-import SimpleBanner from './SimpleBanner';
-
-export { SimpleBanner };
-export default SimpleBanner;
+export { default as SimpleBanner } from './SimpleBanner';

@@ -1,4 +1,1 @@
-import SimpleSelector from './SimpleSelector';
-
-export { SimpleSelector };
-export default SimpleSelector;
+export { default as SimpleSelector } from './SimpleSelector';

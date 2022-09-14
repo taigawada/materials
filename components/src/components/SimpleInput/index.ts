@@ -1,4 +1,1 @@
-import SimpleInput from './SimpleInput';
-
-export { SimpleInput };
-export default SimpleInput;
+export { default as SimpleInput } from './SimpleInput';

@@ -16,12 +16,12 @@ import {
     differenceInWeeks,
 } from 'date-fns';
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
-import SimpleIcon from '../SimpleIcon';
+import { SimpleIcon } from '../SimpleIcon';
 import { CyclePeriod } from '../WeeklySelector/useWeeklySelector';
 import { dayOfWeekStr } from '@/utils/utils';
 import './SimpleCalender.scss';
 import { Holidays } from '../../utils/useHolidays';
-import SimpleSpinner from '../SimpleSpinner';
+import { SimpleSpinner } from '../SimpleSpinner';
 
 interface Entered {
     weekIndex: null | number;

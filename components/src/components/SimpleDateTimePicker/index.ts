@@ -1,4 +1,1 @@
-import SimpleDateTimePicker from './SimpleDateTimePicker';
-
-export { SimpleDateTimePicker };
-export default SimpleDateTimePicker;
+export { default as SimpleDateTimePicker } from './SimpleDateTimePicker';

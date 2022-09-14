@@ -1,4 +1,1 @@
-import SimpleSkelton from './SimpleSkelton';
-
-export { SimpleSkelton };
-export default SimpleSkelton;
+export { default as SimpleSkelton } from './SimpleSkelton';

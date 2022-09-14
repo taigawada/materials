@@ -1,10 +1,10 @@
 import './SimpleCombobox.scss';
 
-import { defineComponent, ref, computed, PropType, h, VNode } from 'vue-demi';
+import { defineComponent, ref, computed, PropType, h, VNode, watchEffect } from 'vue-demi';
 import { DeleteCross, SearchGlass, ArrowDown } from '@simple-education-dev/icons';
-import SimpleInput from '../SimpleInput';
-import SimpleCheckbox from '../SimpleCheckbox';
-import SimpleIcon from '../SimpleIcon';
+import { SimpleInput } from '../SimpleInput';
+import { SimpleCheckbox } from '../SimpleCheckbox';
+import { SimpleIcon } from '../SimpleIcon';
 
 export default defineComponent({
     props: {
@@ -50,6 +50,11 @@ export default defineComponent({
             default: false,
             required: false,
         },
+        error: {
+            type: String,
+            default: undefined,
+            required: false,
+        },
         floatBoxHeight: {
             type: Number,
             default: 180,
@@ -59,6 +64,13 @@ export default defineComponent({
     setup(props, context) {
         const isFocus = ref(false);
         const isEntered = ref(false);
+        watchEffect(() => {
+            if (isEntered.value || isFocus.value) {
+                context.emit('floatOpen');
+            } else {
+                context.emit('floatClose');
+            }
+        });
         const currentSelect = ref('');
         const onChangeSelect = (item: string, bool: boolean | undefined) => {
             currentSelect.value = item;
@@ -138,19 +150,21 @@ export default defineComponent({
         //     props.floatBoxHeight
         // );
         const inputNode = () => {
-            const showIcon = isEntered.value || isFocus.value;
+            const isOpen = isEntered.value || isFocus.value;
             return h(SimpleInput, {
                 caption: props.caption,
                 placeholder: props.placeholder,
                 value: props.fieldValue,
                 remove: props.remove,
-                icon: showIcon ? SearchGlass : ArrowDown,
+                icon: isOpen ? SearchGlass : ArrowDown,
+                error: isOpen ? undefined : props.error,
                 props: {
                     caption: props.caption,
                     placeholder: props.placeholder,
                     value: props.fieldValue,
                     remove: props.remove,
-                    icon: showIcon ? SearchGlass : ArrowDown,
+                    icon: isOpen ? SearchGlass : ArrowDown,
+                    error: isOpen ? undefined : props.error,
                 },
                 'onChange:value': fieldChange,
                 onFocusin: inFocus,

@@ -1,7 +1,7 @@
 import { defineComponent, h, isVue3, PropType } from 'vue-demi';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
-import SimpleStack from '../SimpleStack';
-import SimpleIcon from '../SimpleIcon';
+import { SimpleStack } from '../SimpleStack';
+import { SimpleIcon } from '../SimpleIcon';
 import './ResourceItem.scss';
 export default defineComponent({
     props: {
@@ -23,7 +23,6 @@ export default defineComponent({
         const handleSortClick = () => {
             context.emit('sort', !props.asc);
         };
-
         const justifySelf = () => {
             switch (props.distribution) {
                 case 'left':

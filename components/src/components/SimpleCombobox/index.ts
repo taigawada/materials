@@ -1,4 +1,1 @@
-import SimpleCombobox from './SimpleCombobox';
-
-export { SimpleCombobox };
-export default SimpleCombobox;
+export { default as SimpleCombobox } from './SimpleCombobox';

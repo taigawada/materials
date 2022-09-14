@@ -16,8 +16,7 @@ $text-white: rgba(255, 255, 255, 1);
 $text-disabled: rgba(200, 200, 200, 1);
 $text-error: rgba(196, 0, 0, 1);
 
-$primary: rgba(255, 194, 85, 1);
-$primary-base: rgba(255, 155, 85, 1);
+$primary: rgba(255, 155, 85, 1);
 $primary-hovered: rgba(255, 178, 54, 1);
 $primary-pressed: rgba(255, 178, 54, 1);
 $primary-disabled: rgba(255, 194, 85, 0.5);
@@ -25,10 +24,18 @@ $normal: none;
 $normal-hovered: rgba(233, 239, 241, 1);
 $normal-pressed: rgba(233, 239, 241, 1);
 $normal-disabled: rgba(114, 114, 114, 0.1);
+$critical: rgba(255, 121, 121, 1);
+$critical-hovered: rgba(255, 95, 95, 1);
+$critical-pressed: rgba(255, 95, 95, 1);
+$critical-disabled: rgb(255, 146, 146);
 $plain: rgba(53, 146, 185, 1);
 $plain-hovered: rgba(35, 98, 124, 1);
 $plain-pressed: rgba(35, 98, 124, 1);
 $plain-disabled: rgba(161, 161, 161, 1);
+$criticalPlain: rgba(255, 121, 121, 1);
+$criticalPlain-hovered: rgba(255, 95, 95, 1);
+$criticalPlain-pressed: rgba(255, 95, 95, 1);
+$criticalPlain-disabled: rgb(255, 146, 146);
 
 $hovered: rgba(233, 239, 241, 1);
 $selected: rgba(60, 130, 214, 1);

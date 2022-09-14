@@ -1,5 +1,5 @@
 import { defineComponent, ref, PropType, reactive, watch, toRefs, h } from 'vue-demi';
-import SimpleSmoothPicker from '../SimpleSmoothPicker';
+import { SimpleSmoothPicker } from '../SimpleSmoothPicker';
 import { TimeObject } from '../../types/types';
 import './TimePicker.scss';
 

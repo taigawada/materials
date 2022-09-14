@@ -1,8 +1,8 @@
 import { defineComponent, ref, onMounted, onUpdated, h, isVue3, VNode } from 'vue-demi';
 import { onKeyPressed } from '@vueuse/core';
 import { ArrowLeft, ArrowRight, ThreePointLeader } from '@simple-education-dev/icons';
-import SimpleIcon from '../SimpleIcon';
-import SimplePopover from '../SimplePopover';
+import { SimpleIcon } from '../SimpleIcon';
+import { SimplePopover } from '../SimplePopover';
 import './SimplePagination.scss';
 
 export default defineComponent({

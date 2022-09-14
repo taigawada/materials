@@ -1,4 +1,1 @@
-import SimpleTabs from './SimpleTabs';
-
-export { SimpleTabs };
-export default SimpleTabs;
+export { default as SimpleTabs } from './SimpleTabs';

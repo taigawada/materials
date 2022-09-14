@@ -1,4 +1,1 @@
-import WeeklySelector from './WeeklySelector';
-
-export { WeeklySelector };
-export default WeeklySelector;
+export { default as WeeklySelector } from './WeeklySelector';

@@ -1,4 +1,1 @@
-import SimpleResourceList from './SimpleResourceList';
-
-export { SimpleResourceList };
-export default SimpleResourceList;
+export { default as SimpleResourceList } from './SimpleResourceList';

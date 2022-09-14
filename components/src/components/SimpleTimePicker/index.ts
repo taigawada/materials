@@ -1,4 +1,1 @@
-import SimpleTimePicker from './SimpleTimePicker';
-
-export { SimpleTimePicker };
-export default SimpleTimePicker;
+export { default as SimpleTimePicker } from './SimpleTimePicker';

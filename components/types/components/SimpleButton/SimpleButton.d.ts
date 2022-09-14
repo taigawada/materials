@@ -9,7 +9,15 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: BooleanConstructor;
         required: false;
     };
+    critical: {
+        type: BooleanConstructor;
+        required: false;
+    };
     plain: {
+        type: BooleanConstructor;
+        required: false;
+    };
+    criticalPlain: {
         type: BooleanConstructor;
         required: false;
     };
@@ -65,7 +73,15 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: BooleanConstructor;
         required: false;
     };
+    critical: {
+        type: BooleanConstructor;
+        required: false;
+    };
     plain: {
+        type: BooleanConstructor;
+        required: false;
+    };
+    criticalPlain: {
         type: BooleanConstructor;
         required: false;
     };
@@ -115,7 +131,9 @@ declare const _default: import("vue-demi").DefineComponent<{
     fill: boolean;
     size: number;
     primary: boolean;
+    critical: boolean;
     plain: boolean;
+    criticalPlain: boolean;
     disabled: boolean;
     loading: boolean;
     url: string;

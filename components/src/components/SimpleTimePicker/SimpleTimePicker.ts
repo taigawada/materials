@@ -1,6 +1,6 @@
 import { defineComponent, reactive, ref, onMounted, PropType, h } from 'vue-demi';
-import SimpleInput from '../SimpleInput';
-import TimePicker from '../TimePicker';
+import { SimpleInput } from '../SimpleInput';
+import { TimePicker } from '../TimePicker';
 import { set } from 'date-fns';
 import { TimeObject } from '@/types/types';
 import './SimpleTimePicker.scss';

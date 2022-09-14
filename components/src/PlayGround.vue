@@ -51,7 +51,7 @@
         </SimpleCard>
         <p>Resource List</p>
         <p>buttons</p>
-        <SimpleButton normal :icon="ArrowDown" :disabled="disabled" :loading="loading" @click="handleButtonClick">
+        <SimpleButton critical :icon="ArrowDown" :disabled="disabled" :loading="loading" @click="handleButtonClick">
             プレビュー
         </SimpleButton>
         <div style="height: 20px"></div>
@@ -190,6 +190,7 @@
             remove
             multiple
             search
+            error="エラーです"
             @fieldChange="comboFieldChange"
             @remove="comboFieldRemove"
             @add:item="handleAddItems"

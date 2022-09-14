@@ -1,4 +1,1 @@
-import ResourceItem from './ResourceItem';
-
-export { ResourceItem };
-export default ResourceItem;
+export { default as ResourceItem } from './ResourceItem';

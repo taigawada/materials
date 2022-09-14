@@ -43,6 +43,11 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: boolean;
         required: false;
     };
+    error: {
+        type: StringConstructor;
+        default: undefined;
+        required: false;
+    };
     floatBoxHeight: {
         type: NumberConstructor;
         default: number;
@@ -93,6 +98,11 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: boolean;
         required: false;
     };
+    error: {
+        type: StringConstructor;
+        default: undefined;
+        required: false;
+    };
     floatBoxHeight: {
         type: NumberConstructor;
         default: number;
@@ -103,6 +113,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     placeholder: string;
     caption: string;
     remove: boolean;
+    error: string;
     allowAdd: boolean;
     multiple: boolean;
     floatBoxHeight: number;

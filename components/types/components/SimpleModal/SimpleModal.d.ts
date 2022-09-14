@@ -4,6 +4,7 @@ interface MainAction {
     text: string;
     disabled?: boolean;
     loading?: boolean;
+    isCritical?: boolean;
     onAction?: () => unknown;
 }
 interface SubAction {

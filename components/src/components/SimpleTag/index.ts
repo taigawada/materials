@@ -1,4 +1,1 @@
-import SimpleTag from './SimpleTag';
-
-export { SimpleTag };
-export default SimpleTag;
+export { default as SimpleTag } from './SimpleTag';

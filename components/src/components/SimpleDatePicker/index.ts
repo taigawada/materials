@@ -1,4 +1,1 @@
-import SimpleDatePicker from './SimpleDatePicker';
-
-export { SimpleDatePicker };
-export default SimpleDatePicker;
+export { default as SimpleDatePicker } from './SimpleDatePicker';

@@ -1,4 +1,1 @@
-import SimpleCard from './SimpleCard';
-
-export { SimpleCard };
-export default SimpleCard;
+export { default as SimpleCard } from './SimpleCard';

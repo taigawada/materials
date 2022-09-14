@@ -1,7 +1,7 @@
 import { defineComponent, ref, PropType, h, isVue3, onUpdated, VNode } from 'vue-demi';
 import { ArrowDown } from '@simple-education-dev/icons';
-import SimplePopover from '../SimplePopover';
-import SimpleButton from '../SimpleButton';
+import { SimplePopover } from '../SimplePopover';
+import { SimpleButton } from '../SimpleButton';
 import { useElementBounding } from '@vueuse/core';
 import './SimpleActions.scss';
 interface Actions {

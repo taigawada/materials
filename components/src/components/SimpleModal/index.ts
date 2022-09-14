@@ -1,4 +1,1 @@
-import SimpleModal from './SimpleModal';
-
-export { SimpleModal };
-export default SimpleModal;
+export { default as SimpleModal } from './SimpleModal';

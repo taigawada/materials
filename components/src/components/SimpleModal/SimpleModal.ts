@@ -1,14 +1,14 @@
 import { defineComponent, ref, watchEffect, PropType, h, isVue3 } from 'vue-demi';
 import { useScrollLock, onKeyStroke, onKeyPressed } from '@vueuse/core';
 import { CloseCross } from '@simple-education-dev/icons';
-import SimpleButton from '../SimpleButton';
-import SimpleIcon from '../SimpleIcon';
+import { SimpleButton } from '../SimpleButton';
+import { SimpleIcon } from '../SimpleIcon';
 import './SimpleModal.scss';
 interface MainAction {
     text: string;
     disabled?: boolean;
     loading?: boolean;
-    isError?: boolean;
+    isCritical?: boolean;
     onAction?: () => unknown;
 }
 interface SubAction {
@@ -60,10 +60,10 @@ export default defineComponent({
             context.emit('destroy');
         };
         onKeyPressed(['Enter'], () => {
-            if (props.open === true) context.emit('mainAction');
+            if (props.open === true) onMainAction();
         });
         onKeyPressed(['Escape'], () => {
-            if (props.open === true) context.emit('destroy');
+            if (props.open === true) handleDestroy();
         });
         onKeyStroke(['Tab'], (e) => {
             if (props.open === true) e.preventDefault();
@@ -118,13 +118,13 @@ export default defineComponent({
                     h(
                         SimpleButton,
                         {
-                            primary: props.mainAction.isError ? false : true,
-                            error: props.mainAction.isError ? true : false,
+                            primary: props.mainAction.isCritical ? false : true,
+                            critical: props.mainAction.isCritical ? true : false,
                             disabled: props.mainAction.disabled,
                             loading: props.mainAction.loading,
                             props: {
-                                primary: props.mainAction.isError ? false : true,
-                                error: props.mainAction.isError ? true : false,
+                                primary: props.mainAction.isCritical ? false : true,
+                                critical: props.mainAction.isCritical ? true : false,
                                 disabled: props.mainAction.disabled,
                                 loading: props.mainAction.loading,
                             },

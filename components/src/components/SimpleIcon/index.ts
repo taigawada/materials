@@ -1,4 +1,1 @@
-import SimpleIcon from './SimpleIcon';
-
-export { SimpleIcon };
-export default SimpleIcon;
+export { default as SimpleIcon } from './SimpleIcon';

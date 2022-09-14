@@ -1,6 +1,6 @@
 import { defineComponent, ref, PropType, h, VNode, VNodeNormalizedChildren, isVue3, computed } from 'vue-demi';
-import SimpleSpinner from '../SimpleSpinner';
-import SimpleIcon from '../SimpleIcon';
+import { SimpleSpinner } from '../SimpleSpinner';
+import { SimpleIcon } from '../SimpleIcon';
 import './SimpleButton.scss';
 
 export default defineComponent({
@@ -13,11 +13,15 @@ export default defineComponent({
             type: Boolean,
             required: false,
         },
-        error: {
+        critical: {
             type: Boolean,
             required: false,
         },
         plain: {
+            type: Boolean,
+            required: false,
+        },
+        criticalPlain: {
             type: Boolean,
             required: false,
         },
@@ -105,16 +109,16 @@ export default defineComponent({
         const target = () => (props.external ? '_blank' : '_self');
         const iconColor = computed(() => {
             if (props.textColor) return props.textColor;
-            else if (props.primary) return 'rgba(255, 255, 255, 1)';
+            else if (props.critical || props.primary) return 'rgba(255, 255, 255, 1)';
             else if (props.normal) return 'rgba(114, 114, 114, 1)';
-            else if (props.error) return 'rgba(255, 255, 255, 1)';
+            else if (props.criticalPlain) return 'rgba(255, 121, 121, 1)';
             else if (props.plain) return 'rgba(53, 146, 185, 1)';
             else return 'rgba(255, 255, 255, 1)';
         });
         const spinnerColor = computed(() => {
             if (props.primary) return [255, 255, 85];
             else if (props.normal) return [105, 105, 105];
-            else if (props.error) return [255, 255, 255];
+            else if (props.critical) return [255, 121, 121];
             else return [255, 194, 85];
         });
         const sideSwitch = (domArray: unknown[]): VNode[] => {
@@ -132,8 +136,9 @@ export default defineComponent({
                         {
                             simple_button__disable_prime: props.primary,
                             simple_button__disable_normal: props.normal,
-                            simple_button__disable_error: props.error,
+                            simple_button__disable_critical: props.critical,
                             simple_button__disable_plain: props.plain,
+                            simple_button__disable_criticalPlain: props.criticalPlain,
                         },
                     ],
                     style: [sizeToPixel()],
@@ -144,8 +149,8 @@ export default defineComponent({
                         {
                             class: [
                                 {
-                                    simple_button__disabled_text: !props.plain,
-                                    simple_button__disabled_text_primary: props.primary || props.error,
+                                    simple_button__disabled_text: !props.plain || !props.criticalPlain,
+                                    simple_button__disabled_text_primary: props.primary || props.critical,
                                 },
                             ],
                             style: [textLengthVar()],
@@ -178,7 +183,7 @@ export default defineComponent({
             );
         };
         const loadingSpinnerNode = (): VNode | undefined => {
-            if (!props.plain) {
+            if (!props.plain || !props.criticalPlain) {
                 return h(SimpleSpinner, {
                     size: 'normal',
                     color: spinnerColor.value,
@@ -194,8 +199,9 @@ export default defineComponent({
                         {
                             simple_button__disable_prime: props.primary,
                             simple_button__disable_normal: props.normal,
-                            simple_button__disable_error: props.error,
+                            simple_button__disable_critical: props.critical,
                             simple_button__disable_plain: props.plain,
+                            simple_button__disable_criticalPlain: props.criticalPlain,
                         },
                     ],
                     style: [sizeToPixel()],
@@ -204,7 +210,7 @@ export default defineComponent({
                     h(
                         'a',
                         {
-                            class: [{ simple_button__text_loading: !props.plain }],
+                            class: [{ simple_button__text_loading: !props.plain || !props.criticalPlain }],
                             style: [textLengthVar()],
                             fill: props.fill,
                             attrs: {
@@ -259,8 +265,8 @@ export default defineComponent({
                             simple_button__entered_prime: props.primary && isEntered.value,
                             simple_button__base_normal: props.normal,
                             simple_button__entered_normal: props.normal && isEntered.value,
-                            simple_button__base_error: props.error,
-                            simple_button__entered_error: props.error && isEntered.value,
+                            simple_button__base_critical: props.critical,
+                            simple_button__entered_critical: props.critical && isEntered.value,
                         },
                     ],
                     style: [sizeToPixel()],
@@ -274,7 +280,7 @@ export default defineComponent({
                                 {
                                     simple_button__text_normal: props.normal,
                                     simple_button__text_prime: props.primary,
-                                    simple_button__text_error: props.error,
+                                    simple_button__text_critical: props.critical,
                                 },
                             ],
                             style: [textLengthVar()],
@@ -310,7 +316,14 @@ export default defineComponent({
             return h(
                 'a',
                 {
-                    class: [{ simple_button__base_plain: true, simple_button__entered_plain: isEntered.value }],
+                    class: [
+                        {
+                            simple_button__base_plain: props.plain,
+                            simple_button__entered_plain: isEntered.value && props.plain,
+                            simple_button__base_criticalPlain: props.criticalPlain,
+                            simple_button__entered_criticalPlain: isEntered.value && props.criticalPlain,
+                        },
+                    ],
                     style: [sizeToPixel()],
                     ...buttonElement,
                 },
@@ -340,7 +353,7 @@ export default defineComponent({
                 return disabledButtonNode();
             } else if (props.loading) {
                 return loadingButtonNode();
-            } else if (props.plain) {
+            } else if (props.plain || props.criticalPlain) {
                 return plainButtonNode();
             } else {
                 return buttonNode();

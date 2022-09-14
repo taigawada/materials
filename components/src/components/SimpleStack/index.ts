@@ -1,4 +1,1 @@
-import SimpleStack from './SimpleStack';
-
-export { SimpleStack };
-export default SimpleStack;
+export { default as SimpleStack } from './SimpleStack';

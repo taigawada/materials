@@ -1,4 +1,1 @@
-import SimpleSmoothPicker from './SimpleSmoothPicker';
-
-export { SimpleSmoothPicker };
-export default SimpleSmoothPicker;
+export { default as SimpleSmoothPicker } from './SimpleSmoothPicker';

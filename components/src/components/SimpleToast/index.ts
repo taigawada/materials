@@ -1,4 +1,1 @@
-import SimpleToast from './SimpleToast';
-
-export { SimpleToast };
-export default SimpleToast;
+export { default as SimpleToast } from './SimpleToast';

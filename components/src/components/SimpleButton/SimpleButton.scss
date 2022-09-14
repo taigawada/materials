@@ -44,23 +44,23 @@
 .simple_button__text_normal[fill='true'] {
     padding: $space-4 calc(50% - $font-size-6 * var(--slot-text-length));
 }
-.simple_button__base_error {
+.simple_button__base_critical {
     position: relative;
     border-radius: calc(var(--props-size) * 2);
-    background: $error;
+    background: $critical;
     text-decoration: none;
     padding-top: var(--props-size);
     padding-bottom: var(--props-size);
     box-shadow: $box-shadow-1;
 }
-.simple_button__text_error {
+.simple_button__text_critical {
     font-size: $font-size-6;
     padding: $space-4 $space-4;
     color: $text-white;
     text-decoration: none;
     pointer-events: none;
 }
-.simple_button__text_error[fill='true'] {
+.simple_button__text_critical[fill='true'] {
     padding: $space-4 calc(50% - $font-size-6 * var(--slot-text-length));
 }
 .simple_button__base_plain {
@@ -68,6 +68,16 @@
     color: $plain;
     font-size: calc(var(--props-size) * 1.5);
     text-decoration: none;
+    border-radius: $border-radius-05;
+    padding: $space-05 $space-2;
+}
+.simple_button__base_criticalPlain {
+    cursor: pointer;
+    color: $criticalPlain;
+    font-size: calc(var(--props-size) * 1.5);
+    text-decoration: none;
+    border-radius: $border-radius-05;
+    padding: $space-05 $space-2;
 }
 .simple_button__entered_prime {
     cursor: pointer;
@@ -79,15 +89,22 @@
     text-decoration: none;
     background: $normal-pressed;
 }
-.simple_button__entered_error {
+.simple_button__entered_critical {
     cursor: pointer;
     text-decoration: none;
-    background: $error-hovered;
+    background: $critical-hovered;
 }
 .simple_button__entered_plain {
     cursor: pointer;
     text-decoration: none;
     color: $plain-hovered;
+    background: $hovered;
+}
+.simple_button__entered_criticalPlain {
+    cursor: pointer;
+    text-decoration: none;
+    color: $criticalPlain-hovered;
+    background: $hovered;
 }
 .simple_button__disable_prime {
     position: relative;
@@ -109,9 +126,9 @@
     padding-bottom: var(--props-size);
     box-shadow: $box-shadow-1;
 }
-.simple_button__disable_error {
+.simple_button__disable_critical {
     position: relative;
-    background: $error-disabled;
+    background: $critical-disabled;
     pointer-events: none;
     border-radius: calc(var(--props-size) * 2);
     text-decoration: none;
@@ -121,6 +138,10 @@
 }
 .simple_button__disable_plain {
     color: $plain-disabled;
+    pointer-events: none;
+}
+.simple_button__disable_criticalPlain {
+    color: $criticalPlain-disabled;
     pointer-events: none;
 }
 .simple_button__disabled_text {

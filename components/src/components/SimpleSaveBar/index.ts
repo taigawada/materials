@@ -1,4 +1,1 @@
-import SimpleSaveBar from './SimpleSaveBar';
-
-export { SimpleSaveBar };
-export default SimpleSaveBar;
+export { default as SimpleSaveBar } from './SimpleSaveBar';
