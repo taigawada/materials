@@ -11,7 +11,7 @@ export default defineConfig({
         alias: [
             { find: '~', replacement: '../node_modules/' },
             { find: '@', replacement: path.resolve(__dirname, 'src/') },
-            { find: 'globalStyleSheet', replacement: './stylesheet.scss' },
+            { find: 'globalStyleSheet', replacement: '@simple-education-dev/tokens/styles' },
         ],
     },
     build: {

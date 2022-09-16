@@ -15,6 +15,7 @@ export { SimpleCombobox } from './components/SimpleCombobox';
 export { SimpleStack } from './components/SimpleStack';
 export { SimpleDatePicker } from './components/SimpleDatePicker';
 export { SimpleCalender } from './components/SimpleCalender';
+export { TimePicker } from './components/TimePicker';
 export { SimpleTimePicker } from './components/SimpleTimePicker';
 export { SimpleDateTimePicker } from './components/SimpleDateTimePicker';
 export { SimpleResourceList } from './components/SimpleResourceList';

@@ -21,6 +21,7 @@
     width: 40px;
     position: relative;
     vertical-align: top;
+    font-weight: 500;
 }
 .simple_resource_list__header_row {
     height: 50px;
@@ -83,7 +84,8 @@
     grid-template-columns: var(--child-item-weights);
 }
 .simple_resource_list__slot_data div {
-    font-size: $font-size-6;
+    font-size: $font-size-4;
+    font-weight: 400;
 }
 .simple_resource_list__checkbox {
     position: absolute;

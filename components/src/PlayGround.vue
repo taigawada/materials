@@ -65,7 +65,7 @@
                 }"
                 :multiActions="actions"
                 :selectedItems="resourceListSelected"
-                :weight="[4, 4, 1]"
+                :weight="[2, 2, 1]"
                 @change="handleResourceListChange"
             >
                 <template #header>
@@ -79,8 +79,11 @@
                     <ResourceItem>
                         <component :is="loading ? 'SimpleSkelton' : 'span'" text>{{ render.item.name }}</component>
                     </ResourceItem>
-                    <ResourceItem distribution="right">
-                        <SimpleIcon :source="ThreePointLeader" clickable @click.stop="handleNext"></SimpleIcon>
+                    <ResourceItem popupMenu>
+                        <div class="other-operation-actions-container">
+                            <div class="other-operation-action">編集する</div>
+                            <div class="other-operation-action to-gabbage-text">ゴミ箱に入れる</div>
+                        </div>
                     </ResourceItem>
                 </template>
                 <template #pagination>
@@ -112,6 +115,7 @@
                     v-for="(item, index) in comboSelected"
                     :key="item + index"
                     :style="style.spacing"
+                    dark
                     @remove="handleRemoveItem(item)"
                 >
                     {{ item }}
@@ -518,7 +522,8 @@ export default defineComponent({
     },
 });
 </script>
-<style>
+<style lang="scss">
+@use 'globalStyleSheet' as *;
 body {
     background: #f4f8f9;
 }
@@ -527,5 +532,20 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+}
+.other-operation-actions-container {
+    padding: $space-1;
+}
+.other-operation-action {
+    $action-height: 40px;
+    height: $action-height;
+    line-height: $action-height;
+    padding: 0 $space-5;
+}
+.other-operation-action:hover {
+    background: $hovered;
+}
+.to-gabbage-text {
+    color: $text-error;
 }
 </style>

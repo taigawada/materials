@@ -23,8 +23,8 @@ export default defineComponent({
         },
     },
     setup(props, context) {
-        const handleIconClick = () => {
-            context.emit('click');
+        const handleIconClick = (event: Event) => {
+            context.emit('click', event);
         };
         return () =>
             h('svg', {
@@ -39,7 +39,7 @@ export default defineComponent({
                 domProps: { innerHTML: props.source },
                 // Vue2環境のみ、clickイベントが発火しないのでこのコンポーネントから伝播させる
                 on: {
-                    click: handleIconClick,
+                    click: (e: Event) => handleIconClick(e),
                 },
             });
     },

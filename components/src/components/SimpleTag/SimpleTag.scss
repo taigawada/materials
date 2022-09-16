@@ -2,7 +2,7 @@
 .simple_tag__base {
     display: inline-flex;
     align-items: center;
-    background: $surface;
+    background: var(--tag-surface-color);
     font-size: $font-size-4;
     border-radius: 100vh;
     box-shadow: $box-shadow-1;
@@ -10,7 +10,7 @@
     margin: 0 3px;
 }
 .simple_tag__text {
-    color: $surface-black;
+    color: var(--tag-text-color);
 }
 .simple_tag__remove_icon {
     margin-left: 10px;

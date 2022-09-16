@@ -1,7 +1,7 @@
 import { PropType, VNode } from 'vue-demi';
 import './SimpleResourceList.scss';
 interface ItemClickFunc {
-    (arg0: number): void;
+    (arg1: number, arg2: Event): void;
 }
 interface Actions {
     label: string;

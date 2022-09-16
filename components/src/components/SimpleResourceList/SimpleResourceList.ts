@@ -4,7 +4,7 @@ import { SimplePopover } from '../SimplePopover';
 import { useElementBounding } from '@vueuse/core';
 import './SimpleResourceList.scss';
 interface ItemClickFunc {
-    (arg0: number): void;
+    (arg1: number, arg2: Event): void;
 }
 interface Actions {
     label: string;
@@ -88,11 +88,13 @@ export default defineComponent({
         });
         const handleClickRow = (index: number, event: Event) => {
             // クリックした要素がcheckboxのDOMnodeに含まれていなければ -> checkboxのchangeイベントを発火
-            if (!checkboxRefs[index].$el.contains(event.target as HTMLElement)) {
-                if (typeof props.onClickItem === 'undefined') {
-                    checkboxRefs[index].handleChange();
-                } else {
-                    props.onClickItem(index);
+            if (checkboxRefs[index].$el) {
+                if (!checkboxRefs[index].$el.contains(event.target as HTMLElement)) {
+                    if (typeof props.onClickItem === 'undefined') {
+                        checkboxRefs[index].handleChange();
+                    } else {
+                        props.onClickItem(index, event);
+                    }
                 }
             }
         };

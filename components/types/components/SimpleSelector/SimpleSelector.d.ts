@@ -3,6 +3,7 @@ import './SimpleSelector.scss';
 interface Item {
     value: string;
     label: string;
+    disabled?: boolean;
     helpText?: string;
 }
 declare const _default: import("vue-demi").DefineComponent<{

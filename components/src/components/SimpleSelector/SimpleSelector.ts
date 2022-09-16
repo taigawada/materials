@@ -6,6 +6,7 @@ import './SimpleSelector.scss';
 interface Item {
     value: string;
     label: string;
+    disabled?: boolean;
     helpText?: string;
 }
 export default defineComponent({
@@ -125,11 +126,21 @@ export default defineComponent({
                     domProps: { hidden: true, value: '' },
                     attrs: { disabled: true },
                     disabled: true,
+                    hidden: true,
                 },
                 props.initialValue
             ),
             ...props.items.map((item) => {
-                return h('option', { key: item.value, value: item.value, domProps: { value: item.value } }, item.label);
+                return h(
+                    'option',
+                    {
+                        key: item.value,
+                        value: item.value,
+                        domProps: { value: item.value, disabled: item.disabled ? item.disabled : false },
+                        disabled: item.disabled ? item.disabled : false,
+                    },
+                    item.label
+                );
             }),
         ];
         const simpleSelectorSelectElement = (): VNode | undefined => {
