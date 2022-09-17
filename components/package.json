@@ -14,6 +14,10 @@
         "./style": {
             "import": "./dist/style.css",
             "require": "./dist/style.css"
+        },
+        "./globalStyles": {
+            "import": "./stylesheet.scss",
+            "require": "./stylesheet.scss"
         }
     },
     "scripts": {
@@ -29,7 +33,7 @@
     "author": "TaigaWada",
     "license": "UNLICENSED",
     "dependencies": {
-        "@simple-education-dev/icons": "^0.2.0",
+        "@simple-education-dev/icons": "^0.2.0-alpha.1",
         "@simple-education-dev/tokens": "^1.0.1-alpha.5",
         "@vueuse/core": "^9.1.0",
         "axios": "^0.27.2",

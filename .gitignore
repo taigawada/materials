@@ -5,3 +5,6 @@ node_modules
 dist
 .DS_Store
 package-lock.json
+
+simple-education-dev-components-0.1.1.tgz
+simple-education-dev-icons-0.1.4.tgz
