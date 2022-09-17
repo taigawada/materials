@@ -6,6 +6,7 @@ import CheckMark from "./src/icons/CheckMark.svg?raw";
 import CloseCross from "./src/icons/CloseCross.svg?raw";
 import DeleteCross from "./src/icons/DeleteCross.svg?raw";
 import ExclamationMark from "./src/icons/ExclamationMark.svg?raw";
+import GabbageBox from "./src/icons/GabbageBox.svg?raw";
 import HyphenBar from "./src/icons/HyphenBar.svg?raw";
 import PaginationEnd from "./src/icons/PaginationEnd.svg?raw";
 import SelectArrow from "./src/icons/SelectArrow.svg?raw";
@@ -24,6 +25,7 @@ export {
     CloseCross,
     DeleteCross,
     ExclamationMark,
+    GabbageBox,
     HyphenBar,
     PaginationEnd,
     SelectArrow,
