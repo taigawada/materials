@@ -1,7 +1,5 @@
 import { defineComponent, ref, PropType, onBeforeUpdate, onUpdated, h, isVue3, VNode, onMounted } from 'vue-demi';
 import { SimpleCheckbox } from '../SimpleCheckbox';
-import { SimplePopover } from '../SimplePopover';
-import { useElementBounding } from '@vueuse/core';
 import './SimpleResourceList.scss';
 interface ItemClickFunc {
     (arg1: number, arg2: Event): void;
@@ -88,7 +86,7 @@ export default defineComponent({
         });
         const handleClickRow = (index: number, event: Event) => {
             // クリックした要素がcheckboxのDOMnodeに含まれていなければ -> checkboxのchangeイベントを発火
-            if (checkboxRefs[index].$el) {
+            if (checkboxRefs[index]) {
                 if (!checkboxRefs[index].$el.contains(event.target as HTMLElement)) {
                     if (typeof props.onClickItem === 'undefined') {
                         checkboxRefs[index].handleChange();
@@ -108,14 +106,6 @@ export default defineComponent({
             }
             indeterminateRef.value = false;
             context.emit('change', newSelectedItems);
-        };
-        const bulkPopoverOpen = ref(false);
-        const activatorRect = useElementBounding(bulkMultiActionActivator);
-        const handleBulkButtonClick = () => {
-            bulkPopoverOpen.value = !bulkPopoverOpen.value;
-        };
-        const handleBulkButtonPopoverClose = () => {
-            bulkPopoverOpen.value = false;
         };
         const isSelected = (id: string | number) => {
             return props.selectedItems.indexOf(id) !== -1;
@@ -140,71 +130,6 @@ export default defineComponent({
             '--child-item-weights': props.weight.map((num) => num + 'fr').join(' '),
             '--child-item-height': props.height,
         });
-        const mainActionNode = (): VNode | undefined => {
-            if (props.mainAction !== undefined) {
-                return h(
-                    'span',
-                    {
-                        class: [{ simple_resource_list__bulk_action: true }],
-                    },
-                    [props.mainAction?.label]
-                );
-            }
-        };
-        const multiActionContentNode = props.multiActions?.map((action) => {
-            return h(
-                'div',
-                {
-                    key: action.label,
-                    class: [{ simple_resource_list__action_content: true }],
-                    onClick: action.onAction,
-                    on: { click: action.onAction },
-                },
-                action.label
-            );
-        });
-        const multiActionNode = (): VNode | undefined => {
-            const multiActionShow = props.multiActions !== undefined ? 'block' : 'none';
-            return h(
-                'div',
-                {
-                    style: [{ display: 'inline-flex' }],
-                    ref: isVue3 ? bulkMultiActionActivator : 'bulkMultiActionActivator',
-                },
-                [
-                    h(
-                        'div',
-                        {
-                            class: [{ simple_resource_list__bulk_action: true }],
-                            style: [{ display: multiActionShow }],
-                            plain: true,
-                            size: 9,
-                            props: { plain: true, size: 9 },
-                            onClick: handleBulkButtonClick,
-                            on: { click: handleBulkButtonClick },
-                        },
-                        'その他の操作'
-                    ),
-                    h(
-                        SimplePopover,
-                        {
-                            open: bulkPopoverOpen.value,
-                            activatorRect: activatorRect,
-                            props: {
-                                open: bulkPopoverOpen.value,
-                                activatorRect: activatorRect,
-                                translateX: '-45px',
-                            },
-                            onClose: handleBulkButtonPopoverClose,
-                            on: {
-                                close: handleBulkButtonPopoverClose,
-                            },
-                        },
-                        isVue3 ? () => multiActionContentNode : multiActionContentNode
-                    ),
-                ]
-            );
-        };
         const SelectedHeaderNode = () => {
             if (props.selectedItems.length !== 0) {
                 return h('td', { class: [{ simple_resource_list__slot_data_label_wrapper: true }] }, [
@@ -221,8 +146,7 @@ export default defineComponent({
                                 },
                                 props.selectedItems.length + '件のデータを選択中'
                             ),
-                            mainActionNode(),
-                            multiActionNode(),
+                            context.slots.headerActions ? context.slots.headerActions() : undefined,
                         ]
                     ),
                 ]);

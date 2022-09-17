@@ -7,8 +7,18 @@ import { SimplePopover } from '../SimplePopover';
 import { useElementBounding } from '@vueuse/core';
 export default defineComponent({
     props: {
-        popupMenu: {
+        keyId: {
+            type: [String, Number],
+            default: '',
+            required: false,
+        },
+        popoverMenu: {
             type: Boolean,
+            required: false,
+        },
+        popoverMenuOpen: {
+            type: [String, Number],
+            default: '',
             required: false,
         },
         sort: {
@@ -41,13 +51,12 @@ export default defineComponent({
         const handlePopoverMenuLeave = () => {
             popupMenuEnter.value = false;
         };
-        const popupMenuOpen = ref(false);
         const handlePopoverMenuOpen = (event: Event) => {
             event.stopPropagation();
-            popupMenuOpen.value = !popupMenuOpen.value;
+            context.emit('toggle');
         };
         const handlePopoverMenuClose = () => {
-            popupMenuOpen.value = false;
+            context.emit('close');
         };
         const handleSortClick = () => {
             context.emit('sort', !props.asc);
@@ -83,11 +92,11 @@ export default defineComponent({
             h(
                 SimplePopover,
                 {
-                    open: popupMenuOpen.value,
+                    open: props.popoverMenuOpen === props.keyId,
                     activatorRect: popupMenuRect,
                     translateY: '10px',
                     props: {
-                        open: popupMenuOpen.value,
+                        open: props.popoverMenuOpen === props.keyId,
                         activatorRect: popupMenuRect,
                         translateY: '10px',
                     },
@@ -122,7 +131,7 @@ export default defineComponent({
                         : undefined
                     /* eslint-enable */
                 );
-            } else if (props.popupMenu) {
+            } else if (props.popoverMenu) {
                 // @ts-ignore
                 return h(
                     'div',
