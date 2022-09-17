@@ -8,8 +8,7 @@
     },
     "workspaces": [
         "components",
-        "icons",
-        "tokens"
+        "icons"
     ],
     "devDependencies": {
         "@types/node": "^18.6.3",
