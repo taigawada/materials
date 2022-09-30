@@ -1,11 +1,14 @@
 {
     "name": "@simple-education-dev/components",
-    "version": "0.1.1-alpha.1",
+    "version": "0.1.1-alpha.2",
     "private": false,
     "description": "Vue2 & 3 Universal Component Library for SimpleEducation",
     "type": "module",
     "types": "types/build.d.ts",
     "main": "dist/components.js",
+    "files": [
+        "stylesheet.scss"
+    ],
     "exports": {
         ".": {
             "import": "./dist/components.js",
@@ -33,7 +36,7 @@
     "author": "TaigaWada",
     "license": "UNLICENSED",
     "dependencies": {
-        "@simple-education-dev/icons": "^0.2.0-alpha.2",
+        "@simple-education-dev/icons": "^0.2.0-alpha.10",
         "@simple-education-dev/tokens": "^1.0.1-alpha.5",
         "@vueuse/core": "^9.1.0",
         "axios": "^0.27.2",
