@@ -112,7 +112,7 @@ export default defineComponent({
                 return h('div', { class: [{ classTest: true }] }, [
                     h(
                         SimpleStack,
-                        { vertical: true, props: { vertical: true } },
+                        { vertical: true, alignment: 'upper', props: { vertical: true, alignment: 'upper' } },
                         isVue3 ? () => radioNode() : radioNode()
                     ),
                 ]);

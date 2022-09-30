@@ -1,13 +1,11 @@
 import { defineComponent, ref, PropType, onBeforeUpdate, onUpdated, h, isVue3, VNode, onMounted } from 'vue-demi';
 import { SimpleCheckbox } from '../SimpleCheckbox';
+import { SimpleSpinner } from '../SimpleSpinner';
 import './SimpleResourceList.scss';
 interface ItemClickFunc {
     (arg1: number, arg2: Event): void;
 }
-interface Actions {
-    label: string;
-    onAction: () => unknown;
-}
+
 interface checkBoxRef {
     $el: HTMLElement;
     handleChange: () => void;
@@ -29,14 +27,8 @@ export default defineComponent({
             default: () => [],
             required: false,
         },
-        mainAction: {
-            type: Object as PropType<Actions>,
-            default: undefined,
-            required: false,
-        },
-        multiActions: {
-            type: Array as PropType<Actions[]>,
-            default: undefined,
+        loading: {
+            type: Boolean,
             required: false,
         },
         height: {
@@ -62,7 +54,7 @@ export default defineComponent({
                 checkboxRefs.push(el);
             }
         };
-        // eslint-disable-next-line no-unused-vars
+        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
         const itemCheckBoxes = ref<checkBoxRef[]>();
         const bulkMultiActionActivator = ref();
         onBeforeUpdate(() => {
@@ -163,7 +155,7 @@ export default defineComponent({
                 ]);
             }
         };
-        const headerRowNode = (): VNode =>
+        const headerRowNode = () =>
             h('tr', { class: [{ simple_resource_list__header_row: true }] }, [
                 /* eslint-disable */
                 props.select
@@ -186,7 +178,7 @@ export default defineComponent({
                       ])
                     : undefined,
                 /* eslint-enable */
-                [SelectedHeaderNode()],
+                SelectedHeaderNode(),
             ]);
         const dataRowNode = (): VNode[] =>
             props.items.map((item, index) => {
@@ -240,10 +232,27 @@ export default defineComponent({
                 );
             });
         const tableNode = () =>
-            h('table', { class: [{ simple_resource_list__base: true }] }, [headerRowNode(), dataRowNode()]);
+            h('table', { class: [{ simple_resource_list__base: true }] }, [
+                headerRowNode(),
+                /* eslint-disable */
+                props.loading
+                    ? h('div', { class: [{ simple_resource_list__loading_bar: true }] }, [
+                          h(SimpleSpinner, {
+                              class: [{ simple_resource_list__loading_spinner: true }],
+                              size: 'tiny',
+                              color: [0, 150, 138],
+                              props: { size: 'tiny', color: [0, 150, 138] },
+                          }),
+                          h('span', { style: [{ fontSize: '13px' }] }, '提出物を読み込んでいます...'),
+                      ])
+                    : undefined,
+                /* eslint-enable */
+                dataRowNode(),
+            ]);
         return () =>
             h('div', { class: [{ simple_resource_list__container: true }] }, [
                 tableNode(),
+
                 h('div', { class: [{ padding__elemet: true }] }),
                 context.slots.pagination ? context.slots.pagination() : undefined,
             ]);

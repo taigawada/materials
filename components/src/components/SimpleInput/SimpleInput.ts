@@ -1,4 +1,4 @@
-import { defineComponent, h } from 'vue-demi';
+import { defineComponent, h, isVue3, onMounted, onUpdated, ref, watchEffect } from 'vue-demi';
 import { DeleteCross, ExclamationMark } from '@simple-education-dev/icons';
 import { SimpleIcon } from '../SimpleIcon';
 import './SimpleInput.scss';
@@ -49,8 +49,30 @@ export default defineComponent({
             type: Boolean,
             required: false,
         },
+        autofocus: {
+            type: Boolean,
+            required: false,
+        },
     },
     setup(props, context) {
+        const inputRef = ref<HTMLInputElement | null>(null);
+        onMounted(() => {
+            if (!isVue3) {
+                // @ts-ignore
+                inputRef.value = context.refs.inputRef;
+            }
+        });
+        onUpdated(() => {
+            if (!isVue3) {
+                // @ts-ignore
+                inputRef.value = context.refs.inputRef;
+            }
+        });
+        watchEffect(() => {
+            if (props.autofocus) {
+                inputRef.value?.focus();
+            }
+        });
         const handleRemove = () => {
             context.emit('remove');
         };
@@ -126,6 +148,7 @@ export default defineComponent({
         const inputElementNode = () =>
             h('div', { class: [{ simple_input__input_field: true }] }, [
                 h('input', {
+                    ref: isVue3 ? inputRef : 'inputRef',
                     class: [
                         {
                             simple_input__input_element: true,

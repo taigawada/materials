@@ -11,7 +11,7 @@
             width="50%"
             :mainAction="{
                 label: '追加',
-                onAction: handleCardOnMainAction,
+                onAction: () => (isFocus = !isFocus),
             }"
             :subAction="{
                 label: 'キャンセル',
@@ -23,6 +23,7 @@
                     :value="fieldvalue"
                     caption="生徒氏名"
                     placeholder="名前を入力してください"
+                    :autofocus="isFocus"
                     remove
                     @change:value="handleFieldChange"
                     @remove="handleTextFieldRemove"
@@ -66,6 +67,7 @@
                 :multiActions="actions"
                 :selectedItems="resourceListSelected"
                 :weight="[2, 2, 1]"
+                :loading="loading"
                 @change="handleResourceListChange"
             >
                 <template #header>
@@ -78,12 +80,6 @@
                     </ResourceItem>
                     <ResourceItem>
                         <component :is="loading ? 'SimpleSkelton' : 'span'" text>{{ render.item.name }}</component>
-                    </ResourceItem>
-                    <ResourceItem popupMenu>
-                        <div class="other-operation-actions-container">
-                            <div class="other-operation-action">編集する</div>
-                            <div class="other-operation-action to-gabbage-text">ゴミ箱に入れる</div>
-                        </div>
                     </ResourceItem>
                 </template>
                 <template #pagination>
@@ -326,6 +322,7 @@ export default defineComponent({
         const handleTextFieldRemove = () => {
             fieldvalue.value = '';
         };
+        const isFocus = ref(false);
         // Banner
         const action = () => {
             console.log('todo=>確認');
@@ -474,6 +471,7 @@ export default defineComponent({
             onClose,
             action,
             checked,
+            isFocus,
             handleChecked,
             fieldvalue,
             handleFieldChange,

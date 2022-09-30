@@ -15,6 +15,11 @@ export default defineComponent({
             default: 0,
             required: true,
         },
+        color: {
+            type: String,
+            default: 'rgba(255, 194, 85, 1)',
+            required: false,
+        },
     },
     setup(props, context) {
         const hundleSelect = (index: number) => {
@@ -34,7 +39,10 @@ export default defineComponent({
         };
         const tabSelectedNode = (index: number) => {
             if (props.selected === index) {
-                return h('div', { class: [{ simple_tabs__selected: true }] });
+                return h('div', {
+                    class: [{ simple_tabs__selected: true }],
+                    style: [{ '--selected-color': props.color }],
+                });
             }
         };
         const tabsNode = () =>

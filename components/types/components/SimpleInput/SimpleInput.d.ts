@@ -45,6 +45,10 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: BooleanConstructor;
         required: false;
     };
+    autofocus: {
+        type: BooleanConstructor;
+        required: false;
+    };
 }, () => import("vue-demi").VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
     [key: string]: any;
 }>, unknown, {}, {}, import("vue-demi").ComponentOptionsMixin, import("vue-demi").ComponentOptionsMixin, {}, string, import("vue-demi").VNodeProps & import("vue-demi").AllowedComponentProps & import("vue-demi").ComponentCustomProps, Readonly<import("vue-demi").ExtractPropTypes<{
@@ -93,6 +97,10 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: BooleanConstructor;
         required: false;
     };
+    autofocus: {
+        type: BooleanConstructor;
+        required: false;
+    };
 }>>, {
     width: string;
     disabled: boolean;
@@ -103,6 +111,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     remove: boolean;
     readonly: boolean;
     error: string;
+    autofocus: boolean;
 }>;
 export default _default;
 //# sourceMappingURL=SimpleInput.d.ts.map

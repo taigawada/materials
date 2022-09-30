@@ -1,6 +1,6 @@
 {
     "name": "@simple-education-dev/components",
-    "version": "0.1.1",
+    "version": "0.1.1-alpha.1",
     "private": false,
     "description": "Vue2 & 3 Universal Component Library for SimpleEducation",
     "type": "module",
@@ -50,7 +50,7 @@
         "sass": "^1.54.3",
         "sass-loader": "^13.0.2",
         "typescript": "^4.8.2",
-        "vue": "^3.2.37"
+        "vue": "^3.2.39"
     },
     "peerDependencies": {
         "@vue/composition-api": "^1.7.0"

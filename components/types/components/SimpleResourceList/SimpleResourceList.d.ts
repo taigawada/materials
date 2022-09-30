@@ -3,10 +3,6 @@ import './SimpleResourceList.scss';
 interface ItemClickFunc {
     (arg1: number, arg2: Event): void;
 }
-interface Actions {
-    label: string;
-    onAction: () => unknown;
-}
 declare const _default: import("vue-demi").DefineComponent<{
     items: {
         type: PropType<{
@@ -25,14 +21,8 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: () => never[];
         required: false;
     };
-    mainAction: {
-        type: PropType<Actions>;
-        default: undefined;
-        required: false;
-    };
-    multiActions: {
-        type: PropType<Actions[]>;
-        default: undefined;
+    loading: {
+        type: BooleanConstructor;
         required: false;
     };
     height: {
@@ -70,14 +60,8 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: () => never[];
         required: false;
     };
-    mainAction: {
-        type: PropType<Actions>;
-        default: undefined;
-        required: false;
-    };
-    multiActions: {
-        type: PropType<Actions[]>;
-        default: undefined;
+    loading: {
+        type: BooleanConstructor;
         required: false;
     };
     height: {
@@ -97,13 +81,12 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
 }>>, {
     height: string;
-    mainAction: Actions;
+    loading: boolean;
     items: {
         id: string | number;
     }[];
     select: boolean;
     selectedItems: (string | number)[];
-    multiActions: Actions[];
     weight: number[];
     onClickItem: ItemClickFunc;
 }>;

@@ -3,6 +3,9 @@ import './SimpleSkelton.scss';
 
 export default defineComponent({
     props: {
+        plain: {
+            type: Boolean,
+        },
         body: {
             type: Boolean,
         },
@@ -33,6 +36,11 @@ export default defineComponent({
             '--simple-skelton-body-width': props.width,
             '--simple-skelton-body-height': props.height,
         }));
+        const plainNode = () =>
+            h('div', {
+                class: [{ simple_skelton__plain: true }],
+                style: [bodyStyles.value],
+            });
         const bodyNode = () =>
             h('div', {
                 class: [{ simple_skelton__body: true }],
@@ -46,7 +54,8 @@ export default defineComponent({
             );
         const headerNode = () => h('div', { class: [{ simple_skelton__header: true }] });
         const propsNode = () => {
-            if (props.body) return bodyNode();
+            if (props.plain) return plainNode();
+            else if (props.body) return bodyNode();
             else if (props.text) return textLineNode();
             else if (props.heading) return headerNode();
         };
