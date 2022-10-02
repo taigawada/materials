@@ -20,13 +20,14 @@ import { SimpleIcon } from '../SimpleIcon';
 import { CyclePeriod } from '../WeeklySelector/useWeeklySelector';
 import { dayOfWeekStr } from '@/utils/utils';
 import './SimpleCalender.scss';
-import { Holidays } from '../../utils/useHolidays';
 import { SimpleSpinner } from '../SimpleSpinner';
 
 interface Entered {
     weekIndex: null | number;
     weekDayIndex: null | number;
 }
+
+type Holidays = [Date, string];
 
 export default defineComponent({
     props: {

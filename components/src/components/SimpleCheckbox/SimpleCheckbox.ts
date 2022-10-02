@@ -1,6 +1,7 @@
-import { defineComponent, isVue3, h, VNode, getCurrentInstance } from 'vue-demi';
+import { defineComponent, isVue3, h, VNode, getCurrentInstance, ref, computed, toRefs, watch } from 'vue-demi';
 import { CheckMark, HyphenBar } from '@simple-education-dev/icons';
 import { SimpleIcon } from '../SimpleIcon';
+import { useTransition, TransitionPresets } from '@vueuse/core';
 import './SimpleCheckbox.scss';
 export default defineComponent({
     props: {
@@ -24,9 +25,24 @@ export default defineComponent({
         },
     },
     setup(props, context) {
+        const source = ref(props.value ? 1 : 0);
+        const transitions = useTransition(source, {
+            duration: 150,
+            delay: 50,
+            transition: TransitionPresets.easeInOutCubic,
+        });
+        const outputStyles = computed(() => ({ '--checkbox-icon-scale': transitions.value }));
         const handleChange = () => {
             context.emit('change', !props.value);
         };
+        const { value } = toRefs(props);
+        watch(value, () => {
+            if (value.value) {
+                source.value = 1;
+            } else {
+                source.value = 0;
+            }
+        });
         // Vue3では、context.expose({})で関数を親コンポーネントに公開
         // Vue2では、コンポーネントのインスタンスに直接アクセスして、関数を公開
         if (isVue3) {
@@ -36,20 +52,26 @@ export default defineComponent({
             // @ts-ignore
             Object.assign(internalInstance.proxy, { handleChange });
         }
-        const CheckboxSize = () => ({
-            '--checkbox-size': props.size,
-        });
         const insideIconNode = () => {
             if (!props.indeterminate) {
                 return h(SimpleIcon, {
+                    class: [{ simple_checkbox_inner_icon: true }],
+                    style: outputStyles.value,
                     source: CheckMark,
-                    size: props.size,
+                    size: `calc(${props.size} - 4px)`,
                     fill: 'rgba(255, 255, 255, 1)',
                     clickable: true,
-                    props: { source: CheckMark, size: props.size, fill: 'rgba(255, 255, 255, 1)', clickable: true },
+                    props: {
+                        source: CheckMark,
+                        size: `calc(${props.size} - 4px)`,
+                        fill: 'rgba(255, 255, 255, 1)',
+                        clickable: true,
+                    },
                 });
             } else {
                 return h(SimpleIcon, {
+                    class: [{ simple_checkbox_inner_icon: true }],
+                    style: outputStyles.value,
                     source: HyphenBar,
                     size: props.size,
                     fill: 'rgba(255, 255, 255, 1)',
@@ -83,7 +105,7 @@ export default defineComponent({
                                 simple_checkbox__checked_background: props.value,
                             },
                         ],
-                        style: [CheckboxSize()],
+                        style: [{ '--checkbox-size': props.size }],
                         onClick: handleChange,
                         on: {
                             click: handleChange,

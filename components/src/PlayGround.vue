@@ -19,13 +19,16 @@
             @subAction="handleDestroy"
         >
             <div style="padding: 30px">
+                <p>{{ fieldvalue }}</p>
                 <SimpleInput
+                    type="text"
+                    :maxlength="20"
                     :value="fieldvalue"
                     caption="生徒氏名"
                     placeholder="名前を入力してください"
                     :autofocus="isFocus"
                     remove
-                    @change:value="handleFieldChange"
+                    @change="handleFieldChange"
                     @remove="handleTextFieldRemove"
                 />
                 <div style="text-align: left">
@@ -153,7 +156,7 @@
             />
         </div>
         <div style="width: 40%; margin: 0 auto">
-            <SimpleCalender :highLights="weekState" :holidays="holidays" hiddenHighLightInHolidays></SimpleCalender>
+            <SimpleCalender :highLights="weekState" hiddenHighLightInHolidays></SimpleCalender>
         </div>
         <div style="margin-top: 30px">
             <SimpleCard style="width: 30%; margin: 0 auto">
@@ -204,7 +207,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue-demi';
+import { defineComponent, ref } from 'vue-demi';
 import SimpleButton from './components/SimpleButton/SimpleButton';
 import SimpleTabs from './components/SimpleTabs/SimpleTabs';
 import SimpleActions from './components/SimpleActions/SimpleActions';
@@ -236,7 +239,6 @@ import { CyclePeriod } from './components/WeeklySelector/useWeeklySelector';
 import { sortItems } from './utils/utils';
 import { format } from 'date-fns';
 
-import { Holidays, useHolidays } from './utils/useHolidays';
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
 export default defineComponent({
@@ -269,11 +271,6 @@ export default defineComponent({
         SimpleToast,
     },
     setup() {
-        const holidays = ref<Holidays[] | null>(null);
-        // debug
-        onMounted(async () => {
-            holidays.value = await useHolidays();
-        });
         // SimpleButton
         const disabled = ref(false);
         const loading = ref(false);
@@ -513,7 +510,6 @@ export default defineComponent({
             handleDateChange,
             datetimeInputValue,
             handleDatetimeChange,
-            holidays,
             ThreePointLeader,
             ArrowDown,
         };

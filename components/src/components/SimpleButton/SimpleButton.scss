@@ -1,9 +1,12 @@
 @use 'globalStyleSheet' as *;
 .simple_button__container {
-    display: inline;
+    display: inline-block;
     color: #2c3e50;
     padding: 0 $space-1;
     box-sizing: border-box;
+    margin-top: var(--props-size);
+    margin-bottom: var(--props-size);
+    width: var(--filled-width);
 }
 .simple_button__base_prime {
     position: relative;

@@ -1,7 +1,7 @@
 import { PropType, VNode } from 'vue-demi';
 import { CyclePeriod } from '../WeeklySelector/useWeeklySelector';
 import './SimpleCalender.scss';
-import { Holidays } from '../../utils/useHolidays';
+declare type Holidays = [Date, string];
 declare const _default: import("vue-demi").DefineComponent<{
     start: {
         type: PropType<"monday" | "sunday">;

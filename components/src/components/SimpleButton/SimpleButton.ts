@@ -84,10 +84,10 @@ export default defineComponent({
         const mouseleave = (): void => {
             isEntered.value = false;
         };
-        const sizeToPixel = () => ({
+        const sizeToPixel = computed(() => ({
             '--props-size': `${props.size + 'px'}`,
-        });
-        const textLengthVar = () => {
+        }));
+        const textLengthVar = computed(() => {
             const textChildren = (): VNodeNormalizedChildren | string => {
                 if (isVue3) {
                     return context.slots.default ? context.slots.default()[0].children : '';
@@ -105,8 +105,8 @@ export default defineComponent({
             return {
                 '--slot-text-length': textLength,
             };
-        };
-        const target = () => (props.external ? '_blank' : '_self');
+        });
+        const target = computed(() => (props.external ? '_blank' : '_self'));
         const iconColor = computed(() => {
             if (props.textColor) return props.textColor;
             else if (props.critical || props.primary) return 'rgba(255, 255, 255, 1)';
@@ -121,6 +121,9 @@ export default defineComponent({
             else if (props.critical) return [255, 121, 121];
             else return [255, 194, 85];
         });
+        const fillStyle = computed(() => ({
+            '--filled-width': props.fill ? '100%' : 'auto',
+        }));
         const sideSwitch = (domArray: unknown[]): VNode[] => {
             if (props.iconSide === 'left') {
                 return domArray.reverse() as VNode[];
@@ -141,7 +144,7 @@ export default defineComponent({
                             simple_button__disable_criticalPlain: props.criticalPlain,
                         },
                     ],
-                    style: [sizeToPixel()],
+                    style: [sizeToPixel.value],
                 },
                 [
                     h(
@@ -153,7 +156,7 @@ export default defineComponent({
                                     simple_button__disabled_text_primary: props.primary || props.critical,
                                 },
                             ],
-                            style: [textLengthVar()],
+                            style: [textLengthVar.value],
                             fill: props.fill,
                             attrs: {
                                 fill: props.fill,
@@ -204,14 +207,14 @@ export default defineComponent({
                             simple_button__disable_criticalPlain: props.criticalPlain,
                         },
                     ],
-                    style: [sizeToPixel()],
+                    style: [sizeToPixel.value],
                 },
                 [
                     h(
                         'a',
                         {
                             class: [{ simple_button__text_loading: !props.plain || !props.criticalPlain }],
-                            style: [textLengthVar()],
+                            style: [textLengthVar.value],
                             fill: props.fill,
                             attrs: {
                                 fill: props.fill,
@@ -242,7 +245,7 @@ export default defineComponent({
             );
         };
         const buttonElement: object = {
-            attr: { href: props.url, target: target() },
+            attr: { href: props.url, target: target.value },
             onMouseenter: mouseenter,
             onMouseleave: mouseleave,
             onMousedown: mousedown,
@@ -269,7 +272,7 @@ export default defineComponent({
                             simple_button__entered_critical: props.critical && isEntered.value,
                         },
                     ],
-                    style: [sizeToPixel()],
+                    style: [sizeToPixel.value],
                     ...buttonElement,
                 },
                 [
@@ -283,7 +286,7 @@ export default defineComponent({
                                     simple_button__text_critical: props.critical,
                                 },
                             ],
-                            style: [textLengthVar()],
+                            style: [textLengthVar.value],
                             fill: props.fill,
                             attrs: {
                                 fill: props.fill,
@@ -324,7 +327,7 @@ export default defineComponent({
                             simple_button__entered_criticalPlain: isEntered.value && props.criticalPlain,
                         },
                     ],
-                    style: [sizeToPixel()],
+                    style: [sizeToPixel.value],
                     ...buttonElement,
                 },
                 sideSwitch([
@@ -359,6 +362,14 @@ export default defineComponent({
                 return buttonNode();
             }
         };
-        return () => h('div', { class: [{ simple_button__container: true }] }, [button()]);
+        return () =>
+            h(
+                'div',
+                {
+                    class: [{ simple_button__container: true }],
+                    style: [Object.assign(sizeToPixel.value, fillStyle.value)],
+                },
+                [button()]
+            );
     },
 });

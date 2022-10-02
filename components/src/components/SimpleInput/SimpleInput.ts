@@ -1,9 +1,28 @@
-import { defineComponent, h, isVue3, onMounted, onUpdated, ref, watchEffect } from 'vue-demi';
-import { DeleteCross, ExclamationMark } from '@simple-education-dev/icons';
+import { defineComponent, PropType, h, isVue3, onMounted, onUpdated, ref, watchEffect } from 'vue-demi';
+import { ArrowDown, ArrowUp, DeleteCross, ExclamationMark } from '@simple-education-dev/icons';
 import { SimpleIcon } from '../SimpleIcon';
 import './SimpleInput.scss';
+import { useFocusBackdrop } from '../compositions/useFocusBackdropAnimation';
+
+type InputTypes = 'text' | 'email' | 'password' | 'number';
+
 export default defineComponent({
     props: {
+        type: {
+            type: String as PropType<InputTypes>,
+            default: 'text',
+            required: false,
+        },
+        step: {
+            type: Number,
+            default: 1,
+            required: false,
+        },
+        maxlength: {
+            type: Number,
+            default: undefined,
+            required: false,
+        },
         width: {
             type: String,
             default: 'auto',
@@ -73,16 +92,43 @@ export default defineComponent({
                 inputRef.value?.focus();
             }
         });
+        const isFocus = ref(false);
+        const { outputStyles, focusinFn, focusoutFn } = useFocusBackdrop();
         const handleRemove = () => {
             context.emit('remove');
         };
-        const handleInputChange = (event: { target: HTMLInputElement }) => {
-            context.emit('change:value', event.target.value);
+        const handleInputChange = (event: Event) => {
+            const target = event.target as HTMLInputElement;
+            context.emit('change', target.value);
+        };
+        const isNumber = () => {
+            if (typeof Number(props.value) === 'number') {
+                return true;
+            } else return false;
+        };
+        const handleNumberIncrease = () => {
+            if (isNumber()) {
+                const newNum = (Number(props.value) + 1 / props.step).toFixed(String(props.step).length - 1);
+                context.emit('change', String(newNum));
+            }
+        };
+        const handleNumberDecrease = () => {
+            if (isNumber()) {
+                const newNum = (Number(props.value) + 1 / props.step).toFixed(String(props.step).length - 1);
+                context.emit('change', String(newNum));
+            }
+        };
+        const handleValidation = (event: Event) => {
+            event.stopPropagation();
         };
         const handleFocusin = () => {
+            isFocus.value = true;
+            focusinFn();
             context.emit('focusin');
         };
         const handleFocusout = () => {
+            isFocus.value = false;
+            focusoutFn();
             context.emit('focusout');
         };
         const appearRemoveButton = () => {
@@ -119,7 +165,60 @@ export default defineComponent({
             }
         };
         const iconsNode = () => {
-            if (appearRemoveButton()) {
+            if (props.type === 'number') {
+                return h('div', { class: [{ simple_input_number_handler: true }] }, [
+                    h(
+                        'div',
+                        {
+                            class: [{ simple_input_number_handler_box: true }],
+                            onClick: handleNumberIncrease,
+                            on: {
+                                click: handleNumberIncrease,
+                            },
+                        },
+                        [
+                            h(SimpleIcon, {
+                                source: ArrowUp,
+                                size: '6px',
+                                clickable: true,
+                                props: {
+                                    source: ArrowUp,
+                                    size: '6px',
+                                    clickable: true,
+                                },
+                            }),
+                        ]
+                    ),
+                    h(
+                        'div',
+                        {
+                            class: [{ simple_input_number_handler_box: true }],
+                            onClick: handleNumberDecrease,
+                            on: {
+                                click: handleNumberDecrease,
+                            },
+                        },
+                        [
+                            h(SimpleIcon, {
+                                source: ArrowDown,
+                                size: '6px',
+                                clickable: true,
+                                props: {
+                                    source: ArrowDown,
+                                    size: '6px',
+                                    clickable: true,
+                                },
+                            }),
+                        ]
+                    ),
+                ]);
+            } else if (props.maxlength) {
+                return h(
+                    'span',
+                    { class: [{ simple_input__length_count: true }] },
+                    `${props.value ? props.value.length : 0}/${props.maxlength}`
+                );
+            } else if (appearRemoveButton()) {
                 return h(SimpleIcon, {
                     source: DeleteCross,
                     size: '18px',
@@ -147,6 +246,10 @@ export default defineComponent({
         };
         const inputElementNode = () =>
             h('div', { class: [{ simple_input__input_field: true }] }, [
+                h('div', {
+                    class: [{ text_input_focused_border_backdrop: true }],
+                    style: [{ '--outline-backdrop-weight': outputStyles.value }],
+                }),
                 h('input', {
                     ref: isVue3 ? inputRef : 'inputRef',
                     class: [
@@ -156,7 +259,11 @@ export default defineComponent({
                             simple_input__input_error: isError(),
                         },
                     ],
+                    type: props.type,
+                    maxlength: props.maxlength,
                     domProps: {
+                        type: props.type,
+                        maxlength: props.maxlength,
                         placeholder: props.placeholder,
                         value: props.value,
                     },
@@ -168,12 +275,7 @@ export default defineComponent({
                     readonly: props.readonly,
                     placeholder: props.placeholder,
                     value: props.value,
-                    onInput: (event: { target: HTMLInputElement }) => handleInputChange(event),
-                    on: {
-                        input: (event: { target: HTMLInputElement }) => handleInputChange(event),
-                        focus: handleFocusin,
-                        blur: handleFocusout,
-                    },
+                    onInput: (e: Event) => handleInputChange(e),
                     onFocus: (event: Event) => {
                         handleFocusin();
                         event.preventDefault();
@@ -182,8 +284,15 @@ export default defineComponent({
                         handleFocusout();
                         event.preventDefault();
                     },
+                    onChange: (e: Event) => handleValidation(e),
+                    on: {
+                        input: (e: Event) => handleInputChange(e),
+                        focus: handleFocusin,
+                        blur: handleFocusout,
+                        change: (e: Event) => handleValidation(e),
+                    },
                 }),
-                [h('div', { class: [{ simple_input__remove: true }] }, [iconsNode()])],
+                [h('div', { class: [{ simple_input__icon_base: true }] }, [iconsNode()])],
             ]);
         const inputErrorNode = () => {
             if (isError()) {

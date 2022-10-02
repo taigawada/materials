@@ -1,5 +1,22 @@
+import { PropType } from 'vue-demi';
 import './SimpleInput.scss';
+declare type InputTypes = 'text' | 'email' | 'password' | 'number';
 declare const _default: import("vue-demi").DefineComponent<{
+    type: {
+        type: PropType<InputTypes>;
+        default: string;
+        required: false;
+    };
+    step: {
+        type: NumberConstructor;
+        default: number;
+        required: false;
+    };
+    maxlength: {
+        type: NumberConstructor;
+        default: undefined;
+        required: false;
+    };
     width: {
         type: StringConstructor;
         default: string;
@@ -52,6 +69,21 @@ declare const _default: import("vue-demi").DefineComponent<{
 }, () => import("vue-demi").VNode<import("vue-demi").RendererNode, import("vue-demi").RendererElement, {
     [key: string]: any;
 }>, unknown, {}, {}, import("vue-demi").ComponentOptionsMixin, import("vue-demi").ComponentOptionsMixin, {}, string, import("vue-demi").VNodeProps & import("vue-demi").AllowedComponentProps & import("vue-demi").ComponentCustomProps, Readonly<import("vue-demi").ExtractPropTypes<{
+    type: {
+        type: PropType<InputTypes>;
+        default: string;
+        required: false;
+    };
+    step: {
+        type: NumberConstructor;
+        default: number;
+        required: false;
+    };
+    maxlength: {
+        type: NumberConstructor;
+        default: undefined;
+        required: false;
+    };
     width: {
         type: StringConstructor;
         default: string;
@@ -102,9 +134,12 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
 }>>, {
+    type: InputTypes;
     width: string;
     disabled: boolean;
     icon: string;
+    step: number;
+    maxlength: number;
     placeholder: string;
     caption: string;
     captionHidden: boolean;

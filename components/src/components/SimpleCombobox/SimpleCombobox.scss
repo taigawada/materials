@@ -5,10 +5,10 @@
     position: relative;
     box-sizing: border-box;
     background: $surface;
+    margin-top: $space-1;
     width: 100%;
     height: var(--float-box-height);
     border-radius: $border-radius-1;
-    border: 1px solid $surface;
     box-shadow: $box-shadow-1;
     overflow: scroll;
     text-align: left;

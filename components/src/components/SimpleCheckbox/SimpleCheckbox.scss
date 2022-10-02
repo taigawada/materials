@@ -10,20 +10,26 @@
     cursor: pointer;
 }
 .simple_checkbox__checkbox_container {
-    width: var(--checkbox-size);
-    height: var(--checkbox-size);
+    position: relative;
+    width: calc(var(--checkbox-size) + 2px);
+    height: calc(var(--checkbox-size) + 2px);
     background: rgba(255, 255, 255, 1);
-    border: 1px solid $border;
+    border: 1px solid $border-weak;
+    box-sizing: border-box;
     border-radius: calc(var(--checkbox-size) / 4);
     transition: background 0.1s, border 0.1s;
     cursor: pointer;
 }
 .simple_checkbox__checked_background {
     border: 1px solid $checked;
+    box-sizing: border-box;
     background: $checked;
 }
-.simple_checkbox__checkmark-icon {
-    width: var(--checkbox-size);
-    height: var(--checkbox-size);
-    fill: rgba(255, 255, 255, 1);
+.simple_checkbox_inner_icon {
+    position: absolute;
+    // display: block;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(var(--checkbox-icon-scale));
+    z-index: 10;
 }

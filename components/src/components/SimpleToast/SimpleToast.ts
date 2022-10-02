@@ -1,7 +1,7 @@
 import './SimpleToast.scss';
 
 import { defineComponent, ref, toRefs, watch, h, isVue3, onMounted } from 'vue-demi';
-import { nextFrame } from '@/utils/useAccordionAnimation';
+import { nextFrame } from '@/components/compositions/useAccordionAnimation';
 import { SimpleIcon } from '../SimpleIcon';
 
 import { CloseCross } from '@simple-education-dev/icons';

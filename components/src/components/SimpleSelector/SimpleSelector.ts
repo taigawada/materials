@@ -2,6 +2,7 @@ import { defineComponent, PropType, h, VNode, isVue3 } from 'vue-demi';
 import { ExclamationMark, SelectArrow } from '@simple-education-dev/icons';
 import { SimpleStack } from '../SimpleStack';
 import { SimpleIcon } from '../SimpleIcon';
+import { useFocusBackdrop } from '../compositions/useFocusBackdropAnimation';
 import './SimpleSelector.scss';
 interface Item {
     value: string;
@@ -47,6 +48,7 @@ export default defineComponent({
         },
     },
     setup(props, context) {
+        const { outputStyles, focusinFn, focusoutFn } = useFocusBackdrop();
         const handleRadioClick = (newSelect: string) => {
             context.emit('change:select', newSelect);
         };
@@ -146,6 +148,10 @@ export default defineComponent({
         const simpleSelectorSelectElement = (): VNode | undefined => {
             if (!props.radio) {
                 return h('div', { class: [{ simple_selector__form_element: true }] }, [
+                    h('div', {
+                        class: [{ select_focused_border_backdrop: true }],
+                        style: [{ '--outline-backdrop-weight': outputStyles.value }],
+                    }),
                     h(
                         'select',
                         {
@@ -155,8 +161,12 @@ export default defineComponent({
                                 value: props.value,
                             },
                             onChange: (event: { target: HTMLSelectElement }) => handleSelectChange(event),
+                            onFocus: focusinFn,
+                            onBlur: focusoutFn,
                             on: {
                                 change: (event: { target: HTMLSelectElement }) => handleSelectChange(event),
+                                focus: focusinFn,
+                                blur: focusoutFn,
                             },
                         },
                         selectBoxElements()

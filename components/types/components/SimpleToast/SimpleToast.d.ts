@@ -42,8 +42,8 @@ declare const _default: import("vue-demi").DefineComponent<{
         required: false;
     };
 }>>, {
-    error: boolean;
     duration: number;
+    error: boolean;
     content: string;
 }>;
 export default _default;

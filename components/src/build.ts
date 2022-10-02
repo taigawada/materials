@@ -27,5 +27,4 @@ export { SimpleSpinner } from './components/SimpleSpinner';
 export { SimpleSaveBar } from './components/SimpleSaveBar';
 export { SimpleToast } from './components/SimpleToast';
 export { sortItems, dayOfWeekStr } from './utils/utils';
-export { useHolidays } from './utils/useHolidays';
-export { useAccordionAnimation } from './utils/useAccordionAnimation';
+export { useAccordionAnimation } from './components/compositions/useAccordionAnimation';

@@ -1,13 +1,17 @@
 {
     "name": "@simple-education-dev/components",
-    "version": "0.1.1-alpha.2",
+    "version": "0.1.1-alpha.5",
     "private": false,
     "description": "Vue2 & 3 Universal Component Library for SimpleEducation",
     "type": "module",
     "types": "types/build.d.ts",
     "main": "dist/components.js",
     "files": [
-        "stylesheet.scss"
+        "stylesheet.scss",
+        "dist/style.css",
+        "dist/components.js",
+        "dist/components.umd.cjs",
+        "types"
     ],
     "exports": {
         ".": {
@@ -27,7 +31,7 @@
         "serve": "vite",
         "test": "node ./cli/start.js",
         "build": "vue-demi-switch 3 && tsc && vite build",
-        "format": "prettier -w src/**/*.{ts,tsx,vue}"
+        "lint": "prettier -w src/**/*.{ts,tsx,vue}"
     },
     "eslintIgnore": [
         ".eslintrc.cjs",
@@ -39,7 +43,6 @@
         "@simple-education-dev/icons": "^0.2.0-alpha.10",
         "@simple-education-dev/tokens": "^1.0.1-alpha.5",
         "@vueuse/core": "^9.1.0",
-        "axios": "^0.27.2",
         "date-fns": "^2.29.1",
         "vue-demi": "^0.13.7"
     },
