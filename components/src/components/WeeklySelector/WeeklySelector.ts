@@ -46,7 +46,7 @@ export default defineComponent({
             const deepCopy = [...weekBooleanArray.value];
             deepCopy[week] = [...deepCopy[week]];
             deepCopy[week][weekDay] = !deepCopy[week][weekDay];
-            context.emit('change:week', cyclePeriodConverter(deepCopy, props.start, props.isEachWeek));
+            context.emit('change', cyclePeriodConverter(deepCopy, props.start, props.isEachWeek));
         };
         const changeEachDay = () => {
             context.emit('changeEach:day');
@@ -56,13 +56,13 @@ export default defineComponent({
                 props.isEachWeek
             ) as CyclePeriod[];
             context.emit(
-                'change:week',
+                'change',
                 changed.filter((el) => el.weekIndex < 4)
             );
         };
         const changeEachWeek = () => {
             context.emit('changeEach:week');
-            context.emit('change:week', []);
+            context.emit('change', []);
         };
         const enabled = (week: number, weekDay: number) => {
             return weekBooleanArray.value[week][weekDay];

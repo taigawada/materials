@@ -66,7 +66,7 @@ export default defineComponent({
         const currentSelectDate = ref<Date>(props.initialDate !== undefined ? props.initialDate : new Date());
         const handleSelectDateChange = (date: Date) => {
             currentSelectDate.value = date;
-            context.emit('change:date', date);
+            context.emit('change', date);
         };
         const datePickerNode = (): VNode | undefined => {
             if (isEntered.value || isFocus.value) {

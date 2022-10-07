@@ -1,6 +1,5 @@
 export { SimpleButton } from './components/SimpleButton';
 export { SimpleTabs } from './components/SimpleTabs';
-export { SimplePopover } from './components/SimplePopover';
 export { SimpleActions } from './components/SimpleActions';
 export { SimpleCheckbox } from './components/SimpleCheckbox';
 export { SimpleBanner } from './components/SimpleBanner';
@@ -21,6 +20,8 @@ export { SimpleDateTimePicker } from './components/SimpleDateTimePicker';
 export { SimpleResourceList } from './components/SimpleResourceList';
 export { ResourceItem } from './components/ResourceItem';
 export { SimplePagination } from './components/SimplePagination';
+export { SimplePopover } from './components/SimplePopover';
+export { SimpleProgressBar } from './components/SimpleProgressBar';
 export { SimpleIcon } from './components/SimpleIcon';
 export { SimpleSkelton } from './components/SimpleSkelton';
 export { SimpleSpinner } from './components/SimpleSpinner';

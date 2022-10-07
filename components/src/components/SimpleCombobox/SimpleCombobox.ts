@@ -87,14 +87,14 @@ export default defineComponent({
             if (!props.multiple) {
                 isEntered.value = false;
             }
-            context.emit('change:select', selectedItemsCurrent);
+            context.emit('change', selectedItemsCurrent);
         };
         const addItem = (item: string) => {
             isEntered.value = false;
             if (!props.multiple) {
                 context.emit('remove');
             }
-            context.emit('add:item', item);
+            context.emit('add', item);
         };
         const fieldChange = (value: string) => {
             context.emit('fieldChange', value);
@@ -146,9 +146,6 @@ export default defineComponent({
         const floatBoxHeightStyle = () => ({
             '--float-box-height': `${props.floatBoxHeight}px`,
         });
-        // const { accordionEnter, accordionLeave, accordionAfterEnter, accordionAfterLeave } = useAccordionAnimation(
-        //     props.floatBoxHeight
-        // );
         const inputNode = () => {
             const isOpen = isEntered.value || isFocus.value;
             return h(SimpleInput, {
@@ -166,12 +163,12 @@ export default defineComponent({
                     icon: isOpen ? SearchGlass : ArrowDown,
                     error: isOpen ? undefined : props.error,
                 },
-                'onChange:value': fieldChange,
+                onChange: fieldChange,
                 onFocusin: inFocus,
                 onFocusout: outFocus,
                 onRemove: fieldRemove,
                 on: {
-                    'change:value': fieldChange,
+                    change: fieldChange,
                     focusin: inFocus,
                     focusout: outFocus,
                     remove: fieldRemove,

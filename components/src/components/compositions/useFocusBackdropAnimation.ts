@@ -5,6 +5,7 @@ export const useFocusBackdrop = () => {
     const source = ref(0);
     const transitions = useTransition(source, {
         duration: 140,
+        delay: 100,
         transition: TransitionPresets.easeInOutCubic,
     });
     const outputStyles = computed(() => `${transitions.value}px`);

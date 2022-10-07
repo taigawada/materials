@@ -81,7 +81,7 @@ export default defineComponent({
             if (newValueDeepCopy.meridiem !== null && newValueDeepCopy.meridiem !== undefined) {
                 newValueDeepCopy.hours = newValueDeepCopy.hours + (newValueDeepCopy.meridiem === '午後' ? 12 : 0);
             }
-            context.emit('change:datetime', set(currentSelectDate.value!, newValueDeepCopy));
+            context.emit('change', set(currentSelectDate.value!, newValueDeepCopy));
         };
         const handleSelectDateChange = (date: Date) => {
             currentSelectDate.value = date;
@@ -96,7 +96,7 @@ export default defineComponent({
                 date: date.getDate(),
             };
             const newDate = set(currentSelectDate.value, setTime);
-            context.emit('change:datetime', newDate);
+            context.emit('change', newDate);
         };
         const datetimePickerNode = (): VNode | undefined => {
             if (isEntered.value || isFocus.value) {

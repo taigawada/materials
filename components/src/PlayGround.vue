@@ -22,7 +22,6 @@
                 <p>{{ fieldvalue }}</p>
                 <SimpleInput
                     type="text"
-                    :maxlength="20"
                     :value="fieldvalue"
                     caption="生徒氏名"
                     placeholder="名前を入力してください"
@@ -36,7 +35,7 @@
                         :value="selectRef"
                         :items="selectItems"
                         caption="クラスを選択"
-                        @change:select="handleSelectChange"
+                        @change="handleSelectChange"
                     />
                 </div>
                 <div style="text-align: left">
@@ -48,7 +47,7 @@
                         :value="selectRef"
                         :items="selectItems"
                         caption="クラスを選択"
-                        @change:select="handleSelectChange"
+                        @change="handleSelectChange"
                     />
                 </div>
             </div>
@@ -141,7 +140,7 @@
                 caption="生徒氏名"
                 placeholder="名前を入力してください"
                 remove
-                @change:value="handleFieldChange"
+                @change="handleFieldChange"
                 @remove="handleTextFieldRemove"
             />
         </SimpleModal>
@@ -150,7 +149,7 @@
             <WeeklySelector
                 :isEachWeek="isEachWeek"
                 :weekValue="weekState"
-                @change:week="changeWeek"
+                @change="changeWeek"
                 @changeEach:day="isEachWeek = false"
                 @changeEach:week="isEachWeek = true"
             />
@@ -164,12 +163,12 @@
                 <SimpleDatePicker
                     style="margin: 0 auto"
                     :inputValue="dateInputValue"
-                    @change:date="handleDateChange"
+                    @change="handleDateChange"
                 ></SimpleDatePicker>
                 <SimpleTimePicker
                     style="margin: 0 auto"
                     :inputValue="timeInputValue"
-                    @change:time="handleTimeChange"
+                    @change="handleTimeChange"
                 ></SimpleTimePicker>
             </SimpleCard>
         </div>
@@ -180,7 +179,7 @@
                     style="margin: 0 auto"
                     allowPast
                     :inputValue="datetimeInputValue"
-                    @change:datetime="handleDatetimeChange"
+                    @change="handleDatetimeChange"
                 ></SimpleDateTimePicker>
             </SimpleCard>
         </div>
@@ -196,8 +195,8 @@
             error="エラーです"
             @fieldChange="comboFieldChange"
             @remove="comboFieldRemove"
-            @add:item="handleAddItems"
-            @change:select="comboSelectedChange"
+            @add="handleAddItems"
+            @change="comboSelectedChange"
         >
         </SimpleCombobox>
         <SimpleSaveBar :open="loading" />
@@ -233,6 +232,7 @@ import SimpleSkelton from './components/SimpleSkelton/SimpleSkelton';
 import SimpleIcon from './components/SimpleIcon/SimpleIcon';
 import SimpleSaveBar from './components/SimpleSaveBar/SimpleSaveBar';
 import SimpleToast from './components/SimpleToast/SimpleToast';
+import SimpleProgressBar from './components/SimpleProgressBar/SimpleProgressBar';
 
 import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
 import { CyclePeriod } from './components/WeeklySelector/useWeeklySelector';
@@ -269,6 +269,7 @@ export default defineComponent({
         SimpleIcon,
         SimpleSaveBar,
         SimpleToast,
+        SimpleProgressBar,
     },
     setup() {
         // SimpleButton

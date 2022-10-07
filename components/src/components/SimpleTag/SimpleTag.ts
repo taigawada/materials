@@ -37,7 +37,7 @@ export default defineComponent({
             else if (props.processing) return 'rgba(164, 232, 242, 1)';
             else if (props.critical) return 'rgba(255, 121, 121, 1)';
             else if (props.warn) return 'rgba(255, 178, 54, 1)';
-            else if (props.dark) return 'rgba(119, 133, 133, 1)';
+            else if (props.dark) return 'rgba(228, 229, 231, 1)';
             else return 'rgba(253, 255, 255, 1)';
         });
         const textColor = computed(() => {
@@ -45,7 +45,7 @@ export default defineComponent({
             else if (props.processing) return 'rgba(44, 62, 80, 1)';
             else if (props.critical) return 'rgba(255, 255, 255, 1)';
             else if (props.warn) return 'rgba(44, 62, 80, 1)';
-            else if (props.dark) return 'rgba(248, 248, 248, 1)';
+            else if (props.dark) return 'rgba(44, 62, 80, 1)';
             else return 'rgba(44, 62, 80, 1)';
         });
         return () =>

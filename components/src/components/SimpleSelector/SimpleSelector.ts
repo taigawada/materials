@@ -50,10 +50,12 @@ export default defineComponent({
     setup(props, context) {
         const { outputStyles, focusinFn, focusoutFn } = useFocusBackdrop();
         const handleRadioClick = (newSelect: string) => {
-            context.emit('change:select', newSelect);
+            context.emit('change', newSelect);
         };
-        const handleSelectChange = (event: { target: HTMLSelectElement }) => {
-            context.emit('change:select', event.target.value);
+        const handleSelectChange = (event: Event) => {
+            event.stopPropagation();
+            const target = event.target as HTMLSelectElement;
+            context.emit('change', target.value);
         };
         const isError = () => {
             if (props.error) {
@@ -160,11 +162,11 @@ export default defineComponent({
                             domProps: {
                                 value: props.value,
                             },
-                            onChange: (event: { target: HTMLSelectElement }) => handleSelectChange(event),
+                            onChange: (event: Event) => handleSelectChange(event),
                             onFocus: focusinFn,
                             onBlur: focusoutFn,
                             on: {
-                                change: (event: { target: HTMLSelectElement }) => handleSelectChange(event),
+                                change: (event: Event) => handleSelectChange(event),
                                 focus: focusinFn,
                                 blur: focusoutFn,
                             },

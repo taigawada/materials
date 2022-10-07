@@ -259,22 +259,23 @@ export default defineComponent({
                             simple_input__input_error: isError(),
                         },
                     ],
+                    style: [{ 'padding-right': props.maxlength ? '60px' : '40px' }],
                     type: props.type,
                     maxlength: props.maxlength,
+                    disabled: props.disabled,
+                    readonly: props.readonly,
+                    placeholder: props.placeholder,
+                    value: props.value,
                     domProps: {
                         type: props.type,
-                        maxlength: props.maxlength,
                         placeholder: props.placeholder,
                         value: props.value,
                     },
                     attrs: {
                         readonly: props.readonly,
+                        maxlength: props.maxlength,
                         disabled: props.disabled,
                     },
-                    disabled: props.disabled,
-                    readonly: props.readonly,
-                    placeholder: props.placeholder,
-                    value: props.value,
                     onInput: (e: Event) => handleInputChange(e),
                     onFocus: (event: Event) => {
                         handleFocusin();

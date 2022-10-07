@@ -2,6 +2,7 @@ $background: rgba(244, 244, 244, 1);
 $theme-color: rgba(255, 194, 85, 1);
 $theme-color-alpha: rgba(255, 194, 85, 0.2);
 $surface: rgba(253, 255, 255, 1);
+// $surface: rgba(28, 28, 28, 1); //dark
 $surface-black-alpha: rgba(44, 62, 80, 0.1);
 $surface-black: rgba(44, 62, 80, 1);
 $surface-warning: rgba(255, 194, 85, 1);
@@ -12,6 +13,7 @@ $surface-error-alpha: rgba(255, 240, 240, 1);
 $border-error: rgba(255, 121, 121, 1);
 
 $text: rgba(114, 114, 114, 1);
+// $text: rgba(253, 253, 253, 1); //dark
 $text-weak: rgba(114, 114, 114, 1);
 $text-white: rgba(255, 255, 255, 1);
 $text-disabled: rgba(200, 200, 200, 1);
@@ -77,6 +79,9 @@ $border-radius-2: 0.625rem;
 
 $box-shadow-1: rgba(0, 123, 255, 0.04) 0px 2px 20px 0px, rgba(15, 26, 38, 0.08) 0px 8px 32px 0px;
 $modal-background: rgba(0, 0, 0, 0.75);
+
+$progress-bar-surface: rgba(228, 229, 231, 1);
+$progress-bar-filler: rgba(68, 157, 167, 1);
 
 %partition-bar {
     box-sizing: border-box;

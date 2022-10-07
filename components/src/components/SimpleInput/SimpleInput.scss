@@ -3,7 +3,9 @@
     color: #2c3e50;
     text-align: left;
     width: var(--simple-input-width);
-    margin-bottom: $space-2;
+    margin: $space-2 0;
+    user-select: none;
+    -webkit-user-select: none;
 }
 .simple_input__input_field {
     position: relative;
@@ -91,7 +93,7 @@
     margin: 0 $space-2 0 $space-1;
 }
 .simple_input__length_count {
-    font-size: $font-size-4;
+    font-size: $font-size-3;
     color: $text-weak;
 }
 .simple_input_number_handler {

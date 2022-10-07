@@ -60,7 +60,7 @@ export default defineComponent({
         };
         onMounted(() => {
             if (props.initialTime !== undefined) {
-                context.emit('change:time', props.initialTime);
+                context.emit('change', props.initialTime);
             }
         });
         const selectedDate = reactive<TimeObject>({
@@ -81,7 +81,7 @@ export default defineComponent({
             if (newValue.meridiem !== null && newValue.meridiem !== undefined) {
                 newValue.hours = newValue.hours + newValue.meridiem === '午後' ? 12 : 0;
             }
-            context.emit('change:time', set(baseDate, newValue));
+            context.emit('change', set(baseDate, newValue));
         };
         const timePickerNode = () => {
             if (isEntered.value || isFocus.value) {
