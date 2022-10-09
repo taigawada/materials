@@ -2,20 +2,25 @@
 
 # How to install
 
-main.ts etc...
+#### vue2.x
 
 ```
-//vue2.x
+
 import Vue from 'vue';
 
 import '@simple-education-dev/components/style';
 import { SimpleComponents } from '@simple-education-dev/components';
 Vue.use(SimpleComponents);
+```
 
-//vue3.x
+#### vue3.x
+
+```
 import { createApp } from 'vue';
-const app = createApp(PlayGround);
+import App from 'App.vue';
+const app = createApp(App);
 
+import '@simple-education-dev/components/style';
 import { SimpleComponents } from '@simple-education-dev/components';
 app.use(SimpleComponents);
 
