@@ -1,7 +1,5 @@
 # materials
 
----
-
 # How to install
 
 main.ts etc...
@@ -11,6 +9,8 @@ import '@simple-education-dev/components/style';
 import { SimpleComponents } from '@simple-education-dev/components';
 Vue.use(SimpleComponents);
 ```
+
+---
 
 monorepo
 
