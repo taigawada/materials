@@ -12,7 +12,7 @@ import { SimpleComponents } from '@simple-education-dev/components';
 Vue.use(SimpleComponents);
 ```
 
-theme 追加
+テーマ 追加
 
 ```
 import SomeThemeJSON from './SomeThemeJSON.json';
@@ -21,7 +21,7 @@ Vue.use(SimpleComponents, {
 });
 ```
 
-theme 上書き
+テーマ 上書き
 
 ```
 Vue.use(SimpleComponents, {
