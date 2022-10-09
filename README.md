@@ -5,11 +5,21 @@
 main.ts etc...
 
 ```
+//vue2.x
 import Vue from 'vue';
 
 import '@simple-education-dev/components/style';
 import { SimpleComponents } from '@simple-education-dev/components';
 Vue.use(SimpleComponents);
+
+//vue3.x
+import { createApp } from 'vue';
+const app = createApp(PlayGround);
+
+import { SimpleComponents } from '@simple-education-dev/components';
+app.use(SimpleComponents);
+
+app.mount('#app');
 ```
 
 テーマを追加
