@@ -222,10 +222,12 @@ export default defineComponent({
                 return h(SimpleIcon, {
                     source: DeleteCross,
                     size: '18px',
+                    fill: 'var(--text)',
                     clickable: true,
                     props: {
                         source: DeleteCross,
                         size: '18px',
+                        fill: 'var(--text)',
                         clickable: true,
                     },
                     onClick: handleRemove,
@@ -237,9 +239,11 @@ export default defineComponent({
                 return h(SimpleIcon, {
                     source: props.icon,
                     size: '15px',
+                    fill: 'var(--text)',
                     props: {
                         source: props.icon,
                         size: '15px',
+                        fill: 'var(--text)',
                     },
                 });
             }

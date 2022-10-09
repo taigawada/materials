@@ -1,23 +1,22 @@
-@use 'globalStyleSheet' as *;
-
 .simple_toast__base {
-    color: $surface;
-    font-size: $font-size-6;
+    color: var(--surface);
+    font-size: var(--font-size-6);
     display: none;
     align-items: center;
-    padding: $space-2 $space-4;
-    border-radius: $border-radius-1;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--border-radius-1);
     position: fixed;
     top: 100vh;
     left: 50%;
     transform: translateX(-50%);
-    background: $surface-black;
+    background: var(--surface-black);
     transition: top 200ms ease-in-out;
 }
 .simple_toast__base_error {
-    background: $surface-error;
+    background: var(--surface-error);
 }
 .simple_toast__content_text {
-    font-size: $font-size-6;
-    margin-right: $space-2;
+    color: var(--text-white);
+    font-size: var(--font-size-6);
+    margin-right: var(--space-2);
 }

@@ -194,10 +194,12 @@ export default defineComponent({
                 h(SimpleIcon, {
                     source: ArrowLeft,
                     size: '16px',
+                    fill: 'var(--text)',
                     clickable: true,
                     props: {
                         source: ArrowLeft,
                         size: '16px',
+                        fill: 'var(--text)',
                         clickable: true,
                     },
                     onClick: handleSubMonth,
@@ -209,10 +211,12 @@ export default defineComponent({
                 h(SimpleIcon, {
                     source: ArrowRight,
                     size: '16px',
+                    fill: 'var(--text)',
                     clickable: true,
                     props: {
                         source: ArrowRight,
                         size: '16px',
+                        fill: 'var(--text)',
                         clickable: true,
                     },
                     onClick: handleAddMonth,

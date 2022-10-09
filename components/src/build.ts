@@ -29,3 +29,7 @@ export { SimpleSaveBar } from './components/SimpleSaveBar';
 export { SimpleToast } from './components/SimpleToast';
 export { sortItems, dayOfWeekStr } from './utils/utils';
 export { useAccordionAnimation } from './components/compositions/useAccordionAnimation';
+export { useFocusBackdrop } from './components/compositions/useFocusBackdropAnimation';
+
+import SimpleComponents from './utils/theme/themeInstall';
+export { SimpleComponents };

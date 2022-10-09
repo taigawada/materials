@@ -1,6 +1,5 @@
-@use 'globalStyleSheet' as *;
 .resource_item__child {
-    color: #2c3e50;
+    color: var(--text);
     display: grid;
     align-items: center;
     grid-template-rows: var(--child-item-height);
@@ -8,7 +7,7 @@
     justify-self: var(--item-distribution);
 }
 .resource_item__base div {
-    font-size: $font-size-6;
+    font-size: var(--font-size-6);
 }
 .popup_menu_base {
     display: inline-block;

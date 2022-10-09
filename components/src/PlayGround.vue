@@ -95,10 +95,6 @@
                 </template>
             </SimpleResourceList>
         </div>
-        <p>Banner</p>
-        <SimpleBanner style="width: 40%; margin: 0 auto" title="今日までの提出物" buttonLabel="確認" @action="action">
-            <span style="font-weight: 500">百マス計算</span>
-        </SimpleBanner>
         <p>Smooth Picker</p>
         <p>selected: {{ smoothPickerSelected }}</p>
         <SimpleSmoothPicker
@@ -206,7 +202,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue-demi';
+import { defineComponent, ref, watch, inject } from 'vue-demi';
 import SimpleButton from './components/SimpleButton/SimpleButton';
 import SimpleTabs from './components/SimpleTabs/SimpleTabs';
 import SimpleActions from './components/SimpleActions/SimpleActions';
@@ -238,6 +234,9 @@ import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
 import { CyclePeriod } from './components/WeeklySelector/useWeeklySelector';
 import { sortItems } from './utils/utils';
 import { format } from 'date-fns';
+
+import { usePreferredDark } from '@vueuse/core';
+import { switchThemeKey } from './utils/theme/themeInstall';
 
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
@@ -456,6 +455,13 @@ export default defineComponent({
         const handleSmoothPickerChange = (newValue: number) => {
             smoothPickerSelected.value = newValue;
         };
+        const isDark = usePreferredDark();
+        const switchTheme = inject(switchThemeKey);
+        watch(isDark, () => {
+            if (switchTheme) {
+                switchTheme(isDark.value ? 'dark' : 'light');
+            }
+        });
         return {
             disabled,
             loading,
@@ -518,29 +524,29 @@ export default defineComponent({
 });
 </script>
 <style lang="scss">
-@use 'globalStyleSheet' as *;
 body {
-    background: #f4f8f9;
+    background: var(--global-background);
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
+    color: var(--text);
 }
 .other-operation-actions-container {
-    padding: $space-1;
+    padding: var(--space-1);
 }
 .other-operation-action {
     $action-height: 40px;
     height: $action-height;
     line-height: $action-height;
-    padding: 0 $space-5;
+    padding: 0 var(--space-5);
 }
 .other-operation-action:hover {
-    background: $hovered;
+    background: var(--hovered);
 }
 .to-gabbage-text {
-    color: $text-error;
+    color: var(--text-error);
 }
 </style>

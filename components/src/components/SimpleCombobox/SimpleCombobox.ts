@@ -242,8 +242,10 @@ export default defineComponent({
                         class: [{ simple_combobox__add_icon: true }],
                         source: DeleteCross,
                         size: '16px',
+                        fill: 'var(--text)',
                         props: {
                             source: DeleteCross,
+                            fill: 'var(--text)',
                             size: '16px',
                         },
                     }),

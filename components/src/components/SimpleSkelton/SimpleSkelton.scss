@@ -1,6 +1,3 @@
-@use 'globalStyleSheet' as *;
-$skelton-base-color-light: rgba(241, 241, 241, 1);
-$skelton-base-color-dark: rgba(233, 233, 233, 1);
 .simple_skelton__base {
     display: inline-block;
     vertical-align: middle;
@@ -10,45 +7,45 @@ $skelton-base-color-dark: rgba(233, 233, 233, 1);
     margin: 0 auto;
     width: var(--simple-skelton-body-width);
     height: var(--simple-skelton-body-height);
-    border-radius: $border-radius-1;
+    border-radius: var(--border-radius-1);
     z-index: 1;
-    background: $skelton-base-color-light;
+    background: var(--skelton-color-light);
     animation: GradientAnimation 2.2s 0.5s infinite;
 }
 .simple_skelton__body {
     width: var(--simple-skelton-body-width);
     height: var(--simple-skelton-body-height);
-    margin: $space-4 auto;
-    border-radius: $border-radius-1;
+    margin: var(--space-4) auto;
+    border-radius: var(--border-radius-1);
     z-index: 1;
-    background: $skelton-base-color-light;
+    background: var(--skelton-color-light);
     animation: GradientAnimation 2.2s 0.5s infinite;
 }
 .simple_skelton__text_line {
     height: 12px;
-    margin: $space-4 auto;
-    border-radius: $border-radius-05;
+    margin: var(--space-4) auto;
+    border-radius: var(--border-radius-05);
     z-index: 1;
-    background: $skelton-base-color-light;
+    background: var(--skelton-color-light);
     animation: GradientAnimation 2.2s 0.5s infinite;
 }
 .simple_skelton__header {
     width: 40%;
     height: 20px;
-    margin: $space-4 auto $space-4 0;
-    border-radius: $border-radius-1;
+    margin: var(--space-4) auto var(--space-4) 0;
+    border-radius: var(--border-radius-1);
     z-index: 1;
-    background: $skelton-base-color-light;
+    background: var(--skelton-color-light);
     animation: GradientAnimation 2.2s 0.5s infinite;
 }
 @keyframes GradientAnimation {
     0% {
-        background: $skelton-base-color-light;
+        background: var(--skelton-color-light);
     }
     50% {
-        background: $skelton-base-color-dark;
+        background: var(--skelton-color-dark);
     }
     100% {
-        transform: $skelton-base-color-light;
+        transform: var(--skelton-color-light);
     }
 }

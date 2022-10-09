@@ -1,13 +1,12 @@
-@use 'globalStyleSheet' as *;
 .simple_selector__base {
     width: 100%;
-    color: #2c3e50;
+    color: var(--text);
     display: inline-block;
     text-align: left;
-    margin-bottom: $space-2;
+    margin-bottom: var(--space-2);
 }
 .simple_selector__caption_hidden {
-    font-size: $font-size-3;
+    font-size: var(--font-size-3);
     padding: 0 5px;
     display: block;
     text-align: left;
@@ -22,38 +21,39 @@
     align-items: center;
 }
 .simple_selector__radio_elements {
-    margin: $space-05 0;
+    margin: var(--space-05 0);
 }
 .simple_selector__radio_text {
     cursor: pointer;
-    font-size: $font-size-4;
+    font-size: var(--font-size-4);
+    color: var(--text);
 }
 .simple_selector__radio_helptext {
-    margin-left: calc(21px + $space-1);
-    color: $text;
-    font-size: $font-size-4;
+    margin-left: calc(21px + var(--space-1));
+    color: var(--text);
+    font-size: var(--font-size-4);
 }
 .simple_selector__radio_circle {
-    margin-right: $space-1;
+    margin-right: var(--space-1);
     position: relative;
     width: 17px;
     height: 17px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 1);
-    border: 0.075rem solid $border-weak;
+    border: 0.075rem solid var(--border-weak);
     transition: border 0.2s;
     cursor: pointer;
 }
 .radio_circle__selected {
     background: rgba(255, 255, 255, 1);
-    border: 0.075rem solid $selected;
+    border: 0.075rem solid var(--selected);
 }
 .radio_circle__inside {
     position: absolute;
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: $selected;
+    background: var(--selected);
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -68,15 +68,15 @@
 }
 .simple_selector__select_box {
     width: 100%;
-    font-size: $font-size-4;
-    line-height: $font-size-4;
-    color: $text;
+    font-size: var(--font-size-4);
+    line-height: var(--font-size-4);
+    color: var(--text);
     appearance: none;
-    padding: 11.5px $space-8 11.5px $space-2;
+    padding: 11.5px var(--space-8) 11.5px var(--space-2);
     box-sizing: border-box;
-    border: 1px solid $border-weak;
-    border-radius: $border-radius-1;
-    background: rgba(255, 255, 255, 1);
+    border: 1px solid var(--border-weak);
+    border-radius: var(--border-radius-1);
+    background: var(--surface);
     z-index: 10;
     outline: 0;
     margin: 0;
@@ -85,8 +85,8 @@
     position: absolute;
     width: calc(100% + 1px);
     height: calc(100% + 1px);
-    border-radius: $border-radius-1;
-    box-shadow: 0 0 0 var(--outline-backdrop-weight) $theme-color;
+    border-radius: var(--border-radius-1);
+    box-shadow: 0 0 0 var(--outline-backdrop-weight) var(--theme-color);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -97,24 +97,24 @@
     z-index: 11;
 }
 .select_box__error {
-    border: 1px solid $surface-error;
-    background: $surface-error-alpha;
+    border: 1px solid var(--surface-error);
+    background: var(--surface-error-alpha);
 }
 .select_box__error:focus {
-    border: 1px solid $surface-error;
-    background: $surface-error-alpha;
+    border: 1px solid var(--surface-error);
+    background: var(--surface-error-alpha);
 }
 .simple_selector__error_message {
     display: inline-flex;
     align-items: center;
 }
 .simple_selector__error_text {
-    font-size: $font-size-3;
-    color: $text-error;
+    font-size: var(--font-size-3);
+    color: var(--text-error);
 }
 .simple_selector__error_exclamation {
     width: 15px;
     height: 15px;
-    fill: $surface-error;
-    margin: 0 $space-2 0 $space-1;
+    fill: var(--surface-error);
+    margin: 0 var(--space-2) 0 var(--space-1);
 }

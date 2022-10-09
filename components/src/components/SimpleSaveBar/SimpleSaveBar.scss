@@ -1,7 +1,5 @@
-@use 'globalStyleSheet' as *;
-
 .simple_save_bar__base {
-    background: $surface-black;
+    background: var(--surface-black);
     position: fixed;
     top: 0;
     left: 0;
@@ -12,11 +10,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 $space-8;
+    padding: 0 var(--space-8);
 }
 .simple_save_bar__header_text {
-    color: $surface;
-    font-size: $font-size-8;
+    color: rgba(227, 277, 277, 1);
+    font-size: var(--font-size-8);
     line-height: 70px;
 }
 .simple_save_bar__buttons_container {

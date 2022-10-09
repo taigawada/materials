@@ -1,5 +1,4 @@
-@use 'globalStyleSheet' as *;
 .SimpleIconBase {
-    color: #2c3e50;
+    color: var(--text);
     display: block;
 }

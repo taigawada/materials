@@ -17,7 +17,12 @@ export default defineComponent({
         },
         color: {
             type: String,
-            default: 'rgba(255, 194, 85, 1)',
+            default: 'var(--theme-color)',
+            required: false,
+        },
+        textColor: {
+            type: String,
+            default: 'var(--text)',
             required: false,
         },
     },
@@ -79,6 +84,11 @@ export default defineComponent({
                     ]
                 );
             });
-        return () => h('div', { class: [{ simple_tabs__base: true }] }, tabsNode());
+        return () =>
+            h(
+                'div',
+                { class: [{ simple_tabs__base: true }], style: [{ '--tab-text-color': props.textColor }] },
+                tabsNode()
+            );
     },
 });

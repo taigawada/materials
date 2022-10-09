@@ -1,5 +1,5 @@
-@use 'globalStyleSheet' as *;
 .simple_modal__overlay {
+    color: var(--text);
     z-index: 300;
     display: block;
     position: fixed;
@@ -18,21 +18,21 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    background: $surface;
+    background: var(--surface);
     border-radius: 10px;
-    box-shadow: $box-shadow-1;
+    box-shadow: var(--box-shadow-1);
 }
 .simple_modal__card_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 50px;
-    font-size: $font-size-9;
+    font-size: var(--font-size-9);
     border-bottom: 0.2px solid #a8a8a8;
 }
 .simple_modal__card_title {
-    font-size: $font-size-6;
-    margin-left: $space-4;
+    font-size: var(--font-size-6);
+    margin-left: var(--space-4);
 }
 .simple_modal__content_container {
     width: 90%;
@@ -53,5 +53,5 @@
     transform: translateY(-50%);
 }
 .simple_modal__close_icon {
-    margin-right: $space-4;
+    margin-right: var(--space-4);
 }

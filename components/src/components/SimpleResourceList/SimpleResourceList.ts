@@ -243,7 +243,11 @@ export default defineComponent({
                               color: [0, 150, 138],
                               props: { size: 'tiny', color: [0, 150, 138] },
                           }),
-                          h('span', { style: [{ fontSize: '13px' }] }, '提出物を読み込んでいます...'),
+                          h(
+                              'span',
+                              { style: [{ fontSize: '13px', color: 'var(--text-black)' }] },
+                              '提出物を読み込んでいます...'
+                          ),
                       ])
                     : undefined,
                 /* eslint-enable */

@@ -1,20 +1,18 @@
-@use 'globalStyleSheet' as *;
-
 .simple_popover__popover {
-    color: #2c3e50;
+    color: var(--text);
     position: absolute;
     width: auto;
     height: auto;
-    margin-top: $space-4;
-    background: $surface;
-    box-shadow: $box-shadow-1;
-    border-radius: $border-radius-1;
+    margin-top: var(--space-4);
+    background: var(--surface);
+    box-shadow: var(--box-shadow-1);
+    border-radius: var(--border-radius-1);
     z-index: 1000;
 }
 .simple_popover__popover::before {
     content: '';
     border: 10px solid transparent;
-    border-bottom: 10px solid $surface;
+    border-bottom: 10px solid var(--surface);
     position: absolute;
     top: -20px;
     left: 50%;

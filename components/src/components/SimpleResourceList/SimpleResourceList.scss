@@ -1,16 +1,11 @@
-@use 'globalStyleSheet' as *;
 .simple_resource_list__container {
-    color: #2c3e50;
+    color: var(--text);
     display: inline-block;
     width: 100%;
-    padding-bottom: $border-radius-2;
-    background: $surface;
-    border-radius: $border-radius-2;
-    box-shadow: $box-shadow-1;
-
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    padding-bottom: var(--border-radius-2);
+    border-radius: var(--border-radius-2);
+    background: rgba(255, 255, 255, 0.01);
+    box-shadow: var(--box-shadow-1);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -38,11 +33,11 @@
     box-sizing: border-box;
 }
 .simple_resource_list__row {
-    border-top: 1px solid $border-weak;
+    border-top: 1px solid var(--border-weak);
     cursor: pointer;
 }
 .simple_resource_list__row:hover {
-    background: $hovered;
+    background: var(--hovered);
 }
 .simple_resource_list__slot_data_label_wrapper {
     text-align: left;
@@ -50,14 +45,14 @@
 .simple_resource_list__popover::before {
     content: '';
     border: 10px solid transparent;
-    border-bottom: 10px solid $surface;
+    border-bottom: 10px solid var(--surface);
     position: absolute;
     top: -20px;
     left: 20%;
     transform: translateX(-50%);
 }
 .simple_resource_list__select_info_text {
-    font-size: $font-size-3;
+    font-size: var(--font-size-3);
 }
 .simple_resource_list__header_actions {
     display: flex;
@@ -65,24 +60,24 @@
 }
 .simple_resource_list__bulk_action {
     display: inline-flex;
-    font-size: $font-size-3;
-    color: $plain;
+    font-size: var(--font-size-3);
+    color: var(--plain);
     cursor: pointer;
-    padding: $space-1;
-    border-radius: $border-radius-05;
-    margin: 0 $space-1;
+    padding: var(--space-1);
+    border-radius: var(--border-radius-05);
+    margin: 0 var(--space-1);
 }
 .simple_resource_list__bulk_action:hover {
-    background: $hovered;
+    background: var(--hovered);
 }
 .simple_resource_list__action_content {
-    font-size: $font-size-3;
-    margin: $space-1;
-    padding: $space-2;
+    font-size: var(--font-size-3);
+    margin: var(--space-1);
+    padding: var(--space-2);
     cursor: pointer;
 }
 .simple_resource_list__action_content:hover {
-    background: $hovered;
+    background: var(--hovered);
 }
 .simple_resource_list__check_column {
     position: relative;
@@ -95,7 +90,7 @@
     grid-template-columns: var(--child-item-weights);
 }
 .simple_resource_list__slot_data div {
-    font-size: $font-size-4;
+    font-size: var(--font-size-4);
     font-weight: 400;
 }
 .simple_resource_list__checkbox {
@@ -117,5 +112,5 @@
     align-items: center;
 }
 .simple_resource_list__loading_spinner {
-    margin: 0 $space-4;
+    margin: 0 var(--space-4);
 }

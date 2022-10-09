@@ -77,10 +77,12 @@ export default defineComponent({
                 props: {
                     source: props.asc ? ArrowDown : ArrowUp,
                     size: '13px',
+                    fill: 'var(--text)',
                     clickable: true,
                 },
                 source: props.asc ? ArrowDown : ArrowUp,
                 size: '13px',
+                fill: 'var(--text)',
                 clickable: true,
                 onClick: handleSortClick,
                 on: {
@@ -148,12 +150,12 @@ export default defineComponent({
                             source: ThreePointLeader,
                             size: '20px',
                             clickable: true,
-                            fill: popupMenuEnter.value ? 'rgba(60, 130, 214, 1)' : 'rgba(44, 62, 80, 1)',
+                            fill: popupMenuEnter.value ? 'rgba(60, 130, 214, 1)' : 'var(--text)',
                             props: {
                                 source: ThreePointLeader,
                                 size: '20px',
                                 clickable: true,
-                                fill: popupMenuEnter.value ? 'rgba(60, 130, 214, 1)' : 'rgba(44, 62, 80, 1)',
+                                fill: popupMenuEnter.value ? 'rgba(60, 130, 214, 1)' : 'var(--text)',
                             },
                             onClick: (e: Event) => handlePopoverMenuOpen(e),
                             on: {

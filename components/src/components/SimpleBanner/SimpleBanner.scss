@@ -1,4 +1,3 @@
-@use 'globalStyleSheet' as *;
 .simple_banner__base {
     color: #2c3e50;
     width: 100%;
@@ -6,23 +5,23 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    background: $surface-warning-alpha;
-    border: 1px solid $surface-warning;
-    border-radius: $border-radius-1;
+    background: var(--surface-warning-alpha);
+    border: 1px solid var(--surface-warning);
+    border-radius: var(--border-radius-1);
     box-sizing: border-box;
-    padding: $space-2 $space-3;
+    padding: var(--space-2) var(--space-3);
 }
 .simple_banner__header {
-    font-size: $font-size-4;
+    font-size: var(--font-size-4);
     display: flex;
     align-items: center;
 }
 .simple_banner__heading {
-    margin: 0 $space-5;
+    margin: 0 var(--space-5);
 }
 .simple_banner__content {
-    font-size: $font-size-4;
-    padding: $space-1 0;
+    font-size: var(--font-size-4);
+    padding: var(--space-1) 0;
     text-align: left;
     display: inline;
 }

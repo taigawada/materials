@@ -1,6 +1,5 @@
-@use 'globalStyleSheet' as *;
 .simple_stack__base {
-    color: #2c3e50;
+    color: var(--text);
     display: flex;
     flex-flow: var(--flex-direction-wrap);
     align-items: var(--align-items);

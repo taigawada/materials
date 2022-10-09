@@ -14,7 +14,7 @@ export default defineComponent({
         },
         fill: {
             type: String,
-            default: 'rgba(44, 62, 80, 1)',
+            default: 'var(--text)',
             required: false,
         },
         clickable: {

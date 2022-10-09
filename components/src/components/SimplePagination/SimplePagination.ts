@@ -2,7 +2,6 @@ import { defineComponent, ref, onMounted, onUpdated, h, isVue3, VNode } from 'vu
 import { onKeyPressed } from '@vueuse/core';
 import { ArrowLeft, ArrowRight, ThreePointLeader } from '@simple-education-dev/icons';
 import { SimpleIcon } from '../SimpleIcon';
-import { SimplePopover } from '../SimplePopover';
 import './SimplePagination.scss';
 
 export default defineComponent({
@@ -97,38 +96,6 @@ export default defineComponent({
             clearTimeout(nextHoverTimerId);
             nextButtonHovered.value = false;
         };
-        const previousKeyHelpPopover = () => {
-            return h(
-                SimplePopover,
-                {
-                    open: previousButtonHovered.value,
-                    activatorRef: previousPageActivator,
-                    props: {
-                        open: previousButtonHovered.value,
-                        activatorRef: previousPageActivator,
-                    },
-                },
-                isVue3
-                    ? () => [h('div', { class: [{ keyHelpText: true }] }, 'j')]
-                    : [h('div', { class: [{ keyHelpText: true }] }, 'j')]
-            );
-        };
-        const nextKeyHelpPopover = () => {
-            return h(
-                SimplePopover,
-                {
-                    open: nextButtonHovered.value,
-                    activatorRef: nextPageActivator,
-                    props: {
-                        open: nextButtonHovered.value,
-                        activatorRef: nextPageActivator,
-                    },
-                },
-                isVue3
-                    ? () => [h('div', { class: [{ keyHelpText: true }] }, 'k')]
-                    : [h('div', { class: [{ keyHelpText: true }] }, 'k')]
-            );
-        };
         const pagesNode = (): VNode[] => {
             if (props.length <= 7) {
                 return [...new Array(props.length).keys()].map((pageIndex) => {
@@ -182,9 +149,11 @@ export default defineComponent({
                         style: [{ display: props.current > 3 ? 'inline' : 'none' }],
                         source: ThreePointLeader,
                         size: '18px',
+                        fill: 'var(--text)',
                         props: {
                             source: ThreePointLeader,
                             size: '18px',
+                            fill: 'var(--text)',
                         },
                     }),
                     ...[0, 1, 2].map((index: number) => {
@@ -216,9 +185,11 @@ export default defineComponent({
                         style: [{ display: props.current < props.length - 4 ? 'inline' : 'none' }],
                         source: ThreePointLeader,
                         size: '18px',
+                        fill: 'var(--text)',
                         props: {
                             source: ThreePointLeader,
                             size: '18px',
+                            fill: 'var(--text)',
                         },
                     }),
                     h(
@@ -260,10 +231,12 @@ export default defineComponent({
                                 class: [{ simple_pagination__arrow_icons: true }],
                                 source: ArrowLeft,
                                 size: '14px',
+                                fill: 'var(--text)',
                                 clickable: true,
                                 props: {
                                     source: ArrowLeft,
                                     size: '14px',
+                                    fill: 'var(--text)',
                                     clickable: true,
                                 },
                                 onClick: handlePreviousPage,
@@ -275,7 +248,6 @@ export default defineComponent({
                                     mouseleave: previousLeave,
                                 },
                             }),
-                            previousKeyHelpPopover(),
                         ]
                     ),
                     ...pagesNode(),
@@ -290,10 +262,12 @@ export default defineComponent({
                                 class: [{ simple_pagination__arrow_icons: true }],
                                 source: ArrowRight,
                                 size: '14px',
+                                fill: 'var(--text)',
                                 clickable: true,
                                 props: {
                                     source: ArrowRight,
                                     size: '14px',
+                                    fill: 'var(--text)',
                                     clickable: true,
                                 },
                                 onClick: handleNextPage,
@@ -305,7 +279,6 @@ export default defineComponent({
                                     mouseleave: nextLeave,
                                 },
                             }),
-                            nextKeyHelpPopover(),
                         ]
                     ),
                 ]),

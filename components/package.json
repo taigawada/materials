@@ -7,7 +7,7 @@
     "types": "types/build.d.ts",
     "main": "dist/components.js",
     "files": [
-        "stylesheet.scss",
+        "src/utils/theme",
         "dist/style.css",
         "dist/components.js",
         "dist/components.umd.cjs",
@@ -21,10 +21,6 @@
         "./style": {
             "import": "./dist/style.css",
             "require": "./dist/style.css"
-        },
-        "./globalStyles": {
-            "import": "./stylesheet.scss",
-            "require": "./stylesheet.scss"
         }
     },
     "scripts": {

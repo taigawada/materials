@@ -176,9 +176,11 @@ export default defineComponent({
                     h(SimpleIcon, {
                         class: [{ simple_selector__select_icon: true }],
                         source: SelectArrow,
+                        fill: 'var(--text)',
                         size: '15px',
                         props: {
                             source: SelectArrow,
+                            fill: 'var(--text)',
                             size: '15px',
                         },
                     }),

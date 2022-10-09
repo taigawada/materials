@@ -2,14 +2,12 @@
 
 ---
 
-monorepo 構成
+monorepo
 
 ```
 materials/
 ├── components #component repo
-├── icons # SVG アイコンのソースと VueComponent
-├── tokens # stylesheet.scss, tsconfig, eslintrc...etc
-└── ... # 追加します
+└── icons # SVG アイコンのソースと VueComponent
 ```
 
 # Install dependencies and build workspaces
@@ -28,4 +26,12 @@ npm run build
 
 ```
 npm run serve -w components
+```
+
+install
+
+```
+import '@simple-education-dev/components/style';
+import { SimpleComponents } from '@simple-education-dev/components';
+Vue.use(SimpleComponents);
 ```

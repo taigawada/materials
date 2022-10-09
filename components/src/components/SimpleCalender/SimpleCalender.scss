@@ -1,8 +1,7 @@
-@use 'globalStyleSheet' as *;
 .simple_calender___container {
     position: relative;
     width: 100%;
-    color: #2c3e50;
+    color: var(--text);
     display: inline-block;
 }
 .simple_calender___container_loading {
@@ -17,14 +16,14 @@
 .simple_calender__heading {
     width: 100%;
     display: inline-flex;
-    margin: $space-5 auto;
+    margin: var(--space-5) auto;
     align-items: center;
     justify-content: space-around;
 }
 .simple_calender__paginate_icon {
     width: 16px;
     height: 16px;
-    fill: $surface-black;
+    fill: var(--surface-black);
     cursor: pointer;
 }
 .simple_calender__table {
@@ -33,27 +32,27 @@
 }
 .simple_calender__weekofday_header {
     font-weight: 100;
-    color: $text;
-    padding: $space-2 0;
+    color: var(--text);
+    padding: var(--space-2 0);
 }
 .simple_calender__date_data {
     position: relative;
-    font-size: $font-size-3;
-    color: $surface-black;
-    padding: $space-2 0;
+    font-size: var(--font-size-3);
+    color: var(--text);
+    padding: var(--space-2) 0;
     border-radius: 5px;
     cursor: var(--cursor-calender-data);
 }
 .calenderDataEntered {
-    background: $hovered;
+    background: var(--hovered);
 }
 .calenderShowDisable {
-    color: $text-disabled;
+    color: var(--text-disabled);
     cursor: default;
 }
 .calenderDataSelected {
-    color: $surface;
-    background: $selected;
+    color: var(--surface);
+    background: var(--selected);
 }
 .simple_calender__holidays_icon {
     position: absolute;
