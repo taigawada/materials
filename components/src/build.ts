@@ -31,5 +31,6 @@ export { sortItems, dayOfWeekStr } from './utils/utils';
 export { useAccordionAnimation } from './components/compositions/useAccordionAnimation';
 export { useFocusBackdrop } from './components/compositions/useFocusBackdropAnimation';
 
+export { switchThemeKey } from './utils/theme/themeInstall';
 import SimpleComponents from './utils/theme/themeInstall';
 export { SimpleComponents };
