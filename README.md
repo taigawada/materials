@@ -12,16 +12,16 @@ import { SimpleComponents } from '@simple-education-dev/components';
 Vue.use(SimpleComponents);
 ```
 
-テーマ 追加
+テーマを追加
 
 ```
 import SomeThemeJSON from './SomeThemeJSON.json';
 Vue.use(SimpleComponents, {
-    sometheme: SomeThemeJSON
+    someTheme: SomeThemeJSON
 });
 ```
 
-テーマ 上書き
+テーマを上書き
 
 ```
 Vue.use(SimpleComponents, {
@@ -41,7 +41,7 @@ Vue.use(SimpleComponents, {
 ```
 // vue2,x
 setup (props, context) {
-    context.root.$switchTheme('dark' or 'light');
+    context.root.$switchTheme('dark' , 'light' or 'someTheme');
 }
 
 // vue3,x
@@ -50,7 +50,7 @@ import { switchThemeKey } from '@simple-education-dev/components';
 
 setup (props, context) {
     const switchTheme = inject(switchThemeKey);
-    switchTheme('dark' or 'light');
+    switchTheme('dark' , 'light' or 'someTheme');
 }
 ```
 
