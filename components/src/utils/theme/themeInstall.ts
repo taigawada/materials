@@ -15,7 +15,6 @@ const install = (app: any, option: Theme = {}) => {
         document.documentElement.style.setProperty(key, general[key]);
     });
     const themes: Theme = { light: light, dark: dark };
-    console.log(Object.assign({}, themes));
     Object.keys(option).map((theme: string) => {
         if (theme === 'light' || theme === 'dark') {
             Object.assign(themes[theme], option[theme]);
@@ -23,7 +22,6 @@ const install = (app: any, option: Theme = {}) => {
             Object.assign(themes, { [theme]: option[theme] });
         }
     });
-    console.log(themes);
     const switchTheme = (theme: string) => {
         if (themes[theme]) {
             Object.keys(themes[theme]).map((key: string) => {
