@@ -26,6 +26,11 @@ app.use(SimpleComponents);
 app.mount('#app');
 ```
 
+# テーマ変更機能
+
+デフォルトでダークモード/ライトモードを切り替えられます。
+また、アクセントカラーを変更することもできます。
+
 テーマを追加
 
 ```
@@ -70,7 +75,7 @@ setup (props, context) {
 
 ---
 
-monorepo
+monorepo 構成
 
 ```
 materials/
