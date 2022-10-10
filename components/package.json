@@ -1,13 +1,13 @@
 {
     "name": "@simple-education-dev/components",
-    "version": "0.1.1-alpha.7",
+    "version": "0.1.1-alpha.8",
     "private": false,
     "description": "Vue2 & 3 Universal Component Library for SimpleEducation",
     "type": "module",
     "types": "types/build.d.ts",
     "main": "dist/components.js",
     "files": [
-        "src/utils/theme",
+        "src/utils/theme/assets",
         "dist/style.css",
         "dist/components.js",
         "dist/components.umd.cjs",
