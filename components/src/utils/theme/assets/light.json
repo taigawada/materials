@@ -39,7 +39,7 @@
     "--plain-hovered": "rgba(35, 98, 124, 1)",
     "--plain-pressed": "rgba(35, 98, 124, 1)",
     "--plain-disabled": "rgba(161, 161, 161, 1)",
-    "--criticalPlain": "rgba(255, 121, 121, 1)",
+    "--critical-plain": "rgba(255, 121, 121, 1)",
     "--critical-plain-hovered": "rgba(255, 95, 95, 1)",
     "--critical-plain-pressed": "rgba(255, 95, 95, 1)",
     "--critical-plain-disabled": "rgb(255, 146, 146)",
@@ -59,8 +59,8 @@
     "--box-shadow-1": "rgba(0, 123, 255, 0.04) 0px 2px 20px 0px, rgba(15, 26, 38, 0.08) 0px 8px 32px 0px",
     "--modal-background": "rgba(0, 0, 0, 0.75)",
 
-    "--skelton-color-light": "rgba(241, 241, 241, 1)",
-    "--skelton-color-dark": "rgba(233, 233, 233, 1)",
+    "--skeleton-color-light": "rgba(241, 241, 241, 1)",
+    "--skeleton-color-dark": "rgba(233, 233, 233, 1)",
 
     "--progress-bar-surface": "rgba(228, 229, 231, 1)",
     "--progress-bar-filler": "rgba(68, 157, 167, 1)"

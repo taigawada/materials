@@ -23,13 +23,14 @@ export { SimplePagination } from './components/SimplePagination';
 export { SimplePopover } from './components/SimplePopover';
 export { SimpleProgressBar } from './components/SimpleProgressBar';
 export { SimpleIcon } from './components/SimpleIcon';
-export { SimpleSkelton } from './components/SimpleSkelton';
+export { SimpleSkeleton } from './components/SimpleSkeleton';
 export { SimpleSpinner } from './components/SimpleSpinner';
 export { SimpleSaveBar } from './components/SimpleSaveBar';
 export { SimpleToast } from './components/SimpleToast';
 export { sortItems, dayOfWeekStr } from './utils/utils';
 export { useAccordionAnimation } from './components/compositions/useAccordionAnimation';
 export { useFocusBackdrop } from './components/compositions/useFocusBackdropAnimation';
+export { switchThemeKey } from './utils/theme/themeInstall';
 import SimpleComponents from './utils/theme/themeInstall';
 export { SimpleComponents };
 //# sourceMappingURL=build.d.ts.map

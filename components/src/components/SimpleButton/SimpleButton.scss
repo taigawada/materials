@@ -27,7 +27,6 @@
     padding: var(--space-4) calc(50% - var(--font-size-6) * var(--slot-text-length));
 }
 .simple_button__base_normal {
-    color: var(--normal);
     background: var(--normal);
     border-radius: calc(var(--props-size) * 2);
     text-decoration: none;

@@ -4,7 +4,7 @@
     "--theme-color": "rgba(255, 194, 85, 1)",
     "--theme-color-alpha": "rgba(255, 194, 85, 0.2)",
 
-    "--surface": "rgba(0, 0, 0, 1)",
+    "--surface": "rgba(25, 25, 25, 1)",
     "--surface-black-alpha": "rgba(44, 62, 80, 0.1)",
     "--surface-black": "rgba(44, 62, 80, 1)",
     "--surface-warning": "rgba(255, 194, 85, 1)",
@@ -59,8 +59,8 @@
     "--box-shadow-1": "rgba(0, 123, 255, 0.04) 0px 2px 20px 0px, rgba(15, 26, 38, 0.08) 0px 8px 32px 0px",
     "--modal-background": "rgba(0, 0, 0, 0.75)",
 
-    "--skelton-color-light": "rgba(44, 62, 80, 1)",
-    "--skelton-color-dark": "rgba(32, 41, 52, 1)",
+    "--skeleton-color-light": "rgba(44, 62, 80, 1)",
+    "--skeleton-color-dark": "rgba(32, 41, 52, 1)",
 
     "--progress-bar-surface": "rgba(228, 229, 231, 1)",
     "--progress-bar-filler": "rgba(68, 157, 167, 1)"

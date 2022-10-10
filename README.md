@@ -5,7 +5,6 @@
 #### vue2.x
 
 ```
-
 import Vue from 'vue';
 
 import '@simple-education-dev/components/style';

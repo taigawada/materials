@@ -23,7 +23,7 @@ export { SimplePagination } from './components/SimplePagination';
 export { SimplePopover } from './components/SimplePopover';
 export { SimpleProgressBar } from './components/SimpleProgressBar';
 export { SimpleIcon } from './components/SimpleIcon';
-export { SimpleSkelton } from './components/SimpleSkelton';
+export { SimpleSkeleton } from './components/SimpleSkeleton';
 export { SimpleSpinner } from './components/SimpleSpinner';
 export { SimpleSaveBar } from './components/SimpleSaveBar';
 export { SimpleToast } from './components/SimpleToast';

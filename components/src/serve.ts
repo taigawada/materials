@@ -10,9 +10,5 @@ import themeInstall from './utils/theme/themeInstall';
 const app = createApp(PlayGround);
 
 // import switchJson from './switchTest.json';
-app.use(themeInstall, {
-    light: {
-        '--theme-color': 'rgb(255, 0,0)',
-    },
-});
+app.use(themeInstall, {});
 app.mount('#app');

@@ -2,6 +2,8 @@
     <div id="app">
         <SimpleTabs :tabs="tabs" :selected="tabSelected" @change="handleTabSelect" />
         <h1>Playground</h1>
+        <SimpleSkeleton type="text" :lines="5" />
+        <SimpleSkeleton :size="{ width: '72px', height: '40px' }" />
         <p>Actions</p>
         <SimpleActions :open="actionsOpen" :actions="actions" @click:activator="actionsOpenToggle" @close="onClose">
             その他の操作
@@ -78,10 +80,14 @@
                 </template>
                 <template #data="render">
                     <ResourceItem>
-                        <component :is="loading ? 'SimpleSkelton' : 'span'" text>{{ render.item.id }}</component>
+                        <component :is="loading ? 'SimpleSkeleton' : 'span'" type="text">{{
+                            render.item.id
+                        }}</component>
                     </ResourceItem>
                     <ResourceItem>
-                        <component :is="loading ? 'SimpleSkelton' : 'span'" text>{{ render.item.name }}</component>
+                        <component :is="loading ? 'SimpleSkeleton' : 'span'" type="text">{{
+                            render.item.name
+                        }}</component>
                     </ResourceItem>
                 </template>
                 <template #pagination>
@@ -224,7 +230,7 @@ import SimpleDateTimePicker from './components/SimpleDateTimePicker/SimpleDateTi
 import SimpleResourceList from './components/SimpleResourceList/SimpleResourceList';
 import ResourceItem from './components/ResourceItem/ResourceItem';
 import SimplePagination from './components/SimplePagination/SimplePagination';
-import SimpleSkelton from './components/SimpleSkelton/SimpleSkelton';
+import SimpleSkeleton from './components/SimpleSkeleton/SimpleSkeleton';
 import SimpleIcon from './components/SimpleIcon/SimpleIcon';
 import SimpleSaveBar from './components/SimpleSaveBar/SimpleSaveBar';
 import SimpleToast from './components/SimpleToast/SimpleToast';
@@ -264,7 +270,7 @@ export default defineComponent({
         SimpleTimePicker,
         SimpleDatePicker,
         SimpleDateTimePicker,
-        SimpleSkelton,
+        SimpleSkeleton,
         SimpleIcon,
         SimpleSaveBar,
         SimpleToast,
