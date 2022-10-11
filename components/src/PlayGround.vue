@@ -75,17 +75,19 @@
                 @change="handleResourceListChange"
             >
                 <template #header>
-                    <ResourceItem sort :asc="idOrder" @sort="handleResourceSortById">id</ResourceItem>
+                    <ResourceItem distribution="left" sort :asc="idOrder" @sort="handleResourceSortById">
+                        id
+                    </ResourceItem>
                     <ResourceItem>name</ResourceItem>
                 </template>
                 <template #data="render">
-                    <ResourceItem>
-                        <component :is="loading ? 'SimpleSkeleton' : 'span'" type="text">{{
+                    <ResourceItem :distribution="loading ? 'center' : 'left'">
+                        <component :is="loading ? 'SimpleSkeleton' : 'span'" type="text" display="inline">{{
                             render.item.id
                         }}</component>
                     </ResourceItem>
                     <ResourceItem>
-                        <component :is="loading ? 'SimpleSkeleton' : 'span'" type="text">{{
+                        <component :is="loading ? 'SimpleSkeleton' : 'span'" type="text" display="inline">{{
                             render.item.name
                         }}</component>
                     </ResourceItem>
@@ -201,8 +203,15 @@
             @change="comboSelectedChange"
         >
         </SimpleCombobox>
-        <SimpleSaveBar :open="loading" />
-        <SimpleToast :active="loading" content="保存しました" error />
+        <SimpleButton primary @click="handleToastActive1">Toast1</SimpleButton>
+        <SimpleButton primary @click="handleToastActive2">Toast2</SimpleButton>
+        <SimpleToast :active="toastActive1" content="保存しました1" @dismiss="handleToastDismiss1" />
+        <SimpleToast
+            :active="toastActive2"
+            content="保存しました2"
+            :action="{ label: '元に戻す', onAction: handleToastDismiss1 }"
+            @dismiss="handleToastDismiss2"
+        />
 
         <div style="height: 800px"></div>
     </div>
@@ -238,11 +247,13 @@ import SimpleProgressBar from './components/SimpleProgressBar/SimpleProgressBar'
 
 import { ThreePointLeader, ArrowDown } from '@simple-education-dev/icons';
 import { CyclePeriod } from './components/WeeklySelector/useWeeklySelector';
-import { sortItems } from './utils/utils';
+import { sortItems } from './utilities/utils';
 import { format } from 'date-fns';
 
 import { usePreferredDark } from '@vueuse/core';
-import { switchThemeKey } from './utils/theme/themeInstall';
+import { switchThemeKey } from './utilities/install';
+
+import { ToastTimerKey } from './components/SimpleToast/useToastStore';
 
 const sleep = (waitTime: number) => new Promise((resolve) => setTimeout(resolve, waitTime));
 
@@ -277,6 +288,7 @@ export default defineComponent({
         SimpleProgressBar,
     },
     setup() {
+        const toastTimerStore = inject(ToastTimerKey);
         // SimpleButton
         const disabled = ref(false);
         const loading = ref(false);
@@ -468,7 +480,23 @@ export default defineComponent({
                 switchTheme(isDark.value ? 'dark' : 'light');
             }
         });
+        // Toast
+        const toastActive1 = ref(false);
+        const handleToastActive1 = async () => {
+            toastActive1.value = !toastActive1.value;
+        };
+        const handleToastDismiss1 = async () => {
+            toastActive1.value = false;
+        };
+        const toastActive2 = ref(false);
+        const handleToastActive2 = async () => {
+            toastActive2.value = !toastActive2.value;
+        };
+        const handleToastDismiss2 = async () => {
+            toastActive2.value = false;
+        };
         return {
+            toastTimerStore,
             disabled,
             loading,
             handleButtonClick,
@@ -523,6 +551,13 @@ export default defineComponent({
             handleDateChange,
             datetimeInputValue,
             handleDatetimeChange,
+            toastActive1,
+            handleToastActive1,
+            handleToastDismiss1,
+            toastActive2,
+            handleToastActive2,
+            handleToastDismiss2,
+
             ThreePointLeader,
             ArrowDown,
         };

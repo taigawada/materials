@@ -18,7 +18,7 @@ import {
 import { ArrowLeft, ArrowRight } from '@simple-education-dev/icons';
 import { SimpleIcon } from '../SimpleIcon';
 import { CyclePeriod } from '../WeeklySelector/useWeeklySelector';
-import { dayOfWeekStr } from '@/utils/utils';
+import { dayOfWeekStr } from '@/utilities/utils';
 import './SimpleCalender.scss';
 import { SimpleSpinner } from '../SimpleSpinner';
 

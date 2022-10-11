@@ -1,4 +1,9 @@
 import './SimpleToast.scss';
+import { PropType } from 'vue-demi';
+interface toastAction {
+    label: string;
+    onAction: () => void;
+}
 declare const _default: import("vue-demi").DefineComponent<{
     active: {
         type: BooleanConstructor;
@@ -13,6 +18,11 @@ declare const _default: import("vue-demi").DefineComponent<{
         type: StringConstructor;
         default: string;
         required: true;
+    };
+    action: {
+        type: PropType<toastAction>;
+        default: undefined;
+        required: false;
     };
     error: {
         type: BooleanConstructor;
@@ -36,6 +46,11 @@ declare const _default: import("vue-demi").DefineComponent<{
         default: string;
         required: true;
     };
+    action: {
+        type: PropType<toastAction>;
+        default: undefined;
+        required: false;
+    };
     error: {
         type: BooleanConstructor;
         default: boolean;
@@ -43,6 +58,7 @@ declare const _default: import("vue-demi").DefineComponent<{
     };
 }>>, {
     duration: number;
+    action: toastAction;
     error: boolean;
     content: string;
 }>;

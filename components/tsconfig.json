@@ -29,7 +29,7 @@
         "src/**/*.ts",
         "src/**/*.tsx",
         "src/**/*.vue",
-        "src/utils/CancellationToken.js",
+        "src/utilities/CancellationToken.js",
         "src/components/SimpleStack/useHolidays.js",
         "src/components/WeeklySelector/useHolidays.js"
     ],

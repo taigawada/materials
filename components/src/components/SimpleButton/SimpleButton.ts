@@ -109,11 +109,11 @@ export default defineComponent({
         const target = computed(() => (props.external ? '_blank' : '_self'));
         const iconColor = computed(() => {
             if (props.textColor) return props.textColor;
-            else if (props.critical || props.primary) return 'rgba(255, 255, 255, 1)';
-            else if (props.normal) return 'rgba(114, 114, 114, 1)';
-            else if (props.criticalPlain) return 'rgba(255, 121, 121, 1)';
-            else if (props.plain) return 'rgba(53, 146, 185, 1)';
-            else return 'rgba(255, 255, 255, 1)';
+            else if (props.critical || props.primary) return 'var(--critical-text)';
+            else if (props.normal) return 'var(--normal-text)';
+            else if (props.criticalPlain) return 'var(--critical-plain)';
+            else if (props.plain) return 'var(--plain)';
+            else return 'var(--text)';
         });
         const spinnerColor = computed(() => {
             if (props.primary) return [255, 255, 85];

@@ -1,10 +1,16 @@
 import './SimpleToast.scss';
 
-import { defineComponent, ref, toRefs, watch, h, isVue3, onMounted } from 'vue-demi';
+import { defineComponent, ref, toRefs, watch, inject, h, isVue3, onMounted, computed, PropType } from 'vue-demi';
 import { nextFrame } from '@/components/compositions/useAccordionAnimation';
 import { SimpleIcon } from '../SimpleIcon';
-
 import { CloseCross } from '@simple-education-dev/icons';
+
+import { ToastTimerKey, ToastTimerStore } from './useToastStore';
+
+interface toastAction {
+    label: string;
+    onAction: () => void;
+}
 
 export default defineComponent({
     props: {
@@ -22,6 +28,11 @@ export default defineComponent({
             default: 'SimpleToast',
             required: true,
         },
+        action: {
+            type: Object as PropType<toastAction>,
+            default: undefined,
+            required: false,
+        },
         error: {
             type: Boolean,
             default: false,
@@ -29,8 +40,18 @@ export default defineComponent({
         },
     },
     setup(props, context) {
+        let toastTimerStore: ToastTimerStore | null = null;
+        if (!isVue3) {
+            // @ts-ignore
+            toastTimerStore = context.root.$toastStore;
+        } else {
+            toastTimerStore = inject(ToastTimerKey)!;
+        }
+        if (!toastTimerStore) {
+            throw new Error('Toast state store is not provided.');
+        }
+        const currentDismissTimer = ref<NodeJS.Timeout | null>(null);
         const toastRef = ref<HTMLElement | null>(null);
-
         onMounted(() => {
             if (!isVue3) {
                 // @ts-ignore
@@ -38,32 +59,50 @@ export default defineComponent({
             }
         });
         const { active } = toRefs(props);
-        const sleep = (duration: number) => new Promise((resolve) => setTimeout(resolve, duration));
-        const isAnimating = ref(false);
-        const isCancelled = ref(false);
-        context.expose({ isAnimating, isCancelled });
+
         const dismissAnimation = async () => {
+            toastTimerStore!.resetTimerKey(currentDismissTimer.value);
+            currentDismissTimer.value = null;
+            context.emit('dismiss');
             if (toastRef.value) {
-                isAnimating.value = true;
-                toastRef.value.style.top = '100vh';
-                await sleep(200);
+                toastRef.value.style.bottom = '-5vh';
+                await new Promise((resolve) => setTimeout(resolve, 200));
                 toastRef.value.style.display = 'none';
-                isAnimating.value = false;
             }
         };
+        const handleDismiss = () => {
+            if (currentDismissTimer.value) {
+                clearTimeout(currentDismissTimer.value);
+            }
+            dismissAnimation();
+            context.emit('dismiss');
+        };
         watch(active, () => {
-            if (active && !isAnimating.value) {
+            if (active.value) {
                 if (toastRef.value) {
-                    isAnimating.value = true;
                     toastRef.value.style.display = 'inline-flex';
-                    nextFrame(async () => {
-                        if (toastRef.value) {
-                            toastRef.value.style.top = '90vh';
-                            await sleep(props.duration);
-                            dismissAnimation();
+                    nextFrame(() => {
+                        if (toastTimerStore) {
+                            const timer = setTimeout(() => {
+                                dismissAnimation();
+                            }, props.duration);
+                            toastTimerStore!.setTimerKey(timer);
+                            currentDismissTimer.value = timer;
                         }
                     });
                 }
+            } else {
+                handleDismiss();
+            }
+        });
+        const timerKeyPosition = computed(() => {
+            if (currentDismissTimer.value && toastTimerStore) {
+                return toastTimerStore.timerKeyArray.indexOf(currentDismissTimer.value);
+            } else return -1;
+        });
+        watch(timerKeyPosition, () => {
+            if (toastRef.value && timerKeyPosition.value >= 0) {
+                toastRef.value.style.bottom = `calc(${timerKeyPosition.value + 1} * 9vh)`;
             }
         });
         return () =>
@@ -75,22 +114,33 @@ export default defineComponent({
                 },
                 [
                     h('span', { class: [{ simple_toast__content_text: true }] }, props.content),
+                    /* eslint-disable */
+                    props.action
+                        ? h(
+                              'span',
+                              {
+                                  class: [{ simple_toast__action_label: true }],
+                                  onClick: props.action.onAction,
+                                  on: { action: props.action.onAction },
+                              },
+                              props.action.label
+                          )
+                        : undefined,
+                    /* eslint-enable */
                     h(SimpleIcon, {
                         source: CloseCross,
                         size: '16px',
-                        fill: 'rgba(255, 255, 255, 1',
+                        fill: 'var(--text-white)',
                         clickable: true,
-                        onClick: async () => {
-                            isCancelled.value = true;
-                            await dismissAnimation();
-                            isCancelled.value = false;
+                        props: {
+                            source: CloseCross,
+                            size: '16px',
+                            fill: 'var(--text-white)',
+                            clickable: true,
                         },
+                        onClick: handleDismiss,
                         on: {
-                            click: async () => {
-                                isCancelled.value = true;
-                                await dismissAnimation();
-                                isCancelled.value = false;
-                            },
+                            click: handleDismiss,
                         },
                     }),
                 ]

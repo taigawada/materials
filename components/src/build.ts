@@ -27,10 +27,10 @@ export { SimpleSkeleton } from './components/SimpleSkeleton';
 export { SimpleSpinner } from './components/SimpleSpinner';
 export { SimpleSaveBar } from './components/SimpleSaveBar';
 export { SimpleToast } from './components/SimpleToast';
-export { sortItems, dayOfWeekStr } from './utils/utils';
+export { sortItems, dayOfWeekStr } from './utilities/utils';
 export { useAccordionAnimation } from './components/compositions/useAccordionAnimation';
 export { useFocusBackdrop } from './components/compositions/useFocusBackdropAnimation';
 
-export { switchThemeKey } from './utils/theme/themeInstall';
-import SimpleComponents from './utils/theme/themeInstall';
+export { switchThemeKey } from './utilities/install';
+import SimpleComponents from './utilities/install';
 export { SimpleComponents };

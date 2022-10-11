@@ -1,6 +1,6 @@
 import './WeeklySelector.scss';
 import { defineComponent, computed, PropType, h, VNode, isVue3 } from 'vue-demi';
-import { dayOfWeekStr } from '@/utils/utils';
+import { dayOfWeekStr } from '@/utilities/utils';
 import { cyclePeriodConverter, CyclePeriod, BooleanArray } from './useWeeklySelector';
 import { ArrowDown, ArrowUp } from '@simple-education-dev/icons';
 import { SimpleButton } from '../SimpleButton';
